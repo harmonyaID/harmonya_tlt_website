@@ -1,0 +1,39 @@
+@mixin font-size($size, $responsive: true) {
+  font-size: $size;
+}
+
+@for $i from 100 through 900 {
+  .fw-#{$i} {font-weight: $i;}
+}
+
+// Title
+.title-level-1 {font-size: 6rem;}
+.title-level-2 {font-size: 5rem;}
+.title-level-3 {font-size: 4.5rem;}
+
+h1, .fs-64 { @include font-size(4rem); }
+h2, .fs-48 { @include font-size(3rem); }
+h3, .fs-40 { @include font-size(2.5rem); }
+h4, .fs-32 { @include font-size(2rem); }
+h5, .fs-24 { @include font-size(1.5rem); }
+h6, .fs-20 { @include font-size(1.25rem); }
+.fs-18 { @include font-size(1.125rem); }
+
+.fs-16 {
+  font-size: 1rem;
+}
+.fs-14 {
+  font-size: 0.875rem;
+}
+.fs-13 {
+  font-size: 0.813rem;
+}
+.fs-12 {
+  font-size: 0.75rem;
+}
+
+
+// Color Typography
+.text-title {color: var(--bs-grey-200);}
+
+.text-subtitle {color: var(--bs-grey-400);}

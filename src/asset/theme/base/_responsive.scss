@@ -1,0 +1,116 @@
+@mixin font-size($size, $responsive: true) {
+  font-size: $size;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .title-level-1 {
+    font-size: 3rem;
+  }
+
+  .footer-logo {
+    height: auto;
+    width: 58%;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  body {
+    overflow-y: hidden;
+  }
+
+  .navbar-brand {
+    .logo {
+      height: 48px;
+      max-height: 48px;
+      //height: 54px;
+    }
+  }
+
+  .section-space {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .title-level-1 {
+    font-size: 2.5rem;
+  }
+
+  .fs-md-h1 {@include font-size(2rem);}
+  .fs-md-36 {@include font-size(2.5rem);}
+  .fs-md-32 { @include font-size(2rem); }
+  .fs-md-24 { @include font-size(1.5rem); }
+  .fs-md-20 { @include font-size(1.25rem); }
+  .fs-md-18 { @include font-size(1.125rem);}
+  .fs-md-16 { @include font-size(1rem);}
+  .fs-md-14 { @include font-size(0.875rem);}
+
+  .section-hero-general {
+    .icon-ornament {
+      position: absolute;
+      //top: 0;
+      //right: 0;
+      //transform: translate(34%, -21%);
+
+      top: -12%;
+      right: 0;
+      //transform: unset;
+      img {
+        width: 100%;
+      }
+    }
+
+    .blur-circle {
+      //top: 65%;
+      //left: 12%;
+      top: 50%;
+      left: -12%;
+    }
+
+    .gray-circle {
+      width: 366px; /* Sesuaikan ukuran */
+      height: 366px;
+      background-color: rgba(51, 51, 51, 0.30);
+      border-radius: 50%;
+      filter: blur(500px);
+      position: absolute;
+      bottom: 0%;
+      right: 0;
+      transform: translate(0, 50%);
+    }
+  }
+
+  .section-about-video {
+    height: 400px;
+  }
+
+  // Home
+  .section-bento {
+    .mobil-box-size {
+      height: 300px;
+    }
+  }
+
+  // Service
+  .our-service-image-type {
+    height: 400px;
+    max-height: 400px;
+  }
+
+  .our-service-detail-portfolio {
+    height: 400px;
+    max-height: 400px;
+  }
+
+  // Blog Page
+  .section-blog-banner {
+    height: 400px;
+  }
+
+  // Detail Work
+  .work-h-img {height: 320px;}
+
+  .footer-logo {
+    height: auto;
+    width: 48%;
+  }
+}

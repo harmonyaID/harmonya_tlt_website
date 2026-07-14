@@ -43,5 +43,5 @@ next-env.d.ts
 
 # TypeScript cache
 *.tsbuildinfo
-vite.config.js
-vite.config.d.ts
+
+next-env.d.ts

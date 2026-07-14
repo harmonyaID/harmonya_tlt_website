@@ -1,0 +1,52 @@
+@import 'base/_variables';
+@import '~bootstrap/scss/bootstrap';
+@import 'base/_configFont.scss';
+//@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@100;200;300;400;500;600;700;800;900&display=swap');
+//@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+//html {
+//  scroll-behavior: smooth;
+//  overflow-x: hidden;
+//}
+
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.font-tt-drugs {
+  font-family: 'TT Drugs Trial';
+  font-weight: 400;
+}
+
+.section-hero-general {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+}
+
+a {text-decoration: none;}
+
+
+.section-space {
+  //padding-top: 6rem;
+  //padding-bottom: 6rem;
+  padding-top: 10.25rem;
+  padding-bottom: 10.25rem;
+}
+
+.section-space-small {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+@import 'base/_navbar';
+@import 'base/_typography';
+@import 'base/_accordion';
