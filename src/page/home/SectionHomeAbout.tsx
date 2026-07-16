@@ -6,7 +6,7 @@ import Image from 'next/image'
 import HomeAboutMap from '@/asset/image/home/home-about-map.svg'
 import HomeAboutBanner from '@/asset/image/home/home-about-banner.jpg'
 
-const SectionHomeAbout = () => {
+const SectionHomeAbout = ({ content = {} }: { content?: any }) => {
     return (
         <SectionGeneral>
             <div className="row gx-8">
@@ -49,17 +49,27 @@ const SectionHomeAbout = () => {
                             />
                         </div>
 
-                        <SectionDescription className="pb-5 pt-5">
-                            The Lembongan Traveller is your trusted,
-                            Australian-owned complete guide to Nusa Lembongan
-                            and Nusa Ceningan. More than a place to rest your
-                            head, our handpicked collection of villas, resorts,
-                            and bungalows puts you right at the heart of island
-                            life. We make it easy to find your perfect stay.
-                        </SectionDescription>
+                        {content.sideContent ? (
+                            <div
+                                className="py-5 text-grey-400 fs-20 mb-0"
+                                dangerouslySetInnerHTML={{
+                                    __html: content.sideContent,
+                                }}
+                            />
+                        ) : (
+                            <SectionDescription className="pb-5 pt-5">
+                                The Lembongan Traveller is your trusted,
+                                Australian-owned complete guide to Nusa
+                                Lembongan and Nusa Ceningan. More than a place
+                                to rest your head, our handpicked collection of
+                                villas, resorts, and bungalows puts you right at
+                                the heart of island life. We make it easy to
+                                find your perfect stay.
+                            </SectionDescription>
+                        )}
 
                         <BtnLinkPrimary className="rounded-pill">
-                            Discover More
+                            {content?.buttonText || 'Discover More'}
                         </BtnLinkPrimary>
                     </div>
                 </div>

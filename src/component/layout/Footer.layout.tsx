@@ -31,9 +31,13 @@ const FooterLayout = () => {
     return (
         <section className="footer bg-grey-500 text-white">
             <div className="w-100 section-space-small border-bottom">
-                <div className="container px-5">
+                <div className="container px-lg-5">
                     <div className="text-center pb-5">
-                        <Image src={LogoWhite} alt="the lembongan bali" />
+                        <Image
+                            src={LogoWhite}
+                            alt="the lembongan bali"
+                            width="260"
+                        />
                     </div>
 
                     <div className="row gx-5 gy-3">

@@ -8,6 +8,8 @@ import LogoWhite from '@/asset/image/navbar/logo-white.svg'
 import LogoDefault from '@/asset/image/navbar/logo-defualt.svg'
 import { BtnPrimary } from '@/component/general/Button'
 import joinClassNameHelper from '@/helper/joinClassName.helper'
+import actionModal from '@/helper/base/actionModal.helper'
+import { MDGlobalSearchDat } from '@/config/modal.config'
 
 const NavbarLayout = ({
     isBgTransparent = false,
@@ -56,28 +58,34 @@ const NavbarLayout = ({
                 <div className="container">
                     <div className="d-flex flex-row align-items-center justify-content-center">
                         <div className="icon-search col-md-2">
-                            <Image
-                                src={IconSearchDefault}
-                                className="icon-search-default"
-                                alt="the lembongan"
-                            />
-                            <Image
-                                src={IconSearchWhite}
-                                className="icon-search-white"
-                                alt="the lembongan"
-                            />
+                            <div
+                                role="button"
+                                onClick={() => actionModal(MDGlobalSearchDat)}>
+                                <Image
+                                    src={IconSearchDefault}
+                                    className="icon-search-default"
+                                    alt="the lembongan"
+                                />
+                                <Image
+                                    src={IconSearchWhite}
+                                    className="icon-search-white"
+                                    alt="the lembongan"
+                                />
+                            </div>
                         </div>
                         <div className="logo col-md-8 text-center">
-                            <Image
-                                src={LogoWhite}
-                                className="logo-white"
-                                alt="the lembongan"
-                            />
-                            <Image
-                                src={LogoDefault}
-                                className="logo-default"
-                                alt="the lembongan"
-                            />
+                            <Link href="/">
+                                <Image
+                                    src={LogoWhite}
+                                    className="logo-white"
+                                    alt="the lembongan"
+                                />
+                                <Image
+                                    src={LogoDefault}
+                                    className="logo-default"
+                                    alt="the lembongan"
+                                />
+                            </Link>
                         </div>
                         <div className="cta col-md-2 text-end">
                             <BtnPrimary className="rounded-pill fs-14">

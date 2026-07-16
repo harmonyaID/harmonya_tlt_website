@@ -4,6 +4,8 @@ import type { Metadata } from 'next'
 // import "./globals.css";
 import { ReactNode, useEffect } from 'react'
 import '@/asset/theme/theme.scss'
+import CreatePortalLayout from '@/component/layout/CreatePortal.layout'
+import GlobalSearchData from '@/feature/GlobalSearchData'
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -32,7 +34,13 @@ export default function RootLayout({
     }, [])
     return (
         <html lang="en" className="">
-            <body>{children}</body>
+            <body>
+                {children}
+
+                {/*<CreatePortalLayout>*/}
+                <GlobalSearchData />
+                {/*</CreatePortalLayout>*/}
+            </body>
         </html>
     )
 }

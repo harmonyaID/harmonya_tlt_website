@@ -10,13 +10,20 @@ import SectionHomeFAQ from '@/page/home/SectionHomeFAQ'
 import FooterLayout from '@/component/layout/Footer.layout'
 import FooterNewsLetterLayout from '@/component/layout/FooterNewsLetter.layout'
 import SectionHomeBook from '@/page/home/SectionHomeBook'
+import { getContentHomePage } from '@/service/api/contentPage.api'
 
-export default function Home() {
+const Home = async () => {
+    const content = await getContentHomePage({ locale: 'en' }).then(
+        (res) => res?.result || {},
+    )
+
+    const value = content?.value || {}
+
     return (
         <>
             <NavbarLayout isBgTransparent />
-            <SectionHomeHero />
-            <SectionHomeAbout />
+            <SectionHomeHero content={value?.SECTION1 || {}} />
+            <SectionHomeAbout content={value?.SECTION2 || {}} />
             <SectionHomeBook />
             <SectionHomeExclusiveStay />
             <SectionHomeWhyBookUs />
@@ -29,3 +36,5 @@ export default function Home() {
         </>
     )
 }
+
+export default Home
