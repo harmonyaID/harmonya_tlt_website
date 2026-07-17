@@ -14,7 +14,7 @@ body {
   overflow-y: auto;
 }
 
-.font-tt-drugs {
+.font-tt-drugs, .wp-font-tt-drugs > * {
   font-family: 'TT Drugs Trial';
   font-weight: 400;
 }
@@ -46,6 +46,26 @@ a {text-decoration: none;}
   object-fit: cover;
   object-position: center;
 }
+
+.content-hero-position-default {
+  //position: relative;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 30%;
+}
+
+.content-hero-position-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 15%;
+}
+
+.content-hero-search-card {
+  background-color: #1D1D1D99;
+}
+
 
 @import 'base/_navbar';
 @import 'base/_typography';
