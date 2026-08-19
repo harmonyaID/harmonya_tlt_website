@@ -6,15 +6,17 @@ import IconSearchWhite from '@/asset/image/navbar/nav-icon-search-white.svg'
 import IconSearchDefault from '@/asset/image/navbar/nav-icon-search.svg'
 import LogoWhite from '@/asset/image/navbar/logo-white.svg'
 import LogoDefault from '@/asset/image/navbar/logo-defualt.svg'
-import { BtnPrimary } from '@/component/general/Button'
+import { BtnBasic, BtnPrimary } from '@/component/general/Button'
 import joinClassNameHelper from '@/helper/joinClassName.helper'
 import actionModal from '@/helper/base/actionModal.helper'
 import { MDGlobalSearchDat } from '@/config/modal.config'
 
 const NavbarLayout = ({
     isBgTransparent = false,
+    isStartFix = true,
 }: {
     isBgTransparent?: boolean
+    isStartFix?: boolean
 }) => {
     // const [isScrolled, setIsScrolled] = useState(false)
     //
@@ -51,27 +53,29 @@ const NavbarLayout = ({
     return (
         <nav
             className={joinClassNameHelper(
-                'top-0 z-3 position-fixed start-0 top-0 end-0 navbar-config',
-                { 'navbar-scrolled': !isBgTransparent || isScrolled },
+                'top-0 z-3 start-0 top-0 end-0 navbar-config',
+                {
+                    'position-fixed': isScrolled ? true : isStartFix,
+                    'navbar-scrolled': !isBgTransparent || isScrolled,
+                },
             )}>
             <div className="section-logo py-3">
                 <div className="container">
                     <div className="d-flex flex-row align-items-center justify-content-center">
-                        <div className="icon-search col-md-2">
-                            <div
-                                role="button"
-                                onClick={() => actionModal(MDGlobalSearchDat)}>
-                                <Image
-                                    src={IconSearchDefault}
-                                    className="icon-search-default"
-                                    alt="the lembongan"
-                                />
-                                <Image
-                                    src={IconSearchWhite}
-                                    className="icon-search-white"
-                                    alt="the lembongan"
-                                />
-                            </div>
+                        <div className="col-md-2">
+                            <BtnBasic
+                                className={joinClassNameHelper(
+                                    'rounded-pill fs-14',
+                                    {
+                                        'btn-outline-white': isBgTransparent
+                                            ? !isScrolled
+                                            : false,
+                                        'btn-outline-neutral-500':
+                                            isScrolled || !isBgTransparent,
+                                    },
+                                )}>
+                                LIST WITH US
+                            </BtnBasic>
                         </div>
                         <div className="logo col-md-8 text-center">
                             <Link href="/">
@@ -87,7 +91,25 @@ const NavbarLayout = ({
                                 />
                             </Link>
                         </div>
-                        <div className="cta col-md-2 text-end">
+                        <div className="cta col-md-2 text-end hstack gap-4 justify-content-end">
+                            <div className="icon-search">
+                                <div
+                                    role="button"
+                                    onClick={() =>
+                                        actionModal(MDGlobalSearchDat)
+                                    }>
+                                    <Image
+                                        src={IconSearchDefault}
+                                        className="icon-search-default"
+                                        alt="the lembongan"
+                                    />
+                                    <Image
+                                        src={IconSearchWhite}
+                                        className="icon-search-white"
+                                        alt="the lembongan"
+                                    />
+                                </div>
+                            </div>
                             <BtnPrimary className="rounded-pill fs-14">
                                 BUSINESS LISTING
                             </BtnPrimary>

@@ -1,11 +1,14 @@
-import {ReactNode} from "react";
+import { ReactNode } from 'react'
 
-const SectionGeneral = ({children, className} : {children?: ReactNode, className?: string}) => {
-
+const SectionGeneral = ({
+    children,
+    className = '',
+}: {
+    children?: ReactNode
+    className?: string
+}) => {
     return (
-        <section className={'section-space ' + className}>
-            {children}
-        </section>
+        <section className={'section-space ' + className}>{children}</section>
     )
 }
 

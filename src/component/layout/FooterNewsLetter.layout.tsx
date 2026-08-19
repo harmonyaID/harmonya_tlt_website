@@ -1,15 +1,23 @@
 import Image from 'next/image'
 import BannerBackground from '@/asset/image/footer/footer-newslatter-bg.jpg'
 import { BtnPrimary } from '@/component/general/Button'
+import { PropsSectionContent } from '@/type/sectionContent.type'
 
-const FooterNewsLetterLayout = () => {
+const FooterNewsLetterLayout = ({ content = {} }: PropsSectionContent) => {
+    // console.log('content: ', content)
+
     return (
         <section className="position-relative overflow-hidden">
-            <Image
-                src={BannerBackground}
-                className="position-absolute banner-image"
-                alt="lembongan bali"
-            />
+            <div className="position-absolute banner-image overflow-hidden">
+                <Image
+                    // src={BannerBackground}
+                    // className="position-absolute banner-image"
+                    fill
+                    src={content?.background || BannerBackground}
+                    className="object-fit-cover"
+                    alt="lembongan bali"
+                />
+            </div>
 
             <div className="section-space-small container position-relative z-1">
                 <div className="row justify-content-center">
@@ -27,12 +35,13 @@ const FooterNewsLetterLayout = () => {
                             <div className="position-relative col">
                                 <input
                                     type="email"
-                                    className="form-control bg-neural-100 rounded-pill"
+                                    className="form-control rounded-pill border border-white"
                                     placeholder="e.g arbi@thelemongantraveller.com"
                                 />
                             </div>
                             <BtnPrimary type="button" className="rounded-pill">
-                                SUBSCRIBE
+                                {/*SUBSCRIBE*/}
+                                {content?.buttonText || 'SUBSCRIBE'}
                             </BtnPrimary>
                         </div>
                     </div>

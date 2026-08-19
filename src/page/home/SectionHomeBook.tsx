@@ -1,8 +1,9 @@
 import Image from 'next/image'
 import { BtnPrimary } from '@/component/general/Button'
 import SlideBannerBackground from '@/asset/image/home/home-book-slide-banner.jpg'
+import { PropsSectionContent } from '@/type/sectionContent.type'
 
-const SectionHomeBook = () => {
+const SectionHomeBook = ({ content = {} }: PropsSectionContent) => {
     return (
         <section className="position-relative overflow-hidden">
             <Image

@@ -34,6 +34,9 @@ export default function RootLayout({
     }, [])
     return (
         <html lang="en" className="">
+            <head>
+                <link rel="icon" href="/favicon-tlt.png" sizes="any" />
+            </head>
             <body>
                 {children}
 

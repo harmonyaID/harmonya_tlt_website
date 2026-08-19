@@ -2,13 +2,15 @@ import SectionGeneral from '@/component/general/SectionGeneral'
 import { SectionTitle } from '@/component/text/Heading'
 import IconCircle from '@/asset/image/home/home-icon-circle.png'
 import Image from 'next/image'
+import { PropsSectionContent } from '@/type/sectionContent.type'
+import RenderHtml from '@/component/general/RenderHtml'
 
-const _shapeData = (title: string, desc: string) => ({
+const _shapeData = (title: string, description: string) => ({
     title,
-    desc,
+    description,
 })
 
-const SectionHomeWhyBookUs = () => {
+const SectionHomeWhyBookUs = ({ content = {} }: PropsSectionContent) => {
     const points = [
         _shapeData(
             'FULL PACKAGE EXPERIENCE',
@@ -31,24 +33,32 @@ const SectionHomeWhyBookUs = () => {
     return (
         <SectionGeneral className="bg-green-500">
             <div className="container text-center">
-                <SectionTitle className="text-white pb-5 font-tt-drugs text-uppercase">
-                    Why Book with us?
-                </SectionTitle>
+                {/*<SectionTitle className="text-white pb-5 font-tt-drugs text-uppercase">*/}
+                {/*    Why Book with us?*/}
+                {/*</SectionTitle>*/}
+                <RenderHtml
+                    className="text-white pb-5 font-tt-drugs text-uppercase"
+                    html={content.content}
+                />
 
                 <div className="row g-5 text-white pt-4">
-                    {points.map((point, i) => (
-                        <div className="col-lg-3 vstack gap-3 px-5" key={i}>
+                    {content?.items?.map((vm: any, key: number) => (
+                        <div className="col-lg-3 vstack gap-3 px-5" key={key}>
                             <div className="">
                                 <Image
-                                    src={IconCircle}
+                                    src={vm.icon || IconCircle}
                                     className=""
                                     alt="image"
+                                    width="100"
+                                    height="100"
                                 />
                             </div>
                             <p className="fs-18 mb-0 font-tt-drugs text-uppercase">
-                                {point.title}
+                                {vm.title}
                             </p>
-                            <p className="fs-14 fw-light mb-0">{point.desc}</p>
+                            <p className="fs-14 fw-light mb-0">
+                                {vm.description}
+                            </p>
                         </div>
                     ))}
                 </div>
