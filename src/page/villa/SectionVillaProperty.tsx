@@ -7,6 +7,7 @@ import PropertyResort01 from '@/asset/image/villa/property-resort-01.png'
 import PropertyResort02 from '@/asset/image/villa/property-resort-02.png'
 import Image from 'next/image'
 import { isEmpty } from 'lodash'
+import { BadgeTag } from '@/component/general/Badge'
 
 const otherInfo = (bad: '', guest: '', dineIn: true, pool: true) => ({
     bad,
@@ -98,11 +99,9 @@ const SectionVillaProperty = () => {
                                         <div className="hstack gap-2 flex-wrap">
                                             {/*@ts-ignore*/}
                                             {tags.map((tag, idx) => (
-                                                <div
-                                                    className="badge text-bg-green-100 rounded-pill fw-300"
-                                                    key={idx}>
+                                                <BadgeTag key={idx}>
                                                     {tag}
-                                                </div>
+                                                </BadgeTag>
                                             ))}
                                         </div>
                                     </div>

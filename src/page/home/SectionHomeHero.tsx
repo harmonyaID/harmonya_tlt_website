@@ -33,7 +33,7 @@ const SectionHomeHero = ({ content = {} }: { content?: any | {} }) => {
                 <div className="row justify-content-center">
                     <div className="col-lg-9">
                         <div className="content-hero-search-card text-white p-3 rounded-3">
-                            <div className="row align-items-end g-3">
+                            <div className="row align-items-end g-4">
                                 <div className="col-md">
                                     <div className="">
                                         <label
@@ -46,7 +46,10 @@ const SectionHomeHero = ({ content = {} }: { content?: any | {} }) => {
                                             type="text"
                                             className="form-control"
                                             id="inputDates"
-                                            placeholder="e.g name"
+                                            placeholder={
+                                                content.searchPlaceholderDates ||
+                                                'e.g name'
+                                            }
                                         />
                                     </div>
                                 </div>
@@ -62,7 +65,10 @@ const SectionHomeHero = ({ content = {} }: { content?: any | {} }) => {
                                             type="text"
                                             className="form-control"
                                             id="inputDates"
-                                            placeholder="e.g name"
+                                            placeholder={
+                                                content.searchPlaceholderGuest ||
+                                                'e.g name'
+                                            }
                                         />
                                     </div>
                                 </div>
@@ -71,13 +77,17 @@ const SectionHomeHero = ({ content = {} }: { content?: any | {} }) => {
                                         <label
                                             htmlFor="inputDates"
                                             className="form-label">
-                                            COLLECTIONS
+                                            {content?.searchLabelCollection ||
+                                                'COLLECTIONS'}
                                         </label>
                                         <input
                                             type="text"
                                             className="form-control"
                                             id="inputDates"
-                                            placeholder="e.g name"
+                                            placeholder={
+                                                content?.searchPlaceholderCollection ||
+                                                'e.g Placeholder'
+                                            }
                                         />
                                     </div>
                                 </div>

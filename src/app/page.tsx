@@ -11,6 +11,8 @@ import FooterLayout from '@/component/layout/Footer.layout'
 import FooterNewsLetterLayout from '@/component/layout/FooterNewsLetter.layout'
 import SectionHomeBook from '@/page/home/SectionHomeBook'
 import { getContentHomePage } from '@/service/api/contentPage.api'
+import SectionHomeLiveTheIslandLife from '@/page/home/SectionHomeLiveTheIslandLife'
+import SectionHomeNeighbourhoods from '@/page/home/SectionHomeNeighbourhoods'
 
 const Home = async () => {
     const content = await getContentHomePage({ locale: 'en' }).then(
@@ -24,14 +26,16 @@ const Home = async () => {
             <NavbarLayout isBgTransparent />
             <SectionHomeHero content={value?.SECTION1 || {}} />
             <SectionHomeAbout content={value?.SECTION2 || {}} />
+            <SectionHomeLiveTheIslandLife content={value?.SECTION3 || {}} />
+            <SectionHomeNeighbourhoods content={value?.SECTION4 || {}} />
             <SectionHomeBook />
             <SectionHomeExclusiveStay />
-            <SectionHomeWhyBookUs />
-            <SectionHomeDedication />
+            <SectionHomeWhyBookUs content={value?.SECTION7 || {}} />
+            <SectionHomeDedication content={value?.SECTION9 || {}} />
             <SectionHomeKeepWithUs />
             <SectionHomeLocation />
             <SectionHomeFAQ />
-            <FooterNewsLetterLayout />
+            <FooterNewsLetterLayout content={value?.SECTION13 || {}} />
             <FooterLayout />
         </>
     )

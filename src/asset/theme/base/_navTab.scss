@@ -1,0 +1,11 @@
+.nav-tabs-primary {
+  .nav-link {
+    color: var(--bs-grey-300);
+    font-weight: 400;
+
+    &.active {
+      color: var(--bs-primary);
+      font-weight: 400;
+    }
+  }
+}
