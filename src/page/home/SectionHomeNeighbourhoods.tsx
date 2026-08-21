@@ -1,6 +1,7 @@
 import RenderHtml from '@/component/general/RenderHtml'
+import { PropsSectionContent } from '@/type/sectionContent.type'
 
-const SectionHomeNeighbourhoods = ({ content = {} }: { content?: any }) => {
+const SectionHomeNeighbourhoods = ({ content = {} }: PropsSectionContent) => {
     return (
         <section className="section-space-small overflow-hidden">
             <div className="container">

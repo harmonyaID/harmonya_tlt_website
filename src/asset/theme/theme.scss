@@ -19,6 +19,21 @@ body {
   font-weight: 400;
 }
 
+.wp-content-blog {
+  h1,h2,h3,h4,h5,h6 {
+    font-family: 'TT Drugs Trial', sans-serif;
+    font-weight:  normal;
+    text-transform: uppercase;
+  }
+
+  .render-content {
+    color: var(--bs-grey-200);
+
+    a {color: var(--bs-primary);}
+  }
+}
+
+
 .section-hero-general {
   position: relative;
   height: 100vh;
@@ -87,6 +102,11 @@ a {text-decoration: none;}
   width: fit-content;
 }
 
+.img-cover-general {
+  object-fit: cover;
+  position: relative !important;
+}
+
 .image-hover {
   overflow: hidden;
   img {
@@ -96,8 +116,21 @@ a {text-decoration: none;}
       transform: scale(1.08);
     }
   }
-
 }
+
+.wp-hover-image {
+  img {
+    position: relative!important;
+    transition: transform 0.5s ease;
+  }
+
+  &:hover {
+    img {
+      transform: scale(1.08);
+    }
+  }
+}
+
 
 // HOME PAGE
 .section-home-dedication {
@@ -108,6 +141,49 @@ a {text-decoration: none;}
   }
 }
 
+.section-home-carousel-book-banner {
+  height: 600px;
+  width: 100%;
+
+  .banner-wp-content-text {
+    padding: 2rem;
+    @extend .w-100;
+    @extend .h-100;
+    @extend .d-flex;
+    @extend .align-items-center;
+    @extend .justify-content-center;
+  }
+}
+
+
+// Page Blog
+.section-blog-banner-reel {
+  height: 300px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  @extend .img-cover-general;
+}
+
+// Page Blog - Detail
+.section-blog-detail-banner-small {
+  height: 120px;
+  width: 100%;
+  position: relative;
+}
+
+.sc-blog-banner-right-bar {
+  height: 80px;
+  width: 100%;
+  position: relative;
+}
+
+.section-blog-detail-banner-main {
+  height: 512px;
+  width: 100%;
+  position: relative;
+  @extend .img-cover-general;
+}
 
 
 @import 'base/_typography';
