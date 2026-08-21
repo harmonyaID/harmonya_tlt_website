@@ -12,8 +12,10 @@ import {
 export const getBlogList = async (formSearch: object) =>
     await _shapeMethodGetSearch(SrvContentBlog, formSearch, 'tcSrvContentBlog')
 
-export const getBlogDetail = async (slug: string | number) =>
-    await _shapeMethodGet(SrvContentBlogDetail(slug), 'tcSrvContentBlog')
+export const getBlogDetail = async (
+    slug: string | number,
+    tc = 'tcSrvContentBlogDetail',
+) => await _shapeMethodGet(SrvContentBlogDetail(slug), tc)
 
 export const getBlogCategoryList = async () =>
     await _shapeMethodGet(SrvContentBlogCategory, 'tcSrvContentBlogCategory')

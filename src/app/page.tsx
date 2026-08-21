@@ -28,7 +28,7 @@ const Home = async () => {
             <SectionHomeAbout content={value?.SECTION2 || {}} />
             <SectionHomeLiveTheIslandLife content={value?.SECTION3 || {}} />
             <SectionHomeNeighbourhoods content={value?.SECTION4 || {}} />
-            <SectionHomeBook />
+            <SectionHomeBook items={value?.SECTION5 || []} />
             <SectionHomeExclusiveStay />
             <SectionHomeWhyBookUs content={value?.SECTION7 || {}} />
             <SectionHomeDedication content={value?.SECTION9 || {}} />

@@ -2,14 +2,20 @@
 import { useState, useEffect } from 'react'
 import { getBlogList } from '@/service/api/blog.api'
 
-const useBlogs = ({ passBlogs = [], passPage = 1 }) => {
+const useBlogs = ({
+    passBlogs = [],
+    passPage = 1,
+}: {
+    passBlogs?: any[]
+    passPage?: number | string
+} = {}) => {
     const [list, setList] = useState(passBlogs)
 
     const [search, setSearch] = useState<any>({
         page: passPage,
     })
 
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
 
     const _handleGet = (passSearch = {}) => {
         setIsLoading(true)
@@ -17,6 +23,7 @@ const useBlogs = ({ passBlogs = [], passPage = 1 }) => {
             ...search,
             ...passSearch,
         }).then((res) => {
+            setIsLoading(false)
             setList(res?.result || [])
         })
     }
