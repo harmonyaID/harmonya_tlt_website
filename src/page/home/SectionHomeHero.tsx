@@ -44,7 +44,7 @@ const SectionHomeHero = ({ content = {} }: { content?: any | {} }) => {
                                         </label>
                                         <input
                                             type="text"
-                                            className="form-control"
+                                            className="form-control form-transparent-underline"
                                             id="inputDates"
                                             placeholder={
                                                 content.searchPlaceholderDates ||
@@ -63,7 +63,7 @@ const SectionHomeHero = ({ content = {} }: { content?: any | {} }) => {
                                         </label>
                                         <input
                                             type="text"
-                                            className="form-control"
+                                            className="form-control form-transparent-underline"
                                             id="inputDates"
                                             placeholder={
                                                 content.searchPlaceholderGuest ||
@@ -82,7 +82,7 @@ const SectionHomeHero = ({ content = {} }: { content?: any | {} }) => {
                                         </label>
                                         <input
                                             type="text"
-                                            className="form-control"
+                                            className="form-control form-transparent-underline"
                                             id="inputDates"
                                             placeholder={
                                                 content?.searchPlaceholderCollection ||

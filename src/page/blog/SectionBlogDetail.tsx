@@ -8,6 +8,7 @@ import { BadgeRow } from '@/component/general/Badge'
 import { ReactNode } from 'react'
 import joinClassNameHelper from '@/helper/joinClassName.helper'
 import BlogListSideRight from '@/page/blog/BlogListSideRight'
+import { isEmpty } from 'lodash'
 
 const SectionContent = ({
     children,
@@ -40,30 +41,59 @@ const SectionBlogDetail = ({ detail = {} }: { detail?: any }) => {
 
             <div className="row pt-5 gx-0 gy-4 justify-content-between">
                 <div className="col-md-8 wp-content-blog">
-                    <SectionContent>
-                        {detail?.publishedAt ? (
-                            <p className="fs-16 mb-4 font-tt-drugs">
-                                {formatDateTimeByTlt(detail.publishedAt)}
-                            </p>
-                        ) : null}
-                        <H1 className="fs-48 pb-3">{detail.title}</H1>
+                    {!isEmpty(detail) ? (
+                        <>
+                            <SectionContent>
+                                {detail?.publishedAt ? (
+                                    <p className="fs-16 mb-4 font-tt-drugs">
+                                        {formatDateTimeByTlt(
+                                            detail.publishedAt,
+                                        )}
+                                    </p>
+                                ) : null}
+                                <H1 className="fs-48 pb-3">{detail.title}</H1>
 
-                        {detail?.tags ? (
-                            <BadgeRow badges={detail.tags} />
-                        ) : null}
-                    </SectionContent>
+                                {detail?.tags ? (
+                                    <BadgeRow badges={detail.tags} />
+                                ) : null}
+                            </SectionContent>
+                        </>
+                    ) : null}
 
-                    <SectionContent>
-                        <RenderHtml
-                            className="render-content"
-                            html={detail.excerpt}
-                        />
-                    </SectionContent>
+                    {detail?.excerpt ? (
+                        <SectionContent>
+                            <RenderHtml
+                                className="render-content"
+                                html={detail.excerpt}
+                            />
+                        </SectionContent>
+                    ) : null}
 
-                    <RenderHtml
-                        className="render-content"
-                        html={detail?.content || ''}
-                    />
+                    {detail?.content ? (
+                        <>
+                            <SectionContent>
+                                <RenderHtml
+                                    className="render-content"
+                                    html={detail?.content || ''}
+                                />
+                            </SectionContent>
+
+                            <div className="hstack gap-3 align-items-center justify-content-between text-grey-500">
+                                <div className="">
+                                    <p className="fs-32 font-tt-drugs mb-0">
+                                        LIKE THIS ARTICLE ?
+                                    </p>
+                                </div>
+                                <div className="">
+                                    <div className="hstack flex-wrap gap-2">
+                                        <p className="mb-0 fs-20 font-tt-drugs mb-0">
+                                            Share:
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </>
+                    ) : null}
                 </div>
 
                 <div className="col-md-3">

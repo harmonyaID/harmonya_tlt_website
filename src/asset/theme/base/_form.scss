@@ -1,0 +1,22 @@
+.form-transparent-underline {
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 0;
+  border: 0;
+  border-bottom: .5px solid #fff;
+  color: #fff;
+  font-weight: 400;
+  &:focus {
+    color: #fff;
+    font-weight: 400;
+    background-color: rgba(255, 255, 255, 0);
+    outline: none;
+    box-shadow: none;
+    border-color: #ccc;
+  }
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.55);
+    font-weight: 300;
+  }
+
+}
