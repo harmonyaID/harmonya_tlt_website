@@ -20,8 +20,8 @@
   &.navbar-scrolled {
     background-color: var(--bs-white);
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    //border-bottom: 1px solid #f9f9f9;
-    border-bottom: 1px solid rgba(249, 249, 249, 0.4);
+    border-bottom: 1px solid #f9f9f9;
+    //border-bottom: 1px solid rgba(249, 249, 249, 0.4);
 
     .logo-white, .icon-search-white {
       display: none;

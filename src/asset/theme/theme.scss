@@ -131,6 +131,11 @@ a {text-decoration: none;}
   }
 }
 
+.box-32 {
+  height: 32px !important;
+  width: 32px !important;
+}
+
 
 // HOME PAGE
 .section-home-dedication {
@@ -165,6 +170,7 @@ a {text-decoration: none;}
   @extend .img-cover-general;
 }
 
+
 // Page Blog - Detail
 .section-blog-detail-banner-small {
   height: 120px;
@@ -190,3 +196,4 @@ a {text-decoration: none;}
 @import 'base/_navbar';
 @import 'base/_accordion';
 @import 'base/_navTab.scss';
+@import 'base/_form.scss';
