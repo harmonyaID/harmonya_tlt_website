@@ -3,6 +3,8 @@ import FooterLayout from '@/component/layout/Footer.layout'
 import { getContentHomePage } from '@/service/api/contentPage.api'
 import { getBlogList } from '@/service/api/blog.api'
 import SectionBlogList from '@/page/blog/SectionBlogList'
+import SectionBlogHero from '@/page/blog/SectionBlogHero'
+import Breadcrumb from '@/component/general/Breadcrumb'
 
 const Blog = async () => {
     const page = 1
@@ -10,7 +12,12 @@ const Blog = async () => {
 
     return (
         <>
-            <NavbarLayout isStartFix={false} />
+            <NavbarLayout isBgTransparent />
+            <SectionBlogHero blog={blogs && blogs[0] ? blogs[0] : {}} />
+
+            <section className="container py-4">
+                <Breadcrumb />
+            </section>
             <SectionBlogList passBlogs={blogs} passPage={page} />
             <FooterLayout />
         </>

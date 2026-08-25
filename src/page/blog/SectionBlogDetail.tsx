@@ -9,6 +9,7 @@ import { ReactNode } from 'react'
 import joinClassNameHelper from '@/helper/joinClassName.helper'
 import BlogListSideRight from '@/page/blog/BlogListSideRight'
 import { isEmpty } from 'lodash'
+import Breadcrumb from '@/component/general/Breadcrumb'
 
 const SectionContent = ({
     children,
@@ -37,6 +38,10 @@ const SectionBlogDetail = ({ detail = {} }: { detail?: any }) => {
                     alt={detail.title}
                     fill
                 />
+            </div>
+
+            <div className="pt-4">
+                <Breadcrumb />
             </div>
 
             <div className="row pt-5 gx-0 gy-4 justify-content-between">

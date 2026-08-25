@@ -75,20 +75,29 @@ const SectionHomeHero = ({ content = {} }: { content?: any | {} }) => {
                                 <div className="col-md">
                                     <div className="">
                                         <label
-                                            htmlFor="inputDates"
+                                            htmlFor="selectCollction"
                                             className="form-label">
                                             {content?.searchLabelCollection ||
                                                 'COLLECTIONS'}
                                         </label>
-                                        <input
-                                            type="text"
-                                            className="form-control form-transparent-underline"
-                                            id="inputDates"
-                                            placeholder={
-                                                content?.searchPlaceholderCollection ||
-                                                'e.g Placeholder'
-                                            }
-                                        />
+                                        {/*<input*/}
+                                        {/*    type="text"*/}
+                                        {/*    className="form-control form-transparent-underline"*/}
+                                        {/*    id="inputDates"*/}
+                                        {/*    placeholder={*/}
+                                        {/*        content?.searchPlaceholderCollection ||*/}
+                                        {/*        'e.g Placeholder'*/}
+                                        {/*    }*/}
+                                        {/*/>*/}
+                                        <select
+                                            name=""
+                                            id="selectCollction"
+                                            className="form-control form-transparent-underline">
+                                            <option value="">
+                                                {content?.searchPlaceholderCollection ||
+                                                    'e.g Placeholder'}
+                                            </option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div className="col-md-auto">

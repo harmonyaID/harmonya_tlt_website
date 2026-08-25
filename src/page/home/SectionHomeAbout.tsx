@@ -50,6 +50,7 @@ const SectionHomeAbout = ({ content = {} }: { content?: any }) => {
 
                         <BtnLinkPrimary
                             className="rounded-pill"
+                            isIconArrow
                             href={content?.buttonLink || '#'}>
                             {content?.buttonText || 'Discover More'}
                         </BtnLinkPrimary>

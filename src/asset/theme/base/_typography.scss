@@ -37,3 +37,21 @@ h6, .fs-20 { @include font-size(1.25rem); }
 .text-title {color: var(--bs-grey-200);}
 
 .text-subtitle {color: var(--bs-grey-400);}
+
+
+// Text Wrap
+.desc-wrap-break {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.desc-two-line {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;       /* jumlah baris maksimal */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @extend .desc-wrap-break;
+}

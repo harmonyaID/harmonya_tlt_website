@@ -15,7 +15,7 @@ const SectionBlogList = ({ passBlogs = [], passPage = 1 }) => {
 
     return (
         <section className="section-space-small container">
-            <div className="row">
+            <div className="row gy-5">
                 {!isEmpty(list)
                     ? list.map((vm: any, index) => {
                           const url = vm?.link
@@ -24,7 +24,7 @@ const SectionBlogList = ({ passBlogs = [], passPage = 1 }) => {
                                 ? '/blog/' + vm?.slug
                                 : '#'
                           return (
-                              <div key={index} className="col-md-3">
+                              <div key={index} className="col-lg-3 col-md-4">
                                   <Link
                                       className="w-100 vstack gap-3 text-grey-200 wp-hover-image"
                                       href={url || '#'}>
@@ -44,7 +44,7 @@ const SectionBlogList = ({ passBlogs = [], passPage = 1 }) => {
                                                   vm.publishedAt,
                                               )}
                                           </p>
-                                          <p className="fs-20 wp-font-tt-drugs">
+                                          <p className="fs-20 wp-font-tt-drugs desc-two-line">
                                               {vm.title}
                                           </p>
 

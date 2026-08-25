@@ -4,13 +4,18 @@ import joinClassNameHelper from '@/helper/joinClassName.helper'
 export const BadgeTag = ({
     value = '',
     children,
+    className = '',
 }: {
     children?: ReactNode
     value?: string
     className?: string
 }) => {
     return (
-        <div className="badge text-bg-green-100 rounded-pill fw-300">
+        <div
+            className={joinClassNameHelper(
+                'badge text-bg-green-100 rounded-pill fw-300',
+                className,
+            )}>
             {value || children}
         </div>
     )
@@ -19,9 +24,11 @@ export const BadgeTag = ({
 export const BadgeRow = ({
     badges = [],
     className = '',
+    classNameBadge = '',
 }: {
     badges?: any[]
     className?: string
+    classNameBadge?: string
 }) => {
     return (
         <div
@@ -31,7 +38,9 @@ export const BadgeRow = ({
             )}>
             {/*@ts-ignore*/}
             {badges.map((value, index) => (
-                <BadgeTag key={index}>{value.name}</BadgeTag>
+                <BadgeTag key={index} className={classNameBadge}>
+                    {value.name}
+                </BadgeTag>
             ))}
         </div>
     )
