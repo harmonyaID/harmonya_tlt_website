@@ -1,5 +1,4 @@
 import SectionGeneral from '@/component/general/SectionGeneral'
-import { SectionTitle } from '@/component/text/Heading'
 import { BtnLinkBasic, IconArrowGray } from '@/component/general/Button'
 import Image from 'next/image'
 import KeepUp01 from '@/asset/image/home/home-keep-up-01.jpg'
