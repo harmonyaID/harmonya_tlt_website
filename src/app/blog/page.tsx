@@ -6,6 +6,8 @@ import SectionBlogList from '@/page/blog/SectionBlogList'
 import SectionBlogHero from '@/page/blog/SectionBlogHero'
 import Breadcrumb from '@/component/general/Breadcrumb'
 
+export const dynamic = 'force-dynamic'
+
 const Blog = async () => {
     const page = 1
     const blogs = await getBlogList({ page }).then((res) => res?.result || {})

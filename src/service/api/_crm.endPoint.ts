@@ -13,6 +13,7 @@ export const SrvContentBlogCategory = baseApi + '/blog-categories'
 export const SrvContentBlogTag = baseApi + '/blog-tags'
 
 // Partner
+export const SrvPartners = baseApi + '/media-partners'
 
 // FAS
 export const SrvFaq = baseApi + '/faqs'

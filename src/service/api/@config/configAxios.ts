@@ -55,6 +55,7 @@ export const configMethod = (
         url,
         headers: { ...headers },
         withCredentials: false,
+        timeout: 10000,
         ...others,
         // validateStatus: (status) => status >= 200 && status < 300,
     })

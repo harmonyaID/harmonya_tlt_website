@@ -9,7 +9,7 @@ import { ReactNode } from 'react'
 // import IconArrow from '@/asset/image/icon/icon-arrow-btn.svg'
 
 // Icon Arrow
-const CodeIconArrow = () => (
+export const CodeIconArrow = () => (
     <svg
         width="20"
         height="20"
@@ -18,7 +18,8 @@ const CodeIconArrow = () => (
         xmlns="http://www.w3.org/2000/svg">
         <path
             d="M12.8438 16.0078L18.1088 9.9998L12.8437 3.9918"
-            stroke="white"
+            // stroke="white"
+            stroke="currentColor"
             strokeWidth="1.01897"
         />
         <line
@@ -26,7 +27,8 @@ const CodeIconArrow = () => (
             y1="9.96261"
             x2="1.89722"
             y2="9.96261"
-            stroke="white"
+            // stroke="white"
+            stroke="currentColor"
             strokeWidth="1.01897"
         />
     </svg>
@@ -41,12 +43,14 @@ export const IconArrowGray = () => (
         xmlns="http://www.w3.org/2000/svg">
         <path
             d="M12.8438 16.0082L18.1089 10.0002L12.8438 3.99219"
-            stroke="#847E7E"
+            // stroke="#847E7E"
+            stroke="currentColor"
             strokeWidth="1.01897"
         />
         <path
             d="M18.1057 9.96289H1.89746"
-            stroke="#847E7E"
+            // stroke="#847E7E"
+            stroke="currentColor"
             strokeWidth="1.01897"
         />
     </svg>

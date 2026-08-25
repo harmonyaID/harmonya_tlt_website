@@ -11,25 +11,6 @@ const _shapeData = (title: string, description: string) => ({
 })
 
 const SectionHomeWhyBookUs = ({ content = {} }: PropsSectionContent) => {
-    const points = [
-        _shapeData(
-            'FULL PACKAGE EXPERIENCE',
-            'We handle the entire trip from villa booking, boat transfers from Sanur, and on-island support.',
-        ),
-        _shapeData(
-            'PRICE MATCH ALL ONLINE AGENTS',
-            'An Australian-owned business. We personally inspect every property and match any lower price online.',
-        ),
-        _shapeData(
-            'ACCOMMODATION TO SUIT ALL BUDGETS',
-            'Boutique bungalows to beachfront villas, handpicked stay across Lembongan and Ceningan.',
-        ),
-        _shapeData(
-            'LEMBONGAN OFFICE OPEN 7 DAYS',
-            'Our Jungutbatu office is open daily for local advice, villa booking and on-island support.',
-        ),
-    ]
-
     return (
         <SectionGeneral className="bg-green-500">
             <div className="container text-center">

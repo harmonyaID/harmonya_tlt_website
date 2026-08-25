@@ -3,10 +3,10 @@ import { PropsSectionContent } from '@/type/sectionContent.type'
 import Link from 'next/link'
 import Image from 'next/image'
 import { IMAGE_EMPTY } from '@/config/asset.config'
+import { WrapImageHoverOverlay } from '@/component/general/WrapImage'
+import { BtnBasic, CodeIconArrow } from '@/component/general/Button'
 
 const SectionHomeNeighbourhoods = ({ content = {} }: PropsSectionContent) => {
-    console.log('content: ', content)
-
     const contentItems = content?.items || []
 
     return (
@@ -24,7 +24,18 @@ const SectionHomeNeighbourhoods = ({ content = {} }: PropsSectionContent) => {
                                 <Link
                                     className="w-100 vstack gap-3 text-grey-200 wp-hover-image"
                                     href={vm.buttonLink || '#'}>
-                                    <div className="section-blog-banner-reel">
+                                    <WrapImageHoverOverlay
+                                        className="section-blog-banner-reel"
+                                        contentOverlay={
+                                            <div className="h-100 w-100 d-flex justify-content-center align-items-center">
+                                                <BtnBasic className="btn-outline-white rounded-pill">
+                                                    <div className="hstack align-items-center gap-1">
+                                                        Explore{' '}
+                                                        <CodeIconArrow />
+                                                    </div>
+                                                </BtnBasic>
+                                            </div>
+                                        }>
                                         <Image
                                             src={vm?.image || IMAGE_EMPTY}
                                             alt={vm.title}
@@ -32,13 +43,13 @@ const SectionHomeNeighbourhoods = ({ content = {} }: PropsSectionContent) => {
                                             className="object-fit-cover"
                                             // className="object-cover"
                                         />
-                                    </div>
+                                    </WrapImageHoverOverlay>
 
                                     <div className="">
                                         <p className="fs-24 wp-font-tt-drugs desc-two-line">
                                             {vm.title}
                                         </p>
-                                        <p className="fs-13 wp-font-tt-drugs">
+                                        <p className="fs-13 wp-font-tt-drugs mb-0">
                                             {vm.description}
                                         </p>
                                     </div>

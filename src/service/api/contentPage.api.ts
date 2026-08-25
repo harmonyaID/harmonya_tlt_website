@@ -1,17 +1,19 @@
+import { _shapeMethodGetSearch } from '@/service/api/@config/configAPIPublic'
 import {
-    _shapeMethodGet,
-    _shapeMethodGetSearch,
-} from '@/service/api/@config/configAPIPublic'
-import { SrvContentHomePage, SrvFaq } from '@/service/api/_crm.endPoint'
+    SrvContentHomePage,
+    SrvFaq,
+    SrvPartners,
+} from '@/service/api/_crm.endPoint'
 
 export const getContentHomePage = async (formSearch = {}) =>
     await _shapeMethodGetSearch(
         SrvContentHomePage,
         formSearch,
-        'SrvContentHomePage',
+        'tcSrvContentHomePage',
     )
 
-export const getMediaPartner = () => {}
+export const getMediaPartner = async (formSearch = {}) =>
+    await _shapeMethodGetSearch(SrvPartners, formSearch, 'tcSrvContentHomePage')
 
 export const getFAQHomePage = async (
     formSearch = {},

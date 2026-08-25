@@ -205,3 +205,45 @@
 }
 
 // Position
+
+// Image Hover Style
+.wp-hover-image {
+  img {
+    position: relative!important;
+    transition: transform 0.5s ease;
+  }
+
+  &:hover {
+    img {
+      transform: scale(1.08);
+    }
+
+    .overlay-black{
+      opacity: 1;
+      z-index: 1;
+    }
+  }
+}
+
+.wp-image-hover-overlay-black {
+  position: relative;
+  .overlay-black {
+    position: absolute;
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+    transition: opacity 0.5s ease;
+    top: 0;
+    left: 0;
+  }
+
+  &:hover {
+    .overlay-black{
+      opacity: 1;
+      z-index: 1;
+    }
+  }
+}
+
