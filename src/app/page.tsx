@@ -10,9 +10,13 @@ import SectionHomeFAQ from '@/page/home/SectionHomeFAQ'
 import FooterLayout from '@/component/layout/Footer.layout'
 import FooterNewsLetterLayout from '@/component/layout/FooterNewsLetter.layout'
 import SectionHomeBook from '@/page/home/SectionHomeBook'
-import { getContentHomePage } from '@/service/api/contentPage.api'
+import {
+    getContentHomePage,
+    getFAQHomePage,
+} from '@/service/api/contentPage.api'
 import SectionHomeLiveTheIslandLife from '@/page/home/SectionHomeLiveTheIslandLife'
 import SectionHomeNeighbourhoods from '@/page/home/SectionHomeNeighbourhoods'
+import SectionHomePartner from '@/page/home/SectionHomePartner'
 
 const Home = async () => {
     const content = await getContentHomePage({ locale: 'en' }).then(
@@ -20,6 +24,10 @@ const Home = async () => {
     )
 
     const value = content?.value || {}
+
+    const dataFAQs = await getFAQHomePage({ locale: 'en' }).then(
+        (res) => res?.result || {},
+    )
 
     return (
         <>
@@ -31,10 +39,11 @@ const Home = async () => {
             <SectionHomeBook items={value?.SECTION5 || []} />
             <SectionHomeExclusiveStay />
             <SectionHomeWhyBookUs content={value?.SECTION7 || {}} />
+            <SectionHomePartner content={value?.SECTION8 || {}} />
             <SectionHomeDedication content={value?.SECTION9 || {}} />
-            <SectionHomeKeepWithUs />
-            <SectionHomeLocation />
-            <SectionHomeFAQ />
+            <SectionHomeKeepWithUs content={value?.SECTION10 || {}} />
+            <SectionHomeLocation content={value?.SECTION11 || {}} />
+            <SectionHomeFAQ list={dataFAQs} />
             <FooterNewsLetterLayout content={value?.SECTION13 || {}} />
             <FooterLayout />
         </>

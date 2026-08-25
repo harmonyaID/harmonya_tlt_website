@@ -19,6 +19,13 @@ body {
   font-weight: 400;
 }
 
+.wp-head-font-tt-drugs {
+  h1,h2,h3,h4,h5,h6 {
+    font-family: 'TT Drugs Trial', sans-serif;
+    font-weight:  normal;
+  }
+}
+
 .wp-content-blog {
   h1,h2,h3,h4,h5,h6 {
     font-family: 'TT Drugs Trial', sans-serif;
@@ -30,6 +37,18 @@ body {
     color: var(--bs-grey-200);
 
     a {color: var(--bs-primary);}
+  }
+}
+
+.wp-link-primary {
+  a {
+    color: var(--bs-primary);
+  }
+}
+
+.wp-link-green-400 {
+  a {
+    color: var(--bs-green-400);
   }
 }
 
@@ -80,6 +99,7 @@ a {text-decoration: none;}
 .content-hero-search-card {
   background-color: #1D1D1D99;
 }
+
 
 // GENERAL
 .wp-general-content-head-and-desc {
@@ -137,6 +157,22 @@ a {text-decoration: none;}
 }
 
 
+// Row Top Column Ganjil
+.wrap-row > div:nth-child(odd), .wrap-row > .column:nth-child(odd) {
+  padding-top: 4rem;
+}
+
+// Arrow Hover
+.hover-icon-white:hover svg {
+  //fill: #fff;
+  stroke: #fff !important;
+  path {
+    stroke: #fff !important;
+  }
+}
+
+
+
 // HOME PAGE
 .section-home-dedication {
   .lembongan-logo {
@@ -162,8 +198,51 @@ a {text-decoration: none;}
 
 
 // Page Blog
+.section-blog-hero {
+  height: 80vh;
+  min-height: 80vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+
+  .banner-image {
+    height: 85%;
+    width: 100%;
+  }
+
+  .content-blog-first {
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 30%;
+  }
+
+  .blog-thumbnail-first {
+    //height: 100%;
+    height: 360px;
+    min-height: 50vh;
+    img {position: relative!important;}
+  }
+}
+
+.section-blog-hero-v2 {
+  //background-color: red;
+
+  .content-blog-first {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .blog-thumbnail-first {
+    height: 320px;
+    min-height: 60vh;
+  }
+}
+
 .section-blog-banner-reel {
-  height: 300px;
+  height: 420px;
   width: 100%;
   position: relative;
   overflow: hidden;

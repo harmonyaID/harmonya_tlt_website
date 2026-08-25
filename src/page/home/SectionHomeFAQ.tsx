@@ -1,13 +1,17 @@
 import SectionGeneral from '@/component/general/SectionGeneral'
 import { SectionTitle } from '@/component/text/Heading'
 import { ReactNode } from 'react'
+import {
+    getContentHomePage,
+    getFAQHomePage,
+} from '@/service/api/contentPage.api'
 
-const objectDataFQA = (title: ReactNode, description?: ReactNode) => ({
-    title,
-    description,
+const objectDataFQA = (question: ReactNode, answer?: ReactNode) => ({
+    question,
+    answer,
 })
 
-const SectionHomeFAQ = () => {
+const SectionHomeFAQ = async ({ list = [] }: { list?: any[] }) => {
     const listFAQs = [
         objectDataFQA(
             'WHERE IS LEMBONGAN TRAVELLER LOCATED ?',
@@ -31,6 +35,14 @@ const SectionHomeFAQ = () => {
         ),
     ]
 
+    // const dataFAQs = await getFAQHomePage({ locale: 'en' }).then(
+    //     (res) => res?.result || {},
+    // )
+
+    const dataFAQs = list
+
+    console.log('dataFAQs: ', list)
+
     return (
         <SectionGeneral>
             <div className="container">
@@ -43,33 +55,39 @@ const SectionHomeFAQ = () => {
                         <div
                             className="accordion accordion-flush"
                             id="accordionFlushExample">
-                            {listFAQs.map((vm, index) => {
-                                const dataId = 'flushCollapsse' + index
+                            {dataFAQs && dataFAQs.length
+                                ? dataFAQs?.map((vm: any, index: number) => {
+                                      const dataId = 'flushCollapsse' + index
 
-                                return (
-                                    <div className="accordion-item" key={index}>
-                                        <h2 className="accordion-header">
-                                            <button
-                                                className="accordion-button collapsed grey-300 font-tt-drugs fs-20 bg-transparent box-shadow-0"
-                                                type="button"
-                                                data-bs-toggle="collapse"
-                                                data-bs-target={'#' + dataId}
-                                                aria-expanded="false"
-                                                aria-controls={dataId}>
-                                                {vm.title}
-                                            </button>
-                                        </h2>
-                                        <div
-                                            id={dataId}
-                                            className="accordion-collapse collapse"
-                                            data-bs-parent="#accordionFlushExample">
-                                            <div className="accordion-body">
-                                                {vm.description}
-                                            </div>
-                                        </div>
-                                    </div>
-                                )
-                            })}
+                                      return (
+                                          <div
+                                              className="accordion-item"
+                                              key={index}>
+                                              <h2 className="accordion-header">
+                                                  <button
+                                                      className="accordion-button collapsed grey-300 font-tt-drugs fs-20 bg-transparent box-shadow-0"
+                                                      type="button"
+                                                      data-bs-toggle="collapse"
+                                                      data-bs-target={
+                                                          '#' + dataId
+                                                      }
+                                                      aria-expanded="false"
+                                                      aria-controls={dataId}>
+                                                      {vm.question}
+                                                  </button>
+                                              </h2>
+                                              <div
+                                                  id={dataId}
+                                                  className="accordion-collapse collapse"
+                                                  data-bs-parent="#accordionFlushExample">
+                                                  <div className="accordion-body">
+                                                      {vm.answer}
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      )
+                                  })
+                                : null}
                         </div>
                     </div>
                 </div>

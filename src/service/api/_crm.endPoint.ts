@@ -11,3 +11,11 @@ export const SrvContentBlogDetail = (slug: string | number) =>
 export const SrvContentBlogCategory = baseApi + '/blog-categories'
 
 export const SrvContentBlogTag = baseApi + '/blog-tags'
+
+// Partner
+
+// FAS
+export const SrvFaq = baseApi + '/faqs'
+
+// Property
+export const SrvContentPropertyHomePage = baseApi + '/blog-property'
