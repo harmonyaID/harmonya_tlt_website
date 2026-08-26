@@ -23,15 +23,31 @@ const SectionHomePartner = ({
                     html={content.content}
                 />
 
-                <div className="row justify-content-center">
+                <div className="row justify-content-center py-4">
                     <div className="col-md-10">
                         <SwipeSlideBanner
+                            className="section-logo-swiper-auto"
                             items={partners}
+                            breakpoints={{
+                                576: { slidesPerView: 3, spaceBetween: 20 },
+                                992: { slidesPerView: 4, spaceBetween: 24 },
+                                1200: {
+                                    slidesPerView: 5,
+                                    spaceBetween: 24,
+                                },
+                                // 1200: { slidesPerView: 4, spaceBetween: 24 },
+                            }}
+                            isNavigation={false}
+                            swiperConfig={{
+                                autoplay: true,
+                                loop: true,
+                            }}
                             contentElement={(dataElement: any) => (
                                 <div className="position-relative section-home-logo-partner">
                                     <Image
                                         src={dataElement.logo || ''}
                                         alt={''}
+                                        className="h-auto mh-100 w-100 position-relative"
                                         fill
                                     />
                                 </div>

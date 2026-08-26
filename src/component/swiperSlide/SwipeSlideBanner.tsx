@@ -19,12 +19,16 @@ const SwipeSlideBanner = ({
     },
     isNavigation = true,
     passUseRef = '',
+    swiperConfig = {},
+    className = '',
 }: {
     items?: any[]
     contentElement?: any
     breakpoints?: {} | any
     isNavigation?: boolean
     passUseRef?: any
+    swiperConfig?: any
+    className?: string
 }) => {
     const swiperRef = passUseRef || useRef<SwiperType | null>(null)
 
@@ -42,13 +46,15 @@ const SwipeSlideBanner = ({
             ) : null}
 
             <Swiper
+                className={className}
                 modules={[Navigation]}
                 onSwiper={(swiper) => {
                     swiperRef.current = swiper
                 }}
                 spaceBetween={24}
                 slidesPerView={1.15}
-                breakpoints={breakpoints}>
+                breakpoints={breakpoints}
+                {...swiperConfig}>
                 {items.map((item, index) => (
                     <SwiperSlide key={index}>
                         {contentElement(item)}
