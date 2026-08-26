@@ -6,8 +6,6 @@ import { IconSvgMailWhite } from '@/component/general/IconSvg'
 import RenderHtml from '@/component/general/RenderHtml'
 
 const FooterNewsLetterLayout = ({ content = {} }: PropsSectionContent) => {
-    console.log('content13: ', content)
-
     return (
         <section className="position-relative overflow-hidden">
             <div className="position-absolute banner-image overflow-hidden">

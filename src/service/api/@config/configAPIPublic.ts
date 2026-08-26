@@ -39,6 +39,7 @@ export const _shapeMethodGet = async (
             //         }
             //     }
             // }
+            console.log('error fetch API : ', err)
         })
 }
 

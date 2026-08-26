@@ -138,22 +138,19 @@ a {text-decoration: none;}
   }
 }
 
-.wp-hover-image {
-  img {
-    position: relative!important;
-    transition: transform 0.5s ease;
-  }
-
-  &:hover {
-    img {
-      transform: scale(1.08);
-    }
-  }
-}
-
 .box-32 {
   height: 32px !important;
   width: 32px !important;
+}
+
+.box-40 {
+  height: 40px !important;
+  width: 40px !important;
+}
+
+.box-48 {
+  height: 48px !important;
+  width: 48px !important;
 }
 
 
@@ -168,6 +165,13 @@ a {text-decoration: none;}
   stroke: #fff !important;
   path {
     stroke: #fff !important;
+  }
+}
+.hover-icon-black:hover svg {
+  //fill: #fff;
+  stroke: #000 !important;
+  path {
+    stroke: #000 !important;
   }
 }
 
@@ -196,6 +200,18 @@ a {text-decoration: none;}
   }
 }
 
+.section-home-logo-partner {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.section-logo-swiper-auto {
+  .swiper-slide {
+    width: auto !important;
+  }
+}
 
 // Page Blog
 .section-blog-hero {
@@ -276,3 +292,4 @@ a {text-decoration: none;}
 @import 'base/_accordion';
 @import 'base/_navTab.scss';
 @import 'base/_form.scss';
+@import 'base/_partial.scss';

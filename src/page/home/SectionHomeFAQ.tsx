@@ -1,62 +1,26 @@
 import SectionGeneral from '@/component/general/SectionGeneral'
-import { SectionTitle } from '@/component/text/Heading'
-import { ReactNode } from 'react'
-import {
-    getContentHomePage,
-    getFAQHomePage,
-} from '@/service/api/contentPage.api'
+import { PropsSectionContent } from '@/type/sectionContent.type'
+import RenderHtml from '@/component/general/RenderHtml'
 
-const objectDataFQA = (question: ReactNode, answer?: ReactNode) => ({
-    question,
-    answer,
-})
-
-const SectionHomeFAQ = async ({ list = [] }: { list?: any[] }) => {
-    const listFAQs = [
-        objectDataFQA(
-            'WHERE IS LEMBONGAN TRAVELLER LOCATED ?',
-            'Raffles Bali is located in Jimbaran, Bali, set on a hillside overlooking the ocean. The resort is approximately 20 minutes from Bali Ngurah Rai International Airport, offering convenient access while maintaining a private setting away from busier areas.',
-        ),
-        objectDataFQA(
-            'WHAT IS THE BEST TIME TO GO TO LEMBONGAN?',
-            'Raffles Bali is located in Jimbaran, Bali',
-        ),
-        objectDataFQA(
-            'HOW CAN I GO TO LEMBONGAN ISLAND?',
-            'Raffles Bali is located in Jimbaran, Bali',
-        ),
-        objectDataFQA(
-            'WHAT ARE THE CHECK-IN AND CHECK-OUT TIMES?',
-            'Raffles Bali is located in Jimbaran, Bali',
-        ),
-        objectDataFQA(
-            'WHAT IS THE CANCELLATION POLICY AT THE LEMBONGAN TRAVELLER?',
-            'Raffles Bali is located in Jimbaran, Bali',
-        ),
-    ]
-
-    // const dataFAQs = await getFAQHomePage({ locale: 'en' }).then(
-    //     (res) => res?.result || {},
-    // )
-
-    const dataFAQs = list
-
-    console.log('dataFAQs: ', list)
-
+const SectionHomeFAQ = async ({
+    content = {},
+    list = [],
+}: PropsSectionContent & { list?: any[] }) => {
     return (
         <SectionGeneral>
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-lg-10">
-                        <SectionTitle className="font-tt-drugs text-center pb-5">
-                            FREQUENTLY ASKED QUESTIONS
-                        </SectionTitle>
+                        <RenderHtml
+                            className="font-tt-drugs text-center pb-5"
+                            html={content.content}
+                        />
 
                         <div
                             className="accordion accordion-flush"
                             id="accordionFlushExample">
-                            {dataFAQs && dataFAQs.length
-                                ? dataFAQs?.map((vm: any, index: number) => {
+                            {list && list.length
+                                ? list?.map((vm: any, index: number) => {
                                       const dataId = 'flushCollapsse' + index
 
                                       return (

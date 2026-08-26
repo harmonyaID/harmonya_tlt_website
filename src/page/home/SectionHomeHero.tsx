@@ -32,13 +32,13 @@ const SectionHomeHero = ({ content = {} }: { content?: any | {} }) => {
             <div className="container content-hero-position-bottom z-1">
                 <div className="row justify-content-center">
                     <div className="col-lg-9">
-                        <div className="content-hero-search-card text-white p-3 rounded-3">
+                        <div className="content-hero-search-card text-white py-3 px-4 rounded-3">
                             <div className="row align-items-end g-4">
                                 <div className="col-md">
                                     <div className="">
                                         <label
                                             htmlFor="inputDates"
-                                            className="form-label">
+                                            className="form-label fw-500">
                                             {content.searchLabelDates ||
                                                 'DATES'}
                                         </label>
@@ -57,7 +57,7 @@ const SectionHomeHero = ({ content = {} }: { content?: any | {} }) => {
                                     <div className="">
                                         <label
                                             htmlFor="inputDates"
-                                            className="form-label">
+                                            className="form-label fw-500">
                                             {content.searchLabelGuest ||
                                                 'GUEST'}
                                         </label>
@@ -76,7 +76,7 @@ const SectionHomeHero = ({ content = {} }: { content?: any | {} }) => {
                                     <div className="">
                                         <label
                                             htmlFor="selectCollction"
-                                            className="form-label">
+                                            className="form-label fw-500">
                                             {content?.searchLabelCollection ||
                                                 'COLLECTIONS'}
                                         </label>

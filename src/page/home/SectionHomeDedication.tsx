@@ -3,7 +3,7 @@ import { H3 } from '@/component/text/Heading'
 import { SectionDescription } from '@/component/text/Paragraph'
 import Image from 'next/image'
 import Banner from '@/asset/image/home/home-dedicated-banner.jpg'
-import { BtnBasic, BtnLinkBasic } from '@/component/general/Button'
+import { BtnBasic, BtnIcon, BtnLinkBasic } from '@/component/general/Button'
 import LogoLembongan from '@/asset/image/home/home-logo-lembongan.png'
 import DataImg from '@/asset/image/home/home-dedicated-image.png'
 import { PropsSectionContent } from '@/type/sectionContent.type'
@@ -20,8 +20,6 @@ const SectionHomeDedication = ({ content = {} }: PropsSectionContent) => {
                     src={content?.backgroundImage || Banner}
                     alt="banner"
                     className="object-fit-cover"
-
-                    // className=" position-absolute banner-image"
                 />
             </div>
 
@@ -36,24 +34,17 @@ const SectionHomeDedication = ({ content = {} }: PropsSectionContent) => {
                                     fill
                                 />
                             </div>
+
                             <RenderHtml
                                 className="text-tt-dgrup"
                                 html={content.content}
                             />
-                            {/*<p className="fs-20 mb-0">*/}
-                            {/*    At Love for Lembongan, our mission is to uplift*/}
-                            {/*    the local community by ensuring access to*/}
-                            {/*    quality healthcare and education. Thanks to the*/}
-                            {/*    generosity of our donors, and our partnership*/}
-                            {/*    with Bali Children Foundation, we’ve made*/}
-                            {/*    significant strides in both areas, focusing on*/}
-                            {/*    those who need it most*/}
-                            {/*</p>*/}
+
                             <div className="pt-4">
                                 <BtnLinkBasic
                                     href={content.buttonLink || '#'}
                                     className="btn-outline-white rounded-pill">
-                                    {content.buttonText}
+                                    <BtnIcon>{content.buttonText}</BtnIcon>
                                 </BtnLinkBasic>
                             </div>
                         </div>
