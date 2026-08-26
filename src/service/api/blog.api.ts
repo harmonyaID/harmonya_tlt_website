@@ -9,16 +9,16 @@ import {
     SrvContentBlogTag,
 } from '@/service/api/_crm.endPoint'
 
-export const getBlogList = async (formSearch: object) =>
-    await _shapeMethodGetSearch(SrvContentBlog, formSearch, 'tcSrvContentBlog')
+export const getBlogList = (formSearch: object) =>
+    _shapeMethodGetSearch(SrvContentBlog, formSearch, 'tcSrvContentBlog')
 
-export const getBlogDetail = async (
+export const getBlogDetail = (
     slug: string | number,
     tc = 'tcSrvContentBlogDetail',
-) => await _shapeMethodGet(SrvContentBlogDetail(slug), tc)
+) => _shapeMethodGet(SrvContentBlogDetail(slug), tc)
 
-export const getBlogCategoryList = async () =>
-    await _shapeMethodGet(SrvContentBlogCategory, 'tcSrvContentBlogCategory')
+export const getBlogCategoryList = () =>
+    _shapeMethodGet(SrvContentBlogCategory, 'tcSrvContentBlogCategory')
 
-export const getBlogTagList = async () =>
-    await _shapeMethodGet(SrvContentBlogTag, 'tcSrvContentBlogTag')
+export const getBlogTagList = () =>
+    _shapeMethodGet(SrvContentBlogTag, 'tcSrvContentBlogTag')
