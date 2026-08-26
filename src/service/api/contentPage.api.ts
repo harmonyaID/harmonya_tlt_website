@@ -5,21 +5,21 @@ import {
     SrvPartners,
 } from '@/service/api/_crm.endPoint'
 
-export const getContentHomePage = async (formSearch = {}) =>
-    await _shapeMethodGetSearch(
+export const getContentHomePage = (formSearch = {}) =>
+    _shapeMethodGetSearch(
         SrvContentHomePage,
         formSearch,
         'tcSrvContentHomePage',
     )
 
-export const getMediaPartner = async (formSearch = {}) =>
-    await _shapeMethodGetSearch(SrvPartners, formSearch, 'tcSrvContentHomePage')
+export const getMediaPartner = (formSearch = {}) =>
+    _shapeMethodGetSearch(SrvPartners, formSearch, 'tcSrvContentHomePage')
 
-export const getFAQHomePage = async (
+export const getFAQHomePage = (
     formSearch = {},
     tc: string = 'tcSrvFaqHomaPage',
 ) =>
-    await _shapeMethodGetSearch(
+    _shapeMethodGetSearch(
         SrvFaq,
         // formSearch,
         {
