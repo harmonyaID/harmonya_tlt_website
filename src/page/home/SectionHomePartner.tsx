@@ -4,17 +4,15 @@ import RenderHtml from '@/component/general/RenderHtml'
 import { BtnLinkBasic } from '@/component/general/Button'
 import SwipeSlideBanner from '@/component/swiperSlide/SwipeSlideBanner'
 import Image from 'next/image'
+import { isEmpty } from 'lodash'
 
 const SectionHomePartner = ({
     content = {},
-    partners,
+    partners = [],
 }: {
     content?: any
     partners?: any[]
 }) => {
-    console.log('SECTION8: ', content)
-    console.log('SECTION8 partners: ', partners)
-
     return (
         <SectionGeneral>
             <div className="container">
@@ -27,7 +25,7 @@ const SectionHomePartner = ({
                     <div className="col-md-10">
                         <SwipeSlideBanner
                             className="section-logo-swiper-auto"
-                            items={partners}
+                            items={!isEmpty(partners) ? partners : []}
                             breakpoints={{
                                 576: { slidesPerView: 3, spaceBetween: 20 },
                                 992: { slidesPerView: 4, spaceBetween: 24 },

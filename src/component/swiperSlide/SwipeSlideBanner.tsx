@@ -8,6 +8,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import IconArrowLeft from '@/component/icon/IconArrowLeft'
 import IconArrowRight from '@/component/icon/IconArrowRight'
+import { isEmpty } from 'lodash'
 
 const SwipeSlideBanner = ({
     items = [],
@@ -55,11 +56,13 @@ const SwipeSlideBanner = ({
                 slidesPerView={1.15}
                 breakpoints={breakpoints}
                 {...swiperConfig}>
-                {items?.map((item, index) => (
-                    <SwiperSlide key={index}>
-                        {contentElement(item)}
-                    </SwiperSlide>
-                ))}
+                {items && !isEmpty(items)
+                    ? items?.map((item, index) => (
+                          <SwiperSlide key={index}>
+                              {contentElement(item)}
+                          </SwiperSlide>
+                      ))
+                    : null}
             </Swiper>
 
             {isNavigation ? (
