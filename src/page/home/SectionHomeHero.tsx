@@ -1,3 +1,4 @@
+'use client'
 import HomeBanner from '@/asset/image/home/home-banner.jpg'
 import Image from 'next/image'
 import { BtnPrimary } from '@/component/general/Button'

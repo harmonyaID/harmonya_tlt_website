@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import { BtnLinkPrimary, BtnPrimary } from '@/component/general/Button'
 import SlideBannerBackground from '@/asset/image/home/home-book-slide-banner.jpg'

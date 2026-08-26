@@ -1,6 +1,7 @@
 import SectionGeneral from '@/component/general/SectionGeneral'
 import { PropsSectionContent } from '@/type/sectionContent.type'
 import RenderHtml from '@/component/general/RenderHtml'
+import { isEmpty } from 'lodash'
 
 const SectionHomeFAQ = async ({
     content = {},
@@ -19,7 +20,7 @@ const SectionHomeFAQ = async ({
                         <div
                             className="accordion accordion-flush"
                             id="accordionFlushExample">
-                            {list && list.length
+                            {list && !isEmpty(list) && list.length
                                 ? list?.map((vm: any, index: number) => {
                                       const dataId = 'flushCollapsse' + index
 

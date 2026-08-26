@@ -1,3 +1,5 @@
+'use client'
+
 import SectionGeneral from '@/component/general/SectionGeneral'
 import { SectionTitle } from '@/component/text/Heading'
 import { SectionDescription } from '@/component/text/Paragraph'

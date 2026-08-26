@@ -1,3 +1,4 @@
+'use client'
 import RenderHtml from '@/component/general/RenderHtml'
 import { PropsSectionContent } from '@/type/sectionContent.type'
 import Link from 'next/link'
@@ -18,7 +19,7 @@ const SectionHomeNeighbourhoods = ({ content = {} }: PropsSectionContent) => {
                 />
 
                 <div className="row g-4 wrap-row">
-                    {contentItems.map((vm: any, index: number) => {
+                    {contentItems?.map((vm: any, index: number) => {
                         return (
                             <div className="col-md-3" key={index}>
                                 <Link
