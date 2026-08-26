@@ -1,3 +1,5 @@
+'use client'
+
 import SectionGeneral from '@/component/general/SectionGeneral'
 import { SectionTitle } from '@/component/text/Heading'
 import IconCircle from '@/asset/image/home/home-icon-circle.png'

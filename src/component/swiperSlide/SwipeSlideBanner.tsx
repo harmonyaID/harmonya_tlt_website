@@ -55,7 +55,7 @@ const SwipeSlideBanner = ({
                 slidesPerView={1.15}
                 breakpoints={breakpoints}
                 {...swiperConfig}>
-                {items.map((item, index) => (
+                {items?.map((item, index) => (
                     <SwiperSlide key={index}>
                         {contentElement(item)}
                     </SwiperSlide>

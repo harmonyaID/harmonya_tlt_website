@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import BannerBackground from '@/asset/image/footer/footer-newslatter-bg.jpg'
 import { BtnPrimary } from '@/component/general/Button'
