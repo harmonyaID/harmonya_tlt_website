@@ -36,8 +36,6 @@ const Home = async () => {
         (res) => res?.result || {},
     )
 
-    console.log('partners: ', partners)
-
     return (
         <>
             <NavbarLayout isBgTransparent />
@@ -50,7 +48,7 @@ const Home = async () => {
             <SectionHomeWhyBookUs content={value?.SECTION7 || {}} />
             <SectionHomePartner
                 content={value?.SECTION8 || {}}
-                partners={partners}
+                partners={partners || []}
             />
             <SectionHomeDedication content={value?.SECTION9 || {}} />
             <SectionHomeKeepWithUs content={value?.SECTION10 || {}} />
