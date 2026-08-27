@@ -154,6 +154,7 @@ a {text-decoration: none;}
 }
 
 
+
 // Row Top Column Ganjil
 .wrap-row > div:nth-child(odd), .wrap-row > .column:nth-child(odd) {
   padding-top: 4rem;
@@ -178,6 +179,14 @@ a {text-decoration: none;}
 
 
 // HOME PAGE
+.section-home-about {
+  .wp-image-map {
+    position: relative;
+    width: 100%;
+    img {position: relative!important;}
+  }
+}
+
 .section-home-dedication {
   .lembongan-logo {
     width: 200px;

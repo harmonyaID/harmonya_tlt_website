@@ -1,9 +1,21 @@
-import { _shapeMethodGetSearch } from '@/service/api/@config/configAPIPublic'
+import {
+    _shapeMethodGet,
+    _shapeMethodGetSearch,
+} from '@/service/api/@config/configAPIPublic'
 import {
     SrvContentHomePage,
     SrvFaq,
+    SrvMenus,
     SrvPartners,
 } from '@/service/api/_crm.endPoint'
+
+// Start Global Feature
+export const getMenusNavbar = (formSearch = {}, tc: string = 'tcSrvMenus') =>
+    _shapeMethodGetSearch(SrvMenus, formSearch, tc)
+
+export const getDetailMenusNavbar = (tc: string = 'tcSrvMenus') =>
+    _shapeMethodGet(SrvMenus + '/5', tc)
+// End Global Feature
 
 export const getContentHomePage = (formSearch = {}) =>
     _shapeMethodGetSearch(

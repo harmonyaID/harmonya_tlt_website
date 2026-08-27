@@ -21,7 +21,6 @@ export const _shapeMethodGet = async (
 
     return get(url, others, _configHeadBody())
         .then((res: any) => {
-            console.log('res: ', res)
             if (isSuccess(res.data)) {
                 return res.data
             } else {
