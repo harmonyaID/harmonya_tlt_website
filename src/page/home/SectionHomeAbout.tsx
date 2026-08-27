@@ -11,7 +11,7 @@ import RenderHtml from '@/component/general/RenderHtml'
 
 const SectionHomeAbout = ({ content = {} }: { content?: any }) => {
     return (
-        <SectionGeneral>
+        <SectionGeneral className="section-home-about">
             <div className="row gx-8">
                 <div className="col-lg-6">
                     <div className="hstack justify-content-end">
@@ -23,20 +23,22 @@ const SectionHomeAbout = ({ content = {} }: { content?: any }) => {
                         </div>
                     </div>
 
-                    <Image
-                        src={(content?.mapImage && false) || HomeAboutMap}
-                        alt="about home"
-                        className="w-100 h-auto"
-                    />
+                    <div className="wp-image-map">
+                        <Image
+                            src={content?.mapImage || HomeAboutMap}
+                            alt="about home"
+                            fill
+                            className=""
+                        />
+                    </div>
                 </div>
                 <div className="col-lg-6">
                     <div className="col-lg-8">
-                        <div className="w-100 h-100 position-relative">
+                        <div className="wp-image-map">
                             <Image
-                                src={
-                                    (content?.image && false) || HomeAboutBanner
-                                }
+                                src={content?.image || HomeAboutBanner}
                                 alt="about banner"
+                                fill
                                 className="w-100 h-100"
                             />
                         </div>

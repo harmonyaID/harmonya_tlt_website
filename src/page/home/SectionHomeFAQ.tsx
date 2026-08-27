@@ -13,7 +13,7 @@ const SectionHomeFAQ = async ({
                 <div className="row justify-content-center">
                     <div className="col-lg-10">
                         <RenderHtml
-                            className="font-tt-drugs text-center pb-5"
+                            className="wp-font-tt-drugs text-grey-300 text-center pb-5"
                             html={content.content}
                         />
 
@@ -30,7 +30,7 @@ const SectionHomeFAQ = async ({
                                               key={index}>
                                               <h2 className="accordion-header">
                                                   <button
-                                                      className="accordion-button collapsed grey-300 font-tt-drugs fs-20 bg-transparent box-shadow-0"
+                                                      className="accordion-button collapsed text-uppercase text-grey-300 font-tt-drugs fs-20 bg-transparent box-shadow-0"
                                                       type="button"
                                                       data-bs-toggle="collapse"
                                                       data-bs-target={
@@ -43,9 +43,9 @@ const SectionHomeFAQ = async ({
                                               </h2>
                                               <div
                                                   id={dataId}
-                                                  className="accordion-collapse collapse"
+                                                  className="accordion-collapse pb-2 collapse"
                                                   data-bs-parent="#accordionFlushExample">
-                                                  <div className="accordion-body">
+                                                  <div className="accordion-body text-grey-100 fw-light pt-2">
                                                       {vm.answer}
                                                   </div>
                                               </div>

@@ -1,7 +1,66 @@
 .navbar-config {
   a {
+    &:focus {
+      color: var(--bs-white);
+    }
+
     font-size: 1rem;
     color: var(--bs-white);
+  }
+
+  .dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+
+    &:after {
+      content: unset;
+    }
+
+    &.show {
+      color: var(--bs-white);
+    }
+    &:hover {
+      color: var(--bs-white);
+    }
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+
+  .dropdown-menu {
+    a {
+      color: var(--bs-grey-300);
+    }
+
+    border: 0;
+    border-bottom: 1px solid #f9f9f9;
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    margin: 0;
+
+    //Custom Show
+    display: block !important; /* paksa menang dari default Bootstrap */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s ease;
+    pointer-events: none;
+
+    &.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    &.no-transition {
+      transition: none !important;
+    }
   }
 
   .logo-default, .icon-search-default  {
@@ -17,6 +76,29 @@
     //border-bottom: .5px solid #f9f9f9;
   }
 
+
+  // START DROPDOWN MEGA MENU
+  .navbar-menga-menu {
+    position: static;
+
+    .wrap-banner-img {
+      position: relative;
+      height: 290px;
+      width: 100%;
+      img {
+        position: relative;
+      }
+      .message {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+      }
+    }
+  }
+  // END DROPDOWN MEGA MENU
+
+  // After Scroll*
   &.navbar-scrolled {
     background-color: var(--bs-white);
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
@@ -34,10 +116,33 @@
     a {
       color: var(--bs-grey-300);
     }
+    .dropdown-toggle {
+      &.show {
+        color: var(--bs-grey-300);
+      }
+      &:hover {
+        color: var(--bs-grey-300);
+      }
+    }
   }
 
   &.position-fixed {
     //transform: translateY(-80px);
     transform: translateY(0);
   }
+
+  .h-gap-menu {
+    gap: 40px;
+  }
 }
+
+//@media (min-width: 992px) {
+//  .navbar-menga-menu:hover > .dropdown-menu {
+//    display: block;
+//    margin-top: 0; /* biar nggak ada celah yang bikin hover putus */
+//  }
+//
+//  .navbar-menga-menu > .dropdown-toggle:active {
+//    pointer-events: none; /* cegah menu ketutup lagi saat diklik */
+//  }
+//}

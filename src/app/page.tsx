@@ -18,6 +18,7 @@ import {
 import SectionHomeLiveTheIslandLife from '@/page/home/SectionHomeLiveTheIslandLife'
 import SectionHomeNeighbourhoods from '@/page/home/SectionHomeNeighbourhoods'
 import SectionHomePartner from '@/page/home/SectionHomePartner'
+import dataMenuNavbarServerside from '@/hook/dataMenuNavbarServerside.hook'
 
 export const dynamic = 'force-dynamic'
 
@@ -36,9 +37,11 @@ const Home = async () => {
         (res) => res?.result || {},
     )
 
+    const { menus } = await dataMenuNavbarServerside()
+
     return (
         <>
-            <NavbarLayout isBgTransparent />
+            <NavbarLayout menus={menus} isBgTransparent />
             <SectionHomeHero content={value?.SECTION1 || {}} />
             <SectionHomeAbout content={value?.SECTION2 || {}} />
             <SectionHomeLiveTheIslandLife content={value?.SECTION3 || {}} />
