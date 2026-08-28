@@ -32,10 +32,11 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env*
+#.env*
 
 # vercel
 .vercel
+.next
 
 # typescript
 *.tsbuildinfo
@@ -43,5 +44,5 @@ next-env.d.ts
 
 # TypeScript cache
 *.tsbuildinfo
-vite.config.js
-vite.config.d.ts
+
+next-env.d.ts
