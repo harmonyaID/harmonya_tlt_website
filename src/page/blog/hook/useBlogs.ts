@@ -13,6 +13,7 @@ const useBlogs = ({
 
     const [search, setSearch] = useState<any>({
         page: passPage,
+        limit: 4,
     })
 
     const [isLoading, setIsLoading] = useState(true)

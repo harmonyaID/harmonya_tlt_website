@@ -13,8 +13,10 @@ import {
 export const getMenusNavbar = (formSearch = {}, tc: string = 'tcSrvMenus') =>
     _shapeMethodGetSearch(SrvMenus, formSearch, tc)
 
-export const getDetailMenusNavbar = (tc: string = 'tcSrvMenus') =>
-    _shapeMethodGet(SrvMenus + '/5', tc)
+export const getDetailMenusNavbar = (
+    handle?: string,
+    tc: string = 'tcSrvMenus',
+) => _shapeMethodGet(SrvMenus + '/' + handle, tc)
 // End Global Feature
 
 export const getContentHomePage = (formSearch = {}) =>

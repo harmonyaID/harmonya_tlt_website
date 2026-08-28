@@ -6,6 +6,7 @@ import { formatDateTimeByTlt } from '@/helper/actionFormatDate.helper'
 import { BadgeRow } from '@/component/general/Badge'
 import Link from 'next/link'
 import { isEmpty } from 'lodash'
+import { WrapImageHoverOverlay } from '@/component/general/WrapImage'
 
 const SectionBlogList = ({ passBlogs = [], passPage = 1 }) => {
     const { list, isLoading, _handleChangePage } = useBlogs({
@@ -28,7 +29,7 @@ const SectionBlogList = ({ passBlogs = [], passPage = 1 }) => {
                                   <Link
                                       className="w-100 vstack gap-3 text-grey-200 wp-hover-image"
                                       href={url || '#'}>
-                                      <div className="section-blog-banner-reel">
+                                      <WrapImageHoverOverlay className="section-blog-banner-reel">
                                           <Image
                                               src={vm?.thumbnail || IMAGE_EMPTY}
                                               alt={vm.title}
@@ -36,7 +37,7 @@ const SectionBlogList = ({ passBlogs = [], passPage = 1 }) => {
                                               className="object-fit-cover"
                                               // className="object-cover"
                                           />
-                                      </div>
+                                      </WrapImageHoverOverlay>
 
                                       <div className="">
                                           <p className="fs-13 mb-1">
