@@ -1,0 +1,24 @@
+const IconArrowLeft = () => (
+    <svg
+        width="21"
+        height="17"
+        viewBox="0 0 21 17"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+            d="M7.26562 2.00039L2.00054 8.00841L7.26562 14.0164"
+            stroke="currentColor"
+            strokeWidth="1.01897"
+        />
+        <line
+            x1="2.00098"
+            y1="8.0456"
+            x2="18.2092"
+            y2="8.0456"
+            stroke="currentColor"
+            strokeWidth="1.01897"
+        />
+    </svg>
+)
+
+export default IconArrowLeft

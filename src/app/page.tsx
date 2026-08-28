@@ -1,66 +1,67 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import SectionHomeHero from '@/page/home/SectionHomeHero'
+import NavbarLayout from '@/component/layout/Navbar.layout'
+import SectionHomeAbout from '@/page/home/SectionHomeAbout'
+import SectionHomeWhyBookUs from '@/page/home/SectionHomeWhyBookUs'
+import SectionHomeDedication from '@/page/home/SectionHomeDedication'
+import SectionHomeExclusiveStay from '@/page/home/SectionHomeExclusiveStay'
+import SectionHomeKeepWithUs from '@/page/home/SectionHomeKeepWithUs'
+import SectionHomeLocation from '@/page/home/SectionHomeLocation'
+import SectionHomeFAQ from '@/page/home/SectionHomeFAQ'
+import FooterLayout from '@/component/layout/Footer.layout'
+import FooterNewsLetterLayout from '@/component/layout/FooterNewsLetter.layout'
+import SectionHomeBook from '@/page/home/SectionHomeBook'
+import {
+    getContentHomePage,
+    getFAQHomePage,
+    getMediaPartner,
+} from '@/service/api/contentPage.api'
+import SectionHomeLiveTheIslandLife from '@/page/home/SectionHomeLiveTheIslandLife'
+import SectionHomeNeighbourhoods from '@/page/home/SectionHomeNeighbourhoods'
+import SectionHomePartner from '@/page/home/SectionHomePartner'
+import dataMenuNavbarServerside from '@/hook/dataMenuNavbarServerside.hook'
 
-export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+export const dynamic = 'force-dynamic'
+
+const Home = async () => {
+    const content = await getContentHomePage({ locale: 'en' }).then(
+        (res) => res?.result || {},
+    )
+
+    const value = content?.value || {}
+
+    const dataFAQs = await getFAQHomePage({ locale: 'en' }).then(
+        (res) => res?.result || {},
+    )
+
+    const partners = await getMediaPartner({ locale: 'en' }).then(
+        (res) => res?.result || {},
+    )
+
+    const { menus } = await dataMenuNavbarServerside()
+
+    return (
+        <>
+            <NavbarLayout menus={menus} isBgTransparent />
+            <SectionHomeHero content={value?.SECTION1 || {}} />
+            <SectionHomeAbout content={value?.SECTION2 || {}} />
+            <SectionHomeLiveTheIslandLife content={value?.SECTION3 || {}} />
+            <SectionHomeNeighbourhoods content={value?.SECTION4 || {}} />
+            <SectionHomeBook items={value?.SECTION5 || []} />
+            <SectionHomeExclusiveStay content={value.SECTION6 || {}} />
+            <SectionHomeWhyBookUs content={value?.SECTION7 || {}} />
+            <SectionHomePartner
+                content={value?.SECTION8 || {}}
+                partners={partners || []}
             />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+            <SectionHomeDedication content={value?.SECTION9 || {}} />
+            <SectionHomeKeepWithUs content={value?.SECTION10 || {}} />
+
+            <SectionHomeLocation content={value?.SECTION11 || {}} />
+            <SectionHomeFAQ content={value?.SECTION12 || {}} list={dataFAQs} />
+            <FooterNewsLetterLayout content={value?.SECTION13 || {}} />
+            <FooterLayout />
+        </>
+    )
 }
+
+export default Home
