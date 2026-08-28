@@ -10,6 +10,8 @@ import joinClassNameHelper from '@/helper/joinClassName.helper'
 import BlogListSideRight from '@/page/blog/BlogListSideRight'
 import { isEmpty } from 'lodash'
 import Breadcrumb from '@/component/general/Breadcrumb'
+import ShareBlog from '@/component/general/ShareBlog'
+import { useState, useEffect } from 'react'
 
 const SectionContent = ({
     children,
@@ -30,12 +32,19 @@ const SectionContent = ({
 }
 
 const SectionBlogDetail = ({ detail = {} }: { detail?: any }) => {
+    const [url, setUrl] = useState('')
+
+    useEffect(() => {
+        setUrl(window.location.href)
+    }, [detail?.title])
+
     return (
-        <section className="container py-3 py-md-5">
-            <div className="section-blog-detail-banner-main">
+        <section className="container py-3 py-md-5 position-relative overflow-hidden">
+            <div className="section-blog-detail-banner-main overflow-hidden">
                 <Image
                     src={detail?.thumbnail || IMAGE_EMPTY}
                     alt={detail.title}
+                    className="object-fit-cover"
                     fill
                 />
             </div>
@@ -90,11 +99,13 @@ const SectionBlogDetail = ({ detail = {} }: { detail?: any }) => {
                                     </p>
                                 </div>
                                 <div className="">
-                                    <div className="hstack flex-wrap gap-2">
-                                        <p className="mb-0 fs-20 font-tt-drugs mb-0">
-                                            Share:
-                                        </p>
-                                    </div>
+                                    {/*<div className="hstack flex-wrap gap-2">*/}
+                                    {/*    <p className="mb-0 fs-20 font-tt-drugs mb-0">*/}
+                                    {/*        Share:*/}
+                                    {/*    </p>*/}
+                                    {/*</div>*/}
+
+                                    <ShareBlog url={url} />
                                 </div>
                             </div>
                         </>

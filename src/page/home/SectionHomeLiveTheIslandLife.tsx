@@ -7,6 +7,8 @@ import { BtnBasic, CodeIconArrow } from '@/component/general/Button'
 import Image from 'next/image'
 import { IMAGE_EMPTY } from '@/config/asset.config'
 import Link from 'next/link'
+import { useRef } from 'react'
+import type { Swiper as SwiperType } from 'swiper'
 
 const SectionHomeLiveTheIslandLife = ({
     content = {},
@@ -70,6 +72,9 @@ const SectionHomeLiveTheIslandLife = ({
                                 aria-labelledby="profile-tab">
                                 <SwipeSlideBanner
                                     items={vm.items}
+                                    swiperConfig={{
+                                        loop: true,
+                                    }}
                                     contentElement={(dataElement: any) => (
                                         <>
                                             <Link

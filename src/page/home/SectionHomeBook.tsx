@@ -32,25 +32,21 @@ const SectionHomeBook = ({ items = [] }: { items?: any[] }) => {
                             <div className="container position-relative z-1">
                                 <div className="row justify-content-center">
                                     <div className="col-lg-5 text-center text-white">
-                                        <div className="vstack gap-4">
-                                            <p className="fs-14 mb-0">
+                                        <div className="vstack gap-5">
+                                            <p className="fs-20 font-tt-drugs mb-0">
                                                 {vm.label}
                                             </p>
                                             <div className="">
-                                                {/*<h2 className="font-tt-drugs">*/}
-                                                {/*    BOOK IN ADVANCE*/}
-                                                {/*</h2>*/}
-                                                {/*<p className="fs-14">*/}
-                                                {/*    Book ahead and secure your stay*/}
-                                                {/*    for 2026 island escape and get a*/}
-                                                {/*    special rate.*/}
-                                                {/*</p>*/}
-                                                <RenderHtml html={vm.content} />
+                                                <RenderHtml
+                                                    className="fw-light"
+                                                    html={vm.content}
+                                                />
                                             </div>
 
                                             <div className="">
                                                 <BtnLinkPrimary
                                                     className="rounded-pill"
+                                                    isIconArrow
                                                     href={vm.buttonLink}>
                                                     {vm.buttonText}
                                                 </BtnLinkPrimary>

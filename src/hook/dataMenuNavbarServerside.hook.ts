@@ -1,9 +1,7 @@
 import { getDetailMenusNavbar } from '@/service/api/contentPage.api'
 
 const useMenuNavbarServerside = async () => {
-    const menus = await getDetailMenusNavbar().then((res) => {
-        console.log('res.data: ', res)
-
+    const menus = await getDetailMenusNavbar('navbar-default').then((res) => {
         return res?.result || {}
     })
 

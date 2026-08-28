@@ -6,6 +6,7 @@ import { BtnBasic, BtnIcon } from '@/component/general/Button'
 import { BadgeRow } from '@/component/general/Badge'
 import { formatDateTimeByTlt } from '@/helper/actionFormatDate.helper'
 import Link from 'next/link'
+import { WrapImageHoverOverlay } from '@/component/general/WrapImage'
 
 const SectionBlogHero = ({
     content = {},
@@ -37,7 +38,7 @@ const SectionBlogHero = ({
             <div className="container content-blog-first z-1">
                 <Link href={url || '#'} className="row g-0 wp-hover-image">
                     <div className="col-md-6">
-                        <div className="overflow-hidden position-relative w-100 blog-thumbnail-first">
+                        <WrapImageHoverOverlay className="overflow-hidden position-relative w-100 blog-thumbnail-first">
                             <Image
                                 src={blog.thumbnail || BlogThumbnailDefault}
                                 // src={HomeBanner}
@@ -45,7 +46,7 @@ const SectionBlogHero = ({
                                 alt={blog.title || 'Default Blog Banner'}
                                 fill
                             />
-                        </div>
+                        </WrapImageHoverOverlay>
                     </div>
                     <div className="col-md-6 ">
                         <div className="bg-green-400 text-white py-5 px-5 vstack justify-content-center h-100">

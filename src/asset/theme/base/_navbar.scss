@@ -1,4 +1,5 @@
 .navbar-config {
+  position: relative;
   a {
     &:focus {
       color: var(--bs-white);
@@ -80,6 +81,7 @@
   // START DROPDOWN MEGA MENU
   .navbar-menga-menu {
     position: static;
+    //background-color: white;
 
     .wrap-banner-img {
       position: relative;

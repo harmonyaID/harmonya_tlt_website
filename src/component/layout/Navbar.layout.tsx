@@ -52,11 +52,16 @@ const GroupMegaMenu = ({ name, list = [] }: { name: string; list?: any[] }) => {
 const NavbarLayout = ({
     isBgTransparent = false,
     isStartFix = true,
-    menus = [],
+    menus = {
+        items: [],
+    },
 }: {
     isBgTransparent?: boolean
     isStartFix?: boolean
-    menus?: any[]
+    menus?: {
+        items?: any[]
+        [key: string]: any
+    }
 }) => {
     const [isScrolled, setIsScrolled] = useState(false)
 
@@ -129,8 +134,6 @@ const NavbarLayout = ({
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
-    console.log('menus: ', menus)
-
     return (
         <nav
             className={joinClassNameHelper(
@@ -202,8 +205,8 @@ const NavbarLayout = ({
             </div>
             <div className="container py-3">
                 <div className="hstack flex-wrap h-gap-menu flex-row align-items-center justify-content-center">
-                    {!isEmpty(menus) ? (
-                        menus.map((vm, index) => {
+                    {!isEmpty(menus) && !isEmpty(menus.items) && false ? (
+                        menus?.items?.map((vm, index) => {
                             return (
                                 <div className="font-tt-drugs" key={index}>
                                     <Link href={vm.url || '#'}>{vm.name}</Link>
@@ -479,6 +482,7 @@ const NavbarLayout = ({
                                     </div>
                                 </div>
                             </div>
+
                             <div className="text-uppercase">
                                 <Link href="#">Contact</Link>
                             </div>

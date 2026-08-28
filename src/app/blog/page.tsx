@@ -10,7 +10,9 @@ export const dynamic = 'force-dynamic'
 
 const Blog = async () => {
     const page = 1
-    const blogs = await getBlogList({ page }).then((res) => res?.result || {})
+    const blogs = await getBlogList({ page, limit: 12 }).then(
+        (res) => res?.result || {},
+    )
 
     return (
         <>
