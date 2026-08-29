@@ -92,7 +92,7 @@ const SectionBlogDetail = ({ detail = {} }: { detail?: any }) => {
                                 />
                             </SectionContent>
 
-                            <div className="row gx-3 gy-4 align-items-center justify-content-between text-grey-500">
+                            <div className="row gx-3 gy-4 pt-5 align-items-center justify-content-between text-grey-500">
                                 <div className="col-md-6">
                                     <p className="fs-32 font-tt-drugs mb-0">
                                         LIKE THIS ARTICLE ?
@@ -105,7 +105,10 @@ const SectionBlogDetail = ({ detail = {} }: { detail?: any }) => {
                                     {/*    </p>*/}
                                     {/*</div>*/}
 
-                                    <ShareBlog url={url} />
+                                    <ShareBlog
+                                        url={url}
+                                        className="justify-content-end"
+                                    />
                                 </div>
                             </div>
                         </>
