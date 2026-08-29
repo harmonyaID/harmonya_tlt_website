@@ -6,10 +6,12 @@ const useBlogs = ({
     passBlogs = [],
     passPagination = {},
     passPage = 1,
+    passLimit = 12,
 }: {
     passBlogs?: any[]
     passPagination?: any
     passPage?: number | string
+    passLimit?: number | string
 } = {}) => {
     const [list, setList] = useState(passBlogs)
 
@@ -17,7 +19,7 @@ const useBlogs = ({
 
     const [search, setSearch] = useState<any>({
         page: passPage,
-        limit: 12,
+        limit: passLimit,
     })
 
     const [isLoading, setIsLoading] = useState(false)

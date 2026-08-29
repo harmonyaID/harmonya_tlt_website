@@ -24,7 +24,9 @@ const CardPlaceholder = ({ isLast }: { isLast?: boolean }) => (
 )
 
 const BlogListSideRight = () => {
-    const { list, isLoading } = useBlogs()
+    const { list, isLoading } = useBlogs({
+        passLimit: 4,
+    })
 
     const placeholders = Array(4).fill(0)
 
