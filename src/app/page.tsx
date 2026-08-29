@@ -19,6 +19,7 @@ import SectionHomeLiveTheIslandLife from '@/page/home/SectionHomeLiveTheIslandLi
 import SectionHomeNeighbourhoods from '@/page/home/SectionHomeNeighbourhoods'
 import SectionHomePartner from '@/page/home/SectionHomePartner'
 import dataMenuNavbarServerside from '@/hook/dataMenuNavbarServerside.hook'
+import FooterNewsLatterStatic from '@/component/layout/FooterNewsLatterStatic.layout'
 
 export const dynamic = 'force-dynamic'
 
@@ -55,7 +56,6 @@ const Home = async () => {
             />
             <SectionHomeDedication content={value?.SECTION9 || {}} />
             <SectionHomeKeepWithUs content={value?.SECTION10 || {}} />
-
             <SectionHomeLocation content={value?.SECTION11 || {}} />
             <SectionHomeFAQ content={value?.SECTION12 || {}} list={dataFAQs} />
             <FooterNewsLetterLayout content={value?.SECTION13 || {}} />

@@ -4,19 +4,23 @@ import { getBlogList } from '@/service/api/blog.api'
 
 const useBlogs = ({
     passBlogs = [],
+    passPagination = {},
     passPage = 1,
 }: {
     passBlogs?: any[]
+    passPagination?: any
     passPage?: number | string
 } = {}) => {
     const [list, setList] = useState(passBlogs)
 
+    const [pagination, setPagination] = useState(passPagination)
+
     const [search, setSearch] = useState<any>({
         page: passPage,
-        limit: 4,
+        limit: 12,
     })
 
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
 
     const _handleGet = (passSearch = {}) => {
         setIsLoading(true)
@@ -25,7 +29,9 @@ const useBlogs = ({
             ...passSearch,
         }).then((res) => {
             setIsLoading(false)
+
             setList(res?.result || [])
+            setPagination(res?.pagination || {})
         })
     }
 
@@ -54,6 +60,7 @@ const useBlogs = ({
         isLoading,
         setList,
         _handleChangePage,
+        pagination: pagination,
     }
 }
 

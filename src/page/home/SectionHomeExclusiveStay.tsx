@@ -13,7 +13,6 @@ import RenderHtml from '@/component/general/RenderHtml'
 import Link from 'next/link'
 import { WrapImageHoverOverlay } from '@/component/general/WrapImage'
 import Image from 'next/image'
-import { IMAGE_EMPTY } from '@/config/asset.config'
 import SwipeSlideBanner from '@/component/swiperSlide/SwipeSlideBanner'
 import { BadgeTag } from '@/component/general/Badge'
 import PropertyVilla01 from '@/asset/image/villa/property-villa-01.png'
@@ -27,13 +26,7 @@ import IconPropertyEat from '@/component/icon/IconPropertyEat'
 import IconPropertyPool from '@/component/icon/IconPropertyPool'
 import IconArrowRight from '@/component/icon/IconArrowRight'
 import IconArrowLeft from '@/component/icon/IconArrowLeft'
-
-const iconPropertys = [
-    {
-        media: 'IconPropertyBad',
-        value: '',
-    },
-]
+import { imgReelConfig } from '@/config/urlImage.config'
 
 const tags = ['Family Friendly', 'Guest’s Favorite', 'Breakfast']
 
@@ -137,10 +130,9 @@ const SectionHomeExclusiveStay = ({ content = {} }: PropsSectionContent) => {
                                                 </div>
                                             }>
                                             <Image
-                                                src={
-                                                    dataElement?.image ||
-                                                    IMAGE_EMPTY
-                                                }
+                                                src={imgReelConfig(
+                                                    dataElement?.image,
+                                                )}
                                                 alt={
                                                     dataElement.title ||
                                                     'Property'
