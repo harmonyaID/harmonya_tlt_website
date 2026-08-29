@@ -2,18 +2,17 @@
 
 import Image from 'next/image'
 import { BtnPrimary } from '@/component/general/Button'
-import { PropsSectionContent } from '@/type/sectionContent.type'
 import { IconSvgMailWhite } from '@/component/general/IconSvg'
-import RenderHtml from '@/component/general/RenderHtml'
 import { imgLandscapeConfig } from '@/config/urlImage.config'
+import BackgroundSection from '@/asset/image/footer/footer-newslatter-bg.jpg'
 
-const FooterNewsLetterLayout = ({ content = {} }: PropsSectionContent) => {
+const FooterNewsLatterStatic = () => {
     return (
         <section className="position-relative overflow-hidden">
             <div className="position-absolute banner-image overflow-hidden">
                 <Image
                     fill
-                    src={imgLandscapeConfig(content?.background)}
+                    src={imgLandscapeConfig(BackgroundSection)}
                     className="object-fit-cover"
                     alt="lembongan bali"
                 />
@@ -22,35 +21,14 @@ const FooterNewsLetterLayout = ({ content = {} }: PropsSectionContent) => {
             <div className="section-space-small container position-relative z-1">
                 <div className="row justify-content-center">
                     <div className="col-lg-6 text-center text-white">
-                        <p className="fs-24 mb-1">
-                            {content.label || 'Newsletters'}
+                        <p className="h2 mb-2 font-tt-drugs">INSIDER TIPS</p>
+                        <p className="fs-16 pb-3">
+                            Travel tips, island news and special offers
+                            delivered to your inbox.
                         </p>
-
-                        <RenderHtml
-                            className="wp-head-font-tt-drugs"
-                            html={content.content}
-                        />
-                        {/*<p className="h2 mb-2 font-tt-drugs">*/}
-                        {/*    STAY IN THE KNOW*/}
-                        {/*</p>*/}
-                        {/*<p className="fs-16 pb-3">*/}
-                        {/*    Get updates on our offers and latest news, join our*/}
-                        {/*    mailing list*/}
-                        {/*</p>*/}
 
                         <div className="hstack gap-3 align-items-center pt-3">
                             <div className="position-relative col">
-                                {/*<div className="content-input-newsletter">*/}
-                                {/*    <input*/}
-                                {/*        type="email"*/}
-                                {/*        className="form-control rounded-pill border border-white"*/}
-                                {/*        placeholder="e.g arbi@thelemongantraveller.com"*/}
-                                {/*    />*/}
-                                {/*    <div className="wp-icon position-absolute">*/}
-                                {/*        <IconSvgMailWhite />*/}
-                                {/*    </div>*/}
-                                {/*</div>*/}
-
                                 <div className="input-group rounded-pill wp-input-newsLatter">
                                     <span
                                         className="input-group-text"
@@ -61,13 +39,12 @@ const FooterNewsLetterLayout = ({ content = {} }: PropsSectionContent) => {
                                         type="email"
                                         id="newlater-email"
                                         className="form-control"
-                                        placeholder={content.inputPlaceholder}
+                                        placeholder="EMAIL"
                                     />
                                 </div>
                             </div>
                             <BtnPrimary type="button" className="rounded-pill">
-                                {/*SUBSCRIBE*/}
-                                {content?.buttonText || 'SUBSCRIBEs'}
+                                SUBSCRIBE
                             </BtnPrimary>
                         </div>
                     </div>
@@ -77,4 +54,4 @@ const FooterNewsLetterLayout = ({ content = {} }: PropsSectionContent) => {
     )
 }
 
-export default FooterNewsLetterLayout
+export default FooterNewsLatterStatic

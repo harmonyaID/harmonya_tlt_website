@@ -19,6 +19,9 @@ const nextConfig: NextConfig = {
             },
         ],
     },
+
+    // Handle Stop Double Get
+    reactStrictMode: false,
 }
 
 export default nextConfig

@@ -23,6 +23,8 @@ const SectionBlogHero = ({
           ? '/blog/' + blog?.slug
           : '#'
 
+    const { seo = {}, excerpt = '' } = blog
+
     return (
         <section className="section-blog-hero section-blog-hero-v2">
             <div className="banner-image position-absolute">
@@ -56,7 +58,7 @@ const SectionBlogHero = ({
                                         ? formatDateTimeByTlt(blog.publishedAt)
                                         : '-'}
                                 </p>
-                                <h1 className="fs-40 font-weight-bold mb-4">
+                                <h1 className="fs-40 font-weight-bold mb-4 desc-two-line">
                                     {blog.title || 'Blog Empty'}
                                 </h1>
 
@@ -69,6 +71,7 @@ const SectionBlogHero = ({
                                 {blog.tags ? (
                                     <BadgeRow
                                         badges={blog.tags}
+                                        // className="pt-4"
                                         classNameBadge="py-2 px-3"
                                     />
                                 ) : null}
@@ -78,6 +81,11 @@ const SectionBlogHero = ({
                                 {/*    you do between other plans. On Nusa*/}
                                 {/*    Lembongan, it pretty much is the plan.*/}
                                 {/*</p>*/}
+                                {seo?.description ? (
+                                    <p className="fs-16 pt-3 mb-0 fext-grey-400 desc-two-line">
+                                        {seo?.description}
+                                    </p>
+                                ) : null}
                             </div>
                         </div>
                     </div>

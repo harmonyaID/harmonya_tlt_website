@@ -1,24 +1,15 @@
 'use client'
 
 import SectionGeneral from '@/component/general/SectionGeneral'
-import { SectionTitle } from '@/component/text/Heading'
 import IconCircle from '@/asset/image/home/home-icon-circle.png'
 import Image from 'next/image'
 import { PropsSectionContent } from '@/type/sectionContent.type'
 import RenderHtml from '@/component/general/RenderHtml'
 
-const _shapeData = (title: string, description: string) => ({
-    title,
-    description,
-})
-
 const SectionHomeWhyBookUs = ({ content = {} }: PropsSectionContent) => {
     return (
         <SectionGeneral className="bg-green-500">
             <div className="container text-center">
-                {/*<SectionTitle className="text-white pb-5 font-tt-drugs text-uppercase">*/}
-                {/*    Why Book with us?*/}
-                {/*</SectionTitle>*/}
                 <RenderHtml
                     className="text-white pb-5 font-tt-drugs text-uppercase"
                     html={content.content}

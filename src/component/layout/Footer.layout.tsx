@@ -140,7 +140,7 @@ const FooterLayout = () => {
             </div>
 
             <div className="container py-4">
-                <div className="hstack justify-content-between gap-4">
+                <div className="hstack flex-wrap justify-content-between gap-4">
                     <div className="">
                         <p className="fs-14 mb-0">
                             Copyright © 2026 The Lembongan Traveller
