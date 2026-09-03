@@ -20,6 +20,8 @@ import SectionHomeNeighbourhoods from '@/page/home/SectionHomeNeighbourhoods'
 import SectionHomePartner from '@/page/home/SectionHomePartner'
 import dataMenuNavbarServerside from '@/hook/dataMenuNavbarServerside.hook'
 import FooterNewsLatterStatic from '@/component/layout/FooterNewsLatterStatic.layout'
+import { getPropertyHomePage } from '@/service/api/property.api'
+import FooterNewsLatterStaticLayout from '@/component/layout/FooterNewsLatterStatic.layout'
 
 export const dynamic = 'force-dynamic'
 
@@ -40,6 +42,11 @@ const Home = async () => {
 
     const { menus } = await dataMenuNavbarServerside()
 
+    const propertys = await getPropertyHomePage().then((res) => {
+        console.log('propertys: ', res?.result)
+        return res?.result || {}
+    })
+
     return (
         <>
             <NavbarLayout menus={menus} isBgTransparent />
@@ -48,7 +55,10 @@ const Home = async () => {
             <SectionHomeLiveTheIslandLife content={value?.SECTION3 || {}} />
             <SectionHomeNeighbourhoods content={value?.SECTION4 || {}} />
             <SectionHomeBook items={value?.SECTION5 || []} />
-            <SectionHomeExclusiveStay content={value.SECTION6 || {}} />
+            <SectionHomeExclusiveStay
+                content={value.SECTION6 || {}}
+                propertys={propertys || []}
+            />
             <SectionHomeWhyBookUs content={value?.SECTION7 || {}} />
             <SectionHomePartner
                 content={value?.SECTION8 || {}}
@@ -58,7 +68,8 @@ const Home = async () => {
             <SectionHomeKeepWithUs content={value?.SECTION10 || {}} />
             <SectionHomeLocation content={value?.SECTION11 || {}} />
             <SectionHomeFAQ content={value?.SECTION12 || {}} list={dataFAQs} />
-            <FooterNewsLetterLayout content={value?.SECTION13 || {}} />
+            {/*<FooterNewsLetterLayout content={value?.SECTION13 || {}} />*/}
+            <FooterNewsLatterStaticLayout />
             <FooterLayout />
         </>
     )

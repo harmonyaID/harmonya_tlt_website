@@ -9,6 +9,7 @@ import 'swiper/css/navigation'
 import IconArrowLeft from '@/component/icon/IconArrowLeft'
 import IconArrowRight from '@/component/icon/IconArrowRight'
 import { isEmpty } from 'lodash'
+import joinClassNameHelper from '@/helper/joinClassName.helper'
 
 const SwipeSlideBanner = ({
     items = [],
@@ -47,7 +48,7 @@ const SwipeSlideBanner = ({
             ) : null}
 
             <Swiper
-                className={className}
+                className={joinClassNameHelper('w-100', className)}
                 modules={[Navigation]}
                 onSwiper={(swiper) => {
                     swiperRef.current = swiper

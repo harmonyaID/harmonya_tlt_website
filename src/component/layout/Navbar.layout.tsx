@@ -19,6 +19,7 @@ import IconArrowBottom2 from '@/component/icon/IconArrowBottom2'
 import loadBootstrapHelper from '@/helper/base/loadBootstrap.helper'
 import BannerMegaMenu from '@/asset/image/default/default-mega-menu-banner-image.jpg'
 import BannerMegaMenuEpx from '@/asset/image/default/default-mega-menu-banner-image-exp.jpg'
+import { HOME_PATH } from '@/config/pagePath.config'
 
 const LabelGroup = ({ name = '' }: { name?: string }) => (
     <p className="fs-24 font-tt-drugs mb-0">{name}</p>
@@ -162,7 +163,7 @@ const NavbarLayout = ({
                             </BtnBasic>
                         </div>
                         <div className="logo col-md-8 text-center">
-                            <Link href="/">
+                            <Link href={HOME_PATH}>
                                 <Image
                                     src={LogoWhite}
                                     className="logo-white"

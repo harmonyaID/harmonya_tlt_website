@@ -37,7 +37,10 @@ const Amities = ({ icon, value }: { icon?: any; value?: any }) => (
     </div>
 )
 
-const SectionHomeExclusiveStay = ({ content = {} }: PropsSectionContent) => {
+const SectionHomeExclusiveStay = ({
+    content = {},
+    propertys = [],
+}: PropsSectionContent & { propertys?: any[] }) => {
     const swiperRef = useRef<SwiperType | null>(null)
 
     return (
@@ -83,22 +86,25 @@ const SectionHomeExclusiveStay = ({ content = {} }: PropsSectionContent) => {
                     </div>
 
                     <SwipeSlideBanner
-                        items={[
-                            {
-                                image: PropertyVilla01,
-                            },
-                            {
-                                image: PropertyResort01,
-                            },
-                            {
-                                image: PropertyResort02,
-                            },
-                            4,
-                            5,
-                            6,
-                            7,
-                            8,
-                        ]}
+                        items={
+                            propertys
+                            // [
+                            //     {
+                            //         image: PropertyVilla01,
+                            //     },
+                            //     {
+                            //         image: PropertyResort01,
+                            //     },
+                            //     {
+                            //         image: PropertyResort02,
+                            //     },
+                            //     4,
+                            //     5,
+                            //     6,
+                            //     7,
+                            //     8,
+                            // ]
+                        }
                         isNavigation={false}
                         swiperConfig={{
                             loop: true,
@@ -107,7 +113,11 @@ const SectionHomeExclusiveStay = ({ content = {} }: PropsSectionContent) => {
                         breakpoints={{
                             576: { slidesPerView: 2, spaceBetween: 20 },
                             992: { slidesPerView: 3, spaceBetween: 24 },
-                            1200: { slidesPerView: 3.5, spaceBetween: 24 },
+                            1200: {
+                                slidesPerView: 3.5,
+                                spaceBetween: 24,
+                                loopAdditionalSlides: 100,
+                            },
                         }}
                         contentElement={(dataElement: any) => {
                             const dataTags = dataElement.tags || tags || []
@@ -131,10 +141,11 @@ const SectionHomeExclusiveStay = ({ content = {} }: PropsSectionContent) => {
                                             }>
                                             <Image
                                                 src={imgReelConfig(
-                                                    dataElement?.image,
+                                                    dataElement?.coverPhoto ||
+                                                        PropertyVilla01,
                                                 )}
                                                 alt={
-                                                    dataElement.title ||
+                                                    dataElement.nickname ||
                                                     'Property'
                                                 }
                                                 fill
@@ -149,7 +160,7 @@ const SectionHomeExclusiveStay = ({ content = {} }: PropsSectionContent) => {
                                             </p>
 
                                             <p className="fs-24 mb-1 wp-font-tt-drugs desc-two-line">
-                                                {dataElement.title ||
+                                                {dataElement.nickname ||
                                                     'VILLA TANJUNG'}
                                             </p>
                                             <p className="fs-13 wp-font-tt-drugs mb-3">
