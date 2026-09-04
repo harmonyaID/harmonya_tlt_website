@@ -1,9 +1,10 @@
 import TemplatePageBaseLayout from '@/component/layout/TemplatePageBase.layout'
-import BGHero from '@/asset/image/dummy/offer-last-bg-hero-half.jpg'
+import BGHero from '@/asset/image/dummy/default-bg-contact.jpg'
+// import BGHero from '@/asset/image/dummy/offer-last-bg-hero-half.jpg'
 
-const PropertyPage = () => {
+const ContactUsPage = () => {
     return (
-        <TemplatePageBaseLayout title="Property " backgroundImage={BGHero}>
+        <TemplatePageBaseLayout title="Contact" backgroundImage={BGHero}>
             <section className="section-space">
                 <div className="container">
                     <h4 className="">Hello</h4>
@@ -13,4 +14,4 @@ const PropertyPage = () => {
     )
 }
 
-export default PropertyPage
+export default ContactUsPage
