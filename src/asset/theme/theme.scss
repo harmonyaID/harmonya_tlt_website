@@ -66,6 +66,18 @@ html, body {
 
 a {text-decoration: none;}
 
+.section-hero-half-screen {
+  position: relative;
+  height: 60vh;
+  width: 100%;
+}
+
+.section-hero-second {
+  position: relative;
+  height: 30vh;
+  width: 100%;
+}
+
 
 .section-space {
   //padding-top: 6rem;
@@ -104,6 +116,18 @@ a {text-decoration: none;}
 .content-hero-search-card {
   background-color: #1D1D1D99;
 }
+
+.content-hero-position-center {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+}
+
+
+// IMAGE'S SIZE (HEIGHT)
+.img-h-332px {height: 332px;}
+.img-h-392px {height: 392px;}
 
 
 // GENERAL

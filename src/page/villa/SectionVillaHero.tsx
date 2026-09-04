@@ -1,16 +1,20 @@
 import Image from 'next/image'
 import HomeBanner from '@/asset/image/villa/villa-hero-main.jpg'
 import { BtnPrimary } from '@/component/general/Button'
+import { imgLandscapeConfig } from '@/config/urlImage.config'
 
 const SectionVillaHero = ({ content = {} }: { content?: any | {} }) => {
     return (
         <>
             <section className="section-hero-general bg-green-800">
-                <Image
-                    src={HomeBanner}
-                    className="object-fit-cover w-100 h-100"
-                    alt="The lembongan traveller villa bali"
-                />
+                <div className="general-hero-full-screen">
+                    <Image
+                        src={imgLandscapeConfig(HomeBanner)}
+                        // className="object-fit-cover w-100 h-100"
+                        className="h-100 banner-image"
+                        alt="The lembongan traveller villa bali"
+                    />
+                </div>
 
                 {/*Title*/}
                 <div className="container content-hero-position-default text-center z-1">
