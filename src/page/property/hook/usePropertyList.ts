@@ -1,40 +1,27 @@
 'use client'
-import { useState, useEffect } from 'react'
-import { getBlogList } from '@/service/api/blog.api'
 
-const useBlogs = ({
-    passBlogs = [],
-    passPagination = {},
-    passPage = 1,
-    passLimit = 12,
-}: {
-    passBlogs?: any[]
-    passPagination?: any
-    passPage?: number | string
-    passLimit?: number | string
-} = {}) => {
-    const [list, setList] = useState(passBlogs)
+import { useEffect, useState } from 'react'
+import { getPropertyList } from '@/service/api/property.api'
 
-    const [pagination, setPagination] = useState(passPagination)
+const usePropertyList = () => {
+    const [list, setList] = useState([])
+
+    const [pagination, setPagination] = useState({})
 
     const [search, setSearch] = useState<any>({
-        page: passPage,
-        limit: passLimit,
+        page: 1,
+        limit: 30,
     })
 
     const [isLoading, setIsLoading] = useState(false)
 
     const _handleGet = (passSearch = {}) => {
         setIsLoading(true)
-        getBlogList({
-            ...search,
-            ...passSearch,
-        })
+        getPropertyList(passSearch)
             .then((res) => {
-                setIsLoading(false)
-
                 setList(res?.result || [])
                 setPagination(res?.pagination || {})
+                setIsLoading(false)
             })
             .catch((err) => {
                 setIsLoading(false)
@@ -55,20 +42,15 @@ const useBlogs = ({
     }
 
     useEffect(() => {
-        if (passBlogs.length < 1) {
-            const startPage = 1
-            // @ts-ignore
-            _handleChangePage(startPage)
-        }
+        _handleGet(search)
     }, [])
 
     return {
         list,
         isLoading,
-        setList,
+        pagination,
         _handleChangePage,
-        pagination: pagination,
     }
 }
 
-export default useBlogs
+export default usePropertyList

@@ -43,7 +43,7 @@ export default function Breadcrumb({
     title,
     homeLabel = 'Home',
     className = '',
-    isLabelHome = false,
+    isLabelHome = true,
 }: BreadcrumbProps) {
     const pathname = usePathname() || '/'
     const segments = pathname.split('/').filter(Boolean)
