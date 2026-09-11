@@ -11,17 +11,21 @@ import BgContent1 from '@/asset/image/dummy/offer-content-1.jpg'
 import BgContent2 from '@/asset/image/dummy/offer-content-2.jpg'
 import { BtnBasic, BtnLinkBasic } from '@/component/general/Button'
 import IconArrowRight from '@/component/icon/IconArrowRight'
+import RenderHtml from '@/component/general/RenderHtml'
+import { OFFER_SLUG_PATH } from '@/config/pagePath.config'
 
 const OfferContentCard = ({
     src = '',
     title = '',
-    description = '',
-    link = '#',
+    // description = '',
+    excerpt = '',
+    slug = '',
 }) => {
+    const dataLink = slug ? OFFER_SLUG_PATH + slug : '#'
     return (
         <>
             <Link
-                href={link}
+                href={dataLink}
                 className="w-100 vstack gap-3 text-grey-200 wp-hover-image overflow-hidden">
                 <WrapImageHoverOverlay className="overflow-hidden img-h-392px">
                     <Image
@@ -37,15 +41,20 @@ const OfferContentCard = ({
                         {title}
                     </p>
 
-                    <p className="fs-13 wp-font-tt-drugs mb-3 text-grey-400">
-                        {description}
-                    </p>
+                    {/*<p className="fs-13 wp-font-tt-drugs mb-3 text-grey-400">*/}
+                    {/*    {description}*/}
+                    {/*</p>*/}
+
+                    <RenderHtml
+                        html={excerpt}
+                        className="mb-3 text-grey-400 fs-13"
+                    />
 
                     <div className="pt-2">
                         <BtnBasic
                             type="button"
                             className="btn-outline-grey-100 rounded-pill"
-                            href={'#'}>
+                            href={dataLink}>
                             <div className="hstack align-items-center gap-1">
                                 EXPLORE DETAILS <IconArrowRight />
                             </div>
@@ -69,7 +78,17 @@ const objectData = (
     link,
 })
 
-const SectionOfferMainInfo = () => {
+interface Props {
+    content?: any
+    list?: any
+    pagination?: any
+}
+
+const SectionOfferMainInfo = ({
+    content,
+    list = [],
+    pagination = {},
+}: Props) => {
     const listData: any[] = [
         objectData(
             'BOOK IN ADVANCE',
@@ -111,8 +130,8 @@ const SectionOfferMainInfo = () => {
                     </div>
                 </div>
 
-                <div className="row g-4 pt-5">
-                    {listData.map((vm, index) => {
+                <div className="row gx-4 gy-5 pt-5">
+                    {list.map((vm: any, index: number) => {
                         return (
                             <div className="col-md-6" key={index}>
                                 <OfferContentCard {...vm} />
