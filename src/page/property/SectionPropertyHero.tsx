@@ -3,7 +3,7 @@ import HomeBanner from '@/asset/image/dummy/property-hero-default.jpg'
 import { BtnPrimary } from '@/component/general/Button'
 import { imgLandscapeConfig } from '@/config/urlImage.config'
 
-const SectionVillaHero = ({ content = {} }: { content?: any | {} }) => {
+const SectionPropertyHero = ({ content = {} }: { content?: any | {} }) => {
     return (
         <>
             <section className="section-hero-general bg-green-800">
@@ -42,47 +42,50 @@ const SectionVillaHero = ({ content = {} }: { content?: any | {} }) => {
                                         <div className="">
                                             <label
                                                 htmlFor="inputDates"
-                                                className="form-label">
+                                                className="form-label font-tt-drugs fw-500">
                                                 {content.searchLabelDates ||
                                                     'DATES'}
                                             </label>
                                             <input
                                                 type="text"
-                                                className="form-control"
+                                                className="form-control form-transparent-underline-black"
                                                 id="inputDates"
-                                                placeholder="e.g name"
+                                                placeholder="e.g check-in → check-out"
                                             />
                                         </div>
                                     </div>
                                     <div className="col-md">
                                         <div className="">
                                             <label
-                                                htmlFor="inputDates"
-                                                className="form-label">
+                                                htmlFor="inputGues"
+                                                className="form-label font-tt-drugs fw-500">
                                                 {content.searchLabelGuest ||
-                                                    'GUEST'}
+                                                    'COLLECTIONS'}
                                             </label>
                                             <input
                                                 type="text"
-                                                className="form-control"
-                                                id="inputDates"
-                                                placeholder="e.g name"
+                                                className="form-control form-transparent-underline-black"
+                                                id="inputGues"
+                                                placeholder="e.g 2 Adults, 0 Children"
                                             />
                                         </div>
                                     </div>
                                     <div className="col-md">
                                         <div className="">
                                             <label
-                                                htmlFor="inputDates"
-                                                className="form-label">
+                                                htmlFor="selectCollction"
+                                                className="form-label font-tt-drugs fw-500">
                                                 COLLECTIONS
                                             </label>
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                id="inputDates"
-                                                placeholder="e.g name"
-                                            />
+                                            <select
+                                                name=""
+                                                id="selectCollction"
+                                                className="form-control form-transparent-underline-black">
+                                                <option value="">
+                                                    {content?.searchPlaceholderCollection ||
+                                                        'e.g Choose your preferences'}
+                                                </option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div className="col-md-auto">
@@ -102,4 +105,4 @@ const SectionVillaHero = ({ content = {} }: { content?: any | {} }) => {
     )
 }
 
-export default SectionVillaHero
+export default SectionPropertyHero

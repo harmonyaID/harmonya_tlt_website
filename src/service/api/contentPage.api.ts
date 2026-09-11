@@ -19,8 +19,8 @@ export const getDetailMenusNavbar = (
 ) => _shapeMethodGet(SrvMenus + '/' + handle, tc)
 // End Global Feature
 
-export const getContentHomePage = (formSearch = {}) =>
-    _shapeMethodGetSearch(
+export const getContentHomePage = async (formSearch = {}) =>
+    await _shapeMethodGetSearch(
         SrvContentHomePage,
         formSearch,
         'tcSrvContentHomePage',

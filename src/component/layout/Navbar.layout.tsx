@@ -19,7 +19,21 @@ import IconArrowBottom2 from '@/component/icon/IconArrowBottom2'
 import loadBootstrapHelper from '@/helper/base/loadBootstrap.helper'
 import BannerMegaMenu from '@/asset/image/default/default-mega-menu-banner-image.jpg'
 import BannerMegaMenuEpx from '@/asset/image/default/default-mega-menu-banner-image-exp.jpg'
-import { HOME_PATH } from '@/config/pagePath.config'
+import {
+    ABOUT_US_PATH,
+    BOAT_TRANSFERS_PATH,
+    CONTACT_PATH,
+    HOME_PATH,
+    STAY_PATH,
+} from '@/config/pagePath.config'
+import {
+    ABOUT_US_MENU,
+    BOAT_TRANSFERS_MENU,
+    CONTACT_MENU,
+    EXPERIENCE_MENU,
+    ISLAND_GUIDE_MENU,
+    STAY_MENU,
+} from '@/config/pageMenu.config'
 
 const LabelGroup = ({ name = '' }: { name?: string }) => (
     <p className="fs-24 font-tt-drugs mb-0">{name}</p>
@@ -217,13 +231,17 @@ const NavbarLayout = ({
                     ) : (
                         <>
                             <div className="text-uppercase font-tt-drugs">
-                                <Link href="#">About Us</Link>
+                                <Link href={ABOUT_US_PATH}>
+                                    {ABOUT_US_MENU}
+                                </Link>
                             </div>
                             <div className="text-uppercase font-tt-drugs">
-                                <Link href="#">Stay</Link>
+                                <Link href={STAY_PATH}>{STAY_MENU}</Link>
                             </div>
                             <div className="text-uppercase font-tt-drugs">
-                                <Link href="#">Boat Transfers</Link>
+                                <Link href={BOAT_TRANSFERS_PATH}>
+                                    {BOAT_TRANSFERS_MENU}
+                                </Link>
                             </div>
                             <div className="dropdown navbar-menga-menu">
                                 <a
@@ -232,7 +250,7 @@ const NavbarLayout = ({
                                     role="button"
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false">
-                                    Experience <IconArrowBottom2 />
+                                    {EXPERIENCE_MENU} <IconArrowBottom2 />
                                 </a>
                                 <div className="dropdown-menu w-100 rounded-0 py-5 px-4 mt-2">
                                     <div className="container">
@@ -378,7 +396,7 @@ const NavbarLayout = ({
                                     role="button"
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false">
-                                    ISLAND GUIDE <IconArrowBottom2 />
+                                    {ISLAND_GUIDE_MENU} <IconArrowBottom2 />
                                 </a>
                                 <div className="dropdown-menu w-100 rounded-0 py-5 px-4 mt-2">
                                     <div className="container">
@@ -485,7 +503,7 @@ const NavbarLayout = ({
                             </div>
 
                             <div className="text-uppercase">
-                                <Link href="#">Contact</Link>
+                                <Link href={CONTACT_PATH}>{CONTACT_MENU}</Link>
                             </div>
                         </>
                     )}
