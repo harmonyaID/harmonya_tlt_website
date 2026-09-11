@@ -10,6 +10,7 @@ import RenderHtml from '@/component/general/RenderHtml'
 import { WrapImageHoverOverlay } from '@/component/general/WrapImage'
 import { ReactNode } from 'react'
 import Link from 'next/link'
+import { imgReelConfig } from '@/config/urlImage.config'
 
 const CardImage = ({
     src,
@@ -25,11 +26,15 @@ const CardImage = ({
     moreInfo?: ReactNode
 }) => {
     return (
-        <Link href={link}>
+        <Link href={link || '#'}>
             <WrapImageHoverOverlay
                 className="wp-banner-img"
                 contentOverlay={message}>
-                <Image src={src} className="object-fit-cover w-100" alt={alt} />
+                <Image
+                    src={imgReelConfig(src)}
+                    className="object-fit-cover w-100 h-100"
+                    alt={alt}
+                />
 
                 {moreInfo}
             </WrapImageHoverOverlay>
@@ -37,12 +42,20 @@ const CardImage = ({
     )
 }
 
+const UIMoreInfo = ({ name = '' }: { name?: string }) => (
+    <div className="position-absolute second-info top-0 end-0 pt-3 pe-3">
+        <div className="">
+            <div className="bg-green-500 rounded-pill px-3 py-1 fs-16 text-white">
+                {name}
+            </div>
+        </div>
+    </div>
+)
+
 const SectionHomeKeepWithUs = ({ content = {} }: PropsSectionContent) => {
     return (
         <SectionGeneral className="container section-home-keep-us">
             <div className="hstack flex-wrap justify-content-between gap-3">
-                {/*<SectionTitle>KEEP UP WITH US</SectionTitle>*/}
-
                 <RenderHtml
                     className="wp-font-tt-drugs text-grey-200"
                     html={content.content || ''}
@@ -60,30 +73,14 @@ const SectionHomeKeepWithUs = ({ content = {} }: PropsSectionContent) => {
                     <CardImage
                         src={KeepUp02}
                         alt="keep 01"
-                        moreInfo={
-                            <div className="position-absolute second-info top-0 end-0 pt-3 pe-3">
-                                <div className="">
-                                    <div className="bg-green-700 rounded-pill px-3 fs-16 text-white">
-                                        EAT
-                                    </div>
-                                </div>
-                            </div>
-                        }
+                        moreInfo={<UIMoreInfo name="EAT" />}
                     />
                 </div>
                 <div className="col-lg-3 col-md-6">
                     <CardImage
                         src={KeepUp01}
-                        alt="keep 01"
-                        moreInfo={
-                            <div className="position-absolute second-info top-0 end-0 pt-3 pe-3">
-                                <div className="">
-                                    <div className="bg-green-500 rounded-pill px-3 fs-16 text-white">
-                                        ISLAND INFO
-                                    </div>
-                                </div>
-                            </div>
-                        }
+                        alt="keep 02"
+                        moreInfo={<UIMoreInfo name="ISLAND INFO" />}
                     />
                 </div>
                 <div className="col-lg-6">
@@ -104,15 +101,7 @@ const SectionHomeKeepWithUs = ({ content = {} }: PropsSectionContent) => {
                                 </p>
                             </div>
                         }
-                        moreInfo={
-                            <div className="position-absolute second-info top-0 end-0 pt-3 pe-3">
-                                <div className="">
-                                    <div className="bg-green-500 rounded-pill px-3 fs-16 text-white">
-                                        COMMUNITY
-                                    </div>
-                                </div>
-                            </div>
-                        }
+                        moreInfo={<UIMoreInfo name="COMMUNITY" />}
                     />
                 </div>
             </div>

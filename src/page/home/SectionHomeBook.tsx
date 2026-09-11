@@ -1,14 +1,13 @@
 'use client'
 
 import Image from 'next/image'
-import { BtnLinkPrimary, BtnPrimary } from '@/component/general/Button'
-import SlideBannerBackground from '@/asset/image/home/home-book-slide-banner.jpg'
-import { PropsSectionContent } from '@/type/sectionContent.type'
+import { BtnLinkPrimary } from '@/component/general/Button'
 import {
     CarouselDefaultWrap,
     CarouselItem,
 } from '@/component/general/CarouselDefault'
 import RenderHtml from '@/component/general/RenderHtml'
+import { imgLandscapeConfig } from '@/config/urlImage.config'
 
 const SectionHomeBook = ({ items = [] }: { items?: any[] }) => {
     return (
@@ -21,7 +20,7 @@ const SectionHomeBook = ({ items = [] }: { items?: any[] }) => {
                         isActive={index < 1}>
                         {/*<div className="position-absolute">*/}
                         <Image
-                            src={vm.background || SlideBannerBackground}
+                            src={imgLandscapeConfig(vm?.background)}
                             className="position-absolute banner-image"
                             alt={vm.label || ''}
                             fill

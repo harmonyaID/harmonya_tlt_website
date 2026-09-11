@@ -5,6 +5,14 @@ import {
 import { SrvContentPropertyHomePage } from '@/service/api/_crm.endPoint'
 
 export const getPropertyHomePage = () =>
-    _shapeMethodGet(SrvContentPropertyHomePage)
+    _shapeMethodGetSearch(
+        SrvContentPropertyHomePage,
+        {
+            page: 1,
+            limit: 10,
+            isPublished: true,
+        },
+        'tc SrvContentPropertyHomePage',
+    )
 
 export const getCategoryProperty = () => {}

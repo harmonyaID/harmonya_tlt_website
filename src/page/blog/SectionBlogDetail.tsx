@@ -53,7 +53,7 @@ const SectionBlogDetail = ({ detail = {} }: { detail?: any }) => {
                 <Breadcrumb />
             </div>
 
-            <div className="row pt-5 gx-0 gy-4 justify-content-between">
+            <div className="row pt-5 gx-0 gy-4 section-space-small justify-content-between">
                 <div className="col-md-8 wp-content-blog">
                     {!isEmpty(detail) ? (
                         <>
@@ -92,20 +92,23 @@ const SectionBlogDetail = ({ detail = {} }: { detail?: any }) => {
                                 />
                             </SectionContent>
 
-                            <div className="hstack gap-3 align-items-center justify-content-between text-grey-500">
-                                <div className="">
+                            <div className="row gx-3 gy-4 pt-5 align-items-center justify-content-between text-grey-500">
+                                <div className="col-md-6">
                                     <p className="fs-32 font-tt-drugs mb-0">
                                         LIKE THIS ARTICLE ?
                                     </p>
                                 </div>
-                                <div className="">
+                                <div className="col-md-6">
                                     {/*<div className="hstack flex-wrap gap-2">*/}
                                     {/*    <p className="mb-0 fs-20 font-tt-drugs mb-0">*/}
                                     {/*        Share:*/}
                                     {/*    </p>*/}
                                     {/*</div>*/}
 
-                                    <ShareBlog url={url} />
+                                    <ShareBlog
+                                        url={url}
+                                        className="justify-content-end"
+                                    />
                                 </div>
                             </div>
                         </>

@@ -12,15 +12,18 @@ import {
 } from 'next-share'
 import { useState } from 'react'
 import IconShareLinkCopy from '@/component/icon/IconShareLinkCopy'
+import joinClassNameHelper from '@/helper/joinClassName.helper'
 
 export default function ShareBlog({
     url,
     title,
     media,
+    className = '',
 }: {
     url: string
     title?: string
     media?: string
+    className?: string
 }) {
     const [copied, setCopied] = useState(false)
 
@@ -31,7 +34,11 @@ export default function ShareBlog({
     }
 
     return (
-        <div className="hstack flex-wrap gap-3">
+        <div
+            className={joinClassNameHelper(
+                'hstack flex-wrap gap-3',
+                className,
+            )}>
             <span className="fs-20 font-tt-drugs text-gray-500">Share:</span>
 
             <FacebookShareButton url={url} quote={title}>
@@ -64,7 +71,11 @@ export default function ShareBlog({
                 url={url || '#'}
                 subject={title}
                 body="Cek artikel ini:">
-                <EmailIcon size={32} round />
+                <EmailIcon
+                    size={32}
+                    className="svg-fill-circle text-green-500"
+                    round
+                />
             </EmailShareButton>
         </div>
     )

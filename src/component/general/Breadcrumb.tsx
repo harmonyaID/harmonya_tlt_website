@@ -28,6 +28,8 @@ type BreadcrumbProps = {
     /** Opsional: label untuk item pertama, default "Home" */
     homeLabel?: string
     className?: string
+
+    isLabelHome?: boolean
 }
 
 function formatSegment(segment: string) {
@@ -41,6 +43,7 @@ export default function Breadcrumb({
     title,
     homeLabel = 'Home',
     className = '',
+    isLabelHome = false,
 }: BreadcrumbProps) {
     const pathname = usePathname() || '/'
     const segments = pathname.split('/').filter(Boolean)
@@ -74,11 +77,15 @@ export default function Breadcrumb({
     return (
         <nav aria-label="Breadcrumb" className={className}>
             <ol className={joinClassNameHelper('breadcrumb')}>
-                <li className="breadcrumb-item">
-                    <Link href="/" className="text-gray-300 transition-colors">
-                        {homeLabel}
-                    </Link>
-                </li>
+                {isLabelHome ? (
+                    <li className="breadcrumb-item">
+                        <Link
+                            href="/"
+                            className="text-gray-300 transition-colors">
+                            {homeLabel}
+                        </Link>
+                    </li>
+                ) : null}
 
                 {crumbs.map(({ href, label, isLast }) => (
                     <Fragment key={href}>

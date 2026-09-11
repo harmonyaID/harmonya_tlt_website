@@ -13,7 +13,6 @@ import RenderHtml from '@/component/general/RenderHtml'
 import Link from 'next/link'
 import { WrapImageHoverOverlay } from '@/component/general/WrapImage'
 import Image from 'next/image'
-import { IMAGE_EMPTY } from '@/config/asset.config'
 import SwipeSlideBanner from '@/component/swiperSlide/SwipeSlideBanner'
 import { BadgeTag } from '@/component/general/Badge'
 import PropertyVilla01 from '@/asset/image/villa/property-villa-01.png'
@@ -27,13 +26,7 @@ import IconPropertyEat from '@/component/icon/IconPropertyEat'
 import IconPropertyPool from '@/component/icon/IconPropertyPool'
 import IconArrowRight from '@/component/icon/IconArrowRight'
 import IconArrowLeft from '@/component/icon/IconArrowLeft'
-
-const iconPropertys = [
-    {
-        media: 'IconPropertyBad',
-        value: '',
-    },
-]
+import { imgReelConfig } from '@/config/urlImage.config'
 
 const tags = ['Family Friendly', 'Guest’s Favorite', 'Breakfast']
 
@@ -44,7 +37,10 @@ const Amities = ({ icon, value }: { icon?: any; value?: any }) => (
     </div>
 )
 
-const SectionHomeExclusiveStay = ({ content = {} }: PropsSectionContent) => {
+const SectionHomeExclusiveStay = ({
+    content = {},
+    propertys = [],
+}: PropsSectionContent & { propertys?: any[] }) => {
     const swiperRef = useRef<SwiperType | null>(null)
 
     return (
@@ -90,22 +86,25 @@ const SectionHomeExclusiveStay = ({ content = {} }: PropsSectionContent) => {
                     </div>
 
                     <SwipeSlideBanner
-                        items={[
-                            {
-                                image: PropertyVilla01,
-                            },
-                            {
-                                image: PropertyResort01,
-                            },
-                            {
-                                image: PropertyResort02,
-                            },
-                            4,
-                            5,
-                            6,
-                            7,
-                            8,
-                        ]}
+                        items={
+                            propertys
+                            // [
+                            //     {
+                            //         image: PropertyVilla01,
+                            //     },
+                            //     {
+                            //         image: PropertyResort01,
+                            //     },
+                            //     {
+                            //         image: PropertyResort02,
+                            //     },
+                            //     4,
+                            //     5,
+                            //     6,
+                            //     7,
+                            //     8,
+                            // ]
+                        }
                         isNavigation={false}
                         swiperConfig={{
                             loop: true,
@@ -114,7 +113,11 @@ const SectionHomeExclusiveStay = ({ content = {} }: PropsSectionContent) => {
                         breakpoints={{
                             576: { slidesPerView: 2, spaceBetween: 20 },
                             992: { slidesPerView: 3, spaceBetween: 24 },
-                            1200: { slidesPerView: 3.5, spaceBetween: 24 },
+                            1200: {
+                                slidesPerView: 3.5,
+                                spaceBetween: 24,
+                                loopAdditionalSlides: 100,
+                            },
                         }}
                         contentElement={(dataElement: any) => {
                             const dataTags = dataElement.tags || tags || []
@@ -137,12 +140,12 @@ const SectionHomeExclusiveStay = ({ content = {} }: PropsSectionContent) => {
                                                 </div>
                                             }>
                                             <Image
-                                                src={
-                                                    dataElement?.image ||
-                                                    IMAGE_EMPTY
-                                                }
+                                                src={imgReelConfig(
+                                                    dataElement?.coverPhoto ||
+                                                        PropertyVilla01,
+                                                )}
                                                 alt={
-                                                    dataElement.title ||
+                                                    dataElement.nickname ||
                                                     'Property'
                                                 }
                                                 fill
@@ -157,7 +160,7 @@ const SectionHomeExclusiveStay = ({ content = {} }: PropsSectionContent) => {
                                             </p>
 
                                             <p className="fs-24 mb-1 wp-font-tt-drugs desc-two-line">
-                                                {dataElement.title ||
+                                                {dataElement.nickname ||
                                                     'VILLA TANJUNG'}
                                             </p>
                                             <p className="fs-13 wp-font-tt-drugs mb-3">

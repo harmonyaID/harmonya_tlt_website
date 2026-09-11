@@ -3,9 +3,9 @@ import RenderHtml from '@/component/general/RenderHtml'
 import { PropsSectionContent } from '@/type/sectionContent.type'
 import Link from 'next/link'
 import Image from 'next/image'
-import { IMAGE_EMPTY } from '@/config/asset.config'
 import { WrapImageHoverOverlay } from '@/component/general/WrapImage'
 import { BtnBasic, CodeIconArrow } from '@/component/general/Button'
+import { imgReelConfig } from '@/config/urlImage.config'
 
 const SectionHomeNeighbourhoods = ({ content = {} }: PropsSectionContent) => {
     const contentItems = content?.items || []
@@ -38,11 +38,10 @@ const SectionHomeNeighbourhoods = ({ content = {} }: PropsSectionContent) => {
                                             </div>
                                         }>
                                         <Image
-                                            src={vm?.image || IMAGE_EMPTY}
+                                            src={imgReelConfig(vm?.image)}
                                             alt={vm.title}
                                             fill
                                             className="object-fit-cover"
-                                            // className="object-cover"
                                         />
                                     </WrapImageHoverOverlay>
 

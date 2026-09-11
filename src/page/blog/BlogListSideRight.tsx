@@ -24,7 +24,9 @@ const CardPlaceholder = ({ isLast }: { isLast?: boolean }) => (
 )
 
 const BlogListSideRight = () => {
-    const { list, isLoading } = useBlogs()
+    const { list, isLoading } = useBlogs({
+        passLimit: 4,
+    })
 
     const placeholders = Array(4).fill(0)
 
@@ -56,7 +58,7 @@ const BlogListSideRight = () => {
                                       <p className="fs-13 wp-font-tt-drugs mb-2">
                                           {formatDateTimeByTlt(vm.publishedAt)}
                                       </p>
-                                      <p className="fs-16 wp-font-tt-drugs">
+                                      <p className="fs-16 wp-font-tt-drugs desc-two-line">
                                           {vm.title}
                                       </p>
 

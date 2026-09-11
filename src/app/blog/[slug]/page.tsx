@@ -2,6 +2,7 @@ import NavbarLayout from '@/component/layout/Navbar.layout'
 import FooterLayout from '@/component/layout/Footer.layout'
 import SectionBlogDetail from '@/page/blog/SectionBlogDetail'
 import { getBlogDetail } from '@/service/api/blog.api'
+import FooterNewsLatterStaticLayout from '@/component/layout/FooterNewsLatterStatic.layout'
 
 export const dynamic = 'force-dynamic'
 
@@ -40,6 +41,7 @@ const BlogDetail = async ({ params }: PropsData) => {
         <>
             <NavbarLayout isStartFix={false} />
             <SectionBlogDetail detail={dataBlog} />
+            <FooterNewsLatterStaticLayout />
             <FooterLayout />
         </>
     )

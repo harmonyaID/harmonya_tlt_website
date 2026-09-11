@@ -8,13 +8,18 @@ import Image from 'next/image'
 import HomeAboutMap from '@/asset/image/home/home-about-map.svg'
 import HomeAboutBanner from '@/asset/image/home/home-about-banner.jpg'
 import RenderHtml from '@/component/general/RenderHtml'
+import {
+    imgBoxConfig,
+    imgLandscapeConfig,
+    imgReelConfig,
+} from '@/config/urlImage.config'
 
 const SectionHomeAbout = ({ content = {} }: { content?: any }) => {
     return (
-        <SectionGeneral className="section-home-about">
-            <div className="row gx-8">
+        <SectionGeneral className="section-home-about px-3 px-lg-0">
+            <div className="row gx-8 gy-6">
                 <div className="col-lg-6">
-                    <div className="hstack justify-content-end">
+                    <div className="hstack justify-content-end pb-3 pb-lg-0">
                         <div className="col-lg-9">
                             <RenderHtml
                                 html={content?.content}
@@ -25,7 +30,7 @@ const SectionHomeAbout = ({ content = {} }: { content?: any }) => {
 
                     <div className="wp-image-map">
                         <Image
-                            src={content?.mapImage || HomeAboutMap}
+                            src={imgLandscapeConfig(content?.mapImage)}
                             alt="about home"
                             fill
                             className=""
@@ -36,7 +41,7 @@ const SectionHomeAbout = ({ content = {} }: { content?: any }) => {
                     <div className="col-lg-8">
                         <div className="wp-image-map">
                             <Image
-                                src={content?.image || HomeAboutBanner}
+                                src={imgReelConfig(content?.image)}
                                 alt="about banner"
                                 fill
                                 className="w-100 h-100"

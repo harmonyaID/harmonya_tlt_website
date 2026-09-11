@@ -22,4 +22,4 @@ export const SrvPartners = baseApi + '/media-partners'
 export const SrvFaq = baseApi + '/faqs'
 
 // Property
-export const SrvContentPropertyHomePage = baseApi + '/blog-property'
+export const SrvContentPropertyHomePage = baseApi + '/properties'
