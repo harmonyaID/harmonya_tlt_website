@@ -11,12 +11,14 @@ const TemplatePageBaseLayout = ({
     backgroundImage = '',
     isBgTransparent = true,
     isHeroSecond = false,
+    isSecondFooter = true,
 }: {
     children?: ReactNode
     title?: string | ReactNode
     backgroundImage?: string | any
     isBgTransparent?: boolean
     isHeroSecond?: boolean
+    isSecondFooter?: boolean
 }) => {
     return (
         <>
@@ -41,7 +43,7 @@ const TemplatePageBaseLayout = ({
 
             {children}
 
-            <FooterNewsLatterStaticLayout />
+            {isSecondFooter ? <FooterNewsLatterStaticLayout /> : null}
             <FooterLayout />
         </>
     )

@@ -1,8 +1,6 @@
 // Home
 export const HOME_PATH = '/'
 
-export const OFFER_PATH = '/offer'
-
 export const COMMUNITY_PATH = '/community'
 
 export const ABOUT_US_PATH = '/about-us'
@@ -16,6 +14,20 @@ export const TERMS_AND_CONDITION_PATH = '/terms-and-condition'
 export const PRIVACY_POLICY_PATH = '/privacy-policy'
 
 export const COPYRIGHT_AND_LEGAL_NOTICE_PATH = '/copyright-and-legal-notice'
+
+export const STAY_PATH = '/stay'
+
+export const BOAT_TRANSFERS_PATH = '/boat-transfers'
+
+export const EXPERIENCE_PATH = '/experience'
+
+export const ISLAND_GUIDE_PATH = '/island-guide'
+
+export const PRESS_AND_MEDIA_PATH = '/press-and-media'
+
+export const ABOUT_PATH = '/about'
+
+export const CONTACT_PATH = '/contact'
 
 // Villa
 export const VILLA_PATH = '/villa'
@@ -32,3 +44,7 @@ export const BLOG_PATH = '/blog'
 export const BLOG_SLUG_PATH = '/blog/'
 
 // About
+
+// Offer's
+export const OFFER_PATH = '/offer'
+export const OFFER_SLUG_PATH = '/offer/'

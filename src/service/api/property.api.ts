@@ -12,7 +12,14 @@ export const getPropertyHomePage = () =>
             limit: 10,
             isPublished: true,
         },
-        'tc SrvContentPropertyHomePage',
+        'tcSrvContentPropertyHomePage',
     )
 
 export const getCategoryProperty = () => {}
+
+export const getPropertyList = (formSearch: object) =>
+    _shapeMethodGetSearch(
+        SrvContentPropertyHomePage,
+        formSearch,
+        'tcGetPropertyList',
+    )

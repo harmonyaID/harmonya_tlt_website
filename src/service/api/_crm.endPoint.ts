@@ -23,3 +23,20 @@ export const SrvFaq = baseApi + '/faqs'
 
 // Property
 export const SrvContentPropertyHomePage = baseApi + '/properties'
+
+// Offers
+export const SrvContentOfferPage = baseApi + '/offers'
+
+export const SrvContentOfferDetail = (slug: string) =>
+    SrvContentOfferPage + '/' + slug
+
+// Experience
+export const SrvContentExp = baseApi + '/experiences'
+
+export const SrvContentExpDetail = (slug: string) => SrvContentExp + '/' + slug
+
+// Experience -> Type
+export const SrvContentExpType = baseApi + '/experience-types'
+
+export const SrvContentExpTypeDetail = (slug: string) =>
+    SrvContentExpType + '/' + slug
