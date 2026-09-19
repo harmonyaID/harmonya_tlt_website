@@ -29,7 +29,7 @@ const SectionBlogHero = ({
         <section className="section-blog-hero section-blog-hero-v2">
             <div className="banner-image position-absolute">
                 <Image
-                    src={content.videoThumbnail || BlogBannerDefault}
+                    src={content.backgroundImage || BlogBannerDefault}
                     // src={HomeBanner}
                     className="object-fit-cover w-100 h-100 "
                     alt="Home Banner"

@@ -6,10 +6,11 @@ import SectionBlogList from '@/page/blog/SectionBlogList'
 import SectionBlogHero from '@/page/blog/SectionBlogHero'
 import Breadcrumb from '@/component/general/Breadcrumb'
 import { isSuccess } from '@/helper/base/condition.helper'
+import { PropsSectionContent } from '@/type/sectionContent.type'
 
 export const dynamic = 'force-dynamic'
 
-const Blog = async () => {
+const Blog = async ({ content }: PropsSectionContent) => {
     const page = 1
     const { blogs = [], pagination = {} } = await getBlogList({
         page,

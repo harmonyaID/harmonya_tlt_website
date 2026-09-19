@@ -2,10 +2,15 @@ const baseApi = process.env.NEXT_PUBLIC_CRM_BASE_API
 
 export const SrvContentHomePage = baseApi + '/homepages'
 
+// Page
+export const SrvContentPage = baseApi + '/pages'
+export const SrvContentPageDetail = (slug: string) =>
+    baseApi + '/pages' + '/' + slug
+
 // Blog
 export const SrvContentBlog = baseApi + '/blogs'
 
-export const SrvContentBlogDetail = (slug: string | number) =>
+export const SrvContentBlogDetail = (slug?: string) =>
     SrvContentBlog + '/' + slug
 
 export const SrvContentBlogCategory = baseApi + '/blog-categories'
