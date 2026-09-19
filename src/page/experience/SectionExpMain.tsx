@@ -129,41 +129,8 @@ const SectionContentAndImage = ({
 )
 
 const SectionExpMain = ({ list = [] }: { list?: any }) => {
-    console.log('experiences: ', list)
-
     return (
         <>
-            {/*Section 1*/}
-            <section className="section-space-small">
-                <div className="container">
-                    <div className="row gx-8 gy-5">
-                        <div className="col-md-6">
-                            <RenderHtml
-                                className="wp-font-tt-drugs fs-48 text-grey-200"
-                                html={`<p>
-                                        TURQUOISE WATER. QUIET BEACHES. SLOW
-                                        DAYS.
-                                    </p>`}
-                            />
-                        </div>
-                        <div className="col-md-6">
-                            <RenderHtml
-                                className="wp-font-tt-drugs text-grey-400"
-                                html={`<p>
-                                        Whether you want to fill your days with
-                                        adventure or simply spend the afternoon
-                                        doing absolutely nothing, the choice is
-                                        yours. From where to eat and play to the
-                                        best places to explore, discover our
-                                        favourite experiences across Nusa
-                                        Lembongan and Nusa Ceningan.
-                                    </p>`}
-                            />
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             {list.length > 0 ? (
                 <>
                     {list.map((vm: any, index: number) => {

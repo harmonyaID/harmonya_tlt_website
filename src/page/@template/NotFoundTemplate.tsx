@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { imgLandscapeConfig } from '@/config/urlImage.config'
 import BGHero404 from '@/asset/image/default/bg-404-default.jpg'
 
-const NotFoundPage = () => {
+const NotFoundTemplate = () => {
     return (
         <>
             <TemplatePageBaseLayout isBgTransparent isSecondFooter={false}>
@@ -54,4 +54,4 @@ const NotFoundPage = () => {
     )
 }
 
-export default NotFoundPage
+export default NotFoundTemplate
