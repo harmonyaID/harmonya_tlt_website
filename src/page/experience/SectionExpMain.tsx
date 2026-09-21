@@ -1,3 +1,4 @@
+'use client'
 import SectionGeneral from '@/component/general/SectionGeneral'
 import RenderHtml from '@/component/general/RenderHtml'
 import { BtnLinkPrimary } from '@/component/general/Button'
@@ -7,6 +8,8 @@ import { WrapImageHoverOverlay } from '@/component/general/WrapImage'
 import BannerEat from '@/asset/image/dummy/exp-eat.jpg'
 import BannerPlay from '@/asset/image/dummy/exp-play.jpg'
 import BannerWellness from '@/asset/image/dummy/exp-wellness.jpg'
+import { usePathname } from 'next/navigation'
+import { slugify } from '@/helper/slugify.helper'
 
 interface BlockInfoProps {
     title?: string
@@ -129,6 +132,10 @@ const SectionContentAndImage = ({
 )
 
 const SectionExpMain = ({ list = [] }: { list?: any }) => {
+    const pathname = usePathname() || '/'
+    console.log('list: ', list)
+    console.log('pathname: ', pathname)
+
     return (
         <>
             {list.length > 0 ? (
@@ -141,7 +148,9 @@ const SectionExpMain = ({ list = [] }: { list?: any }) => {
                             title: vm.name || '',
                             subTitle: '',
                             description: vm.description || '',
-                            link: '',
+                            link: vm.name
+                                ? pathname + '/' + slugify(vm.name)
+                                : '#',
                             image: vm.featuredImage || '',
                         }
 

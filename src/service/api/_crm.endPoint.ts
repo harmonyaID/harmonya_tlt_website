@@ -43,5 +43,11 @@ export const SrvContentExpDetail = (slug: string) => SrvContentExp + '/' + slug
 // Experience -> Type
 export const SrvContentExpType = baseApi + '/experience-types'
 
-export const SrvContentExpTypeDetail = (slug: string) =>
+export const SrvContentExpTypeDetail = (slug?: string) =>
     SrvContentExpType + '/' + slug
+
+// Experience -> Area
+export const SrvContentExpArea = baseApi + '/experience-areas'
+
+export const SrvContentExpAreaDetail = (slug?: string) =>
+    SrvContentExpArea + '/' + slug

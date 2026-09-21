@@ -1,10 +1,10 @@
 import { imgLandscapeConfig } from '@/config/urlImage.config'
 import Image from 'next/image'
 
-const SectionHeroSecond = ({ content = {} }: { content?: any | {} }) => {
+const SectionHeroSecondSmall = ({ content = {} }: { content?: any | {} }) => {
     return (
         <>
-            <section className="section-hero-second">
+            <section className="section-hero-second-small">
                 <div className="general-hero-full-screen">
                     <Image
                         src={imgLandscapeConfig(content.image)}
@@ -18,7 +18,7 @@ const SectionHeroSecond = ({ content = {} }: { content?: any | {} }) => {
                 </div>
 
                 {/*Title*/}
-                <div className="container content-hero-position-centerP  z-1">
+                <div className="container content-hero-position-centerP content-hero-data-text-center z-1">
                     <div className="text-white wp-font-tt-drugs text-center text-uppercase">
                         <h1 className="fw-light">{content.title}</h1>
                     </div>
@@ -28,4 +28,4 @@ const SectionHeroSecond = ({ content = {} }: { content?: any | {} }) => {
     )
 }
 
-export default SectionHeroSecond
+export default SectionHeroSecondSmall

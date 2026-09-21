@@ -33,8 +33,6 @@ export const generateMetadata = async ({ params }: PropsData) => {
 const BlogDetailTemplate = async ({ slug }: { slug?: string }) => {
     // const { slug } = await params
 
-    console.log('slug: ', slug)
-
     const dataBlog = await getBlogDetail(slug, 'tcGetBlogDetail').then(
         (res) => res?.result || {},
     )

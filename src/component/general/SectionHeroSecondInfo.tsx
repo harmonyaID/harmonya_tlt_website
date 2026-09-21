@@ -18,7 +18,7 @@ const SectionHeroSecondInfo = ({ content = {} }: { content?: any | {} }) => {
                 </div>
 
                 {/*Title*/}
-                <div className="container content-hero-position-full-center z-1">
+                <div className="container content-hero-position-full-centerP content-hero-data-text-center z-1">
                     <div className="vstack justify-content-center align-items-center h-100">
                         <div className="text-white wp-font-tt-drugs text-center text-uppercase">
                             <h1 className="fw-light">{content.title}</h1>
