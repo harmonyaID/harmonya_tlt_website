@@ -1,5 +1,3 @@
-import TemplatePageBaseLayout from '@/component/layout/TemplatePageBase.layout'
-import BGHero from '@/asset/image/dummy/default-bg-contact.jpg'
 import NavbarLayout from '@/component/layout/Navbar.layout'
 import FooterNewsLatterStaticLayout from '@/component/layout/FooterNewsLatterStatic.layout'
 import FooterLayout from '@/component/layout/Footer.layout'
@@ -8,15 +6,25 @@ import SectionHeroHalfScreen from '@/component/general/SectionHeroHalfScreen'
 import SectionHeroSecondInfo from '@/component/general/SectionHeroSecondInfo'
 import Breadcrumb from '@/component/general/Breadcrumb'
 import RenderHtml from '@/component/general/RenderHtml'
+import { getBlogDetail } from '@/service/api/blog.api'
+import { getDetailExpTypes } from '@/service/api/experience.api'
+import SectionExpAreaList from '@/page/experience/SectionExpAreaList'
 
-const ExperienceDetailTemplate = () => {
+const ExperienceDetailLevel1Template = async ({ slug }: { slug?: string }) => {
+    const typeDetail = await getDetailExpTypes(
+        '2',
+        'tcSrvContentExpTypeDetail',
+    ).then((res) => res?.result || {})
+
+    const { name, banner, description } = typeDetail || {}
+
     return (
         <>
             <NavbarLayout isBgTransparent={false} isStartFix={false} />
             <SectionHeroSecondInfo
                 content={{
-                    title: 'Eat',
-                    image: BGHero,
+                    title: name,
+                    image: banner,
                 }}
             />
             <div className="container">
@@ -36,17 +44,16 @@ const ExperienceDetailTemplate = () => {
                         </div>
 
                         <div className="col-md-6">
-                            <p className="fs-20 text-grey-400">
-                                Whether you're looking for somewhere nearby or
-                                venturing to a new neighbourhood for a change of
-                                scene, our EAT guide helps you discover the best
-                                restaurants and places to eat across Nusa
-                                Lembongan and Nusa Ceningan.
-                            </p>
+                            <RenderHtml
+                                className="fs-20 text-grey-400"
+                                html={description}
+                            />
                         </div>
                     </div>
                 </div>
             </section>
+
+            <SectionExpAreaList slug={slug} />
 
             <FooterNewsLatterStaticLayout />
             <FooterLayout />
@@ -54,4 +61,4 @@ const ExperienceDetailTemplate = () => {
     )
 }
 
-export default ExperienceDetailTemplate
+export default ExperienceDetailLevel1Template

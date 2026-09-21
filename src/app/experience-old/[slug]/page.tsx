@@ -1,9 +1,9 @@
-import ExperienceDetailTemplate from '@/page/@template/ExperienceDetailTemplate'
+import ExperienceDetailLevel1Template from '@/page/@template/ExperienceDetailLevel1Template'
 
 const page = () => {
     return (
         <>
-            <ExperienceDetailTemplate />
+            <ExperienceDetailLevel1Template />
         </>
     )
 }

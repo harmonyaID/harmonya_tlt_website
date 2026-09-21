@@ -1,10 +1,8 @@
 import { PropsSectionContent } from '@/type/sectionContent.type'
 import { getListExpTypes } from '@/service/api/experience.api'
 import NavbarLayout from '@/component/layout/Navbar.layout'
-import BGHero from '@/asset/image/dummy/exp-bg-demo-half-screen.jpg'
 import SectionHeroHalfScreen from '@/component/general/SectionHeroHalfScreen'
 import SectionExpMain from '@/page/experience/SectionExpMain'
-import RenderHtml from '@/component/general/RenderHtml'
 import SectionExpDataInfo from '@/page/experience/SectionExpDataInfo'
 import FooterNewsLatterStaticLayout from '@/component/layout/FooterNewsLatterStatic.layout'
 import FooterLayout from '@/component/layout/Footer.layout'
@@ -26,7 +24,6 @@ const ExperienceTemplate = async ({ content }: PropsSectionContent) => {
                 }}
             />
             <SectionExpDataInfo content={SECTION2} />
-
             <SectionExpMain list={typeExperiences} />
             <FooterNewsLatterStaticLayout />
             <FooterLayout />

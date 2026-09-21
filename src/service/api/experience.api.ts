@@ -4,6 +4,8 @@ import {
 } from '@/service/api/@config/configAPIPublic'
 import {
     SrvContentExp,
+    SrvContentExpArea,
+    SrvContentExpAreaDetail,
     SrvContentExpDetail,
     SrvContentExpType,
     SrvContentExpTypeDetail,
@@ -19,5 +21,16 @@ export const getDetailExperience = (slug: string) =>
 export const getListExpTypes = (formSearch: object) =>
     _shapeMethodGetSearch(SrvContentExpType, formSearch, 'tcSrvContentExpType')
 
-export const getDetailExpTypes = (slug: string) =>
-    _shapeMethodGet(SrvContentExpTypeDetail(slug), 'tcSrvContentExpTypeDetail')
+export const getDetailExpTypes = async (
+    slug?: string,
+    tc = 'tcSrvContentExpTypeDetail',
+) => await _shapeMethodGet(SrvContentExpTypeDetail(slug), tc)
+
+// Area
+export const getListExpArea = (formSearch: object) =>
+    _shapeMethodGetSearch(SrvContentExpArea, formSearch, 'tcSrvContentExpArea')
+
+export const getDetailExpArea = async (
+    slug?: string,
+    tc = 'tcSrvContentExpAreaDetail',
+) => await _shapeMethodGet(SrvContentExpAreaDetail(slug), tc)
