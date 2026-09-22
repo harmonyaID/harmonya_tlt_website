@@ -1,37 +1,48 @@
 'use client'
+import { usePathname } from 'next/navigation'
 import useExpListHook from '@/page/experience/hook/useExpList.hook'
 import RenderHtml from '@/component/general/RenderHtml'
-import { isEmpty } from 'lodash'
 import ExpLoadingList from '@/page/experience/component/ExpLoadingList'
-import Pagination from '@/component/general/Pagination'
-import InfoNotAvailable from '@/component/general/InfoEmpty'
+import { isEmpty } from 'lodash'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { slugify } from '@/helper/slugify.helper'
-import { BtnBasic, CodeIconArrow } from '@/component/general/Button'
 import { WrapImageHoverOverlay } from '@/component/general/WrapImage'
+import { BtnBasic, CodeIconArrow } from '@/component/general/Button'
+import Image from 'next/image'
 import { imgReelConfig } from '@/config/urlImage.config'
 import PropertyVilla01 from '@/asset/image/villa/property-villa-01.png'
-import Image from 'next/image'
+import Pagination from '@/component/general/Pagination'
+import InfoNotAvailable from '@/component/general/InfoEmpty'
+import joinClassNameHelper from '@/helper/joinClassName.helper'
 
-const SectionExpList = ({ slug = '' }: { slug?: string | number }) => {
+const ExpMainList = ({
+    title = '',
+    className = '',
+    configSearch = {},
+    isOnlyPathname = false,
+}: {
+    title?: string
+    className?: string
+    configSearch?: object
+    isOnlyPathname?: boolean
+}) => {
     const pathname = usePathname() || '/'
 
     const { list, isLoading, pagination, _handleChangePage } = useExpListHook({
-        configSearch: {
-            typeName: slug,
-        },
+        configSearch,
     })
-
-    console.log('list: ', list)
 
     return (
         <>
-            <section className="section-space-small-bottom">
+            <section
+                className={joinClassNameHelper(
+                    'section-space-small-bottom',
+                    className,
+                )}>
                 <div className="container">
                     <RenderHtml
                         className="wp-font-tt-drugs text-uppercase text-grey-200 pb-4"
-                        html={'<h3>ALL Restaurants</h3>'}
+                        html={'<h3>' + title + '</h3>'}
                     />
 
                     {isLoading ? (
@@ -43,25 +54,25 @@ const SectionExpList = ({ slug = '' }: { slug?: string | number }) => {
                                     const { slug } = vm?.seo || {}
                                     const { name } = vm?.area || {}
 
+                                    const href = isOnlyPathname
+                                        ? pathname + '/' + slug
+                                        : slug && name
+                                          ? pathname +
+                                            '/' +
+                                            slugify(name) +
+                                            '/' +
+                                            slug
+                                          : slug
+                                            ? pathname + '/' + slug
+                                            : '#'
+
                                     return (
                                         <div
                                             key={index}
                                             className="col-lg-4 col-md-6">
                                             <Link
                                                 className="w-100 vstack gap-3 text-grey-200 wp-hover-image overflow-hidden property-card-slider"
-                                                href={
-                                                    slug && name
-                                                        ? pathname +
-                                                          '/' +
-                                                          slugify(name) +
-                                                          '/' +
-                                                          slug
-                                                        : slug
-                                                          ? pathname +
-                                                            '/' +
-                                                            slug
-                                                          : '#'
-                                                }>
+                                                href={href}>
                                                 <WrapImageHoverOverlay
                                                     className="img-h-332px overflow-hidden"
                                                     contentOverlay={
@@ -114,17 +125,8 @@ const SectionExpList = ({ slug = '' }: { slug?: string | number }) => {
                     )}
                 </div>
             </section>
-
-            <section className="section-space-small bg-primary">
-                <div className="container text-white">
-                    <RenderHtml
-                        className="wp-font-tt-drugs text-uppercase text-grey-200 pb-4 text-white"
-                        html={'<h3>YOU MUST TRY</h3>'}
-                    />
-                </div>
-            </section>
         </>
     )
 }
 
-export default SectionExpList
+export default ExpMainList

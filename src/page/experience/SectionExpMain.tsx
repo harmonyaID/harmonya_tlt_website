@@ -143,14 +143,13 @@ const SectionExpMain = ({ list = [] }: { list?: any }) => {
                     {list.map((vm: any, index: number) => {
                         const number = index + 1
                         const isSectionImageAndContent = number % 2 !== 0
+                        const { slug } = vm?.seo || {}
 
                         const dataProps = {
                             title: vm.name || '',
                             subTitle: '',
                             description: vm.description || '',
-                            link: vm.name
-                                ? pathname + '/' + slugify(vm.name)
-                                : '#',
+                            link: slug ? pathname + '/' + slugify(slug) : '#',
                             image: vm.featuredImage || '',
                         }
 
