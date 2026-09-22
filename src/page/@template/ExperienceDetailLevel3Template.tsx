@@ -3,10 +3,12 @@ import NavbarLayout from '@/component/layout/Navbar.layout'
 import SectionHeroSecondSmall from '@/component/general/SectionHeroSecondSmall'
 import SectionHeroSecond from '@/component/general/SectionHeroSecond'
 
-const ExperienceDetailLevel3Template = async ({ slug }: { slug?: string }) => {
-    const experienceDetail = await getDetailExperience('1').then(
+const ExperienceDetailLevel3Template = async ({ slug }: { slug: string }) => {
+    const experienceDetail = await getDetailExperience(slug).then(
         (res) => res?.result || {},
     )
+
+    console.log('experienceDetail: ', experienceDetail)
 
     const { name, banner, featuredImage } = experienceDetail || {}
 

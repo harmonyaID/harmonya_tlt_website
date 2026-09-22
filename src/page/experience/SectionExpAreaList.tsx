@@ -21,18 +21,21 @@ const SectionExpAreaList = ({ slug = '' }: { slug?: string | number }) => {
             {!isLoading && list.length ? (
                 <section className="section-space-small-bottom">
                     <div className="container">
-                        <div className="row">
+                        <div className="row gy-4">
                             {list.map((vm: any, index: any) => {
+                                const { slug } = vm?.seo || {}
                                 return (
                                     <div className="col-md-3" key={index}>
                                         <Link
                                             href={
-                                                pathname +
-                                                '/' +
-                                                slugify(vm.name)
+                                                slug
+                                                    ? pathname +
+                                                      '/' +
+                                                      slugify(slug)
+                                                    : '#'
                                             }
                                             className="">
-                                            <div className="exp-area-card-img">
+                                            <div className="exp-area-card-img wp-hover-image">
                                                 <Image
                                                     src={imgReelConfig(
                                                         vm.banner,

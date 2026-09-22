@@ -18,6 +18,7 @@ import ExperienceTemplate from '@/page/@template/ExperienceTemplate'
 import BlogDetailTemplate from '@/page/@template/BlogDetailTemplate'
 import ExperienceDetailLevel1Template from '@/page/@template/ExperienceDetailLevel1Template'
 import ExperienceDetailLevel2Template from '@/page/@template/ExperienceDetailLevel2Template'
+import ExperienceDetailLevel3Template from '@/page/@template/ExperienceDetailLevel3Template'
 
 type PropsData = {
     params: Promise<{ slug: string }>
@@ -55,7 +56,17 @@ const page = async ({ params }: PropsData) => {
     if (template) {
         console.log('template: ', template)
 
-        if (slug[2]) {
+        if (slug[3] && slug.length === 4) {
+            const renderPageTemplateLevel4 = {
+                [TEMPLATE_EXPERIENCE]: (
+                    <ExperienceDetailLevel3Template slug={slug[2]} />
+                ),
+            }
+
+            if (renderPageTemplateLevel4[template]) {
+                return <>{renderPageTemplateLevel4[template]}</>
+            }
+        } else if (slug[2] && slug.length === 3) {
             // Slug Level 3
             const renderPageTemplateLevel3 = {
                 [TEMPLATE_EXPERIENCE]: (
@@ -66,7 +77,7 @@ const page = async ({ params }: PropsData) => {
             if (renderPageTemplateLevel3[template]) {
                 return <>{renderPageTemplateLevel3[template]}</>
             }
-        } else if (slug[1]) {
+        } else if (slug[1] && slug.length === 2) {
             // Slug Level 2
             const renderPageTemplateLevel2 = {
                 [TEMPLATE_BLOG]: <BlogDetailTemplate slug={slug[1]} />,
@@ -78,7 +89,7 @@ const page = async ({ params }: PropsData) => {
             if (renderPageTemplateLevel2[template]) {
                 return <>{renderPageTemplateLevel2[template]}</>
             }
-        } else {
+        } else if (slug[0] && slug.length === 1) {
             // Slug Level 1
             const renderPageTemplate = {
                 [TEMPLATE_BLOG]: <BlogTemplate content={contentPage} />,

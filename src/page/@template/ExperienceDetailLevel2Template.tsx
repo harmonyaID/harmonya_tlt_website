@@ -4,15 +4,16 @@ import FooterNewsLatterStaticLayout from '@/component/layout/FooterNewsLatterSta
 import FooterLayout from '@/component/layout/Footer.layout'
 import SectionHeroSecondSmall from '@/component/general/SectionHeroSecondSmall'
 import { getDetailExpArea } from '@/service/api/experience.api'
+import ExpMainList from '@/page/experience/container/ExpMainList'
 
 const ExperienceDetailLevel2Template = async ({ slug }: { slug?: string }) => {
-    const areaDetail = await getDetailExpArea('10', 'tcGetDetailExpArea').then(
+    const areaDetail = await getDetailExpArea(slug, 'tcGetDetailExpArea').then(
         (res) => res?.result || {},
     )
 
     console.log('areaDetail: ', areaDetail)
 
-    const { name, banner, featuredImage } = areaDetail || {}
+    const { name, banner, id, type, featuredImage } = areaDetail || {}
 
     return (
         <>
@@ -29,6 +30,16 @@ const ExperienceDetailLevel2Template = async ({ slug }: { slug?: string }) => {
                     <Breadcrumb />
                 </div>
             </div>
+
+            <ExpMainList
+                title="ALL Restaurants"
+                className="pt-5"
+                configSearch={{
+                    typeId: type?.id || '',
+                    areaId: id,
+                }}
+                isOnlyPathname
+            />
 
             <FooterNewsLatterStaticLayout />
             <FooterLayout />

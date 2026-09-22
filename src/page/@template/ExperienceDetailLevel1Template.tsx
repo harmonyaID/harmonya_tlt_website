@@ -1,14 +1,12 @@
 import NavbarLayout from '@/component/layout/Navbar.layout'
 import FooterNewsLatterStaticLayout from '@/component/layout/FooterNewsLatterStatic.layout'
 import FooterLayout from '@/component/layout/Footer.layout'
-import SectionHeroSecond from '@/component/general/SectionHeroSecond'
-import SectionHeroHalfScreen from '@/component/general/SectionHeroHalfScreen'
 import SectionHeroSecondInfo from '@/component/general/SectionHeroSecondInfo'
 import Breadcrumb from '@/component/general/Breadcrumb'
 import RenderHtml from '@/component/general/RenderHtml'
-import { getBlogDetail } from '@/service/api/blog.api'
 import { getDetailExpTypes } from '@/service/api/experience.api'
 import SectionExpAreaList from '@/page/experience/SectionExpAreaList'
+import SectionExpList from '@/page/experience/SectionExpList'
 
 const ExperienceDetailLevel1Template = async ({ slug }: { slug?: string }) => {
     const typeDetail = await getDetailExpTypes(
@@ -17,6 +15,8 @@ const ExperienceDetailLevel1Template = async ({ slug }: { slug?: string }) => {
     ).then((res) => res?.result || {})
 
     const { name, banner, description } = typeDetail || {}
+
+    console.log('typeDetail: ', typeDetail)
 
     return (
         <>
@@ -33,13 +33,13 @@ const ExperienceDetailLevel1Template = async ({ slug }: { slug?: string }) => {
                 </div>
             </div>
 
-            <section className="section-space-small">
+            <section className="py-5">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-6">
                             <RenderHtml
                                 className="wp-font-tt-drugs text-uppercase text-grey-200"
-                                html={'<h3>Neighbourhood</h3>'}
+                                html={'<h3>LOCATIONS</h3>'}
                             />
                         </div>
 
@@ -52,9 +52,8 @@ const ExperienceDetailLevel1Template = async ({ slug }: { slug?: string }) => {
                     </div>
                 </div>
             </section>
-
             <SectionExpAreaList slug={slug} />
-
+            <SectionExpList slug={slug} />
             <FooterNewsLatterStaticLayout />
             <FooterLayout />
         </>

@@ -14,8 +14,8 @@ import {
 export const getListExperiences = (formSearch: object) =>
     _shapeMethodGetSearch(SrvContentExp, formSearch, 'tcSrvContentExp')
 
-export const getDetailExperience = (slug: string) =>
-    _shapeMethodGet(SrvContentExpDetail(slug), 'tcSrvContentExpDetail')
+export const getDetailExperience = async (slug: string) =>
+    await _shapeMethodGet(SrvContentExpDetail(slug), 'tcSrvContentExpDetail')
 
 // Type
 export const getListExpTypes = (formSearch: object) =>
