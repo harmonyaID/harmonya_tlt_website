@@ -39,7 +39,7 @@ const ExperienceDetailLevel1Template = async ({ slug }: { slug?: string }) => {
                         <div className="col-md-6">
                             <RenderHtml
                                 className="wp-font-tt-drugs text-uppercase text-grey-200"
-                                html={'<h3>LOCATIONS</h3>'}
+                                html={'<h3>NEIGHBOURHOOD</h3>'}
                             />
                         </div>
 

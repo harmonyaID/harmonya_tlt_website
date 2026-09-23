@@ -59,7 +59,7 @@ const page = async ({ params }: PropsData) => {
         if (slug[3] && slug.length === 4) {
             const renderPageTemplateLevel4 = {
                 [TEMPLATE_EXPERIENCE]: (
-                    <ExperienceDetailLevel3Template slug={slug[2]} />
+                    <ExperienceDetailLevel3Template slug={slug[3]} />
                 ),
             }
 
