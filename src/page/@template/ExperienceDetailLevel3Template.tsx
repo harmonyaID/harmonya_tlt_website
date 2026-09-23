@@ -1,7 +1,10 @@
 import { getDetailExperience } from '@/service/api/experience.api'
 import NavbarLayout from '@/component/layout/Navbar.layout'
-import SectionHeroSecondSmall from '@/component/general/SectionHeroSecondSmall'
-import SectionHeroSecond from '@/component/general/SectionHeroSecond'
+import SectionHeroSecondInfo from '@/component/general/SectionHeroSecondInfo'
+import FooterNewsLatterStaticLayout from '@/component/layout/FooterNewsLatterStatic.layout'
+import FooterLayout from '@/component/layout/Footer.layout'
+import Breadcrumb from '@/component/general/Breadcrumb'
+import SectionExpDetailInfo from '@/page/experience/SectionExpDetailInfo'
 
 const ExperienceDetailLevel3Template = async ({ slug }: { slug: string }) => {
     const experienceDetail = await getDetailExperience(slug).then(
@@ -10,17 +13,25 @@ const ExperienceDetailLevel3Template = async ({ slug }: { slug: string }) => {
 
     console.log('experienceDetail: ', experienceDetail)
 
-    const { name, banner, featuredImage } = experienceDetail || {}
+    const { name, thumbnail } = experienceDetail || {}
 
     return (
         <>
             <NavbarLayout isBgTransparent={false} isStartFix={false} />
-            <SectionHeroSecond
+            <SectionHeroSecondInfo
                 content={{
                     title: name,
-                    image: featuredImage,
+                    image: thumbnail,
                 }}
             />
+            <div className="container">
+                <div className="pt-4">
+                    <Breadcrumb />
+                </div>
+            </div>
+            <SectionExpDetailInfo content={experienceDetail} />
+            <FooterNewsLatterStaticLayout />
+            <FooterLayout />
         </>
     )
 }
