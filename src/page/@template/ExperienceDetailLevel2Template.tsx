@@ -6,7 +6,13 @@ import SectionHeroSecondSmall from '@/component/general/SectionHeroSecondSmall'
 import { getDetailExpArea } from '@/service/api/experience.api'
 import ExpMainList from '@/page/experience/container/ExpMainList'
 
-const ExperienceDetailLevel2Template = async ({ slug }: { slug?: string }) => {
+const ExperienceDetailLevel2Template = async ({
+    slug,
+    allSlug = [],
+}: {
+    slug: string
+    allSlug?: any
+}) => {
     const areaDetail = await getDetailExpArea(slug, 'tcGetDetailExpArea').then(
         (res) => res?.result || {},
     )
