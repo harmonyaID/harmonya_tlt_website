@@ -1,5 +1,6 @@
 import RenderHtml from '@/component/general/RenderHtml'
 import joinClassNameHelper from '@/helper/joinClassName.helper'
+import ExpSlideImage from '@/page/experience/component/ExpSlideImage'
 
 const ContactInformation = ({
     label,
@@ -19,7 +20,16 @@ const ContactInformation = ({
 }
 
 const SectionExpDetailInfo = ({ content = {} }: { content?: any }) => {
-    const { name, thumbnail, description, whatsapp } = content || {}
+    const {
+        name,
+        thumbnail,
+        description,
+        whatsapp,
+        photos = [],
+        mapLocationUrl,
+    } = content || {}
+
+    console.log('ExpDetail: ', content)
 
     return (
         <>
@@ -30,6 +40,7 @@ const SectionExpDetailInfo = ({ content = {} }: { content?: any }) => {
                     </div>
 
                     {/*SLIDER's*/}
+                    <ExpSlideImage list={photos} />
 
                     {/*DETAIL INFORMATION*/}
                     <div className="row justify-content-between gx-4">
@@ -51,6 +62,17 @@ const SectionExpDetailInfo = ({ content = {} }: { content?: any }) => {
                                     className="wp-font-tt-drugs fs-48 text-grey-200 pb-3"
                                     html={'<h4>LOCATION</h4>'}
                                 />
+
+                                {mapLocationUrl ? (
+                                    <div className="w-100">
+                                        <iframe
+                                            src={mapLocationUrl}
+                                            loading="lazy"
+                                            width="100%"
+                                            height="392px"
+                                        />
+                                    </div>
+                                ) : null}
                             </div>
                         </div>
                         <div className="col-md-4">

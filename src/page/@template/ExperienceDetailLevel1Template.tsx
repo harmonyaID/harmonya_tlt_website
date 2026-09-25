@@ -10,7 +10,7 @@ import SectionExpList from '@/page/experience/SectionExpList'
 
 const ExperienceDetailLevel1Template = async ({ slug }: { slug?: string }) => {
     const typeDetail = await getDetailExpTypes(
-        '2',
+        slug,
         'tcSrvContentExpTypeDetail',
     ).then((res) => res?.result || {})
 

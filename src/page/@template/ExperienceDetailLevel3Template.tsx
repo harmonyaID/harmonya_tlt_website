@@ -5,15 +5,22 @@ import FooterNewsLatterStaticLayout from '@/component/layout/FooterNewsLatterSta
 import FooterLayout from '@/component/layout/Footer.layout'
 import Breadcrumb from '@/component/general/Breadcrumb'
 import SectionExpDetailInfo from '@/page/experience/SectionExpDetailInfo'
+import ExpOtherList from '@/page/experience/container/ExpOtherList'
 
-const ExperienceDetailLevel3Template = async ({ slug }: { slug: string }) => {
+const ExperienceDetailLevel3Template = async ({
+    slug,
+    allSlug = [],
+}: {
+    slug: string
+    allSlug?: any
+}) => {
     const experienceDetail = await getDetailExperience(slug).then(
         (res) => res?.result || {},
     )
 
     console.log('experienceDetail: ', experienceDetail)
 
-    const { name, thumbnail } = experienceDetail || {}
+    const { name, thumbnail, area = {}, type = {} } = experienceDetail || {}
 
     return (
         <>
@@ -30,6 +37,19 @@ const ExperienceDetailLevel3Template = async ({ slug }: { slug: string }) => {
                 </div>
             </div>
             <SectionExpDetailInfo content={experienceDetail} />
+            <section className="section-space-small-top bg-neutral-100">
+                <ExpOtherList
+                    title="Other Restaurant"
+                    configSearch={{
+                        limit: 3,
+                        areaId: area?.id || '',
+                        typeId: type?.id || '',
+                    }}
+                    basePath={
+                        '/' + allSlug[0] + '/' + allSlug[1] + '/' + allSlug[2]
+                    }
+                />
+            </section>
             <FooterNewsLatterStaticLayout />
             <FooterLayout />
         </>
