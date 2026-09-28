@@ -3,7 +3,6 @@ import BGHero from '@/asset/image/dummy/default-bg-faq.jpg'
 import TemplatePageBaseLayout from '@/component/layout/TemplatePageBase.layout'
 
 const FAQTemplate = async ({ content }: PropsSectionContent) => {
-    console.log('content: ', content)
     const { SECTION1 = {}, SECTION2 = {} } = content?.content || {}
 
     return (
