@@ -20,12 +20,12 @@ const OfferContentCard = ({
     // description = '',
     excerpt = '',
     slug = '',
+    href = '#',
 }) => {
-    const dataLink = slug ? OFFER_SLUG_PATH + slug : '#'
     return (
         <>
             <Link
-                href={dataLink}
+                href={href}
                 className="w-100 vstack gap-3 text-grey-200 wp-hover-image overflow-hidden">
                 <WrapImageHoverOverlay className="overflow-hidden img-h-392px">
                     <Image
@@ -54,7 +54,7 @@ const OfferContentCard = ({
                         <BtnBasic
                             type="button"
                             className="btn-outline-grey-100 rounded-pill"
-                            href={dataLink}>
+                            href={href}>
                             <div className="hstack align-items-center gap-1">
                                 EXPLORE DETAILS <IconArrowRight />
                             </div>
@@ -82,51 +82,28 @@ interface Props {
     content?: any
     list?: any
     pagination?: any
+    basicSlug?: string
 }
 
 const SectionOfferMainInfo = ({
     content,
     list = [],
     pagination = {},
+    basicSlug = '',
 }: Props) => {
-    const listData: any[] = [
-        objectData(
-            'BOOK IN ADVANCE',
-            'Book ahead and secure your stay for 2026 island escape and get a special rate.',
-            BgContent1,
-            '/offer/book-in-advance',
-        ),
-        objectData(
-            'LAST MINUTE GETAWAY',
-            'From now until May is the perfect time to slip away to the island. Book direct and get the best rate on our website.',
-            BgContent2,
-            '/offer/last-minute-gateaway',
-        ),
-    ]
-
     return (
         <section className="section-space bg-white">
             <div className="container">
                 <div className="row gx-5 gy-3 mb-5">
                     <div className="col-md-6">
-                        <TitleContentText>
-                            ALL LIMITED TIME PROMOTIONS
-                        </TitleContentText>
+                        <TitleContentText>{content.title}</TitleContentText>
                     </div>
 
                     <div className="col-md-6">
-                        <DescriptionContentText>
-                            Enjoy limited-time offers on your Nusa Lembongan
-                            stay with The Lembongan Traveller. Whether you’re
-                            planning your dream holiday well in advance or
-                            looking for a spontaneous beach escape, our
-                            exclusive promotions and last-minute bookings make
-                            it easy to find the perfect stay at the best rate
-                            with various property options from bungalows,
-                            resorts, to private villas. Start your island
-                            adventure with offers designed to make your stay
-                            unforgettable.
-                        </DescriptionContentText>
+                        <RenderHtml
+                            className="fs-20 fw-light text-grey-400"
+                            html={content.description}
+                        />
                     </div>
                 </div>
 
@@ -134,7 +111,15 @@ const SectionOfferMainInfo = ({
                     {list.map((vm: any, index: number) => {
                         return (
                             <div className="col-md-6" key={index}>
-                                <OfferContentCard {...vm} />
+                                <OfferContentCard
+                                    {...vm}
+                                    src={vm.thumbnail || ''}
+                                    href={
+                                        vm.slug
+                                            ? '/' + basicSlug + '/' + vm.slug
+                                            : '#'
+                                    }
+                                />
                             </div>
                         )
                     })}

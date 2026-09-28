@@ -6,6 +6,8 @@ import {
     TEMPLATE_BLOG,
     TEMPLATE_EXPERIENCE,
     TEMPLATE_FAQ,
+    TEMPLATE_INFO_PRIVACY_POLICY,
+    TEMPLATE_INFO_TNC,
     TEMPLATE_OFFER,
     TEMPLATE_PROPERTY,
 } from '@/config/pageTemplate.config'
@@ -19,6 +21,8 @@ import BlogDetailTemplate from '@/page/@template/BlogDetailTemplate'
 import ExperienceDetailLevel1Template from '@/page/@template/ExperienceDetailLevel1Template'
 import ExperienceDetailLevel2Template from '@/page/@template/ExperienceDetailLevel2Template'
 import ExperienceDetailLevel3Template from '@/page/@template/ExperienceDetailLevel3Template'
+import OfferDetailTemplate from '@/page/@template/OfferDetailTemplate'
+import InformationGeneralTemplate from '@/page/@template/InformationGeneralTemplate'
 
 type PropsData = {
     params: Promise<{ slug: string }>
@@ -90,6 +94,7 @@ const page = async ({ params }: PropsData) => {
                 [TEMPLATE_EXPERIENCE]: (
                     <ExperienceDetailLevel1Template slug={slug[1]} />
                 ),
+                [TEMPLATE_OFFER]: <OfferDetailTemplate slug={slug[1]} />,
             }
 
             if (renderPageTemplateLevel2[template]) {
@@ -101,9 +106,19 @@ const page = async ({ params }: PropsData) => {
                 [TEMPLATE_BLOG]: <BlogTemplate content={contentPage} />,
                 [TEMPLATE_FAQ]: <FAQTemplate content={contentPage} />,
                 [TEMPLATE_PROPERTY]: <PropertyTemplate content={contentPage} />,
-                [TEMPLATE_OFFER]: <OfferTemplate content={contentPage} />,
+                [TEMPLATE_OFFER]: (
+                    <OfferTemplate content={contentPage} slug={slug[0]} />
+                ),
                 [TEMPLATE_EXPERIENCE]: (
                     <ExperienceTemplate content={contentPage} />
+                ),
+
+                // Info. General
+                [TEMPLATE_INFO_PRIVACY_POLICY]: (
+                    <InformationGeneralTemplate content={contentPage} />
+                ),
+                [TEMPLATE_INFO_TNC]: (
+                    <InformationGeneralTemplate content={contentPage} />
                 ),
             }
 
