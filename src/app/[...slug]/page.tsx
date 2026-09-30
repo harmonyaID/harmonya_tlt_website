@@ -6,6 +6,7 @@ import {
     TEMPLATE_BLOG,
     TEMPLATE_EXPERIENCE,
     TEMPLATE_FAQ,
+    TEMPLATE_INFO_CONTACT,
     TEMPLATE_INFO_PRIVACY_POLICY,
     TEMPLATE_INFO_TNC,
     TEMPLATE_OFFER,
@@ -23,6 +24,7 @@ import ExperienceDetailLevel2Template from '@/page/@template/ExperienceDetailLev
 import ExperienceDetailLevel3Template from '@/page/@template/ExperienceDetailLevel3Template'
 import OfferDetailTemplate from '@/page/@template/OfferDetailTemplate'
 import InformationGeneralTemplate from '@/page/@template/InformationGeneralTemplate'
+import ContactTemplate from '@/page/@template/ContactTemplate'
 
 type PropsData = {
     params: Promise<{ slug: string }>
@@ -114,6 +116,9 @@ const page = async ({ params }: PropsData) => {
                 ),
 
                 // Info. General
+                [TEMPLATE_INFO_CONTACT]: (
+                    <ContactTemplate content={contentPage} />
+                ),
                 [TEMPLATE_INFO_PRIVACY_POLICY]: (
                     <InformationGeneralTemplate content={contentPage} />
                 ),

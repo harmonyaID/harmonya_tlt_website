@@ -48,3 +48,6 @@ export const getFAQHomePage = (
         },
         tc,
     )
+
+export const getFAQList = (formSearch = {}, tc: string = 'tcSrvFaq') =>
+    _shapeMethodGetSearch(SrvFaq, formSearch, tc)

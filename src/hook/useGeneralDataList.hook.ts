@@ -4,9 +4,11 @@ import { useEffect, useState } from 'react'
 const useGeneralDataList = ({
     configSearch = {},
     urlAPI = () => {},
+    isAutoGet = true,
 }: {
     configSearch?: any
     urlAPI?: (pass: any) => any
+    isAutoGet?: boolean
 }) => {
     const [list, setList] = useState([])
 
@@ -51,7 +53,9 @@ const useGeneralDataList = ({
     }
 
     useEffect(() => {
-        _handleGet(search)
+        if (isAutoGet) {
+            _handleGet(search)
+        }
     }, [])
 
     return {
@@ -59,6 +63,7 @@ const useGeneralDataList = ({
         setList,
         isLoading,
         pagination,
+        _handleGet,
         _handleChangePage,
     }
 }
