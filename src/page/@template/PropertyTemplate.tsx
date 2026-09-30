@@ -9,8 +9,9 @@ import FooterLayout from '@/component/layout/Footer.layout'
 import { PropsSectionContent } from '@/type/sectionContent.type'
 
 const PropertyTemplate = async ({ content }: PropsSectionContent) => {
-    console.log('content: ', content)
     const { SECTION1 = {}, SECTION2 = {} } = content?.content || {}
+
+    console.log('content: ', content)
 
     const offers = await getListOffers({ limit: 2, page: 1 }).then(
         (res) => res?.result || {},
@@ -19,7 +20,7 @@ const PropertyTemplate = async ({ content }: PropsSectionContent) => {
     return (
         <>
             <NavbarLayout isBgTransparent />
-            <SectionPropertyHero />
+            <SectionPropertyHero content={SECTION1} />
             <SectionListProperty />
             <SectionPropertyHighlight />
             <SectionPropertyOffer list={offers} />

@@ -4,28 +4,28 @@ import { BtnPrimary } from '@/component/general/Button'
 import { imgLandscapeConfig } from '@/config/urlImage.config'
 
 const SectionPropertyHero = ({ content = {} }: { content?: any | {} }) => {
+    console.log('SectionPropertyHero: ', content)
     return (
         <>
             <section className="section-hero-general bg-green-800">
                 <div className="general-hero-full-screen">
                     <Image
-                        src={imgLandscapeConfig(HomeBanner)}
+                        src={imgLandscapeConfig(content.backgroundImage)}
                         // className="object-fit-cover w-100 h-100"
                         className="h-100 banner-image"
                         alt="The lembongan traveller villa bali"
+                        fill
                     />
                 </div>
 
                 {/*Title*/}
-                <div className="container content-hero-position-default text-center z-1">
+                <div className="container content-hero-position-defaultP content-hero-data-text-center text-center z-1">
                     <div className="row justify-content-center">
-                        <div className="col-lg-9 text-white">
+                        <div className="col-lg-12 text-white">
                             <div
-                                className="wp-font-tt-drugs"
+                                className="wp-font-tt-drugs wp-fw-300"
                                 dangerouslySetInnerHTML={{
-                                    __html:
-                                        content?.content ||
-                                        '<h1>FIND YOUR PERFECT STAY</h1>',
+                                    __html: content?.content || '',
                                 }}
                             />
                         </div>

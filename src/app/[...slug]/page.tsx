@@ -25,6 +25,7 @@ import ExperienceDetailLevel3Template from '@/page/@template/ExperienceDetailLev
 import OfferDetailTemplate from '@/page/@template/OfferDetailTemplate'
 import InformationGeneralTemplate from '@/page/@template/InformationGeneralTemplate'
 import ContactTemplate from '@/page/@template/ContactTemplate'
+import PropertyDetailTemplate from '@/page/@template/PropertyDetailTemplate'
 
 type PropsData = {
     params: Promise<{ slug: string }>
@@ -97,6 +98,9 @@ const page = async ({ params }: PropsData) => {
                     <ExperienceDetailLevel1Template slug={slug[1]} />
                 ),
                 [TEMPLATE_OFFER]: <OfferDetailTemplate slug={slug[1]} />,
+                [TEMPLATE_PROPERTY]: (
+                    <PropertyDetailTemplate slug={slug[1]} allSlug={slug} />
+                ),
             }
 
             if (renderPageTemplateLevel2[template]) {

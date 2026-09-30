@@ -18,8 +18,12 @@ import Pagination from '@/component/general/Pagination'
 import InfoNotAvailable from '@/component/general/InfoEmpty'
 import SectionGeneral from '@/component/general/SectionGeneral'
 import { SectionTitle } from '@/component/text/Heading'
+import { usePathname } from 'next/navigation'
+import { slugify } from '@/helper/slugify.helper'
 
 const SectionListProperty = () => {
+    const pathname = usePathname() || '/'
+
     const { list, isLoading, pagination, _handleChangePage } = usePropertyList()
     console.log('list: ', list)
 
@@ -37,18 +41,19 @@ const SectionListProperty = () => {
                         <>
                             <div className="row gx-3 gy-4">
                                 {list.map((vm: any, index) => {
+                                    const { slug } = vm.seo || {}
                                     const dataElement: any = vm
                                     const dataTags = vm?.tags || []
+                                    const listDetail = slug
+                                        ? pathname + '/' + slugify(slug)
+                                        : '#'
                                     return (
                                         <div
                                             className="col-lg-4 col-md-6"
                                             key={index}>
                                             <Link
                                                 className="w-100 vstack gap-3 text-grey-200 wp-hover-image overflow-hidden property-card-slider"
-                                                href={
-                                                    dataElement.buttonLink ||
-                                                    '#'
-                                                }>
+                                                href={listDetail || '#'}>
                                                 <WrapImageHoverOverlay
                                                     className="banner"
                                                     contentOverlay={

@@ -29,6 +29,9 @@ export const SrvFaq = baseApi + '/faqs'
 // Property
 export const SrvContentPropertyHomePage = baseApi + '/properties'
 
+export const SrvContentPropertyDetail = (slug?: string) =>
+    baseApi + '/properties/' + slug
+
 // Offers
 export const SrvContentOfferPage = baseApi + '/offers'
 
