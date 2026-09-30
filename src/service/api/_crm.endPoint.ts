@@ -23,7 +23,7 @@ export const SrvMenus = baseApi + '/menus'
 // Partner
 export const SrvPartners = baseApi + '/media-partners'
 
-// FAS
+// FAQ
 export const SrvFaq = baseApi + '/faqs'
 
 // Property

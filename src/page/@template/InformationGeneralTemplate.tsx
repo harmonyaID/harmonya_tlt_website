@@ -11,15 +11,19 @@ const InformationGeneralTemplate = async ({ content }: PropsSectionContent) => {
             title={SECTION1?.title || ''}
             backgroundImage={SECTION1.backgroundImage}>
             <section className="section-space-small-top">
-                <div className="container wp-content-blog">
-                    {SECTION2 && SECTION2?.content ? (
-                        <SectionContent isBorderBottom={false}>
-                            <RenderHtml
-                                className="render-content"
-                                html={SECTION2.content || ''}
-                            />
-                        </SectionContent>
-                    ) : null}
+                <div className="container">
+                    <div className="row justify-content-center">
+                        <div className="col-md-10 wp-content-blog">
+                            {SECTION2 && SECTION2?.content ? (
+                                <SectionContent isBorderBottom={false}>
+                                    <RenderHtml
+                                        className="render-content"
+                                        html={SECTION2.content || ''}
+                                    />
+                                </SectionContent>
+                            ) : null}
+                        </div>
+                    </div>
                 </div>
             </section>
         </TemplatePageBaseLayout>

@@ -6,6 +6,7 @@ import { ReactNode, useEffect } from 'react'
 import '@/asset/theme/theme.scss'
 import CreatePortalLayout from '@/component/layout/CreatePortal.layout'
 import GlobalSearchData from '@/feature/GlobalSearchData'
+import { ProgressProvider } from '@bprogress/next/app'
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -38,11 +39,17 @@ export default function RootLayout({
                 <link rel="icon" href="/favicon-tlt.png" sizes="any" />
             </head>
             <body>
-                {children}
+                <ProgressProvider
+                    height="4px"
+                    color="#138F8F"
+                    options={{ showSpinner: false }}
+                    shallowRouting>
+                    {children}
 
-                {/*<CreatePortalLayout>*/}
-                <GlobalSearchData />
-                {/*</CreatePortalLayout>*/}
+                    {/*<CreatePortalLayout>*/}
+                    <GlobalSearchData />
+                    {/*</CreatePortalLayout>*/}
+                </ProgressProvider>
             </body>
         </html>
     )
