@@ -9,6 +9,7 @@ import {
     TEMPLATE_INFO_CONTACT,
     TEMPLATE_INFO_PRIVACY_POLICY,
     TEMPLATE_INFO_TNC,
+    TEMPLATE_ISLAND_GUIDE,
     TEMPLATE_OFFER,
     TEMPLATE_PROPERTY,
 } from '@/config/pageTemplate.config'
@@ -26,6 +27,7 @@ import OfferDetailTemplate from '@/page/@template/OfferDetailTemplate'
 import InformationGeneralTemplate from '@/page/@template/InformationGeneralTemplate'
 import ContactTemplate from '@/page/@template/ContactTemplate'
 import PropertyDetailTemplate from '@/page/@template/PropertyDetailTemplate'
+import IslandGuideTemplate from '@/page/@template/IslandGuideTemplate'
 
 type PropsData = {
     params: Promise<{ slug: string }>
@@ -117,6 +119,9 @@ const page = async ({ params }: PropsData) => {
                 ),
                 [TEMPLATE_EXPERIENCE]: (
                     <ExperienceTemplate content={contentPage} />
+                ),
+                [TEMPLATE_ISLAND_GUIDE]: (
+                    <IslandGuideTemplate content={contentPage} />
                 ),
 
                 // Info. General

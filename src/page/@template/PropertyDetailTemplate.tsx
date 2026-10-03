@@ -13,7 +13,7 @@ const PropertyDetailTemplate = async ({
     allSlug?: any
 }) => {
     const dataProperty = await getPropertyDetail(
-        '157',
+        slug,
         'tcGetPropertyDetail',
     ).then((res) => res?.result || {})
 
