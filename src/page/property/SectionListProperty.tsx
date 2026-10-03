@@ -130,7 +130,7 @@ const SectionListProperty = () => {
                                                             ) => (
                                                                 <BadgeTag
                                                                     key={idx}>
-                                                                    {tag}
+                                                                    {tag.name}
                                                                 </BadgeTag>
                                                             ),
                                                         )}
