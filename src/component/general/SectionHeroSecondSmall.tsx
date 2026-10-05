@@ -20,7 +20,7 @@ const SectionHeroSecondSmall = ({ content = {} }: { content?: any | {} }) => {
                 {/*Title*/}
                 <div className="container content-hero-position-centerP content-hero-data-text-center z-1">
                     <div className="text-white wp-font-tt-drugs text-center text-uppercase">
-                        <h1 className="fw-light">{content.title}</h1>
+                        <h1 className="fw-light mb-0">{content.title}</h1>
                     </div>
                 </div>
             </section>

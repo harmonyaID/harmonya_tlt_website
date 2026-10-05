@@ -55,8 +55,14 @@ export const SrvContentExpArea = baseApi + '/experience-areas'
 export const SrvContentExpAreaDetail = (slug?: string) =>
     SrvContentExpArea + '/' + slug
 
-// Island Guide -> Type
-export const SrvContentIslandGuide = baseApi + '/island-guide-types' + ''
+// Island Guide
+export const SrvContentIslandGuide = baseApi + '/island-guides'
 
 export const SrvContentIslandGuideDetail = (slug?: string) =>
+    SrvContentIslandGuide + '/' + slug
+
+// Island Guide -> Type
+export const SrvContentIslandGuideType = baseApi + '/island-guide-types'
+
+export const SrvContentIslandGuideTypeDetail = (slug?: string) =>
     baseApi + '/island-guide-types/' + slug

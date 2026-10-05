@@ -53,6 +53,16 @@ h6, .fs-20 { @include font-size(1.25rem); }
   word-break: break-word;
 }
 
+.desc-one-line {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;       /* jumlah baris maksimal */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @extend .desc-wrap-break;
+}
+
 .desc-two-line {
   display: -webkit-box;
   -webkit-line-clamp: 2;       /* jumlah baris maksimal */
