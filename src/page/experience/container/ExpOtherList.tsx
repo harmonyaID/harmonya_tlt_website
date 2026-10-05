@@ -34,7 +34,7 @@ const ExpOtherList = ({
 
     return (
         <>
-            <section className="section-space-small-bottom">
+            <section className="section-space-small-bottom bg-neutral-100">
                 <div className="container">
                     <RenderHtml
                         className="wp-font-tt-drugs text-uppercase text-center text-grey-200 pb-4"

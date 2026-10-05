@@ -28,6 +28,8 @@ import InformationGeneralTemplate from '@/page/@template/InformationGeneralTempl
 import ContactTemplate from '@/page/@template/ContactTemplate'
 import PropertyDetailTemplate from '@/page/@template/PropertyDetailTemplate'
 import IslandGuideTemplate from '@/page/@template/IslandGuideTemplate'
+import IslandGuideDetailLevel1Template from '@/page/@template/IslandGuideDetailLevel1Template'
+import IslandGuideDetailLevel2Template from '@/page/@template/IslandGuideDetailLevel2Template'
 
 type PropsData = {
     params: Promise<{ slug: string }>
@@ -52,7 +54,7 @@ const isSlugLevel2 = (passTemplate = '') => {
 const page = async ({ params }: PropsData) => {
     const { slug } = await params
 
-    console.log('slug: ', slug)
+    // console.log('slug: ', slug)
 
     const contentPage = await getPageDetail(slug[0])
         .then((res) => res?.result || {})
@@ -87,6 +89,12 @@ const page = async ({ params }: PropsData) => {
                         allSlug={slug}
                     />
                 ),
+                [TEMPLATE_ISLAND_GUIDE]: (
+                    <IslandGuideDetailLevel2Template
+                        slug={slug[2]}
+                        allSlug={slug}
+                    />
+                ),
             }
 
             if (renderPageTemplateLevel3[template]) {
@@ -102,6 +110,9 @@ const page = async ({ params }: PropsData) => {
                 [TEMPLATE_OFFER]: <OfferDetailTemplate slug={slug[1]} />,
                 [TEMPLATE_PROPERTY]: (
                     <PropertyDetailTemplate slug={slug[1]} allSlug={slug} />
+                ),
+                [TEMPLATE_ISLAND_GUIDE]: (
+                    <IslandGuideDetailLevel1Template slug={slug[1]} />
                 ),
             }
 
