@@ -3,6 +3,7 @@ import NavbarLayout from '@/component/layout/Navbar.layout'
 import SectionBlogDetail from '@/page/blog/SectionBlogDetail'
 import FooterNewsLatterStaticLayout from '@/component/layout/FooterNewsLatterStatic.layout'
 import FooterLayout from '@/component/layout/Footer.layout'
+import SEOBasicGeneral from '@/component/seo/SEOBasicGeneral'
 
 export const dynamic = 'force-dynamic'
 
@@ -37,8 +38,11 @@ const BlogDetailTemplate = async ({ slug }: { slug?: string }) => {
         (res) => res?.result || {},
     )
 
+    const seo = dataBlog?.seo || {}
+
     return (
         <>
+            <SEOBasicGeneral seo={seo} />
             <NavbarLayout isStartFix={false} />
             <SectionBlogDetail detail={dataBlog} />
             <FooterNewsLatterStaticLayout />
