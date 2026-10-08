@@ -2,10 +2,15 @@ const baseApi = process.env.NEXT_PUBLIC_CRM_BASE_API
 
 export const SrvContentHomePage = baseApi + '/homepages'
 
+// Page
+export const SrvContentPage = baseApi + '/pages'
+export const SrvContentPageDetail = (slug: string) =>
+    baseApi + '/pages' + '/' + slug
+
 // Blog
 export const SrvContentBlog = baseApi + '/blogs'
 
-export const SrvContentBlogDetail = (slug: string | number) =>
+export const SrvContentBlogDetail = (slug?: string) =>
     SrvContentBlog + '/' + slug
 
 export const SrvContentBlogCategory = baseApi + '/blog-categories'
@@ -18,11 +23,14 @@ export const SrvMenus = baseApi + '/menus'
 // Partner
 export const SrvPartners = baseApi + '/media-partners'
 
-// FAS
+// FAQ
 export const SrvFaq = baseApi + '/faqs'
 
 // Property
 export const SrvContentPropertyHomePage = baseApi + '/properties'
+
+export const SrvContentPropertyDetail = (slug?: string) =>
+    baseApi + '/properties/' + slug
 
 // Offers
 export const SrvContentOfferPage = baseApi + '/offers'
@@ -38,5 +46,23 @@ export const SrvContentExpDetail = (slug: string) => SrvContentExp + '/' + slug
 // Experience -> Type
 export const SrvContentExpType = baseApi + '/experience-types'
 
-export const SrvContentExpTypeDetail = (slug: string) =>
+export const SrvContentExpTypeDetail = (slug?: string) =>
     SrvContentExpType + '/' + slug
+
+// Experience -> Area
+export const SrvContentExpArea = baseApi + '/experience-areas'
+
+export const SrvContentExpAreaDetail = (slug?: string) =>
+    SrvContentExpArea + '/' + slug
+
+// Island Guide
+export const SrvContentIslandGuide = baseApi + '/island-guides'
+
+export const SrvContentIslandGuideDetail = (slug?: string) =>
+    SrvContentIslandGuide + '/' + slug
+
+// Island Guide -> Type
+export const SrvContentIslandGuideType = baseApi + '/island-guide-types'
+
+export const SrvContentIslandGuideTypeDetail = (slug?: string) =>
+    baseApi + '/island-guide-types/' + slug

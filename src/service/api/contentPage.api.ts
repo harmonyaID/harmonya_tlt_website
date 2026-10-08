@@ -4,6 +4,7 @@ import {
 } from '@/service/api/@config/configAPIPublic'
 import {
     SrvContentHomePage,
+    SrvContentPageDetail,
     SrvFaq,
     SrvMenus,
     SrvPartners,
@@ -26,6 +27,9 @@ export const getContentHomePage = async (formSearch = {}) =>
         'tcSrvContentHomePage',
     )
 
+export const getPageDetail = async (slug = '', tc = 'tcSrvContentHomePage') =>
+    await _shapeMethodGet(SrvContentPageDetail(slug), tc)
+
 export const getMediaPartner = (formSearch = {}) =>
     _shapeMethodGetSearch(SrvPartners, formSearch, 'tcSrvContentHomePage')
 
@@ -44,3 +48,6 @@ export const getFAQHomePage = (
         },
         tc,
     )
+
+export const getFAQList = (formSearch = {}, tc: string = 'tcSrvFaq') =>
+    _shapeMethodGetSearch(SrvFaq, formSearch, tc)

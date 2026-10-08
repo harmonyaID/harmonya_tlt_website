@@ -1,15 +1,13 @@
-import NavbarLayout from '@/component/layout/Navbar.layout'
-import FooterLayout from '@/component/layout/Footer.layout'
-import { getContentHomePage } from '@/service/api/contentPage.api'
+import { PropsSectionContent } from '@/type/sectionContent.type'
 import { getBlogList } from '@/service/api/blog.api'
-import SectionBlogList from '@/page/blog/SectionBlogList'
+import NavbarLayout from '@/component/layout/Navbar.layout'
 import SectionBlogHero from '@/page/blog/SectionBlogHero'
 import Breadcrumb from '@/component/general/Breadcrumb'
-import { isSuccess } from '@/helper/base/condition.helper'
+import SectionBlogList from '@/page/blog/SectionBlogList'
+import FooterLayout from '@/component/layout/Footer.layout'
+import SEOBasicGeneral from '@/component/seo/SEOBasicGeneral'
 
-export const dynamic = 'force-dynamic'
-
-const Blog = async () => {
+const BlogTemplate = async ({ content }: PropsSectionContent) => {
     const page = 1
     const { blogs = [], pagination = {} } = await getBlogList({
         page,
@@ -21,10 +19,16 @@ const Blog = async () => {
         }
     })
 
+    const { SECTION1 } = content?.content || {}
+
     return (
         <>
+            <SEOBasicGeneral seo={content?.seo || {}} />
             <NavbarLayout isBgTransparent />
-            <SectionBlogHero blog={blogs && blogs[0] ? blogs[0] : {}} />
+            <SectionBlogHero
+                content={SECTION1 || {}}
+                blog={blogs && blogs[0] ? blogs[0] : {}}
+            />
 
             <section className="container py-4">
                 <Breadcrumb />
@@ -39,4 +43,4 @@ const Blog = async () => {
     )
 }
 
-export default Blog
+export default BlogTemplate

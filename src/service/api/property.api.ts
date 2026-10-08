@@ -2,7 +2,10 @@ import {
     _shapeMethodGet,
     _shapeMethodGetSearch,
 } from '@/service/api/@config/configAPIPublic'
-import { SrvContentPropertyHomePage } from '@/service/api/_crm.endPoint'
+import {
+    SrvContentPropertyDetail,
+    SrvContentPropertyHomePage,
+} from '@/service/api/_crm.endPoint'
 
 export const getPropertyHomePage = () =>
     _shapeMethodGetSearch(
@@ -23,3 +26,8 @@ export const getPropertyList = (formSearch: object) =>
         formSearch,
         'tcGetPropertyList',
     )
+
+export const getPropertyDetail = async (
+    slug,
+    tc = 'SrvContentPropertyDetail',
+) => await _shapeMethodGet(SrvContentPropertyDetail(slug), tc)

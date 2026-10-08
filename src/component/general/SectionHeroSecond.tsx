@@ -18,7 +18,7 @@ const SectionHeroSecond = ({ content = {} }: { content?: any | {} }) => {
                 </div>
 
                 {/*Title*/}
-                <div className="container content-hero-position-center z-1">
+                <div className="container content-hero-position-centerP  z-1">
                     <div className="text-white wp-font-tt-drugs text-center text-uppercase">
                         <h1 className="fw-light">{content.title}</h1>
                     </div>

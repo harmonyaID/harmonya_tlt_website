@@ -191,7 +191,7 @@ const SectionHomeExclusiveStay = ({
                                                 {/*@ts-ignore*/}
                                                 {dataTags.map((tag, idx) => (
                                                     <BadgeTag key={idx}>
-                                                        {tag}
+                                                        {tag.name}
                                                     </BadgeTag>
                                                 ))}
                                             </div>

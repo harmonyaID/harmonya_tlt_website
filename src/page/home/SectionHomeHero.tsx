@@ -20,7 +20,7 @@ const SectionHomeHero = ({ content = {} }: { content?: any | {} }) => {
                 <div className="row justify-content-center">
                     <div className="col-lg-9 text-white">
                         <div
-                            className="wp-font-tt-drugs"
+                            className="wp-font-tt-drugs wp-fw-300"
                             dangerouslySetInnerHTML={{
                                 __html:
                                     content?.content ||

@@ -1,30 +1,13 @@
-import NavbarLayout from '@/component/layout/Navbar.layout'
-import FooterNewsLatterStaticLayout from '@/component/layout/FooterNewsLatterStatic.layout'
-import FooterLayout from '@/component/layout/Footer.layout'
 import TemplatePageBaseLayout from '@/component/layout/TemplatePageBase.layout'
-import {
-    BtnLinkBasic,
-    BtnLinkPrimary,
-    BtnPrimary,
-} from '@/component/general/Button'
-import { EXPERIENCE_PATH, HOME_PATH, STAY_PATH } from '@/config/pagePath.config'
+import { BtnLinkBasic, BtnLinkPrimary } from '@/component/general/Button'
+import { EXPERIENCE_PATH, HOME_PATH } from '@/config/pagePath.config'
 import Image from 'next/image'
 import { imgLandscapeConfig } from '@/config/urlImage.config'
-import BGHero from '@/asset/image/dummy/offer-last-bg-hero-half.jpg'
 import BGHero404 from '@/asset/image/default/bg-404-default.jpg'
 
 const NotFoundPage = () => {
     return (
         <>
-            {/*<NavbarLayout />*/}
-            {/*<section className="section-space bg-white">*/}
-            {/*    <div className="container pt-5 mt-5 text-center">*/}
-            {/*        <h1 className="font-tt-drugs">404 - Page Not Found</h1>*/}
-            {/*    </div>*/}
-            {/*</section>*/}
-            {/*<FooterNewsLatterStaticLayout />*/}
-            {/*<FooterLayout />*/}
-
             <TemplatePageBaseLayout isBgTransparent isSecondFooter={false}>
                 <section className="section-hero-min-half-screen bg-green-500 ">
                     <div className="general-hero-full-screen">

@@ -24,7 +24,7 @@ const TemplatePageBaseLayout = ({
         <>
             <NavbarLayout isBgTransparent={isBgTransparent} />
             {title || backgroundImage ? (
-                isHeroSecond && false ? (
+                isHeroSecond ? (
                     <SectionHeroSecond
                         content={{
                             title: title,

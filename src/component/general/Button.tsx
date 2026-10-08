@@ -118,9 +118,13 @@ export const BtnLinkBasic = ({
     children,
     href = '#',
     className = '',
+    ...other
 }: BtnLinkProps) => {
     return (
-        <Link href={href} className={joinClassNameHelper('btn', className)}>
+        <Link
+            href={href}
+            className={joinClassNameHelper('btn', className)}
+            {...other}>
             {children}
         </Link>
     )
@@ -132,6 +136,7 @@ export const BtnLinkPrimary = ({
     className = '',
     isOutline = false,
     isIconArrow = false,
+    ...other
 }: BtnLinkProps & { isOutline?: boolean; isIconArrow?: boolean }) => {
     const configBtnClass: string = isOutline
         ? 'btn-outline-primary'
@@ -140,6 +145,7 @@ export const BtnLinkPrimary = ({
     return (
         <BtnLinkBasic
             href={href}
+            {...other}
             className={joinClassNameHelper(configBtnClass, className)}>
             {isIconArrow ? <BtnIcon>{children}</BtnIcon> : children}
         </BtnLinkBasic>
