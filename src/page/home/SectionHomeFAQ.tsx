@@ -2,6 +2,8 @@ import SectionGeneral from '@/component/general/SectionGeneral'
 import { PropsSectionContent } from '@/type/sectionContent.type'
 import RenderHtml from '@/component/general/RenderHtml'
 import { isEmpty } from 'lodash'
+import { BtnLinkBasic } from '@/component/general/Button'
+import IconArrowRight from '@/component/icon/IconArrowRight'
 
 const SectionHomeFAQ = async ({
     content = {},
@@ -28,9 +30,9 @@ const SectionHomeFAQ = async ({
                                           <div
                                               className="accordion-item"
                                               key={index}>
-                                              <h2 className="accordion-header">
+                                              <div className="accordion-header h2">
                                                   <button
-                                                      className="accordion-button collapsed text-uppercase text-grey-300 font-tt-drugs fs-20 bg-transparent box-shadow-0"
+                                                      className="accordion-button py-4 collapsed text-uppercase text-grey-300 font-tt-drugs fs-20 bg-transparent box-shadow-0"
                                                       type="button"
                                                       data-bs-toggle="collapse"
                                                       data-bs-target={
@@ -40,12 +42,12 @@ const SectionHomeFAQ = async ({
                                                       aria-controls={dataId}>
                                                       {vm.question}
                                                   </button>
-                                              </h2>
+                                              </div>
                                               <div
                                                   id={dataId}
-                                                  className="accordion-collapse pb-2 collapse"
+                                                  className="accordion-collapse collapse"
                                                   data-bs-parent="#accordionFlushExample">
-                                                  <div className="accordion-body text-grey-100 fw-light pt-2">
+                                                  <div className="accordion-body text-grey-100 fw-light pt-0 pb-4">
                                                       {vm.answer}
                                                   </div>
                                               </div>
@@ -53,6 +55,17 @@ const SectionHomeFAQ = async ({
                                       )
                                   })
                                 : null}
+                        </div>
+
+                        <div className="text-center pt-5">
+                            <BtnLinkBasic
+                                className="btn-outline-grey-100 rounded-pill"
+                                href={content?.buttonLink || '#'}>
+                                <div className="hstack align-items-center gap-1">
+                                    {content.buttonText || 'MORE QUESTIONS'}{' '}
+                                    <IconArrowRight />
+                                </div>
+                            </BtnLinkBasic>
                         </div>
                     </div>
                 </div>

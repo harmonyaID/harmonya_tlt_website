@@ -1,0 +1,93 @@
+// ==========================================================================
+// _pagination.scss
+// Override style untuk komponen pagination bawaan Bootstrap 5.3
+// agar tampil bulat (circle), memanfaatkan CSS variables bawaan Bootstrap
+// (var(--bs-primary), dst) supaya otomatis ikut tema (termasuk dark mode
+// kalau kamu pakai data-bs-theme).
+//
+// Cara pakai:
+// 1. Import file ini SETELAH bootstrap, misalnya di app.scss:
+//      @import "bootstrap/scss/bootstrap";
+//      @import "pagination";
+// 2. Tambahkan class "pagination-circle" pada <ul class="pagination">.
+// ==========================================================================
+
+.pagination-circle {
+  gap: .5rem;
+
+  .page-item {
+    .page-link {
+      width: 2rem;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      border: none;
+      border-radius: 50%;
+      color: var(--bs-body-color);
+      background-color: var(--bs-tertiary-bg);
+      box-shadow: none;
+      transition: background-color .15s ease, color .15s ease;
+
+      &:hover {
+        background-color: var(--bs-secondary-bg);
+      }
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+
+    // Halaman aktif
+    &.active .page-link {
+      background-color: var(--bs-primary);
+      color: var(--bs-white);
+
+      &:hover {
+        background-color: var(--bs-primary);
+        filter: brightness(0.92);
+      }
+    }
+
+    &.active > .page-link {
+      z-index: unset;
+    }
+
+    // Halaman / tombol disabled
+    &.disabled .page-link {
+      background-color: transparent;
+      color: var(--bs-secondary-color);
+      cursor: default;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+
+    // Ellipsis ("...")
+    &.ellipsis .page-link {
+      background-color: transparent;
+      cursor: default;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+
+    // Tombol Previous / Next
+    &.nav-arrow .page-link {
+      background-color: transparent;
+      color: var(--bs-secondary-color);
+
+      &.disabled,
+      &:disabled {
+        color: var(--bs-tertiary-color);
+      }
+    }
+
+    &.nav-arrow.disabled .page-link {
+      color: var(--bs-tertiary-color);
+    }
+  }
+}

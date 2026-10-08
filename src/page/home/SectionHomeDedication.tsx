@@ -1,23 +1,17 @@
-import SectionGeneral from '@/component/general/SectionGeneral'
-import { H3 } from '@/component/text/Heading'
-import { SectionDescription } from '@/component/text/Paragraph'
+'use client'
 import Image from 'next/image'
-import Banner from '@/asset/image/home/home-dedicated-banner.jpg'
-import { BtnBasic, BtnIcon, BtnLinkBasic } from '@/component/general/Button'
-import LogoLembongan from '@/asset/image/home/home-logo-lembongan.png'
-import DataImg from '@/asset/image/home/home-dedicated-image.png'
+import { BtnIcon, BtnLinkBasic } from '@/component/general/Button'
 import { PropsSectionContent } from '@/type/sectionContent.type'
 import RenderHtml from '@/component/general/RenderHtml'
+import { imgBoxConfig, imgLandscapeConfig } from '@/config/urlImage.config'
 
 const SectionHomeDedication = ({ content = {} }: PropsSectionContent) => {
-    // console.log('content: ', content)
-
     return (
         <section className="position-relative overflow-hidden section-home-dedication">
             <div className="position-absolute banner-image overflow-hidden">
                 <Image
                     fill
-                    src={content?.backgroundImage || Banner}
+                    src={imgLandscapeConfig(content?.backgroundImage)}
                     alt="banner"
                     className="object-fit-cover"
                 />
@@ -27,13 +21,15 @@ const SectionHomeDedication = ({ content = {} }: PropsSectionContent) => {
                 <div className="row gx-7 py-4">
                     <div className="col-lg-6">
                         <div className="vstack gap-4 text-white">
-                            <div className="lembongan-logo">
-                                <Image
-                                    src={content.logo || LogoLembongan}
-                                    alt="logo lembongan"
-                                    fill
-                                />
-                            </div>
+                            {content?.logo ? (
+                                <div className="lembongan-logo">
+                                    <Image
+                                        src={content.logo}
+                                        alt="logo lembongan"
+                                        fill
+                                    />
+                                </div>
+                            ) : null}
 
                             <RenderHtml
                                 className="text-tt-dgrup"
@@ -52,7 +48,7 @@ const SectionHomeDedication = ({ content = {} }: PropsSectionContent) => {
 
                     <div className="col-lg-5">
                         <Image
-                            src={content?.image || DataImg}
+                            src={imgBoxConfig(content.image)}
                             className="w-100 h-auto position-relative"
                             fill
                             alt="data"

@@ -4,6 +4,13 @@
 
 @for $i from 100 through 900 {
   .fw-#{$i} {font-weight: $i;}
+
+  .wp-fw-#{$i} {
+    font-weight: $i;
+    * {
+      font-weight: inherit;
+    }
+  }
 }
 
 // Title
@@ -44,6 +51,16 @@ h6, .fs-20 { @include font-size(1.25rem); }
   word-wrap: break-word;
   overflow-wrap: break-word;
   word-break: break-word;
+}
+
+.desc-one-line {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;       /* jumlah baris maksimal */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @extend .desc-wrap-break;
 }
 
 .desc-two-line {

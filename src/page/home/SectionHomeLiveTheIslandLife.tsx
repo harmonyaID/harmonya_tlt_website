@@ -5,10 +5,8 @@ import SwipeSlideBanner from '@/component/swiperSlide/SwipeSlideBanner'
 import { WrapImageHoverOverlay } from '@/component/general/WrapImage'
 import { BtnBasic, CodeIconArrow } from '@/component/general/Button'
 import Image from 'next/image'
-import { IMAGE_EMPTY } from '@/config/asset.config'
 import Link from 'next/link'
-import { useRef } from 'react'
-import type { Swiper as SwiperType } from 'swiper'
+import { imgReelConfig } from '@/config/urlImage.config'
 
 const SectionHomeLiveTheIslandLife = ({
     content = {},
@@ -96,14 +94,12 @@ const SectionHomeLiveTheIslandLife = ({
                                                         </div>
                                                     }>
                                                     <Image
-                                                        src={
-                                                            dataElement?.image ||
-                                                            IMAGE_EMPTY
-                                                        }
+                                                        src={imgReelConfig(
+                                                            dataElement?.image,
+                                                        )}
                                                         alt={dataElement.title}
                                                         fill
                                                         className="object-fit-cover"
-                                                        // className="object-cover"
                                                     />
                                                 </WrapImageHoverOverlay>
 

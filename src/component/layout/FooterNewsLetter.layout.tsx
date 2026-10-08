@@ -1,21 +1,19 @@
 'use client'
 
 import Image from 'next/image'
-import BannerBackground from '@/asset/image/footer/footer-newslatter-bg.jpg'
 import { BtnPrimary } from '@/component/general/Button'
 import { PropsSectionContent } from '@/type/sectionContent.type'
 import { IconSvgMailWhite } from '@/component/general/IconSvg'
 import RenderHtml from '@/component/general/RenderHtml'
+import { imgLandscapeConfig } from '@/config/urlImage.config'
 
 const FooterNewsLetterLayout = ({ content = {} }: PropsSectionContent) => {
     return (
         <section className="position-relative overflow-hidden">
             <div className="position-absolute banner-image overflow-hidden">
                 <Image
-                    // src={BannerBackground}
-                    // className="position-absolute banner-image"
                     fill
-                    src={content?.background || BannerBackground}
+                    src={imgLandscapeConfig(content?.background)}
                     className="object-fit-cover"
                     alt="lembongan bali"
                 />
@@ -28,7 +26,10 @@ const FooterNewsLetterLayout = ({ content = {} }: PropsSectionContent) => {
                             {content.label || 'Newsletters'}
                         </p>
 
-                        <RenderHtml html={content.content} />
+                        <RenderHtml
+                            className="wp-head-font-tt-drugs"
+                            html={content.content}
+                        />
                         {/*<p className="h2 mb-2 font-tt-drugs">*/}
                         {/*    STAY IN THE KNOW*/}
                         {/*</p>*/}

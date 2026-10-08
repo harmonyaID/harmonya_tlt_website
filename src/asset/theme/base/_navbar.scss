@@ -131,6 +131,7 @@
   &.position-fixed {
     //transform: translateY(-80px);
     transform: translateY(0);
+    transition: background-color 300ms linear;
   }
 
   .h-gap-menu {

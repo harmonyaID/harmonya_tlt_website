@@ -4,29 +4,42 @@ import { getBlogList } from '@/service/api/blog.api'
 
 const useBlogs = ({
     passBlogs = [],
+    passPagination = {},
     passPage = 1,
+    passLimit = 12,
 }: {
     passBlogs?: any[]
+    passPagination?: any
     passPage?: number | string
+    passLimit?: number | string
 } = {}) => {
     const [list, setList] = useState(passBlogs)
 
+    const [pagination, setPagination] = useState(passPagination)
+
     const [search, setSearch] = useState<any>({
         page: passPage,
-        limit: 4,
+        limit: passLimit,
     })
 
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
 
     const _handleGet = (passSearch = {}) => {
         setIsLoading(true)
         getBlogList({
             ...search,
             ...passSearch,
-        }).then((res) => {
-            setIsLoading(false)
-            setList(res?.result || [])
         })
+            .then((res) => {
+                setIsLoading(false)
+
+                setList(res?.result || [])
+                setPagination(res?.pagination || {})
+            })
+            .catch((err) => {
+                setIsLoading(false)
+                console.log('err: ', err)
+            })
     }
 
     const _handleChangePage = (page: number | string) => {
@@ -54,6 +67,7 @@ const useBlogs = ({
         isLoading,
         setList,
         _handleChangePage,
+        pagination: pagination,
     }
 }
 

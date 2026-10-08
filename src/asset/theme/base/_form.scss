@@ -20,6 +20,28 @@
   }
 }
 
+.form-transparent-underline-black {
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 0;
+  border: 0;
+  border-bottom: .5px solid #BABABA;
+  color: #847E7E;
+  font-weight: 400;
+  &:focus {
+    color: #000;
+    font-weight: 400;
+    background-color: rgba(255, 255, 255, 0);
+    outline: none;
+    box-shadow: none;
+    border-color: #ccc;
+  }
+
+  &::placeholder, &:has(option[value=""]:checked) {
+    color: #847E7E;
+    font-weight: 300;
+  }
+}
+
 .wp-input-newsLatter {
   position: relative;
   overflow: hidden;

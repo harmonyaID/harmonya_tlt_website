@@ -1,0 +1,15 @@
+const IconChevronRight = () => (
+    <svg
+        width="11"
+        height="18"
+        viewBox="0 0 11 18"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+            d="M2.00006 15.0527L8.52611 8.52667L2.00006 2.00061"
+            stroke="currentColor"
+        />
+    </svg>
+)
+
+export default IconChevronRight

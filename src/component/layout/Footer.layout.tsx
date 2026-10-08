@@ -4,6 +4,39 @@ import LogoWhite from '@/asset/image/navbar/logo-white.svg'
 import IconIG from '@/asset/image/footer/footer-icon-ig.svg'
 import IconFB from '@/asset/image/footer/footer-icon-fb.svg'
 import IconYoutube from '@/asset/image/footer/footer-icon-youtube.svg'
+import {
+    ABOUT_US_PATH,
+    BLOG_PATH,
+    BOAT_TRANSFERS_PATH,
+    COMMUNITY_PATH,
+    CONTACT_PATH,
+    CONTACT_US_PATH,
+    COPYRIGHT_AND_LEGAL_NOTICE_PATH,
+    EXPERIENCE_PATH,
+    FAQ_PATH,
+    HOME_PATH,
+    ISLAND_GUIDE_PATH,
+    OFFER_PATH,
+    PRESS_AND_MEDIA_PATH,
+    PRIVACY_POLICY_PATH,
+    PROPERTY_PATH,
+    STAY_PATH,
+    TERMS_AND_CONDITION_PATH,
+    VILLA_MANAGEMENT_PATH,
+} from '@/config/pagePath.config'
+import {
+    ABOUT_US_MENU,
+    BLOG_MENU,
+    BOAT_TRANSFERS_MENU,
+    CONTACT_MENU,
+    EXPERIENCE_MENU,
+    FAQ_MENU,
+    ISLAND_GUIDE_MENU,
+    PRESS_AND_MEDIA_MENU,
+    PRIVACY_POLICY_MENU,
+    STAY_MENU,
+    TERMS_AND_CONDITION_MENU,
+} from '@/config/pageMenu.config'
 
 const shapeMenu = (name: string, href: any = '#') => ({
     name,
@@ -12,32 +45,43 @@ const shapeMenu = (name: string, href: any = '#') => ({
 
 const FooterLayout = () => {
     const listMenusOne = [
-        shapeMenu('ABOUT US', '#'),
-        shapeMenu('PROPERTIES', '#'),
-        shapeMenu('OFFERS', '#'),
-        shapeMenu('VILLA MANAGEMENT', '#'),
-        shapeMenu('COMMUNITY', '#'),
-        shapeMenu('BLOG', '#'),
-        shapeMenu('CONTACT US', '#'),
+        shapeMenu(ABOUT_US_MENU, ABOUT_US_PATH),
+        shapeMenu(STAY_MENU, STAY_PATH),
+        shapeMenu(BOAT_TRANSFERS_MENU, BOAT_TRANSFERS_PATH),
+        shapeMenu(EXPERIENCE_MENU, EXPERIENCE_PATH),
+        shapeMenu(ISLAND_GUIDE_MENU, ISLAND_GUIDE_PATH),
+        shapeMenu(PRESS_AND_MEDIA_MENU, PRESS_AND_MEDIA_PATH),
+        shapeMenu(CONTACT_MENU, CONTACT_PATH),
+
+        // Old
+        // shapeMenu('PROPERTIES', PROPERTY_PATH),
+        // shapeMenu('OFFERS', OFFER_PATH),
+        // shapeMenu('VILLA MANAGEMENT', VILLA_MANAGEMENT_PATH),
+        // shapeMenu('COMMUNITY', COMMUNITY_PATH),
+        // shapeMenu('BLOG', BLOG_PATH),
+        // shapeMenu('CONTACT US', CONTACT_US_PATH),
     ]
 
     const listMenusTwo = [
-        shapeMenu('FAQ', '#'),
-        shapeMenu('TERMS & CONDITION', '#'),
-        shapeMenu('PRIVACY POLICY', '#'),
-        shapeMenu('COPYRIGHT & LEGAL NOTICE', '#'),
+        shapeMenu(BLOG_MENU, BLOG_PATH),
+        shapeMenu(FAQ_MENU, FAQ_PATH),
+        shapeMenu(TERMS_AND_CONDITION_MENU, TERMS_AND_CONDITION_PATH),
+        shapeMenu(PRIVACY_POLICY_MENU, PRIVACY_POLICY_PATH),
+        // shapeMenu('COPYRIGHT & LEGAL NOTICE', COPYRIGHT_AND_LEGAL_NOTICE_PATH),
     ]
 
     return (
         <section className="footer bg-grey-500 text-white">
             <div className="w-100 section-space-small border-bottom">
                 <div className="container px-lg-5">
-                    <div className="text-center pb-5">
-                        <Image
-                            src={LogoWhite}
-                            alt="the lembongan bali"
-                            width="260"
-                        />
+                    <div className="w-100 text-center pb-5">
+                        <Link href={HOME_PATH} className="">
+                            <Image
+                                src={LogoWhite}
+                                alt="the lembongan bali"
+                                width="260"
+                            />
+                        </Link>
                     </div>
 
                     <div className="row gx-5 gy-3">
@@ -140,7 +184,7 @@ const FooterLayout = () => {
             </div>
 
             <div className="container py-4">
-                <div className="hstack justify-content-between gap-4">
+                <div className="hstack flex-wrap justify-content-between gap-4">
                     <div className="">
                         <p className="fs-14 mb-0">
                             Copyright © 2026 The Lembongan Traveller

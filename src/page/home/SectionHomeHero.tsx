@@ -1,24 +1,26 @@
 'use client'
-import HomeBanner from '@/asset/image/home/home-banner.jpg'
 import Image from 'next/image'
 import { BtnPrimary } from '@/component/general/Button'
+import { imgLandscapeConfig } from '@/config/urlImage.config'
 
 const SectionHomeHero = ({ content = {} }: { content?: any | {} }) => {
     return (
         <section className="section-hero-general bg-green-800">
-            <Image
-                // src={content.videoThumbnail || HomeBanner}
-                src={HomeBanner}
-                className="object-fit-cover w-100 h-100 position-absolute banner-image"
-                alt="Home Banner"
-            />
+            <div className="general-hero-full-screen">
+                <Image
+                    src={imgLandscapeConfig(content.videoThumbnail)}
+                    className="h-100 banner-image"
+                    alt="The Lembongan Traveller - Your Guide to Nusa Lembongan"
+                    fill
+                />
+            </div>
 
             {/*Title*/}
             <div className="container content-hero-position-default text-center z-1">
                 <div className="row justify-content-center">
                     <div className="col-lg-9 text-white">
                         <div
-                            className="wp-font-tt-drugs"
+                            className="wp-font-tt-drugs wp-fw-300"
                             dangerouslySetInnerHTML={{
                                 __html:
                                     content?.content ||
