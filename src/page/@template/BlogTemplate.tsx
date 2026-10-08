@@ -5,6 +5,7 @@ import SectionBlogHero from '@/page/blog/SectionBlogHero'
 import Breadcrumb from '@/component/general/Breadcrumb'
 import SectionBlogList from '@/page/blog/SectionBlogList'
 import FooterLayout from '@/component/layout/Footer.layout'
+import SEOBasicGeneral from '@/component/seo/SEOBasicGeneral'
 
 const BlogTemplate = async ({ content }: PropsSectionContent) => {
     const page = 1
@@ -22,6 +23,7 @@ const BlogTemplate = async ({ content }: PropsSectionContent) => {
 
     return (
         <>
+            <SEOBasicGeneral seo={content?.seo || {}} />
             <NavbarLayout isBgTransparent />
             <SectionBlogHero
                 content={SECTION1 || {}}

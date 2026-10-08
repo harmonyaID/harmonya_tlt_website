@@ -34,7 +34,10 @@ const IslandGuideDetailLevel2Template = async ({
                     <Breadcrumb />
                 </div>
             </div>
-            <IslandGuideDetailMain detail={islandGuideDetail} />
+            <IslandGuideDetailMain
+                detail={islandGuideDetail}
+                allSlug={allSlug}
+            />
             <FooterNewsLatterStaticLayout />
             <FooterLayout />
         </>
