@@ -9,6 +9,7 @@ import Image from 'next/image'
 import PropertyThingsToExplore from '@/page/property/container/PropertyThingsToExplore'
 import PropertyOther from '@/page/property/container/PropertyOther'
 import PropertyFormInquiry from '@/page/property/container/PropertyFormInquiry'
+import PropertyInfoWhyYouLoveThis from '@/page/property/component/PropertyInfoWhyYouLoveThis'
 
 const TitleSection = ({ title }: { title: string }) => (
     <>
@@ -27,7 +28,12 @@ const PropertyDetail = ({
 
     console.log('description: ', detail.descriptions)
 
-    const { amenities = [], floorplanImage = '', seo = {} } = detail
+    const {
+        amenities = [],
+        floorplanImage = '',
+        whyYoullLoveThis = [],
+        seo = {},
+    } = detail
 
     return (
         <>
@@ -149,11 +155,18 @@ const PropertyDetail = ({
                                     {/*ACCOMMODATION*/}
                                 </div>
 
-                                <hr />
-                                <div className="">
-                                    <TitleSection title="Why you’ll love this" />
-                                    {/*Why you’ll love this*/}
-                                </div>
+                                {whyYoullLoveThis && whyYoullLoveThis.length ? (
+                                    <>
+                                        <hr />
+                                        <div className="">
+                                            <TitleSection title="Why you’ll love this" />
+                                            {/*Why you’ll love this*/}
+                                            <PropertyInfoWhyYouLoveThis
+                                                list={whyYoullLoveThis}
+                                            />
+                                        </div>
+                                    </>
+                                ) : null}
 
                                 <hr />
                                 <div className="">
