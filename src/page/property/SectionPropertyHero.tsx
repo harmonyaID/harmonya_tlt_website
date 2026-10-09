@@ -1,10 +1,8 @@
 import Image from 'next/image'
-import HomeBanner from '@/asset/image/dummy/property-hero-default.jpg'
 import { BtnPrimary } from '@/component/general/Button'
 import { imgLandscapeConfig } from '@/config/urlImage.config'
 
 const SectionPropertyHero = ({ content = {} }: { content?: any | {} }) => {
-    console.log('SectionPropertyHero: ', content)
     return (
         <>
             <section className="section-hero-general bg-green-800">

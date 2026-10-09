@@ -23,7 +23,7 @@ const PropertyDetailTemplate = async ({
         <>
             <SEOBasicGeneral seo={seo} />
             <NavbarLayout isStartFix={false} />
-            <PropertyDetail detail={dataProperty} />
+            <PropertyDetail detail={dataProperty} allSlug={allSlug} />
             <FooterNewsLatterStaticLayout />
             <FooterLayout />
         </>
