@@ -8,6 +8,7 @@ import LogoWhite from '@/asset/image/navbar/logo-white.svg'
 import LogoDefault from '@/asset/image/navbar/logo-defualt.svg'
 import {
     BtnBasic,
+    BtnLinkBasic,
     BtnLinkPrimary,
     BtnPrimary,
 } from '@/component/general/Button'
@@ -22,7 +23,7 @@ import BannerMegaMenuEpx from '@/asset/image/default/default-mega-menu-banner-im
 import {
     ABOUT_US_PATH,
     BOAT_TRANSFERS_PATH,
-    CONTACT_PATH,
+    CONTACT_US_PATH,
     HOME_PATH,
     STAY_PATH,
 } from '@/config/pagePath.config'
@@ -162,7 +163,8 @@ const NavbarLayout = ({
                 <div className="container">
                     <div className="d-flex flex-row align-items-center justify-content-center">
                         <div className="col-md-2">
-                            <BtnBasic
+                            <BtnLinkBasic
+                                href={STAY_PATH}
                                 className={joinClassNameHelper(
                                     'rounded-pill fs-14',
                                     {
@@ -174,7 +176,7 @@ const NavbarLayout = ({
                                     },
                                 )}>
                                 LIST WITH US
-                            </BtnBasic>
+                            </BtnLinkBasic>
                         </div>
                         <div className="logo col-md-8 text-center">
                             <Link href={HOME_PATH}>
@@ -503,7 +505,9 @@ const NavbarLayout = ({
                             </div>
 
                             <div className="text-uppercase">
-                                <Link href={CONTACT_PATH}>{CONTACT_MENU}</Link>
+                                <Link href={CONTACT_US_PATH}>
+                                    {CONTACT_MENU}
+                                </Link>
                             </div>
                         </>
                     )}

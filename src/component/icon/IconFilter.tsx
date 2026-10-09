@@ -1,0 +1,17 @@
+const IconFilter = () => {
+    return (
+        <svg
+            width="35"
+            height="35"
+            viewBox="0 0 35 35"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <rect y="9.99292" width="35.0001" height="2.6986" fill="#138F8F" />
+            <rect y="22.1707" width="35.0001" height="2.6986" fill="#138F8F" />
+            <circle cx="10.693" cy="11.3424" r="4.46249" fill="#138F8F" />
+            <circle cx="23.9723" cy="23.6588" r="4.46249" fill="#138F8F" />
+        </svg>
+    )
+}
+
+export default IconFilter

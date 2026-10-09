@@ -7,6 +7,7 @@ import '@/asset/theme/theme.scss'
 import CreatePortalLayout from '@/component/layout/CreatePortal.layout'
 import GlobalSearchData from '@/feature/GlobalSearchData'
 import { ProgressProvider } from '@bprogress/next/app'
+import ScrollReset from '@/component/general/ScrollReset'
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -47,7 +48,9 @@ export default function RootLayout({
                     {children}
 
                     {/*<CreatePortalLayout>*/}
-                    <GlobalSearchData />
+                    <ScrollReset>
+                        <GlobalSearchData />
+                    </ScrollReset>
                     {/*</CreatePortalLayout>*/}
                 </ProgressProvider>
             </body>
