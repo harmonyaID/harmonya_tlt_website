@@ -27,6 +27,7 @@ import IconPropertyPool from '@/component/icon/IconPropertyPool'
 import IconArrowRight from '@/component/icon/IconArrowRight'
 import IconArrowLeft from '@/component/icon/IconArrowLeft'
 import { imgReelConfig } from '@/config/urlImage.config'
+import canonicalURLHelper from '@/helper/canonicalURL.helper'
 
 const tags = ['Family Friendly', 'Guest’s Favorite', 'Breakfast']
 
@@ -120,13 +121,17 @@ const SectionHomeExclusiveStay = ({
                             },
                         }}
                         contentElement={(dataElement: any) => {
+                            console.log('dataElement: ', dataElement)
                             const dataTags = dataElement.tags || tags || []
+                            const { seo = {} } = dataElement
 
                             return (
                                 <>
                                     <Link
                                         className="w-100 vstack gap-3 text-grey-200 wp-hover-image overflow-hidden property-card-slider"
-                                        href={dataElement.buttonLink || '#'}>
+                                        href={canonicalURLHelper(
+                                            seo.canonicalUrl,
+                                        )}>
                                         <WrapImageHoverOverlay
                                             className="banner"
                                             contentOverlay={

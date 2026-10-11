@@ -265,19 +265,19 @@ const NavbarLayout = ({
                                                             list={[
                                                                 objectChildOfGroup(
                                                                     'JUNGUTBATU',
-                                                                    '#',
+                                                                    '/experience/play/jungutbatu',
                                                                 ),
                                                                 objectChildOfGroup(
                                                                     'NUSA CENINGAN',
-                                                                    '#',
+                                                                    '/experience/play/nusa-ceningan',
                                                                 ),
                                                                 objectChildOfGroup(
                                                                     'MUSHROOM & SANDY BY',
-                                                                    '#',
+                                                                    '/experience/play/mushroom-and-sandy-bay',
                                                                 ),
                                                                 objectChildOfGroup(
                                                                     'ALL RESTAURANT',
-                                                                    '#',
+                                                                    '/experience/eat',
                                                                 ),
                                                             ]}
                                                         />
