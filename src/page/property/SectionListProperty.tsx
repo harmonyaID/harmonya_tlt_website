@@ -20,6 +20,11 @@ import SectionGeneral from '@/component/general/SectionGeneral'
 import { SectionTitle } from '@/component/text/Heading'
 import { usePathname } from 'next/navigation'
 import { slugify } from '@/helper/slugify.helper'
+import {
+    IconPropertyBestPrice,
+    IconPropertyNewResort,
+} from '@/component/general/IconSvg'
+import IconFilter from '@/component/icon/IconFilter'
 
 const SectionListProperty = () => {
     const pathname = usePathname() || '/'
@@ -29,17 +34,28 @@ const SectionListProperty = () => {
 
     return (
         <>
-            <SectionGeneral>
+            <section className="section-space-small">
                 <div className="container">
-                    <SectionTitle className="font-tt-drugs mb-5">
+                    <SectionTitle className="font-tt-drugs mb-4">
                         ALL PROPERTIES
                     </SectionTitle>
+
+                    <div className="pb-5 mb-4 pt-2">
+                        <div className="hstack align-items-center gap-3">
+                            <IconFilter />
+                            <div className="">
+                                <p className="mb-0 fs-20 text-grey-400">
+                                    FILTER
+                                </p>
+                            </div>
+                        </div>
+                    </div>
 
                     {isLoading ? (
                         <PropertyLoadingList />
                     ) : !isEmpty(list) ? (
                         <>
-                            <div className="row gx-3 gy-4">
+                            <div className="row gx-3 gy-5">
                                 {list.map((vm: any, index) => {
                                     const { slug } = vm.seo || {}
                                     const dataElement: any = vm
@@ -52,7 +68,7 @@ const SectionListProperty = () => {
                                             className="col-lg-4 col-md-6"
                                             key={index}>
                                             <Link
-                                                className="w-100 vstack gap-3 text-grey-200 wp-hover-image overflow-hidden property-card-slider"
+                                                className="w-100 vstack gap-3 text-grey-200 position-relative wp-hover-image overflow-hidden property-card-slider"
                                                 href={listDetail || '#'}>
                                                 <WrapImageHoverOverlay
                                                     className="banner"
@@ -136,6 +152,25 @@ const SectionListProperty = () => {
                                                         )}
                                                     </div>
                                                 </div>
+
+                                                {/*Label*/}
+                                                <div className="position-absolute top-0 end-0 pe-3">
+                                                    {/*<img*/}
+                                                    {/*    src={*/}
+                                                    {/*        IconPropertyBestPrice*/}
+                                                    {/*    }*/}
+                                                    {/*    className="w-auto"*/}
+                                                    {/*    alt={vm.name}*/}
+                                                    {/*/>*/}
+                                                    <div className="hstack gap-3">
+                                                        {vm.isPopular ? (
+                                                            <IconPropertyBestPrice />
+                                                        ) : null}
+                                                        {vm.isNewVilla ? (
+                                                            <IconPropertyNewResort />
+                                                        ) : null}
+                                                    </div>
+                                                </div>
                                             </Link>
                                         </div>
                                     )
@@ -156,7 +191,7 @@ const SectionListProperty = () => {
                         <InfoNotAvailable />
                     )}
                 </div>
-            </SectionGeneral>
+            </section>
         </>
     )
 }

@@ -11,6 +11,8 @@ const OfferDetailTemplate = async ({ slug }: { slug: string }) => {
         (res) => res?.result || {},
     )
 
+    console.log('dataOffer: ', dataOffer)
+
     return (
         <>
             <NavbarLayout isBgTransparent />

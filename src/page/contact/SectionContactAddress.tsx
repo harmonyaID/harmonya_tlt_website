@@ -1,34 +1,56 @@
+'use client'
 import RenderHtml from '@/component/general/RenderHtml'
+import { MapPin } from 'feather-icons-react'
 
-const SectionContactAddress = ({
-    SECTION2 = {},
-    SECTION3 = {},
-}: {
-    SECTION2?: any
-    SECTION3?: any
-}) => {
+const SectionContactAddress = ({ content = {} }: { content?: any }) => {
     return (
-        <section>
-            <div className="container">
-                <hr />
+        <>
+            <section className="section-space-small-bottom">
+                <div className="container">
+                    <hr />
 
-                <div className="row justify-content-center">
-                    <div className="col-md-10">
-                        <div className="row justify-content-between">
-                            <div className="col-md-4">
-                                <h4 className="font-tt-drugs">
-                                    {SECTION3?.title}
-                                </h4>
-                            </div>
+                    <div className="row justify-content-center pt-5">
+                        <div className="col-md-10">
+                            <div className="row justify-content-between">
+                                <div className="col-md-6">
+                                    <p className="fs-48 fw-400 font-tt-drugs text-grey-200">
+                                        {content.title}
+                                    </p>
+                                </div>
 
-                            <div className="col-md-4">
-                                <RenderHtml html={SECTION3?.address} />
+                                <div className="col-md-6">
+                                    <div className="hstack gap-3 align-items-start">
+                                        <div className="">
+                                            <MapPin className="fs-20 text-grey-400" />
+                                        </div>
+
+                                        <RenderHtml
+                                            html={content?.description}
+                                            className="text-grey-400 fw-300"
+                                        />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+
+            {content.linkEmbedMap ? (
+                <div className="w-100 h-680-px overflow-hidden">
+                    <iframe
+                        src={
+                            content.linkEmbedMap ||
+                            'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d75255.57767416943!2d115.40225729051069!3d-8.692688057142671!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd26d1fd9a2805d%3A0x53dd9b00e8e16da3!2sThe%20Lembongan%20Traveller!5e0!3m2!1sen!2sid!4v1783960380802!5m2!1sen!2sid'
+                        }
+                        width="100%"
+                        height="100%"
+                        loading="lazy"
+                        referrerPolicy="strict-origin-when-cross-origin"
+                    />
+                </div>
+            ) : null}
+        </>
     )
 }
 
