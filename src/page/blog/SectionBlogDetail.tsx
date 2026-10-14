@@ -43,7 +43,7 @@ const SectionBlogDetail = ({ detail = {} }: { detail?: any }) => {
             <div className="section-blog-detail-banner-main overflow-hidden">
                 <Image
                     src={detail?.thumbnail || IMAGE_EMPTY}
-                    alt={detail.title}
+                    alt={detail?.title || 'blog the lembongan travel'}
                     className="object-fit-cover"
                     fill
                 />
