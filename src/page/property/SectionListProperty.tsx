@@ -25,12 +25,23 @@ import {
     IconPropertyNewResort,
 } from '@/component/general/IconSvg'
 import IconFilter from '@/component/icon/IconFilter'
+import PropertyFormSelectBedRooms from '@/page/property/component/PropertyFormSelectBedRooms'
+import { WrapFormContext } from '@/context/Form.Context'
+import PropertyFormSelectBathRoom from '@/page/property/component/PropertyFormSelectBathRoom'
 
 const SectionListProperty = () => {
     const pathname = usePathname() || '/'
 
-    const { list, isLoading, pagination, _handleChangePage } = usePropertyList()
-    console.log('list: ', list)
+    const {
+        list,
+        isLoading,
+        pagination,
+        _handleChangePage,
+        search,
+        _handleChange,
+    } = usePropertyList()
+
+    console.log('search: ', search)
 
     return (
         <>
@@ -40,13 +51,38 @@ const SectionListProperty = () => {
                         ALL PROPERTIES
                     </SectionTitle>
 
-                    <div className="pb-5 mb-4 pt-2">
-                        <div className="hstack align-items-center gap-3">
-                            <IconFilter />
-                            <div className="">
-                                <p className="mb-0 fs-20 text-grey-400">
-                                    FILTER
-                                </p>
+                    <div className="row align-items-center pb-5 mb-4 pt-2">
+                        <div className="col-auto">
+                            <div className="hstack align-items-center gap-3">
+                                <IconFilter />
+                                <div className="">
+                                    <p className="mb-0 fs-20 text-grey-400">
+                                        FILTER
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="col-auto">
+                            <div className="vr"></div>
+                        </div>
+
+                        <div className="col">
+                            <div className="row gx-2 gy-3">
+                                <WrapFormContext
+                                    formRequest={search}
+                                    actions={{
+                                        change: _handleChange,
+                                    }}>
+                                    <div className="col-md-2">
+                                        <PropertyFormSelectBedRooms
+                                            value={search.bedroom}
+                                        />
+                                    </div>
+                                    <div className="col-md-2">
+                                        <PropertyFormSelectBathRoom />
+                                    </div>
+                                </WrapFormContext>
                             </div>
                         </div>
                     </div>
@@ -116,13 +152,15 @@ const SectionListProperty = () => {
                                                             icon={
                                                                 <IconPropertyBad />
                                                             }
-                                                            value={2}
+                                                            value={
+                                                                vm.rooms.length
+                                                            }
                                                         />
                                                         <PropertyAmities
                                                             icon={
                                                                 <IconPropertyGuest />
                                                             }
-                                                            value={2}
+                                                            value={vm.occupancy}
                                                         />
                                                         <PropertyAmities
                                                             icon={
