@@ -52,6 +52,13 @@ const useGeneralDataList = ({
         })
     }
 
+    const _handleChange = (name: string = '', value: any) => {
+        setSearch((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }))
+    }
+
     useEffect(() => {
         if (isAutoGet) {
             _handleGet(search)
@@ -65,6 +72,7 @@ const useGeneralDataList = ({
         pagination,
         _handleGet,
         _handleChangePage,
+        _handleChange,
     }
 }
 
