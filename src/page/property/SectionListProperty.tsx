@@ -28,6 +28,7 @@ import IconFilter from '@/component/icon/IconFilter'
 import PropertyFormSelectBedRooms from '@/page/property/component/PropertyFormSelectBedRooms'
 import { WrapFormContext } from '@/context/Form.Context'
 import PropertyFormSelectBathRoom from '@/page/property/component/PropertyFormSelectBathRoom'
+import { countTotalBeds } from '@/helper/count.helper'
 
 const SectionListProperty = () => {
     const pathname = usePathname() || '/'
@@ -120,8 +121,7 @@ const SectionListProperty = () => {
                                                     }>
                                                     <Image
                                                         src={imgReelConfig(
-                                                            dataElement?.coverPhoto ||
-                                                                PropertyVilla01,
+                                                            dataElement?.coverPhoto,
                                                         )}
                                                         alt={
                                                             dataElement.nickname ||
@@ -135,16 +135,16 @@ const SectionListProperty = () => {
                                                 <div className="">
                                                     <p className="fs-20 text-primary mb-0">
                                                         {dataElement?.category
-                                                            ?.name || 'Villa'}
+                                                            ?.name || ''}
                                                     </p>
 
                                                     <p className="fs-24 mb-1 wp-font-tt-drugs desc-two-line">
                                                         {dataElement.nickname ||
-                                                            'VILLA TANJUNG'}
+                                                            ''}
                                                     </p>
                                                     <p className="fs-13 wp-font-tt-drugs mb-3">
                                                         {dataElement.description ||
-                                                            'Tamarind Bay'}
+                                                            ''}
                                                     </p>
 
                                                     <div className="hstack gap-3 flex-wrap mb-3 text-grey-200">
@@ -153,7 +153,11 @@ const SectionListProperty = () => {
                                                                 <IconPropertyBad />
                                                             }
                                                             value={
-                                                                vm.rooms.length
+                                                                vm?.rooms
+                                                                    ? countTotalBeds(
+                                                                          vm.rooms,
+                                                                      )
+                                                                    : '0'
                                                             }
                                                         />
                                                         <PropertyAmities
