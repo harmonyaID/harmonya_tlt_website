@@ -168,11 +168,25 @@ const PropertyDetail = ({
                                     </>
                                 ) : null}
 
-                                <hr />
-                                <div className="">
-                                    <TitleSection title="Fine Print" />
-                                    {/*Fine Print*/}
-                                </div>
+                                {detail?.descriptions &&
+                                detail.descriptions[1] &&
+                                detail.descriptions[1].summary ? (
+                                    <>
+                                        <hr />
+                                        <div className="">
+                                            <TitleSection title="Fine Print" />
+                                            {/*Fine Print*/}
+
+                                            <RenderHtml
+                                                html={
+                                                    detail.descriptions[1]
+                                                        .summary
+                                                }
+                                                className="text-grey-400"
+                                            />
+                                        </div>
+                                    </>
+                                ) : null}
 
                                 <hr />
                                 <div className="">

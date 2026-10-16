@@ -12,6 +12,7 @@ import {
     TEMPLATE_ISLAND_GUIDE,
     TEMPLATE_OFFER,
     TEMPLATE_PROPERTY,
+    TEMPLATE_INFO_PRES_AND_MEDIA,
 } from '@/config/pageTemplate.config'
 import BlogTemplate from '@/page/@template/BlogTemplate'
 import FAQTemplate from '@/page/@template/FAQTemplate'
@@ -30,6 +31,7 @@ import PropertyDetailTemplate from '@/page/@template/PropertyDetailTemplate'
 import IslandGuideTemplate from '@/page/@template/IslandGuideTemplate'
 import IslandGuideDetailLevel1Template from '@/page/@template/IslandGuideDetailLevel1Template'
 import IslandGuideDetailLevel2Template from '@/page/@template/IslandGuideDetailLevel2Template'
+import PressAndMediaTemplate from '@/page/@template/PressAndMediaTemplate'
 
 type PropsData = {
     params: Promise<{ slug: string }>
@@ -144,6 +146,9 @@ const page = async ({ params }: PropsData) => {
                 ),
                 [TEMPLATE_INFO_TNC]: (
                     <InformationGeneralTemplate content={contentPage} />
+                ),
+                [TEMPLATE_INFO_PRES_AND_MEDIA]: (
+                    <PressAndMediaTemplate content={contentPage} />
                 ),
             }
 
