@@ -11,6 +11,8 @@ const usePropertyList = () => {
     const [search, setSearch] = useState<any>({
         page: 1,
         limit: 30,
+        bathroom: '',
+        bedroom: '',
     })
 
     const [isLoading, setIsLoading] = useState(false)
@@ -41,6 +43,13 @@ const usePropertyList = () => {
         })
     }
 
+    const _handleChange = (name: string = '', value: any) => {
+        setSearch((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }))
+    }
+
     useEffect(() => {
         _handleGet(search)
     }, [])
@@ -50,6 +59,9 @@ const usePropertyList = () => {
         isLoading,
         pagination,
         _handleChangePage,
+        search,
+        setSearch,
+        _handleChange,
     }
 }
 
