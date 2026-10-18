@@ -17,6 +17,8 @@ import {
     IconPropertyBestPrice,
     IconPropertyNewResort,
 } from '@/component/general/IconSvg'
+import canonicalURLHelper from '@/helper/canonicalURL.helper'
+import { countTotalBeds } from '@/helper/count.helper'
 
 const SectionOfferDetail = ({ detail = {} }: { detail?: any }) => {
     const properties = detail?.properties || []
@@ -60,7 +62,13 @@ const SectionOfferDetail = ({ detail = {} }: { detail?: any }) => {
                                             className="col-lg-4 col-md-6">
                                             <Link
                                                 className="w-100 vstack gap-3 text-grey-200 position-relative wp-hover-image overflow-hidden property-card-slider"
-                                                href={canonicalUrl || '#'}>
+                                                href={
+                                                    canonicalUrl
+                                                        ? canonicalURLHelper(
+                                                              canonicalUrl,
+                                                          )
+                                                        : '#'
+                                                }>
                                                 <WrapImageHoverOverlay
                                                     className="banner"
                                                     contentOverlay={
@@ -105,13 +113,19 @@ const SectionOfferDetail = ({ detail = {} }: { detail?: any }) => {
                                                             icon={
                                                                 <IconPropertyBad />
                                                             }
-                                                            value={2}
+                                                            value={
+                                                                vm?.rooms
+                                                                    ? countTotalBeds(
+                                                                          vm.rooms,
+                                                                      )
+                                                                    : '0'
+                                                            }
                                                         />
                                                         <PropertyAmities
                                                             icon={
                                                                 <IconPropertyGuest />
                                                             }
-                                                            value={2}
+                                                            value={vm.occupancy}
                                                         />
                                                         <PropertyAmities
                                                             icon={

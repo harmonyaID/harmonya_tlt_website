@@ -238,13 +238,16 @@ export interface FormTextAreaProps {
     cols?: number
     other?: TextareaHTMLAttributes<HTMLTextAreaElement>
     value?: any
-    actions?: {
-        onChange?: (
-            name: string,
-            value: any,
-            e: ChangeEvent<HTMLInputElement>,
-        ) => void
-    }
+    actions?:
+        | object
+        | any
+        | {
+              onChange?: (
+                  name: string,
+                  value: any,
+                  e: ChangeEvent<HTMLInputElement>,
+              ) => void
+          }
 }
 
 // Form Upload File

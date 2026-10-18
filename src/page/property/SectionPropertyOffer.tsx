@@ -11,6 +11,7 @@ import { WrapImageHoverOverlay } from '@/component/general/WrapImage'
 import Link from 'next/link'
 import RenderHtml from '@/component/general/RenderHtml'
 import { OFFER_SLUG_PATH } from '@/config/pagePath.config'
+import canonicalURLHelper from '@/helper/canonicalURL.helper'
 
 const SectionPropertyOffer = ({ list = [] }: { list?: [] }) => {
     console.log('list: ', list)
@@ -25,6 +26,7 @@ const SectionPropertyOffer = ({ list = [] }: { list?: [] }) => {
                     {!isEmpty(list) ? (
                         <div className="row gx-5">
                             {list?.map((vm: any, index) => {
+                                const { seo = {} } = vm
                                 return (
                                     <div className="col-md-6" key={index}>
                                         <WrapImageHoverOverlay className="h-320-px w-100">
@@ -52,11 +54,9 @@ const SectionPropertyOffer = ({ list = [] }: { list?: [] }) => {
                                         />
 
                                         <BtnLinkBasic
-                                            href={
-                                                vm.slug
-                                                    ? OFFER_SLUG_PATH + vm.slug
-                                                    : '#'
-                                            }
+                                            href={canonicalURLHelper(
+                                                seo?.canonicalUrl || '#',
+                                            )}
                                             className="rounded-pill btn-outline-grey-100 mt-4">
                                             <BtnIcon>EXPLORE DETAILS</BtnIcon>
                                         </BtnLinkBasic>

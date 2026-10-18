@@ -37,6 +37,11 @@ export const SrvPropertyType = baseApi + '/property-types'
 
 export const SrvPropertyTag = baseApi + '/property-tags'
 
+// Property -> Form
+export const SrvPropertyContact = baseApi + '/property-contact-forms'
+
+export const SrvPropertyInquiry = baseApi + '/property-inquiry-forms'
+
 // Offers
 export const SrvContentOfferPage = baseApi + '/offers'
 
@@ -71,3 +76,6 @@ export const SrvContentIslandGuideType = baseApi + '/island-guide-types'
 
 export const SrvContentIslandGuideTypeDetail = (slug?: string) =>
     baseApi + '/island-guide-types/' + slug
+
+// Contact US
+export const SrvContactForm = baseApi + '/website-contact-forms'
