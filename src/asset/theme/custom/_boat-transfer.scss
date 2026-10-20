@@ -148,6 +148,20 @@
   scrollbar-width: thin;
 }
 
+.modal-boat-transfer-booking label {
+  font-size: 20px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 5%;
+  color: #555555;
+
+  span {
+    position: relative;
+    top: -3px;
+    color: red;
+  }
+}
+
 .modal-boat-transfer-booking::-webkit-scrollbar {
   width: 5px !important;
 }

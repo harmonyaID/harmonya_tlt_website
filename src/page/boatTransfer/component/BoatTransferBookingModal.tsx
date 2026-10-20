@@ -6,12 +6,16 @@ import FormInput from '@/component/form/FormInput'
 import LabelForm from '@/component/form/LabelForm'
 import IconArrowLeft from '@/component/icon/IconArrowLeft'
 import FormInputDatePicker from '@/component/form/FormDatepicker'
+import { Minus, Plus } from 'feather-icons-react'
+import FormTextArea from '@/component/form/FormTextarea'
 
 const BoatTransferBookingModal = () => {
     return (
         <div
             className="modal fade"
             id={MDBoatTransferBooking}
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
             aria-labelledby="modalBoatTransferBooking"
             aria-hidden="true">
             <div className="modal-dialog modal-lg" style={{ width: '911px' }}>
@@ -66,10 +70,10 @@ const BoatTransferBookingModal = () => {
                                             actions={{
                                                 change: (name, value) => {},
                                             }}>
-                                            <div className="vstack gap-3">
+                                            <div className="vstack gap-5">
                                                 <div>
                                                     <LabelForm
-                                                        label="ROUTE"
+                                                        label="route"
                                                         required
                                                     />
                                                     <div className="border rounded-3 py-2 hstack justify-content-between align-items-center px-3">
@@ -116,14 +120,316 @@ const BoatTransferBookingModal = () => {
                                                     </div>
                                                 </div>
 
-                                                <FormInput
-                                                    label="NAME"
-                                                    placeholder="e.g Jhon Doe"
-                                                    name="name"
-                                                    required
-                                                />
+                                                <div>
+                                                    <FormInput
+                                                        label="departure date"
+                                                        placeholder="e.g Jhon Doe"
+                                                        name="name"
+                                                        required
+                                                    />
+
+                                                    <div className="hstack gap-2 mt-2">
+                                                        <div className="badge fs-14 text-white border border-primary rounded-pill fw-300 bg-primary px-3">
+                                                            9:15 AM
+                                                        </div>
+                                                        <div className="badge fs-14 text-black border rounded-pill fw-300 width-fit-content px-3">
+                                                            3 AM
+                                                        </div>
+                                                        <div className="badge fs-14 text-black border rounded-pill fw-300 width-fit-content px-3">
+                                                            11 AM
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div>
+                                                    <FormInput
+                                                        label="return date"
+                                                        placeholder="e.g Jhon Doe"
+                                                        name="name"
+                                                        required
+                                                    />
+
+                                                    <div className="hstack gap-2 mt-2">
+                                                        <div className="badge fs-14 text-black border rounded-pill fw-300 px-3">
+                                                            9:15 AM
+                                                        </div>
+                                                        <div className="badge fs-14 text-black border rounded-pill fw-300 px-3">
+                                                            3 AM
+                                                        </div>
+                                                        <div className="badge fs-14 text-black border rounded-pill fw-300 px-3">
+                                                            11 AM
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div>
+                                                    <LabelForm
+                                                        label="passengers"
+                                                        required
+                                                    />
+
+                                                    <div className="row">
+                                                        <div className="col-6">
+                                                            <div className="border rounded-3 py-2 hstack justify-content-between align-items-center px-3">
+                                                                <div>
+                                                                    <p className="text-uppercase fw-light fs-16 m-0">
+                                                                        Adults
+                                                                    </p>
+                                                                    <p className="fs-12 text-neutral-300 m-0">
+                                                                        Age 12+
+                                                                    </p>
+                                                                </div>
+
+                                                                <div>
+                                                                    <div className="hstack align-items-center gap-4 h-100">
+                                                                        <div
+                                                                            className="rounded-circle text-primary hstack justify-content-center align-items-center"
+                                                                            style={{
+                                                                                width: '22px',
+                                                                                height: '22px',
+                                                                                background:
+                                                                                    '#EBF7F6',
+                                                                                border: '1px solid #98C9C9',
+                                                                            }}>
+                                                                            <Plus
+                                                                                strokeWidth={
+                                                                                    4
+                                                                                }
+                                                                                size={
+                                                                                    12
+                                                                                }
+                                                                            />
+                                                                        </div>
+                                                                        <p className="m-0">
+                                                                            2
+                                                                        </p>
+                                                                        <div
+                                                                            className="rounded-circle text-primary hstack justify-content-center align-items-center"
+                                                                            style={{
+                                                                                width: '22px',
+                                                                                height: '22px',
+                                                                                background:
+                                                                                    '#EBF7F6',
+                                                                                border: '1px solid #98C9C9',
+                                                                            }}>
+                                                                            <Minus
+                                                                                strokeWidth={
+                                                                                    4
+                                                                                }
+                                                                                size={
+                                                                                    12
+                                                                                }
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-6">
+                                                            <div className="border rounded-3 py-2 hstack justify-content-between align-items-center px-3">
+                                                                <div>
+                                                                    <p className="text-uppercase fw-light fs-16 m-0">
+                                                                        Children
+                                                                    </p>
+                                                                    <p className="fs-12 text-neutral-300 m-0">
+                                                                        Age 2 -
+                                                                        11
+                                                                    </p>
+                                                                </div>
+
+                                                                <div>
+                                                                    <div className="hstack align-items-center gap-4 h-100">
+                                                                        <div
+                                                                            className="rounded-circle text-primary hstack justify-content-center align-items-center"
+                                                                            style={{
+                                                                                width: '22px',
+                                                                                height: '22px',
+                                                                                background:
+                                                                                    '#EBF7F6',
+                                                                                border: '1px solid #98C9C9',
+                                                                            }}>
+                                                                            <Plus
+                                                                                strokeWidth={
+                                                                                    4
+                                                                                }
+                                                                                size={
+                                                                                    12
+                                                                                }
+                                                                            />
+                                                                        </div>
+                                                                        <p className="m-0">
+                                                                            1
+                                                                        </p>
+                                                                        <div
+                                                                            className="rounded-circle text-primary hstack justify-content-center align-items-center"
+                                                                            style={{
+                                                                                width: '22px',
+                                                                                height: '22px',
+                                                                                background:
+                                                                                    '#EBF7F6',
+                                                                                border: '1px solid #98C9C9',
+                                                                            }}>
+                                                                            <Minus
+                                                                                strokeWidth={
+                                                                                    4
+                                                                                }
+                                                                                size={
+                                                                                    12
+                                                                                }
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <p className="m-0 text-end text-neutral-300 fs-12 mt-1">
+                                                        *Child 0-2 years old
+                                                        free
+                                                    </p>
+                                                </div>
+
+                                                <div>
+                                                    <LabelForm
+                                                        label="Your Details"
+                                                        required
+                                                    />
+
+                                                    <FormInput
+                                                        name="name"
+                                                        className="mb-2"
+                                                        placeholder="Full Name"
+                                                    />
+                                                    <div className="row g-3">
+                                                        <div className="col-6">
+                                                            <FormInput
+                                                                name="phone"
+                                                                placeholder="Phone"
+                                                            />
+                                                        </div>
+                                                        <div className="col-6">
+                                                            <FormInput
+                                                                name="email"
+                                                                placeholder="Email"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <hr className="m-0 p-0" />
+
+                                                <div>
+                                                    <LabelForm
+                                                        label="Land Transport"
+                                                        required
+                                                    />
+
+                                                    <div className="border rounded-3 py-2 hstack justify-content-between align-items-center px-3">
+                                                        <p className="m-0 fs-16">
+                                                            Do you need land
+                                                            transport service?
+                                                        </p>
+                                                    </div>
+
+                                                    <div>
+                                                        <p className="mb-2 text-uppercase fs-14 mt-4 fw-light">
+                                                            Select Pick up Point
+                                                        </p>
+                                                        <FormInput
+                                                            placeholder="Airport"
+                                                            name="airport"
+                                                            className="mb-2"
+                                                        />
+                                                        <div className="row g-3">
+                                                            <div className="col-6">
+                                                                <FormInput
+                                                                    placeholder="Flight Number"
+                                                                    name="flightNumber"
+                                                                />
+                                                            </div>
+                                                            <div className="col-6">
+                                                                <FormInput
+                                                                    placeholder="Arrival Time"
+                                                                    name="arrivalTime"
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div>
+                                                        <p className="mb-2 text-uppercase fs-14 mt-4 fw-light">
+                                                            Select Drop off
+                                                            Point
+                                                        </p>
+                                                        <FormInput
+                                                            placeholder="Airport"
+                                                            name="airport"
+                                                            className="mb-2"
+                                                        />
+                                                        <div className="row g-3">
+                                                            <div className="col-6">
+                                                                <FormInput
+                                                                    placeholder="Location"
+                                                                    name="location"
+                                                                />
+                                                            </div>
+                                                            <div className="col-6">
+                                                                <FormInput
+                                                                    placeholder="Arrival Time"
+                                                                    name="arrivalTime"
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <hr className="m-0 p-0" />
+
+                                                <div>
+                                                    <LabelForm label="Extras" />
+
+                                                    <div className="border rounded-3 py-2 hstack justify-content-between align-items-center px-3">
+                                                        <p className="m-0 fs-16">
+                                                            Accommodation booked
+                                                            through TLT?
+                                                        </p>
+                                                    </div>
+
+                                                    <div>
+                                                        <p className="mb-2 text-uppercase fs-14 mt-3 fw-light">
+                                                            Property Name /
+                                                            Booking Info
+                                                        </p>
+
+                                                        <FormInput
+                                                            name="refName"
+                                                            placeholder="Booking Ref/Name"
+                                                        />
+                                                    </div>
+
+                                                    <div className="border rounded-3 py-2 hstack justify-content-between align-items-center px-3 mt-3">
+                                                        <p className="m-0 fs-16">
+                                                            Bringing a
+                                                            surfboard?
+                                                        </p>
+                                                    </div>
+
+                                                    <FormTextArea
+                                                        className="mt-2"
+                                                        rows={5}
+                                                        name="description"
+                                                        placeholder="(optional) Write any additional notes/special request"
+                                                    />
+                                                </div>
                                             </div>
                                         </WrapFormContext>
+
+                                        <BtnPrimary
+                                            handle={() => {}}
+                                            className="rounded-pill text-white fs-14 w-100 text-uppercase mt-4">
+                                            Submit
+                                        </BtnPrimary>
                                     </FormWrap>
                                 </div>
                             </div>
