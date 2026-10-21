@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useId, FC, ChangeEvent, InputHTMLAttributes } from 'react'
 import _ from 'lodash'
 import { useHookContextForm } from '@/context/Form.Context'

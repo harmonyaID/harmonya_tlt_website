@@ -9,6 +9,9 @@ import FormInputDatePicker from '@/component/form/FormDatepicker'
 import { Minus, Plus } from 'feather-icons-react'
 import FormTextArea from '@/component/form/FormTextarea'
 import FormDatepicker from '@/component/form/FormDatepicker'
+import FormRadio from '@/component/form/FormRadio'
+import FormTimePicker from '@/component/form/FormTimePicker'
+import FormPhone from '@/component/form/FormPhone'
 
 const BoatTransferBookingModal = () => {
     return (
@@ -31,6 +34,16 @@ const BoatTransferBookingModal = () => {
                                 to you shortly
                             </p>
                         </div>
+
+                        <button
+                            type="button"
+                            className="btn-close position-absolute"
+                            style={{
+                                top: '20px',
+                                right: '20px',
+                            }}
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
 
                     <div className="modal-body font-tt-drugs">
@@ -48,7 +61,7 @@ const BoatTransferBookingModal = () => {
                                     <div className="row">
                                         <div className="col-6">
                                             <BtnBasic
-                                                className="w-100 text-uppercase bg-neutral-200 text-neutral-400"
+                                                className="w-100 text-uppercase bg-neutral-100 text-neutral-400"
                                                 style={{ fontSize: '20px' }}>
                                                 One Way
                                             </BtnBasic>
@@ -82,7 +95,7 @@ const BoatTransferBookingModal = () => {
                                                             <p className="text-uppercase fw-light fs-16 m-0">
                                                                 From
                                                             </p>
-                                                            <p className="fw-semibold fs-16 m-0">
+                                                            <p className="fw-medium fs-16 m-0">
                                                                 Sanur, Bali
                                                             </p>
                                                         </div>
@@ -113,7 +126,7 @@ const BoatTransferBookingModal = () => {
                                                             <p className="text-uppercase fw-light fs-16 m-0">
                                                                 To
                                                             </p>
-                                                            <p className="fw-semibold fs-16 m-0">
+                                                            <p className="fw-medium fs-16 m-0">
                                                                 Jungutbatu main
                                                                 bay
                                                             </p>
@@ -284,7 +297,10 @@ const BoatTransferBookingModal = () => {
                                                     </div>
 
                                                     <p className="m-0 text-end text-neutral-300 fs-12 mt-1">
-                                                        *Child 0-2 years old
+                                                        *Child{' '}
+                                                        <span className="fw-bold">
+                                                            0-2 years old
+                                                        </span>{' '}
                                                         free
                                                     </p>
                                                 </div>
@@ -302,10 +318,7 @@ const BoatTransferBookingModal = () => {
                                                     />
                                                     <div className="row g-3">
                                                         <div className="col-6">
-                                                            <FormInput
-                                                                name="phone"
-                                                                placeholder="Phone"
-                                                            />
+                                                            <FormPhone name="phone" />
                                                         </div>
                                                         <div className="col-6">
                                                             <FormInput
@@ -324,11 +337,24 @@ const BoatTransferBookingModal = () => {
                                                         required
                                                     />
 
-                                                    <div className="border rounded-3 py-2 hstack justify-content-between align-items-center px-3">
+                                                    <div className="border rounded-3 py-3 hstack justify-content-between align-items-center px-4">
                                                         <p className="m-0 fs-16">
                                                             Do you need land
                                                             transport service?
                                                         </p>
+
+                                                        <div className="hstack gap-5">
+                                                            <FormRadio
+                                                                name="phone"
+                                                                label="Yes"
+                                                                className="hstack gap-2"
+                                                            />
+                                                            <FormRadio
+                                                                name="phone"
+                                                                label="No"
+                                                                className="hstack gap-2"
+                                                            />
+                                                        </div>
                                                     </div>
 
                                                     <div>
@@ -348,8 +374,8 @@ const BoatTransferBookingModal = () => {
                                                                 />
                                                             </div>
                                                             <div className="col-6">
-                                                                <FormInput
-                                                                    placeholder="Arrival Time"
+                                                                <FormTimePicker
+                                                                    placeholder="12:33"
                                                                     name="arrivalTime"
                                                                 />
                                                             </div>
@@ -374,8 +400,8 @@ const BoatTransferBookingModal = () => {
                                                                 />
                                                             </div>
                                                             <div className="col-6">
-                                                                <FormInput
-                                                                    placeholder="Arrival Time"
+                                                                <FormTimePicker
+                                                                    placeholder="12:33"
                                                                     name="arrivalTime"
                                                                 />
                                                             </div>
@@ -388,11 +414,24 @@ const BoatTransferBookingModal = () => {
                                                 <div>
                                                     <LabelForm label="Extras" />
 
-                                                    <div className="border rounded-3 py-2 hstack justify-content-between align-items-center px-3">
+                                                    <div className="border rounded-3 py-3 hstack justify-content-between align-items-center px-4">
                                                         <p className="m-0 fs-16">
                                                             Accommodation booked
                                                             through TLT?
                                                         </p>
+
+                                                        <div className="hstack gap-5">
+                                                            <FormRadio
+                                                                name="phone"
+                                                                label="Yes"
+                                                                className="hstack gap-2"
+                                                            />
+                                                            <FormRadio
+                                                                name="phone"
+                                                                label="No"
+                                                                className="hstack gap-2"
+                                                            />
+                                                        </div>
                                                     </div>
 
                                                     <div>
@@ -407,11 +446,24 @@ const BoatTransferBookingModal = () => {
                                                         />
                                                     </div>
 
-                                                    <div className="border rounded-3 py-2 hstack justify-content-between align-items-center px-3 mt-3">
+                                                    <div className="border rounded-3 py-3 hstack justify-content-between align-items-center px-4 mt-3">
                                                         <p className="m-0 fs-16">
                                                             Bringing a
                                                             surfboard?
                                                         </p>
+
+                                                        <div className="hstack gap-5">
+                                                            <FormRadio
+                                                                name="phone"
+                                                                label="Yes"
+                                                                className="hstack gap-2"
+                                                            />
+                                                            <FormRadio
+                                                                name="phone"
+                                                                label="No"
+                                                                className="hstack gap-2"
+                                                            />
+                                                        </div>
                                                     </div>
 
                                                     <FormTextArea
