@@ -79,3 +79,9 @@
     transform: translateY(-50%);
   }
 }
+
+.wp-custom-timepicker {
+  .flatpickr-wrapper {
+    display: block !important;
+  }
+}

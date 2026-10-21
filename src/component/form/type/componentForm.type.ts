@@ -85,8 +85,9 @@ export interface FormInputTimePickerProps extends InputHTMLAttributes<HTMLInputE
     }
     config?: object | any
     other?: object | any
-    isTimeRange: boolean
+    isTimeRange?: boolean
     isResetValue?: boolean
+    isHook?: boolean
 }
 
 // Form Input
