@@ -8,6 +8,7 @@ import IconArrowLeft from '@/component/icon/IconArrowLeft'
 import FormInputDatePicker from '@/component/form/FormDatepicker'
 import { Minus, Plus } from 'feather-icons-react'
 import FormTextArea from '@/component/form/FormTextarea'
+import FormDatepicker from '@/component/form/FormDatepicker'
 
 const BoatTransferBookingModal = () => {
     return (
@@ -121,9 +122,8 @@ const BoatTransferBookingModal = () => {
                                                 </div>
 
                                                 <div>
-                                                    <FormInput
+                                                    <FormDatepicker
                                                         label="departure date"
-                                                        placeholder="e.g Jhon Doe"
                                                         name="name"
                                                         required
                                                     />
@@ -142,9 +142,8 @@ const BoatTransferBookingModal = () => {
                                                 </div>
 
                                                 <div>
-                                                    <FormInput
+                                                    <FormDatepicker
                                                         label="return date"
-                                                        placeholder="e.g Jhon Doe"
                                                         name="name"
                                                         required
                                                     />
@@ -427,7 +426,7 @@ const BoatTransferBookingModal = () => {
 
                                         <BtnPrimary
                                             handle={() => {}}
-                                            className="rounded-pill text-white fs-14 w-100 text-uppercase mt-4">
+                                            className="rounded-pill text-white fs-14 w-100 text-uppercase mt-4 mb-5">
                                             Submit
                                         </BtnPrimary>
                                     </FormWrap>
