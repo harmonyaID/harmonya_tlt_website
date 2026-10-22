@@ -97,6 +97,44 @@
         bottom: 0;
       }
     }
+
+    //.dropdown-menu {
+    //  position: absolute;
+    //  top: 100%;            // tepat di bawah navbar (logo + menu bar)
+    //  left: 0;
+    //  right: 0;
+    //  width: 100%;
+    //  margin-top: 0 !important;   // menimpa margin-top dari data-bs-popper & class mt-2
+    //  transform: translateY(2px); // posisi awal animasi
+    //  opacity: 0;
+    //  visibility: hidden;
+    //  pointer-events: none;
+    //  transition: opacity .5s, transform .5s, visibility .5s;
+    //
+    //  &.show {
+    //    opacity: 1;
+    //    visibility: visible;
+    //    pointer-events: auto;
+    //    transform: translateY(0);
+    //  }
+    //}
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;              // mulai dari batas bawah navbar (garis merah)
+      left: 0;
+      right: 0;
+      width: 100%;
+      margin: 0 !important;
+
+      &.show {
+        // kondisi terbuka: terbuka dari atas ke bawah
+        clip-path: inset(0 0 0 0);
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+    }
   }
   // END DROPDOWN MEGA MENU
 

@@ -146,8 +146,7 @@ const SectionHomeExclusiveStay = ({
                                             }>
                                             <Image
                                                 src={imgReelConfig(
-                                                    dataElement?.coverPhoto ||
-                                                        PropertyVilla01,
+                                                    dataElement?.coverPhoto,
                                                 )}
                                                 alt={dataElement.nickname}
                                                 fill
