@@ -4,16 +4,17 @@ import FormWrap from '@/component/wrapping/Form.wrap'
 import { WrapFormContext } from '@/context/Form.Context'
 import FormInput from '@/component/form/FormInput'
 import LabelForm from '@/component/form/LabelForm'
-import IconArrowLeft from '@/component/icon/IconArrowLeft'
-import FormInputDatePicker from '@/component/form/FormDatepicker'
 import { Minus, Plus } from 'feather-icons-react'
 import FormTextArea from '@/component/form/FormTextarea'
 import FormDatepicker from '@/component/form/FormDatepicker'
 import FormRadio from '@/component/form/FormRadio'
 import FormTimePicker from '@/component/form/FormTimePicker'
 import FormPhone from '@/component/form/FormPhone'
+import { useState } from 'react'
 
 const BoatTransferBookingModal = () => {
+    const [formRequest, setFormRequest] = useState({})
+
     return (
         <div
             className="modal fade"

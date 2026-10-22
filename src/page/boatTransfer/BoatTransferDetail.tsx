@@ -5,6 +5,7 @@ import { SectionTitle } from '@/component/text/Heading'
 import {
     BtnBasic,
     BtnLinkPrimary,
+    BtnPrimary,
     CodeIconArrow,
 } from '@/component/general/Button'
 import Image from 'next/image'
@@ -15,6 +16,9 @@ import { WrapImageHoverOverlay } from '@/component/general/WrapImage'
 import { imgReelConfig } from '@/config/urlImage.config'
 import BoatTransferCard from '@/page/boatTransfer/component/BoatTransferCard'
 import BoatTransferPriceTable from '@/page/boatTransfer/component/BoatTransferPriceTable'
+import BoatTransferBookingModal from '@/page/boatTransfer/component/BoatTransferBookingModal'
+import actionModal from '@/helper/base/actionModal.helper'
+import { MDBoatTransferBooking } from '@/config/modal.config'
 
 const customInfo = [
     {
@@ -106,11 +110,13 @@ const BoatTransferDetail = ({ detail }: { detail: any }) => {
                                 className="rounded-pill fs-14 w-100 text-nowrap px-5">
                                 MORE DETAILS
                             </BtnLinkPrimary>
-                            <BtnLinkPrimary
-                                href="#"
+                            <BtnPrimary
+                                handle={() =>
+                                    actionModal(MDBoatTransferBooking)
+                                }
                                 className="rounded-pill text-white fs-14 w-100 text-nowrap px-5">
                                 BOOK NOW
-                            </BtnLinkPrimary>
+                            </BtnPrimary>
                         </div>
                     </div>
                 </div>
@@ -268,6 +274,8 @@ const BoatTransferDetail = ({ detail }: { detail: any }) => {
                     </div>
                 </div>
             </section>
+
+            <BoatTransferBookingModal />
         </>
     )
 }
