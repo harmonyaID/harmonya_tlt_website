@@ -13,6 +13,7 @@ import {
     TEMPLATE_OFFER,
     TEMPLATE_PROPERTY,
     TEMPLATE_INFO_PRES_AND_MEDIA,
+    TEMPLATE_BOAT_TRANSFER,
 } from '@/config/pageTemplate.config'
 import BlogTemplate from '@/page/@template/BlogTemplate'
 import FAQTemplate from '@/page/@template/FAQTemplate'
@@ -32,6 +33,8 @@ import IslandGuideTemplate from '@/page/@template/IslandGuideTemplate'
 import IslandGuideDetailLevel1Template from '@/page/@template/IslandGuideDetailLevel1Template'
 import IslandGuideDetailLevel2Template from '@/page/@template/IslandGuideDetailLevel2Template'
 import PressAndMediaTemplate from '@/page/@template/PressAndMediaTemplate'
+import BoatTransferTemplate from '@/page/@template/BoatTransferTemplate'
+import BoatTransferDetailTemplate from '@/page/@template/BoatTransferDetailTemplate'
 
 type PropsData = {
     params: Promise<{ slug: string }>
@@ -116,6 +119,9 @@ const page = async ({ params }: PropsData) => {
                 [TEMPLATE_ISLAND_GUIDE]: (
                     <IslandGuideDetailLevel1Template slug={slug[1]} />
                 ),
+                [TEMPLATE_BOAT_TRANSFER]: (
+                    <BoatTransferDetailTemplate slug={slug[1]} />
+                ),
             }
 
             if (renderPageTemplateLevel2[template]) {
@@ -135,6 +141,9 @@ const page = async ({ params }: PropsData) => {
                 ),
                 [TEMPLATE_ISLAND_GUIDE]: (
                     <IslandGuideTemplate content={contentPage} />
+                ),
+                [TEMPLATE_BOAT_TRANSFER]: (
+                    <BoatTransferTemplate content={contentPage} />
                 ),
 
                 // Info. General
