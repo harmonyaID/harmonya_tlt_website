@@ -29,6 +29,7 @@ import PropertyFormSelectBedRooms from '@/page/property/component/PropertyFormSe
 import { WrapFormContext } from '@/context/Form.Context'
 import PropertyFormSelectBathRoom from '@/page/property/component/PropertyFormSelectBathRoom'
 import { countTotalBeds } from '@/helper/count.helper'
+import PropertyFormSelectTreeType from '@/page/property/component/PropertyFormSelectTreeType'
 
 const SectionListProperty = () => {
     const pathname = usePathname() || '/'
@@ -75,6 +76,9 @@ const SectionListProperty = () => {
                                     actions={{
                                         change: _handleChange,
                                     }}>
+                                    <div className="col-md-2">
+                                        <PropertyFormSelectTreeType />
+                                    </div>
                                     <div className="col-md-2">
                                         <PropertyFormSelectBedRooms
                                             value={search.bedroom}

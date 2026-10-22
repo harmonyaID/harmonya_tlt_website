@@ -106,7 +106,7 @@ const FooterLayout = () => {
                                 {listMenusOne.map((menu, index) => (
                                     <li key={index}>
                                         <Link
-                                            className="text-white"
+                                            className="text-white font-tt-drugs"
                                             href={menu.href}>
                                             {menu.name}
                                         </Link>
