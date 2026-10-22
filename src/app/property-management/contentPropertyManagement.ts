@@ -115,6 +115,56 @@ From day-to-day operations to bookings, revenue and marketing, The Lembongan Tra
             },
         ],
     },
+    SECTION6: {
+        title: 'PEOPLE BEHIND THE LEMBONGAN TRAVELLER ',
+        points: [
+            {
+                title: 'Founder',
+                backgroundImage: '',
+            },
+            {
+                title: 'Reservation',
+                backgroundImage: '',
+            },
+            {
+                title: 'Marketing',
+                backgroundImage: '',
+            },
+            {
+                title: 'Operations',
+                backgroundImage: '',
+            },
+            {
+                title: 'Engineering',
+                backgroundImage: '',
+            },
+            {
+                title: 'Finance ',
+                backgroundImage: '',
+            },
+        ],
+    },
+    SECTION7: {
+        title: 'Our Portfolio',
+        points: [
+            {
+                title: 'VILLA',
+                description:
+                    'We work exclusively in Nusa Lembongan & Nusa Ceningan. That focus gives owners an experienced local team ',
+                backgroundImage: '',
+            },
+            {
+                title: '',
+                description: '',
+                backgroundImage: '',
+            },
+            {
+                title: '',
+                description: '',
+                backgroundImage: '',
+            },
+        ],
+    },
 }
 
 export default contentPropertyManagement

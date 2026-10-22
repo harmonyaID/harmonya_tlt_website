@@ -11,7 +11,8 @@ import { BtnLinkPrimary } from '@/component/general/Button'
 import HorizontalTitleAndDesc from '@/component/general/HorizontalTitleAndDesc'
 
 const PropertyManagementMain = ({ content = {} }: { content?: any }) => {
-    const { SECTION1, SECTION2, SECTION3, SECTION4, SECTION5 } = content
+    const { SECTION1, SECTION2, SECTION3, SECTION4, SECTION5, SECTION6 } =
+        content
 
     return (
         <>
@@ -228,6 +229,14 @@ const PropertyManagementMain = ({ content = {} }: { content?: any }) => {
                             )
                         })}
                     </div>
+                </div>
+            </section>
+
+            <section className="section-space-small">
+                <div className="container">
+                    <h5 className="font-tt-drugs text-uppercase fs-40 text-center text-grey-200">
+                        {SECTION6.title}
+                    </h5>
                 </div>
             </section>
 
