@@ -251,6 +251,7 @@ const NavbarLayout = ({
                                     href="#"
                                     role="button"
                                     data-bs-toggle="dropdown"
+                                    data-bs-display="static" // posisi dinamis
                                     aria-expanded="false">
                                     {EXPERIENCE_MENU} <IconArrowBottom2 />
                                 </a>
@@ -397,6 +398,7 @@ const NavbarLayout = ({
                                     href="#"
                                     role="button"
                                     data-bs-toggle="dropdown"
+                                    data-bs-display="static" // posisi dinamis
                                     aria-expanded="false">
                                     {ISLAND_GUIDE_MENU} <IconArrowBottom2 />
                                 </a>
