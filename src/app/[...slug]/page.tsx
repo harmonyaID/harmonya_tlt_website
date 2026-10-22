@@ -34,6 +34,7 @@ import IslandGuideDetailLevel1Template from '@/page/@template/IslandGuideDetailL
 import IslandGuideDetailLevel2Template from '@/page/@template/IslandGuideDetailLevel2Template'
 import PressAndMediaTemplate from '@/page/@template/PressAndMediaTemplate'
 import BoatTransferTemplate from '@/page/@template/BoatTransferTemplate'
+import BoatTransferDetailTemplate from '@/page/@template/BoatTransferDetailTemplate'
 
 type PropsData = {
     params: Promise<{ slug: string }>
@@ -117,6 +118,9 @@ const page = async ({ params }: PropsData) => {
                 ),
                 [TEMPLATE_ISLAND_GUIDE]: (
                     <IslandGuideDetailLevel1Template slug={slug[1]} />
+                ),
+                [TEMPLATE_BOAT_TRANSFER]: (
+                    <BoatTransferDetailTemplate slug={slug[1]} />
                 ),
             }
 

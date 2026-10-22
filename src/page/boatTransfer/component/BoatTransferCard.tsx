@@ -1,3 +1,4 @@
+'use client'
 import { WrapImageHoverOverlay } from '@/component/general/WrapImage'
 import {
     BtnBasic,
@@ -14,8 +15,10 @@ import { MDBoatTransferBooking } from '@/config/modal.config'
 const BoatTransferCard = ({
     isSimple = false,
     onBook,
+    boat,
 }: {
     isSimple?: boolean
+    boat: any
     onBook?: () => void
 }) => {
     return (
@@ -52,7 +55,7 @@ const BoatTransferCard = ({
             </Link>
 
             <p className="fs-32 fw-light mb-1 font-tt-drugs text-uppercase">
-                BAli hai cruises
+                {boat?.name}
             </p>
 
             {!isSimple && (
@@ -83,7 +86,7 @@ const BoatTransferCard = ({
                     </div>
                     <div className="hstack gap-2 mt-3">
                         <BtnLinkPrimary
-                            href="/boat-transfers/test-slug"
+                            href={`/boat-transfers/${boat.id}`}
                             isOutline
                             className="rounded-pill fs-14 w-100">
                             MORE DETAILS

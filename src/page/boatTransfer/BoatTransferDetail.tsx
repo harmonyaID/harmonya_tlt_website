@@ -262,13 +262,13 @@ const BoatTransferDetail = ({ detail }: { detail: any }) => {
                     <div className="mt-70">
                         <div className="row boat-transfer-card-g ">
                             <div className="col-md-4 col-12">
-                                <BoatTransferCard isSimple />
+                                <BoatTransferCard isSimple boat={null} />
                             </div>
                             <div className="col-md-4 col-12">
-                                <BoatTransferCard isSimple />
+                                <BoatTransferCard isSimple boat={null} />
                             </div>
                             <div className="col-md-4 col-12">
-                                <BoatTransferCard isSimple />
+                                <BoatTransferCard isSimple boat={null} />
                             </div>
                         </div>
                     </div>

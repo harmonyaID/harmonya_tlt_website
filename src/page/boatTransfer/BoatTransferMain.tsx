@@ -99,6 +99,7 @@ const BoatTransferMain = ({
                                     className="col-lg-4 col-md-6 col-12"
                                     key={boat.id}>
                                     <BoatTransferCard
+                                        boat={boat}
                                         onBook={() =>
                                             actionModal(MDBoatTransferBooking)
                                         }
@@ -129,6 +130,7 @@ const BoatTransferMain = ({
                             {boatSection3.map((boat) => (
                                 <div className="col-md-6 col-12" key={boat.id}>
                                     <BoatTransferCard
+                                        boat={boat}
                                         onBook={() =>
                                             actionModal(MDBoatTransferBooking)
                                         }
