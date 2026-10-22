@@ -11,9 +11,50 @@ import FormRadio from '@/component/form/FormRadio'
 import FormTimePicker from '@/component/form/FormTimePicker'
 import FormPhone from '@/component/form/FormPhone'
 import { useState } from 'react'
+import useNestedFormHook from '@/hook/base/useNestedForm.hook'
+
+const ONE_WAY = 'one_way'
+const RETURN = 'return'
+const TRUE = '1'
+const FALSE = '0'
+
+const param = {
+    boatId: '',
+    name: '',
+    email: '',
+    phone: '',
+    ticketType: ONE_WAY,
+    baliLandLocation: '',
+    bookedThroughTlt: TRUE,
+    needLandTransport: FALSE,
+    tltBookingRefName: '',
+    adultCount: 1,
+    childCount: 0,
+    infantCount: 0,
+    departureDateFromBali: '',
+    departureTimeFromBali: '',
+    pickUpLocationBali: '',
+    flightNumber: '',
+    arrivalTime: '',
+    hotelNameBali: '',
+    hotelContactBali: '',
+    departureDateFromLembongan: '',
+    departureTimeFromLembongan: '',
+    dropOffLocationBali: '',
+    flightTime: '',
+    hotelNameLembongan: '',
+    accommodationLembongan: '',
+    passengerNames: '',
+    hasSurfboard: TRUE,
+    hearAboutUs: '',
+    message: '',
+}
 
 const BoatTransferBookingModal = () => {
-    const [formRequest, setFormRequest] = useState({})
+    const [formRequest, setFormRequest] =
+        useState<Record<keyof typeof param, any>>(param)
+
+    const nestedForm = useNestedFormHook(formRequest, setFormRequest as any)
 
     return (
         <div
@@ -59,32 +100,60 @@ const BoatTransferBookingModal = () => {
                                         D'stars Fast Ferry
                                     </p>
 
-                                    <div className="row">
-                                        <div className="col-6">
-                                            <BtnBasic
-                                                className="w-100 text-uppercase bg-neutral-100 text-neutral-400"
-                                                style={{ fontSize: '20px' }}>
-                                                One Way
-                                            </BtnBasic>
-                                        </div>
-                                        <div className="col-6">
-                                            <BtnBasic
-                                                className="w-100 text-uppercase bg-primary text-white"
-                                                style={{ fontSize: '20px' }}>
-                                                Return
-                                            </BtnBasic>
-                                        </div>
-                                    </div>
-
                                     <FormWrap
                                         actions={{
                                             handleSubmit: () => {},
                                         }}>
                                         <WrapFormContext
-                                            formRequest={{}}
+                                            formRequest={formRequest}
                                             actions={{
-                                                change: (name, value) => {},
+                                                change: nestedForm._handleChange,
                                             }}>
+                                            <div className="row mb-4">
+                                                <div className="col-6">
+                                                    <BtnBasic
+                                                        handle={() =>
+                                                            nestedForm._handleChange(
+                                                                'ticketType',
+                                                                ONE_WAY,
+                                                            )
+                                                        }
+                                                        className={`w-100 text-uppercase ${
+                                                            formRequest.ticketType ===
+                                                            ONE_WAY
+                                                                ? ' bg-primary text-white'
+                                                                : 'bg-neutral-100 text-neutral-400'
+                                                        }`}
+                                                        type="button"
+                                                        style={{
+                                                            fontSize: '20px',
+                                                        }}>
+                                                        One Way
+                                                    </BtnBasic>
+                                                </div>
+                                                <div className="col-6">
+                                                    <BtnBasic
+                                                        handle={() =>
+                                                            nestedForm._handleChange(
+                                                                'ticketType',
+                                                                RETURN,
+                                                            )
+                                                        }
+                                                        type="button"
+                                                        className={`w-100 text-uppercase ${
+                                                            formRequest.ticketType ===
+                                                            RETURN
+                                                                ? ' bg-primary text-white'
+                                                                : 'bg-neutral-100 text-neutral-400'
+                                                        }`}
+                                                        style={{
+                                                            fontSize: '20px',
+                                                        }}>
+                                                        Return
+                                                    </BtnBasic>
+                                                </div>
+                                            </div>
+
                                             <div className="vstack gap-5">
                                                 <div>
                                                     <LabelForm
@@ -138,7 +207,7 @@ const BoatTransferBookingModal = () => {
                                                 <div>
                                                     <FormDatepicker
                                                         label="departure date"
-                                                        name="name"
+                                                        name="departureDateFromBali"
                                                         required
                                                     />
 
@@ -155,25 +224,28 @@ const BoatTransferBookingModal = () => {
                                                     </div>
                                                 </div>
 
-                                                <div>
-                                                    <FormDatepicker
-                                                        label="return date"
-                                                        name="name"
-                                                        required
-                                                    />
+                                                {formRequest.ticketType ===
+                                                    RETURN && (
+                                                    <div>
+                                                        <FormDatepicker
+                                                            label="return date"
+                                                            name="departureDateFromLembongan"
+                                                            required
+                                                        />
 
-                                                    <div className="hstack gap-2 mt-2">
-                                                        <div className="badge fs-14 text-black border rounded-pill fw-300 px-3">
-                                                            9:15 AM
-                                                        </div>
-                                                        <div className="badge fs-14 text-black border rounded-pill fw-300 px-3">
-                                                            3 AM
-                                                        </div>
-                                                        <div className="badge fs-14 text-black border rounded-pill fw-300 px-3">
-                                                            11 AM
+                                                        <div className="hstack gap-2 mt-2">
+                                                            <div className="badge fs-14 text-black border rounded-pill fw-300 px-3">
+                                                                9:15 AM
+                                                            </div>
+                                                            <div className="badge fs-14 text-black border rounded-pill fw-300 px-3">
+                                                                3 AM
+                                                            </div>
+                                                            <div className="badge fs-14 text-black border rounded-pill fw-300 px-3">
+                                                                11 AM
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                )}
 
                                                 <div>
                                                     <LabelForm
@@ -346,68 +418,140 @@ const BoatTransferBookingModal = () => {
 
                                                         <div className="hstack gap-5">
                                                             <FormRadio
-                                                                name="phone"
+                                                                name="needLandTransport"
                                                                 label="Yes"
+                                                                defaultValue={
+                                                                    TRUE
+                                                                }
                                                                 className="hstack gap-2"
                                                             />
                                                             <FormRadio
-                                                                name="phone"
+                                                                name="needLandTransport"
                                                                 label="No"
+                                                                defaultValue={
+                                                                    FALSE
+                                                                }
                                                                 className="hstack gap-2"
                                                             />
                                                         </div>
                                                     </div>
 
-                                                    <div>
-                                                        <p className="mb-2 text-uppercase fs-14 mt-4 fw-light">
-                                                            Select Pick up Point
-                                                        </p>
-                                                        <FormInput
-                                                            placeholder="Airport"
-                                                            name="airport"
-                                                            className="mb-2"
-                                                        />
-                                                        <div className="row g-3">
-                                                            <div className="col-6">
-                                                                <FormInput
-                                                                    placeholder="Flight Number"
-                                                                    name="flightNumber"
-                                                                />
+                                                    {formRequest.needLandTransport ===
+                                                        TRUE && (
+                                                        <>
+                                                            <div className="mt-4">
+                                                                {formRequest.ticketType ===
+                                                                    RETURN && (
+                                                                    <LabelForm
+                                                                        label="Departure"
+                                                                        required
+                                                                    />
+                                                                )}
+                                                                <div>
+                                                                    <p className="mb-2 text-uppercase fs-14 fw-light">
+                                                                        Pick up
+                                                                        Point
+                                                                    </p>
+                                                                    <FormInput
+                                                                        placeholder="Airport"
+                                                                        name="airport"
+                                                                        className="mb-2"
+                                                                    />
+                                                                    <div className="row g-3">
+                                                                        <div className="col-6">
+                                                                            <FormInput
+                                                                                placeholder="Flight Number"
+                                                                                name="flightNumber"
+                                                                            />
+                                                                        </div>
+                                                                        <div className="col-6">
+                                                                            <FormTimePicker
+                                                                                placeholder="12:33"
+                                                                                name="arrivalTime"
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div>
+                                                                    <p className="mb-2 text-uppercase fs-14 mt-4 fw-light">
+                                                                        Drop off
+                                                                        Point
+                                                                    </p>
+                                                                    <FormInput
+                                                                        placeholder="Airport"
+                                                                        name="airport"
+                                                                        className="mb-2"
+                                                                    />
+                                                                    <div className="row g-3">
+                                                                        <div className="col-6">
+                                                                            <FormInput
+                                                                                placeholder="Location"
+                                                                                name="location"
+                                                                            />
+                                                                        </div>
+                                                                        <div className="col-6">
+                                                                            <FormTimePicker
+                                                                                placeholder="12:33"
+                                                                                name="arrivalTime"
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div className="col-6">
-                                                                <FormTimePicker
-                                                                    placeholder="12:33"
-                                                                    name="arrivalTime"
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                    </div>
 
-                                                    <div>
-                                                        <p className="mb-2 text-uppercase fs-14 mt-4 fw-light">
-                                                            Select Drop off
-                                                            Point
-                                                        </p>
-                                                        <FormInput
-                                                            placeholder="Airport"
-                                                            name="airport"
-                                                            className="mb-2"
-                                                        />
-                                                        <div className="row g-3">
-                                                            <div className="col-6">
-                                                                <FormInput
-                                                                    placeholder="Location"
-                                                                    name="location"
-                                                                />
-                                                            </div>
-                                                            <div className="col-6">
-                                                                <FormTimePicker
-                                                                    placeholder="12:33"
-                                                                    name="arrivalTime"
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                            {formRequest.ticketType ===
+                                                                RETURN && (
+                                                                <div className="mt-4">
+                                                                    <LabelForm
+                                                                        label="Return"
+                                                                        required
+                                                                    />
+                                                                    <div>
+                                                                        <p className="mb-2 text-uppercase fs-14 fw-light">
+                                                                            Pick
+                                                                            up
+                                                                            Point
+                                                                        </p>
+                                                                        <FormInput
+                                                                            placeholder="Airport"
+                                                                            name="airport"
+                                                                            className="mb-2"
+                                                                        />
+                                                                        <div className="row g-3">
+                                                                            <div className="col-6">
+                                                                                <FormInput
+                                                                                    placeholder="Flight Number"
+                                                                                    name="flightNumber"
+                                                                                />
+                                                                            </div>
+                                                                            <div className="col-6">
+                                                                                <FormTimePicker
+                                                                                    placeholder="12:33"
+                                                                                    name="arrivalTime"
+                                                                                />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div>
+                                                                        <p className="mb-2 text-uppercase fs-14 mt-4 fw-light">
+                                                                            Drop
+                                                                            off
+                                                                            Point
+                                                                        </p>
+                                                                        <FormInput
+                                                                            placeholder="Airport"
+                                                                            name="airport"
+                                                                            className="mb-2"
+                                                                        />
+                                                                        <FormInput
+                                                                            placeholder="Location"
+                                                                            name="location"
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                            )}
+                                                        </>
+                                                    )}
                                                 </div>
 
                                                 <hr className="m-0 p-0" />
@@ -423,13 +567,19 @@ const BoatTransferBookingModal = () => {
 
                                                         <div className="hstack gap-5">
                                                             <FormRadio
-                                                                name="phone"
+                                                                name="bookedThroughTlt"
                                                                 label="Yes"
+                                                                defaultValue={
+                                                                    TRUE
+                                                                }
                                                                 className="hstack gap-2"
                                                             />
                                                             <FormRadio
-                                                                name="phone"
+                                                                name="bookedThroughTlt"
                                                                 label="No"
+                                                                defaultValue={
+                                                                    FALSE
+                                                                }
                                                                 className="hstack gap-2"
                                                             />
                                                         </div>
@@ -442,7 +592,7 @@ const BoatTransferBookingModal = () => {
                                                         </p>
 
                                                         <FormInput
-                                                            name="refName"
+                                                            name="hearAboutUs"
                                                             placeholder="Booking Ref/Name"
                                                         />
                                                     </div>
@@ -455,13 +605,19 @@ const BoatTransferBookingModal = () => {
 
                                                         <div className="hstack gap-5">
                                                             <FormRadio
-                                                                name="phone"
+                                                                name="hasSurfboard"
                                                                 label="Yes"
+                                                                defaultValue={
+                                                                    TRUE
+                                                                }
                                                                 className="hstack gap-2"
                                                             />
                                                             <FormRadio
-                                                                name="phone"
+                                                                name="hasSurfboard"
                                                                 label="No"
+                                                                defaultValue={
+                                                                    FALSE
+                                                                }
                                                                 className="hstack gap-2"
                                                             />
                                                         </div>
@@ -470,7 +626,7 @@ const BoatTransferBookingModal = () => {
                                                     <FormTextArea
                                                         className="mt-2"
                                                         rows={5}
-                                                        name="description"
+                                                        name="message"
                                                         placeholder="(optional) Write any additional notes/special request"
                                                     />
                                                 </div>

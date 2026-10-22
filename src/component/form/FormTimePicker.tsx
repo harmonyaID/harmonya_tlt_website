@@ -117,11 +117,11 @@ const FormTimePicker: FC<FormInputTimePickerProps> = (props) => {
         if (modals.length && isResetValue) {
             modals?.forEach((modal) => {
                 modal?.addEventListener('shown.bs.modal', () => {
-                    timePicker.setDate(timePicker.input.value || '', true)
+                    timePicker?.setDate(timePicker.input.value || '', true)
                 })
 
                 modal?.addEventListener('hidden.bs.modal', () => {
-                    timePicker.clear()
+                    timePicker?.clear()
                 })
             })
         }
