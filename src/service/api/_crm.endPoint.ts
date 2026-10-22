@@ -79,3 +79,10 @@ export const SrvContentIslandGuideTypeDetail = (slug?: string) =>
 
 // Contact US
 export const SrvContactForm = baseApi + '/website-contact-forms'
+
+// Boat
+export const SrvBoat = baseApi + '/boats'
+
+export const SrvBoatDetail = (id) => baseApi + '/boats/' + id
+
+export const SrvBoatContactForm = baseApi + '/boat-contact-forms'
