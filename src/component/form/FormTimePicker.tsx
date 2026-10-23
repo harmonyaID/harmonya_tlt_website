@@ -53,8 +53,6 @@ const FormTimePicker: FC<FormInputTimePickerProps> = (props) => {
     const _configTimePicker = (element = null) => {
         const has12HourFormat = /[hHgG]/.test(format) && /K/i.test(format)
 
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
         return flatpickr(element, {
             enableTime: true,
             altFormat: format,
@@ -101,11 +99,8 @@ const FormTimePicker: FC<FormInputTimePickerProps> = (props) => {
     useEffect(() => {
         const modals = document.querySelectorAll('.modal')
         const elem = document.getElementById(idInput)
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
         const timePicker = _configTimePicker(elem)
 
-        // @ts-ignore
         elem?.addEventListener(
             'change',
             (e: ChangeEvent<HTMLInputElement> | any) => {

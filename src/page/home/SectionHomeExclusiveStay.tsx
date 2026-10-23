@@ -29,6 +29,7 @@ import IconArrowLeft from '@/component/icon/IconArrowLeft'
 import { imgReelConfig } from '@/config/urlImage.config'
 import canonicalURLHelper from '@/helper/canonicalURL.helper'
 import { countTotalBeds } from '@/helper/count.helper'
+import PropertyAmities from '@/page/property/component/PropertyAmities'
 
 const tags = ['Family Friendly', 'Guest’s Favorite', 'Breakfast']
 
@@ -125,12 +126,20 @@ const SectionHomeExclusiveStay = ({
                             const dataTags = dataElement.tags || tags || []
                             const { seo = {} } = dataElement
 
+                            const fineAmenities = (passName: string) => {
+                                return dataElement?.fineAmenities
+                                    ? dataElement.fineAmenities.some(
+                                          (v) => v.name === passName,
+                                      )
+                                    : false
+                            }
+
                             return (
                                 <>
                                     <Link
                                         className="w-100 vstack gap-3 text-grey-200 wp-hover-image overflow-hidden property-card-slider"
                                         href={canonicalURLHelper(
-                                            seo.canonicalUrl,
+                                            seo?.canonicalUrl,
                                         )}>
                                         <WrapImageHoverOverlay
                                             className="banner"
@@ -184,14 +193,23 @@ const SectionHomeExclusiveStay = ({
                                                         dataElement.occupancy
                                                     }
                                                 />
-                                                <Amities
-                                                    icon={<IconPropertyEat />}
-                                                    value="Dine In"
-                                                />
-                                                <Amities
-                                                    icon={<IconPropertyPool />}
-                                                    value="Pool"
-                                                />
+                                                {fineAmenities('Dine In') ? (
+                                                    <PropertyAmities
+                                                        icon={
+                                                            <IconPropertyEat />
+                                                        }
+                                                        value="Dine In"
+                                                    />
+                                                ) : null}
+
+                                                {fineAmenities('Pool') ? (
+                                                    <PropertyAmities
+                                                        icon={
+                                                            <IconPropertyPool />
+                                                        }
+                                                        value="Pool"
+                                                    />
+                                                ) : null}
                                             </div>
 
                                             <div className="hstack gap-2 flex-wrap">
