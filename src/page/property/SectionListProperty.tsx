@@ -104,6 +104,17 @@ const SectionListProperty = () => {
                                     const listDetail = slug
                                         ? pathname + '/' + slugify(slug)
                                         : '#'
+
+                                    const fineAmenities = (
+                                        passName: string,
+                                    ) => {
+                                        return vm?.fineAmenities
+                                            ? vm.fineAmenities.some(
+                                                  (v) => v.name === passName,
+                                              )
+                                            : false
+                                    }
+
                                     return (
                                         <div
                                             className="col-lg-4 col-md-6"
@@ -168,20 +179,31 @@ const SectionListProperty = () => {
                                                             icon={
                                                                 <IconPropertyGuest />
                                                             }
-                                                            value={vm.occupancy}
-                                                        />
-                                                        <PropertyAmities
-                                                            icon={
-                                                                <IconPropertyEat />
+                                                            value={
+                                                                vm.occupancy ||
+                                                                '0'
                                                             }
-                                                            value="Dine In"
                                                         />
-                                                        <PropertyAmities
-                                                            icon={
-                                                                <IconPropertyPool />
-                                                            }
-                                                            value="Pool"
-                                                        />
+                                                        {fineAmenities(
+                                                            'Dine In',
+                                                        ) ? (
+                                                            <PropertyAmities
+                                                                icon={
+                                                                    <IconPropertyEat />
+                                                                }
+                                                                value="Dine In"
+                                                            />
+                                                        ) : null}
+                                                        {fineAmenities(
+                                                            'Pool',
+                                                        ) ? (
+                                                            <PropertyAmities
+                                                                icon={
+                                                                    <IconPropertyPool />
+                                                                }
+                                                                value="Pool"
+                                                            />
+                                                        ) : null}
                                                     </div>
 
                                                     <div className="hstack gap-2 flex-wrap">

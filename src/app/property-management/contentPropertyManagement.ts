@@ -11,6 +11,15 @@ import Section5Icon1 from '@/asset/image/propertyManagement/section-5-icon-1.svg
 import Section5Icon2 from '@/asset/image/propertyManagement/section-5-icon-2.svg'
 import Section5Icon3 from '@/asset/image/propertyManagement/section-5-icon-3.svg'
 import Section5Icon4 from '@/asset/image/propertyManagement/section-5-icon-4.svg'
+import Section6Image1 from '@/asset/image/propertyManagement/section-6-point-1.png'
+import Section6Image2 from '@/asset/image/propertyManagement/section-6-point-2.png'
+import Section6Image3 from '@/asset/image/propertyManagement/section-6-point-3.png'
+import Section6Image4 from '@/asset/image/propertyManagement/section-6-point-4.png'
+import Section6Image5 from '@/asset/image/propertyManagement/section-6-point-5.png'
+import Section6Image6 from '@/asset/image/propertyManagement/section-6-point-6.png'
+import Section7Image1 from '@/asset/image/propertyManagement/section-7-slide-1.jpg'
+import Section7Image2 from '@/asset/image/propertyManagement/section-7-slide-2.jpg'
+import Section7Image3 from '@/asset/image/propertyManagement/section-7-slide-3.jpg'
 
 const contentPropertyManagement = {
     SECTION1: {
@@ -120,27 +129,27 @@ From day-to-day operations to bookings, revenue and marketing, The Lembongan Tra
         points: [
             {
                 title: 'Founder',
-                backgroundImage: '',
+                backgroundImage: Section6Image1,
             },
             {
                 title: 'Reservation',
-                backgroundImage: '',
+                backgroundImage: Section6Image2,
             },
             {
                 title: 'Marketing',
-                backgroundImage: '',
+                backgroundImage: Section6Image3,
             },
             {
                 title: 'Operations',
-                backgroundImage: '',
+                backgroundImage: Section6Image4,
             },
             {
                 title: 'Engineering',
-                backgroundImage: '',
+                backgroundImage: Section6Image5,
             },
             {
                 title: 'Finance ',
-                backgroundImage: '',
+                backgroundImage: Section6Image6,
             },
         ],
     },
@@ -151,19 +160,28 @@ From day-to-day operations to bookings, revenue and marketing, The Lembongan Tra
                 title: 'VILLA',
                 description:
                     'We work exclusively in Nusa Lembongan & Nusa Ceningan. That focus gives owners an experienced local team ',
-                backgroundImage: '',
+                backgroundImage: Section7Image1,
             },
             {
-                title: '',
-                description: '',
-                backgroundImage: '',
+                title: 'resort',
+                description:
+                    'Boutique resorts with up to 11 rooms, offering personalised service and shared facilities.',
+                backgroundImage: Section7Image2,
             },
             {
-                title: '',
-                description: '',
-                backgroundImage: '',
+                title: 'bungalow',
+                description:
+                    'Bungalow complexes suited to solo travellers, couples and small retreat groups.',
+                backgroundImage: Section7Image3,
             },
         ],
+        buttonName: 'Explore More',
+        buttonLink: '/stay',
+    },
+    SECTION8: {
+        title: "Let's Talk About Your Property ",
+        description:
+            "Whether you're preparing a new villa for the market, looking for a new management partner or want to improve the performance of an existing property, we'd love to hear from you. \n",
     },
 }
 

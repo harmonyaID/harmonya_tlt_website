@@ -73,7 +73,7 @@ const FormInputDatePicker: FC<FormInputDatePickerProps> = (props) => {
             const modals = document.querySelectorAll('.modal')
             const elem = document.getElementById(idInput)
             const customClearBtn = document.getElementById(idBtnClear)
-            // @ts-ignore
+
             const datepicker = _configDatePicker(elem, Datepicker) || {}
 
             elem?.addEventListener(

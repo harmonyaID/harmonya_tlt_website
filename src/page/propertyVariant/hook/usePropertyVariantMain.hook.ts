@@ -1,0 +1,67 @@
+'use client'
+import { useEffect, useState } from 'react'
+import { getPropertyVariantList } from '@/service/api/propertyVariant.api'
+
+const usePropertyVariantMainHook = () => {
+    const [list, setList] = useState([])
+
+    const [pagination, setPagination] = useState({})
+
+    const [search, setSearch] = useState<any>({
+        page: 1,
+        limit: 30,
+        bathroom: '',
+        bedroom: '',
+    })
+
+    const [isLoading, setIsLoading] = useState(false)
+
+    const _handleGet = (passSearch = {}) => {
+        setIsLoading(true)
+        getPropertyVariantList(passSearch)
+            .then((res) => {
+                setList(res?.result || [])
+                setPagination(res?.pagination || {})
+                setIsLoading(false)
+            })
+            .catch((err) => {
+                setIsLoading(false)
+                console.log('err: ', err)
+            })
+    }
+
+    const _handleChangePage = (page: number | string) => {
+        setSearch((prev: any) => {
+            const newState = { ...prev }
+
+            newState.page = page
+
+            _handleGet(newState)
+
+            return newState
+        })
+    }
+
+    const _handleChange = (name: string = '', value: any) => {
+        setSearch((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }))
+    }
+
+    useEffect(() => {
+        _handleGet(search)
+    }, [])
+
+    return {
+        list,
+        isLoading,
+        pagination,
+        _handleChangePage,
+        search,
+        setSearch,
+        _handleChange,
+    }
+}
+
+export default usePropertyVariantMainHook

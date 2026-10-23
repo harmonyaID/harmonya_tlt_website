@@ -9,10 +9,21 @@ import { WrapImageHoverOverlay } from '@/component/general/WrapImage'
 import { imgLandscapeConfig } from '@/config/urlImage.config'
 import { BtnLinkPrimary } from '@/component/general/Button'
 import HorizontalTitleAndDesc from '@/component/general/HorizontalTitleAndDesc'
+import SlideGalleryAndContent from '@/page/propertyManagement/component/SliderGalleryAndContent'
+import CarouselPortfolio from '@/page/propertyManagement/container/CarouselPortfolio'
+import PropertyManagementForm from '@/page/propertyManagement/container/PropertyManagementForm'
 
 const PropertyManagementMain = ({ content = {} }: { content?: any }) => {
-    const { SECTION1, SECTION2, SECTION3, SECTION4, SECTION5, SECTION6 } =
-        content
+    const {
+        SECTION1,
+        SECTION2,
+        SECTION3,
+        SECTION4,
+        SECTION5,
+        SECTION6,
+        SECTION7,
+        SECTION8,
+    } = content
 
     return (
         <>
@@ -234,11 +245,57 @@ const PropertyManagementMain = ({ content = {} }: { content?: any }) => {
 
             <section className="section-space-small">
                 <div className="container">
-                    <h5 className="font-tt-drugs text-uppercase fs-40 text-center text-grey-200">
+                    <h5 className="font-tt-drugs text-uppercase fs-40 text-center text-grey-200 mb-5">
                         {SECTION6.title}
                     </h5>
+
+                    <div className="px-5 pt-3">
+                        <div className="row px-5 g-5">
+                            {SECTION6.points.map((vm, index) => {
+                                return (
+                                    <div key={index} className="col-md-4">
+                                        <div className="h-320-px position-relative mb-4">
+                                            <Image
+                                                src={vm.backgroundImage}
+                                                alt={vm.title}
+                                                fill
+                                                className="object-fit-cover w-100"
+                                            />
+                                        </div>
+
+                                        <p className="text-center mb-0 text-uppercase fs-24 text-gray-400 font-tt-drugs">
+                                            {vm.title}
+                                        </p>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
                 </div>
             </section>
+
+            <section className="section-space-small-bottom pt-5">
+                <div className="container">
+                    <h5 className="font-tt-drugs text-uppercase fs-40 text-center text-grey-200 mb-5">
+                        {SECTION7.title}
+                    </h5>
+
+                    <div className="">
+                        <CarouselPortfolio items={SECTION7.points} />
+                    </div>
+
+                    <div className="text-center pt-5">
+                        <BtnLinkPrimary
+                            className="font-tt-drugs text-uppercase rounded-pill"
+                            isIconArrow
+                            href={SECTION7.buttonLink}>
+                            {SECTION7.buttonName}
+                        </BtnLinkPrimary>
+                    </div>
+                </div>
+            </section>
+
+            <PropertyManagementForm content={SECTION8} />
 
             <FooterLayout />
         </>

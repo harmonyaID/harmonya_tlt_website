@@ -54,7 +54,7 @@ const PropertyDetail = ({
                             <div className="vstack gap-4">
                                 <div className="">
                                     <h1 className="font-tt-drugs fs-48 pb-2 text-grey-200">
-                                        {detail.nickname}
+                                        {detail?.nickname}
                                     </h1>
 
                                     {/*<SectionDescription>*/}
