@@ -25,12 +25,25 @@ import {
     IconPropertyNewResort,
 } from '@/component/general/IconSvg'
 import IconFilter from '@/component/icon/IconFilter'
+import PropertyFormSelectBedRooms from '@/page/property/component/PropertyFormSelectBedRooms'
+import { WrapFormContext } from '@/context/Form.Context'
+import PropertyFormSelectBathRoom from '@/page/property/component/PropertyFormSelectBathRoom'
+import { countTotalBeds } from '@/helper/count.helper'
+import PropertyFormSelectTreeType from '@/page/property/component/PropertyFormSelectTreeType'
 
 const SectionListProperty = () => {
     const pathname = usePathname() || '/'
 
-    const { list, isLoading, pagination, _handleChangePage } = usePropertyList()
-    console.log('list: ', list)
+    const {
+        list,
+        isLoading,
+        pagination,
+        _handleChangePage,
+        search,
+        _handleChange,
+    } = usePropertyList()
+
+    console.log('search: ', search)
 
     return (
         <>
@@ -40,13 +53,41 @@ const SectionListProperty = () => {
                         ALL PROPERTIES
                     </SectionTitle>
 
-                    <div className="pb-5 mb-4 pt-2">
-                        <div className="hstack align-items-center gap-3">
-                            <IconFilter />
-                            <div className="">
-                                <p className="mb-0 fs-20 text-grey-400">
-                                    FILTER
-                                </p>
+                    <div className="row align-items-center pb-5 mb-4 pt-2">
+                        <div className="col-auto">
+                            <div className="hstack align-items-center gap-3">
+                                <IconFilter />
+                                <div className="">
+                                    <p className="mb-0 fs-20 text-grey-400">
+                                        FILTER
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="col-auto">
+                            <div className="vr"></div>
+                        </div>
+
+                        <div className="col">
+                            <div className="row gx-2 gy-3">
+                                <WrapFormContext
+                                    formRequest={search}
+                                    actions={{
+                                        change: _handleChange,
+                                    }}>
+                                    <div className="col-md-2">
+                                        <PropertyFormSelectTreeType />
+                                    </div>
+                                    <div className="col-md-2">
+                                        <PropertyFormSelectBedRooms
+                                            value={search.bedroom}
+                                        />
+                                    </div>
+                                    <div className="col-md-2">
+                                        <PropertyFormSelectBathRoom />
+                                    </div>
+                                </WrapFormContext>
                             </div>
                         </div>
                     </div>
@@ -63,6 +104,17 @@ const SectionListProperty = () => {
                                     const listDetail = slug
                                         ? pathname + '/' + slugify(slug)
                                         : '#'
+
+                                    const fineAmenities = (
+                                        passName: string,
+                                    ) => {
+                                        return vm?.fineAmenities
+                                            ? vm.fineAmenities.some(
+                                                  (v) => v.name === passName,
+                                              )
+                                            : false
+                                    }
+
                                     return (
                                         <div
                                             className="col-lg-4 col-md-6"
@@ -84,8 +136,7 @@ const SectionListProperty = () => {
                                                     }>
                                                     <Image
                                                         src={imgReelConfig(
-                                                            dataElement?.coverPhoto ||
-                                                                PropertyVilla01,
+                                                            dataElement?.coverPhoto,
                                                         )}
                                                         alt={
                                                             dataElement.nickname ||
@@ -99,16 +150,16 @@ const SectionListProperty = () => {
                                                 <div className="">
                                                     <p className="fs-20 text-primary mb-0">
                                                         {dataElement?.category
-                                                            ?.name || 'Villa'}
+                                                            ?.name || ''}
                                                     </p>
 
                                                     <p className="fs-24 mb-1 wp-font-tt-drugs desc-two-line">
                                                         {dataElement.nickname ||
-                                                            'VILLA TANJUNG'}
+                                                            ''}
                                                     </p>
                                                     <p className="fs-13 wp-font-tt-drugs mb-3">
                                                         {dataElement.description ||
-                                                            'Tamarind Bay'}
+                                                            ''}
                                                     </p>
 
                                                     <div className="hstack gap-3 flex-wrap mb-3 text-grey-200">
@@ -116,26 +167,43 @@ const SectionListProperty = () => {
                                                             icon={
                                                                 <IconPropertyBad />
                                                             }
-                                                            value={2}
+                                                            value={
+                                                                vm?.rooms
+                                                                    ? countTotalBeds(
+                                                                          vm.rooms,
+                                                                      )
+                                                                    : '0'
+                                                            }
                                                         />
                                                         <PropertyAmities
                                                             icon={
                                                                 <IconPropertyGuest />
                                                             }
-                                                            value={2}
-                                                        />
-                                                        <PropertyAmities
-                                                            icon={
-                                                                <IconPropertyEat />
+                                                            value={
+                                                                vm.occupancy ||
+                                                                '0'
                                                             }
-                                                            value="Dine In"
                                                         />
-                                                        <PropertyAmities
-                                                            icon={
-                                                                <IconPropertyPool />
-                                                            }
-                                                            value="Pool"
-                                                        />
+                                                        {fineAmenities(
+                                                            'Dine In',
+                                                        ) ? (
+                                                            <PropertyAmities
+                                                                icon={
+                                                                    <IconPropertyEat />
+                                                                }
+                                                                value="Dine In"
+                                                            />
+                                                        ) : null}
+                                                        {fineAmenities(
+                                                            'Pool',
+                                                        ) ? (
+                                                            <PropertyAmities
+                                                                icon={
+                                                                    <IconPropertyPool />
+                                                                }
+                                                                value="Pool"
+                                                            />
+                                                        ) : null}
                                                     </div>
 
                                                     <div className="hstack gap-2 flex-wrap">

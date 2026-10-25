@@ -27,6 +27,9 @@ import IconPropertyPool from '@/component/icon/IconPropertyPool'
 import IconArrowRight from '@/component/icon/IconArrowRight'
 import IconArrowLeft from '@/component/icon/IconArrowLeft'
 import { imgReelConfig } from '@/config/urlImage.config'
+import canonicalURLHelper from '@/helper/canonicalURL.helper'
+import { countTotalBeds } from '@/helper/count.helper'
+import PropertyAmities from '@/page/property/component/PropertyAmities'
 
 const tags = ['Family Friendly', 'Guest’s Favorite', 'Breakfast']
 
@@ -121,12 +124,23 @@ const SectionHomeExclusiveStay = ({
                         }}
                         contentElement={(dataElement: any) => {
                             const dataTags = dataElement.tags || tags || []
+                            const { seo = {} } = dataElement
+
+                            const fineAmenities = (passName: string) => {
+                                return dataElement?.fineAmenities
+                                    ? dataElement.fineAmenities.some(
+                                          (v) => v.name === passName,
+                                      )
+                                    : false
+                            }
 
                             return (
                                 <>
                                     <Link
                                         className="w-100 vstack gap-3 text-grey-200 wp-hover-image overflow-hidden property-card-slider"
-                                        href={dataElement.buttonLink || '#'}>
+                                        href={canonicalURLHelper(
+                                            seo?.canonicalUrl,
+                                        )}>
                                         <WrapImageHoverOverlay
                                             className="banner"
                                             contentOverlay={
@@ -141,13 +155,9 @@ const SectionHomeExclusiveStay = ({
                                             }>
                                             <Image
                                                 src={imgReelConfig(
-                                                    dataElement?.coverPhoto ||
-                                                        PropertyVilla01,
+                                                    dataElement?.coverPhoto,
                                                 )}
-                                                alt={
-                                                    dataElement.nickname ||
-                                                    'Property'
-                                                }
+                                                alt={dataElement.nickname}
                                                 fill
                                                 className="object-fit-cover"
                                             />
@@ -156,35 +166,50 @@ const SectionHomeExclusiveStay = ({
                                         <div className="">
                                             <p className="fs-20 text-primary mb-0">
                                                 {dataElement?.category?.name ||
-                                                    'Villa'}
+                                                    ''}
                                             </p>
 
                                             <p className="fs-24 mb-1 wp-font-tt-drugs desc-two-line">
-                                                {dataElement.nickname ||
-                                                    'VILLA TANJUNG'}
+                                                {dataElement?.nickname || ''}
                                             </p>
                                             <p className="fs-13 wp-font-tt-drugs mb-3">
-                                                {dataElement.description ||
-                                                    'Tamarind Bay'}
+                                                {dataElement?.description || ''}
                                             </p>
 
                                             <div className="hstack gap-3 flex-wrap mb-3 text-grey-200">
                                                 <Amities
                                                     icon={<IconPropertyBad />}
-                                                    value={2}
+                                                    value={
+                                                        dataElement.rooms
+                                                            ? countTotalBeds(
+                                                                  dataElement.rooms,
+                                                              )
+                                                            : '0'
+                                                    }
                                                 />
                                                 <Amities
                                                     icon={<IconPropertyGuest />}
-                                                    value={2}
+                                                    value={
+                                                        dataElement.occupancy
+                                                    }
                                                 />
-                                                <Amities
-                                                    icon={<IconPropertyEat />}
-                                                    value="Dine In"
-                                                />
-                                                <Amities
-                                                    icon={<IconPropertyPool />}
-                                                    value="Pool"
-                                                />
+                                                {fineAmenities('Dine In') ? (
+                                                    <PropertyAmities
+                                                        icon={
+                                                            <IconPropertyEat />
+                                                        }
+                                                        value="Dine In"
+                                                    />
+                                                ) : null}
+
+                                                {fineAmenities('Pool') ? (
+                                                    <PropertyAmities
+                                                        icon={
+                                                            <IconPropertyPool />
+                                                        }
+                                                        value="Pool"
+                                                    />
+                                                ) : null}
                                             </div>
 
                                             <div className="hstack gap-2 flex-wrap">

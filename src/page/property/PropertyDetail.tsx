@@ -54,7 +54,7 @@ const PropertyDetail = ({
                             <div className="vstack gap-4">
                                 <div className="">
                                     <h1 className="font-tt-drugs fs-48 pb-2 text-grey-200">
-                                        {detail.nickname}
+                                        {detail?.nickname}
                                     </h1>
 
                                     {/*<SectionDescription>*/}
@@ -168,11 +168,25 @@ const PropertyDetail = ({
                                     </>
                                 ) : null}
 
-                                <hr />
-                                <div className="">
-                                    <TitleSection title="Fine Print" />
-                                    {/*Fine Print*/}
-                                </div>
+                                {detail?.descriptions &&
+                                detail.descriptions[1] &&
+                                detail.descriptions[1].summary ? (
+                                    <>
+                                        <hr />
+                                        <div className="">
+                                            <TitleSection title="Fine Print" />
+                                            {/*Fine Print*/}
+
+                                            <RenderHtml
+                                                html={
+                                                    detail.descriptions[1]
+                                                        .summary
+                                                }
+                                                className="text-grey-400"
+                                            />
+                                        </div>
+                                    </>
+                                ) : null}
 
                                 <hr />
                                 <div className="">

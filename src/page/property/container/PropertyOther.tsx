@@ -18,6 +18,8 @@ import {
     IconPropertyBestPrice,
     IconPropertyNewResort,
 } from '@/component/general/IconSvg'
+import canonicalURLHelper from '@/helper/canonicalURL.helper'
+import { countTotalBeds } from '@/helper/count.helper'
 
 const PropertyOther = ({ allSlug = [] }: { allSlug?: any }) => {
     const { list, isLoading } = useGeneralDataList({
@@ -42,7 +44,7 @@ const PropertyOther = ({ allSlug = [] }: { allSlug?: any }) => {
                 ) : (
                     <div className="row gx-3 gy-5">
                         {list.map((vm: any, index) => {
-                            const { slug } = vm.seo || {}
+                            const { slug, canonicalUrl } = vm.seo || {}
                             const dataElement: any = vm
                             const dataTags = vm?.tags || []
 
@@ -55,7 +57,13 @@ const PropertyOther = ({ allSlug = [] }: { allSlug?: any }) => {
                                 <div className="col-lg-4 col-md-6" key={index}>
                                     <Link
                                         className="w-100 vstack gap-3 text-grey-200 position-relative wp-hover-image overflow-hidden property-card-slider"
-                                        href={link}>
+                                        href={
+                                            canonicalUrl
+                                                ? canonicalURLHelper(
+                                                      canonicalUrl,
+                                                  )
+                                                : link
+                                        }>
                                         <WrapImageHoverOverlay
                                             className="banner"
                                             contentOverlay={
@@ -70,8 +78,7 @@ const PropertyOther = ({ allSlug = [] }: { allSlug?: any }) => {
                                             }>
                                             <Image
                                                 src={imgReelConfig(
-                                                    dataElement?.coverPhoto ||
-                                                        PropertyVilla01,
+                                                    dataElement?.coverPhoto,
                                                 )}
                                                 alt={
                                                     dataElement.nickname ||
@@ -85,26 +92,30 @@ const PropertyOther = ({ allSlug = [] }: { allSlug?: any }) => {
                                         <div className="">
                                             <p className="fs-20 text-primary mb-0">
                                                 {dataElement?.category?.name ||
-                                                    'Villa'}
+                                                    ''}
                                             </p>
 
                                             <p className="fs-24 mb-1 wp-font-tt-drugs desc-two-line">
-                                                {dataElement.nickname ||
-                                                    'VILLA TANJUNG'}
+                                                {dataElement?.nickname || ''}
                                             </p>
                                             <p className="fs-13 wp-font-tt-drugs mb-3">
-                                                {dataElement.description ||
-                                                    'Tamarind Bay'}
+                                                {dataElement?.description || ''}
                                             </p>
 
                                             <div className="hstack gap-3 flex-wrap mb-3 text-grey-200">
                                                 <PropertyAmities
                                                     icon={<IconPropertyBad />}
-                                                    value={2}
+                                                    value={
+                                                        vm?.rooms
+                                                            ? countTotalBeds(
+                                                                  vm.rooms,
+                                                              )
+                                                            : '0'
+                                                    }
                                                 />
                                                 <PropertyAmities
                                                     icon={<IconPropertyGuest />}
-                                                    value={2}
+                                                    value={vm.occupancy}
                                                 />
                                                 <PropertyAmities
                                                     icon={<IconPropertyEat />}

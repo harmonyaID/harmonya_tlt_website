@@ -1,0 +1,207 @@
+// By npm vanillajs-datepicker
+@import 'vanillajs-datepicker/sass/datepicker';
+// ======= End =======
+
+.wp-custom-datepicker {
+  // display: block !important;
+
+  .datepicker-dropdown {
+    .datepicker-picker {
+      box-shadow: none;
+      border: 1px solid $neutral-200;
+      @extend .bg-white;
+
+      .datepicker-header {
+        .datepicker-controls {
+          padding: 0.5rem 0.5rem 0 0.5rem;
+
+          button {
+            margin-top: 0;
+            padding: 0;
+
+            &.view-switch {
+              font-size: 0.875rem;
+              color: $black;
+              @extend .bg-white;
+              //border-color: var(--bs-gray-300);
+              border-color: $primary;
+            }
+
+            &.prev-btn,
+            &.next-btn {
+              font-size: 1.25rem;
+              color: $white;
+              background-color: $primary;
+              border-color: $primary;
+            }
+
+            &:hover {
+              //background-color: #eeeeee;
+              background-color:$gray-400;
+            }
+          }
+        }
+      }
+
+      .datepicker-main {
+        padding: 0.5rem;
+
+        .datepicker-view {
+          .days-of-week {
+            .dow {
+              color: $primary;
+              font-size: 0.75rem;
+            }
+          }
+
+          .datepicker-cell {
+            &:not(.day) {
+              height: 3.5rem;
+            }
+
+            &.focused:not(.selected) {
+              background-color: $primary;
+              color: $white;
+            }
+          }
+        }
+
+        .datepicker-grid {
+          .day {
+            color: $black;
+            font-size: 0.75rem;
+            //background-color: var(--bs-gray-200);
+
+            &.selected {
+              //   color: var(--bs-white-mood-theme);
+              //   color: var(--bs-gray-800);
+              color: $black;
+            }
+
+            &.prev,
+            &.next {
+              //color: #eaecee; // Default
+              //color: var(--bs-white-mood-theme);
+              color: $gray-400;
+            }
+
+            &:hover {
+              //background-color: #f2f4f5;
+              background-color: $gray-400;
+            }
+          }
+        }
+
+        .datepicker-cell {
+          &.range {
+            background-color: $gray-200;
+          }
+        }
+      }
+    }
+  }
+
+  .input-daterange {
+    .startDate {
+      &.form-control {
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+      }
+    }
+
+    .endDate {
+      &.form-control {
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+      }
+    }
+
+    .input-group-addon {
+      background: $gray-300;
+      //border: 1px solid var(--gx-input-border-color);
+      color: $neutral-300;
+      font-size: 14px;
+      padding: 0 10px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .datepicker-footer {
+    background-color: $white;
+    padding: 8px 4px;
+
+    button {
+      margin-top: 0;
+      width: 100%;
+      //border: unset;
+      border: 1px solid $primary;
+      &:hover {
+        border: 1px solid $primary;
+      }
+    }
+    .clear-button {
+      background-color: $primary !important;
+      color: $white !important;
+    }
+
+  }
+}
+
+// Date Picker Required
+.input-datepicker-ref {
+  position: absolute;
+  bottom: -2px;
+  height: 0;
+  width: 100%;
+  border: 0;
+  color: transparent;
+  background-color: transparent;
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+
+    + .focus-required {
+      border: 1px solid var(--bs-neutral-200);
+    }
+  }
+}
+
+.custom-radio {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 22px;
+  height: 22px;
+  border: 2px solid $gray-300; /* Gray outer border */
+  border-radius: 50%;
+  background-color: #fff; /* White middle */
+  display: inline-grid;
+  place-content: center;
+  cursor: pointer;
+}
+
+.custom-radio::before {
+  content: "";
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: $primary; /* Blue inner circle */
+  transform: scale(0);
+  transition: transform 0.12s ease-in-out;
+}
+
+.custom-radio:checked::before {
+  transform: scale(1);
+}
+
+.custom-radio:checked {
+  background-color: #fff;
+  border-color: $gray-400;
+}
+
+.custom-radio:focus {
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.2);
+}

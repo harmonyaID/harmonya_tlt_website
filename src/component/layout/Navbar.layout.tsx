@@ -251,6 +251,7 @@ const NavbarLayout = ({
                                     href="#"
                                     role="button"
                                     data-bs-toggle="dropdown"
+                                    data-bs-display="static" // posisi dinamis
                                     aria-expanded="false">
                                     {EXPERIENCE_MENU} <IconArrowBottom2 />
                                 </a>
@@ -265,19 +266,19 @@ const NavbarLayout = ({
                                                             list={[
                                                                 objectChildOfGroup(
                                                                     'JUNGUTBATU',
-                                                                    '#',
+                                                                    '/experience/play/jungutbatu',
                                                                 ),
                                                                 objectChildOfGroup(
                                                                     'NUSA CENINGAN',
-                                                                    '#',
+                                                                    '/experience/play/nusa-ceningan',
                                                                 ),
                                                                 objectChildOfGroup(
                                                                     'MUSHROOM & SANDY BY',
-                                                                    '#',
+                                                                    '/experience/play/mushroom-and-sandy-bay',
                                                                 ),
                                                                 objectChildOfGroup(
                                                                     'ALL RESTAURANT',
-                                                                    '#',
+                                                                    '/experience/eat',
                                                                 ),
                                                             ]}
                                                         />
@@ -397,6 +398,7 @@ const NavbarLayout = ({
                                     href="#"
                                     role="button"
                                     data-bs-toggle="dropdown"
+                                    data-bs-display="static" // posisi dinamis
                                     aria-expanded="false">
                                     {ISLAND_GUIDE_MENU} <IconArrowBottom2 />
                                 </a>
