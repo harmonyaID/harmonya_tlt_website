@@ -1,5 +1,6 @@
 import {
     get,
+    post,
     renderCancelToken,
     queryFilter,
 } from '@/service/api/@config/configAxios'
@@ -50,4 +51,35 @@ export const _shapeMethodGetSearch = (
     isMsgSuccess: boolean = true,
 ) => {
     return _shapeMethodGet(url + queryFilter(search), tokenCancel)
+}
+
+export const _shapeMethodPost = (url: string, formRequest: any = {}) => {
+    return post(url, formRequest)
+        .then((res: any) => {
+            // if (isSuccess(res.data)) {
+            //     if (isMsgSuccess) {
+            //         notifySuccess(res.data.status.message || 'Success')
+            //     }
+            // } else {
+            //     notifyAPIError(res.data.status, true)
+            // }
+
+            if (isSuccess(res.data)) {
+            }
+
+            return res.data
+        })
+        .catch((err: any) => {
+            // if (err && err.response && err.response.status === 401) {
+            //     manageHandleTokenExpired()
+            // } else {
+            //     if (tokenCancel && argCatchMsg(err)) {
+            //         notifyError(err.message)
+            //     } else {
+            //         //
+            //     }
+            // }
+
+            console.log('err: ', err)
+        })
 }

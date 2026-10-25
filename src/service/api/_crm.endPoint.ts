@@ -32,6 +32,22 @@ export const SrvContentPropertyHomePage = baseApi + '/properties'
 export const SrvContentPropertyDetail = (slug?: string) =>
     baseApi + '/properties/' + slug
 
+// Property -> Attribute
+export const SrvPropertyType = baseApi + '/property-types'
+
+export const SrvPropertyTag = baseApi + '/property-tags'
+
+// Property -> Form
+export const SrvPropertyContact = baseApi + '/property-contact-forms'
+
+export const SrvPropertyInquiry = baseApi + '/property-inquiry-forms'
+
+// Property Variant
+export const SrvContentPropertyVariant = baseApi + '/property-variants'
+
+export const SrvContentPropertyVariantDetail = (slug?: string) =>
+    baseApi + '/property-variants/' + slug
+
 // Offers
 export const SrvContentOfferPage = baseApi + '/offers'
 
@@ -66,3 +82,15 @@ export const SrvContentIslandGuideType = baseApi + '/island-guide-types'
 
 export const SrvContentIslandGuideTypeDetail = (slug?: string) =>
     baseApi + '/island-guide-types/' + slug
+
+// Contact US
+export const SrvContactForm = baseApi + '/website-contact-forms'
+
+export const SrvContactType = baseApi + '/components/contact-form-types'
+
+// Boat
+export const SrvBoat = baseApi + '/boats'
+
+export const SrvBoatDetail = (id) => baseApi + '/boats/' + id
+
+export const SrvBoatContactForm = baseApi + '/boat-contact-forms'

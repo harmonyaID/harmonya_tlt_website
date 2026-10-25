@@ -1,0 +1,176 @@
+// Boat Transfer
+.boat-transfer-color {
+  color: #626262 !important;
+}
+
+.boat-transfer-card {
+  .banner {
+    height: 320px !important;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+}
+
+.boat-transfer-card-g {
+  --bs-gutter-x: 70px;
+  --bs-gutter-y: 70px;
+}
+
+.boat-transfer-card-promo {
+  background: #C7455D;
+  padding: 6px 20px;
+  clip-path: polygon(
+          0 0,
+          100% 0,
+          100% 80%,
+          50% 100%,
+          0 80%
+  );
+
+  .promo-text {
+    font-size: 25px;
+    line-height: 0.8;
+  }
+}
+
+.boat-transfer-banner {
+  height: 350px;
+  width: 100%;
+  overflow: auto;
+  position: relative;
+  .discount {
+    h1 {
+      font-size: 198.39px;
+      font-weight: bold;
+      line-height: 0.8;
+    }
+
+    h4 {
+      font-size: 58.3px;
+    }
+
+    p {
+      font-size: 34.13px;
+    }
+  }
+
+  .bookings {
+    font-size: 27.19px;
+  }
+
+  .exclude {
+    font-size: 20.99px;
+    font-weight: lighter;
+  }
+}
+
+.boat-transfer-banner-sm {
+  height: 201px;
+  width: 100%;
+  overflow: auto;
+  position: relative;
+  .discount {
+    h1 {
+      font-size: 114px;
+      font-weight: bold;
+      line-height: 0.8;
+    }
+
+    h4 {
+      font-size: 33px;
+    }
+
+    p {
+      font-size: 19.13px;
+    }
+  }
+
+  .bookings {
+    font-size: 15.19px;
+  }
+
+  .exclude {
+    font-size: 12px;
+    font-weight: lighter;
+  }
+}
+
+.px-50 {
+  padding: 0 50px 0 50px;
+}
+
+.end-20 {
+  right: 20px;
+}
+
+.mb-90 {
+  margin-bottom: 90px;
+}
+
+.mt-70 {
+  margin-top: 70px;
+}
+
+.section-boat-banner-reel {
+  height: 420px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  @extend .img-cover-general;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #BABABA;
+
+  th, td {
+    padding: 5px 14px;
+    border: none;
+    color: #626262;
+  }
+
+  thead th {
+    background-color: #EEEEEE;
+    text-align: center;
+    color: #626262;
+    padding: 15px 14px;
+    text-transform: uppercase;
+    font-weight: normal;
+  }
+}
+
+.modal-boat-transfer-booking .modal-body {
+  overflow-y: auto;
+  max-height: 80vh;
+  scrollbar-color: #00A79C #f1f1f1;
+  scrollbar-width: thin;
+}
+
+.modal-boat-transfer-booking label {
+  font-size: 20px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 5%;
+  color: #555555;
+
+  span {
+    position: relative;
+    top: -3px;
+    color: red;
+  }
+}
+
+.modal-boat-transfer-booking::-webkit-scrollbar {
+  width: 5px !important;
+}
+
+.modal-boat-transfer-booking::-webkit-scrollbar-thumb {
+  background: #00A79C;
+  border-radius: 10px;
+}
+
+.modal-boat-transfer-booking::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}

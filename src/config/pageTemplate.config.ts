@@ -5,6 +5,7 @@ export const TEMPLATE_CONTACT_US = 'template-page-contact-us'
 export const TEMPLATE_EXPERIENCE = 'template-page-experience'
 // export const TEMPLATE_EXPERIENCE_DETAIL = 'template-page-experience-detail'
 export const TEMPLATE_FAQ = 'template-page-FAQ'
+export const TEMPLATE_BOAT_TRANSFER = 'template-page-boat-transfer'
 
 export const TEMPLATE_INFO_PRES_AND_MEDIA = 'template-page-press-and-media'
 export const TEMPLATE_INFO_CONTACT = 'template-page-contact'
