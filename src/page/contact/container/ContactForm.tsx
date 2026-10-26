@@ -6,10 +6,15 @@ import FormWrap from '@/component/wrapping/Form.wrap'
 import FormInput from '@/component/form/FormInput'
 import FormTextArea from '@/component/form/FormTextarea'
 import { BtnPrimary } from '@/component/general/Button'
+import useContactType from '@/page/contact/hook/useContactType'
+import FormSelectOption from '@/component/form/FormSelectOption'
 
 const ContactForm = () => {
     const { formRequest, isLoading, _handleChange, _handleSubmit } =
         useContactFormHook()
+
+    const { listType } = useContactType()
+
     return (
         <>
             <FormWrap
@@ -48,6 +53,18 @@ const ContactForm = () => {
                                 />
                             </div>
                         </div>
+
+                        <FormSelectOption
+                            label="Type of Inquiry"
+                            required
+                            name="formTypeId">
+                            <option value="">- Select Type -</option>
+                            {listType?.map((vm: any, index) => (
+                                <option value={vm.id} key={index}>
+                                    {vm.name}
+                                </option>
+                            ))}
+                        </FormSelectOption>
 
                         <FormInput
                             label="Subject"

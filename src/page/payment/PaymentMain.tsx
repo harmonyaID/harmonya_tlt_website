@@ -11,7 +11,7 @@ const PaymentMain = () => (
             <div className="container">
                 <div className="row justify-content-between">
                     <div className="col-md-5">
-                        <h1 className="text-grey-400 font-tt-drugs">
+                        <h1 className="text-grey-400 text-uppercase font-tt-drugs">
                             Guest information
                         </h1>
                     </div>

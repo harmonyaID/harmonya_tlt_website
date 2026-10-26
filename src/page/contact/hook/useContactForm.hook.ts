@@ -27,9 +27,7 @@ const useContactFormHook = () => {
     const _handleSubmit = () => {
         if (!isLoading) {
             setIsLoading(true)
-            addFormContact({
-                name: formRequest.name,
-            })
+            addFormContact(formRequest)
                 .then((resData) => {
                     setIsLoading(false)
 
