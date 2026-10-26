@@ -130,7 +130,7 @@ const SectionHomeExclusiveStay = ({
                                     <Link
                                         className="w-100 vstack gap-3 text-grey-200 wp-hover-image overflow-hidden property-card-slider"
                                         href={canonicalURLHelper(
-                                            seo.canonicalUrl,
+                                            seo?.canonicalUrl,
                                         )}>
                                         <WrapImageHoverOverlay
                                             className="banner"

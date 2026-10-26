@@ -17,7 +17,7 @@ export const COPYRIGHT_AND_LEGAL_NOTICE_PATH = '/copyright-and-legal-notice'
 
 export const STAY_PATH = '/stay'
 
-export const BOAT_TRANSFERS_PATH = '/boat-transfers'
+export const BOAT_TRANSFERS_PATH = '/boats/boat-transfers'
 
 export const EXPERIENCE_PATH = '/experience'
 

@@ -100,6 +100,9 @@ const page = async ({ params }: PropsData) => {
                         allSlug={slug}
                     />
                 ),
+                [TEMPLATE_BOAT_TRANSFER]: (
+                    <BoatTransferDetailTemplate slug={slug[2]} />
+                ),
             }
 
             if (renderPageTemplateLevel3[template]) {
@@ -120,7 +123,7 @@ const page = async ({ params }: PropsData) => {
                     <IslandGuideDetailLevel1Template slug={slug[1]} />
                 ),
                 [TEMPLATE_BOAT_TRANSFER]: (
-                    <BoatTransferDetailTemplate slug={slug[1]} />
+                    <BoatTransferTemplate content={contentPage} />
                 ),
             }
 
@@ -141,9 +144,6 @@ const page = async ({ params }: PropsData) => {
                 ),
                 [TEMPLATE_ISLAND_GUIDE]: (
                     <IslandGuideTemplate content={contentPage} />
-                ),
-                [TEMPLATE_BOAT_TRANSFER]: (
-                    <BoatTransferTemplate content={contentPage} />
                 ),
 
                 // Info. General
