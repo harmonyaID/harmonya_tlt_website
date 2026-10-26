@@ -1,44 +1,54 @@
 import { MDGlobalSearchDat } from '@/config/modal.config'
-import { BtnPrimary } from '@/component/general/Button'
+import { BtnLinkPrimary, BtnPrimary } from '@/component/general/Button'
+import { SEARCH_PATH } from '@/config/pagePath.config'
+import { useState } from 'react'
+import { slugify } from '@/helper/slugify.helper'
+import { useRouter } from 'next/navigation'
+import { Search } from 'feather-icons-react'
+import actionModal from '@/helper/base/actionModal.helper'
 
 const GlobalSearchData = () => {
+    const router = useRouter()
+
+    const [formRequest, setFormRequest] = useState({
+        search: '',
+    })
+
+    const _handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value
+        setFormRequest({ search: value })
+    }
+
     return (
         <div
             className="modal fade"
             id={MDGlobalSearchDat}
             aria-labelledby="exampleModalLabel"
             aria-hidden="true">
-            <div className="modal-dialog modal-xl">
-                <div className="modal-content">
-                    <div className="modal-header border-0">
-                        <p
-                            className="modal-title fs-5 fw-500"
-                            id="exampleModalLabel">
-                            Search
-                        </p>
-                        <button
-                            type="button"
-                            className="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    </div>
+            <div className="modal-dialog modal-xl bg-transparent">
+                <div className="modal-content bg-transparent border-0">
                     <div className="modal-body">
-                        <div className="row justify-content-center">
-                            <div className="col-lg-7">
-                                <div className="hstack gap-3 align-items-center">
-                                    <div className="position-relative col">
-                                        <input
-                                            type="text"
-                                            className="form-control rounded-pill"
-                                            placeholder="e.g Search Villa, and Property"
-                                        />
-                                    </div>
+                        <div className="position-relative col">
+                            <span className="search-input-icon text-primary">
+                                <Search />
+                            </span>
 
-                                    <BtnPrimary className="rounded-pill">
-                                        Search
-                                    </BtnPrimary>
-                                </div>
-                            </div>
+                            <input
+                                type="text"
+                                className="rounded-pill w-100 search-input font-tt-drugs"
+                                placeholder="SEARCH..."
+                                onChange={_handleChange}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        router.push(
+                                            SEARCH_PATH +
+                                                '/' +
+                                                slugify(formRequest.search),
+                                        )
+                                        actionModal(MDGlobalSearchDat, true)
+                                    }
+                                }}
+                            />
                         </div>
                     </div>
                 </div>

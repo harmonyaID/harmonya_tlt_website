@@ -11,6 +11,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import actionModal from '@/helper/base/actionModal.helper'
 import { MDBoatTransferBooking } from '@/config/modal.config'
+import { BOAT_TRANSFERS_PATH } from '@/config/pagePath.config'
 
 const BoatTransferCard = ({
     isSimple = false,
@@ -86,7 +87,7 @@ const BoatTransferCard = ({
                     </div>
                     <div className="hstack gap-2 mt-3">
                         <BtnLinkPrimary
-                            href={`/boat-transfers/${boat.id}`}
+                            href={`${BOAT_TRANSFERS_PATH}/${boat.id}`}
                             isOutline
                             className="rounded-pill fs-14 w-100">
                             MORE DETAILS

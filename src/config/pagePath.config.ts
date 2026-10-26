@@ -29,6 +29,8 @@ export const ABOUT_PATH = '/about'
 
 export const CONTACT_PATH = '/contact'
 
+export const SEARCH_PATH = '/search'
+
 // Villa
 export const VILLA_PATH = '/villa'
 export const VILLA_SLUG_PATH = '/villa/'

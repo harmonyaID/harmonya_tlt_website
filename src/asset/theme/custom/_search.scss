@@ -1,0 +1,29 @@
+.search-result-img {
+  height: 413px !important;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.search-result-color {
+  color: #555555 !important;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  box-shadow: none;
+  padding: 13px 80px;
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+.search-input-icon {
+  position: absolute;
+  left: 50px;
+  top: 0;
+  transform: translateY(50%);
+}
