@@ -33,11 +33,11 @@ const SearchResultCard = () => {
                 </Link>
             </div>
             <div className="col-md-6">
-                <div className="vstack gap-3 justify-content-center h-100 search-result-color">
+                <div className="vstack gap-3 justify-content-center h-100 color-555">
                     <p className="font-tt-drugs text-uppercase fw-light m-0">
                         August 8, 2025
                     </p>
-                    <p className="font-tt-drugs fs-32 text-uppercase search-result-color m-0">
+                    <p className="font-tt-drugs fs-32 text-uppercase color-555 m-0">
                         a complete guide to sandy bay, nusa lembongan
                     </p>
                     <div
