@@ -12,6 +12,10 @@ import {
     CodeIconArrow,
 } from '@/component/general/Button'
 import Image from 'next/image'
+import { useEffect, useMemo, useState } from 'react'
+import { getTeamList } from '@/service/api/about.api'
+import { isSuccess } from '@/helper/base/condition.helper'
+import { imgLandscapeConfig } from '@/config/urlImage.config'
 
 const AboutUsMain = ({
     SECTION2,
@@ -22,6 +26,30 @@ const AboutUsMain = ({
     SECTION3: any
     SECTION4: any
 }) => {
+    const [isLoadingTeam, setIsLoadingTeam] = useState(false)
+    const [team, setTeam] = useState<any>([])
+
+    const _handleGetTeam = () => {
+        getTeamList({}).then((res) => {
+            if (isSuccess(res)) {
+                setTeam(res.result)
+            }
+        })
+    }
+
+    const groupedTeam = useMemo(() => {
+        const regrouped = Object.groupBy(
+            team.toSorted((a, b) => a.level - b.level || a.order - b.order),
+            (item: any) => item.level,
+        )
+
+        return Object.values(regrouped)
+    }, [team])
+
+    useEffect(() => {
+        _handleGetTeam()
+    }, [])
+
     return (
         <>
             <section className="section-space-small">
@@ -347,6 +375,41 @@ const AboutUsMain = ({
                             discover the island through the eyes of our team.
                         </p>
                     </div>
+
+                    {groupedTeam.map((group, index) => (
+                        <div
+                            className="hstack flex-nowrap gap-5 align-items-start mt-70 justify-content-center"
+                            key={index}>
+                            {group.map((vm) => (
+                                <div
+                                    key={vm.id}
+                                    className="col-md-3 overflow-hidden">
+                                    <div className="text-center color-555">
+                                        <Image
+                                            src={vm.photo}
+                                            alt={vm.name}
+                                            width={342}
+                                            height={459}
+                                            className="object-fit-cover"
+                                        />
+                                        <p className="font-tt-drugs fs-24 text-primary mb-1 mt-3">
+                                            {vm.name}
+                                        </p>
+                                        <p className="font-tt-drugs text-primary fs-16 mb-1">
+                                            {vm.role}
+                                        </p>
+                                        <hr className="my-3 p-0" />
+                                        <p className="mb-1 fs-16 fw-semibold">
+                                            {vm.question}
+                                        </p>
+                                        <p className="mb-1 fs-16">
+                                            {vm.answer}
+                                        </p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    ))}
                 </div>
             </section>
         </>

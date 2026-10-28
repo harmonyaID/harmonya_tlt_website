@@ -94,3 +94,6 @@ export const SrvBoat = baseApi + '/boats'
 export const SrvBoatDetail = (id) => baseApi + '/boats/' + id
 
 export const SrvBoatContactForm = baseApi + '/boat-contact-forms'
+
+// Team
+export const SrvTeam = baseApi + '/teams'
