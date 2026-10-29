@@ -473,6 +473,32 @@ a {text-decoration: none;}
   }
 }
 
+// About Us
+.gx-120 {
+  --bs-gutter-x: 120px;
+}
+
+.section-about-banner-reel {
+  height: 730px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  @extend .img-cover-general;
+}
+
+.absolute-y-middle {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%),
+}
+
+.end-5 {
+  right: 5%;
+}
+
+.start-5 {
+  left: 5%;
+}
 
 
 @import 'base/_typography';

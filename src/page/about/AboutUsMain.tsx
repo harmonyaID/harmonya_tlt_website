@@ -16,6 +16,10 @@ import { useEffect, useMemo, useState } from 'react'
 import { getTeamList } from '@/service/api/about.api'
 import { isSuccess } from '@/helper/base/condition.helper'
 import { imgLandscapeConfig } from '@/config/urlImage.config'
+import {
+    ABOUT_HOLIDAY_BOOKING_PATH,
+    ABOUT_PROPERTY_MANAGEMENT_PATH,
+} from '@/config/pagePath.config'
 
 const AboutUsMain = ({
     SECTION2,
@@ -176,7 +180,7 @@ const AboutUsMain = ({
                     </div>
 
                     <div className="mt-70">
-                        <div className="row g-5">
+                        <div className="row gx-5">
                             <div className="col">
                                 <div className="w-100 vstack gap-3 text-grey-200 wp-hover-image">
                                     <WrapImageHoverOverlay
@@ -192,7 +196,11 @@ const AboutUsMain = ({
                                 </div>
                             </div>
                             <div className="col-md-6 font-tt-drugs color-555">
-                                <div className="vstack gap-3 justify-content-center h-100 px-5">
+                                <div
+                                    className="vstack gap-3 justify-content-center h-100"
+                                    style={{
+                                        paddingLeft: '50px',
+                                    }}>
                                     <div>
                                         <p
                                             className="m-0 mb-2 fs-48 text-uppercase"
@@ -227,7 +235,7 @@ const AboutUsMain = ({
                                     </p>
 
                                     <BtnLinkPrimary
-                                        href="#"
+                                        href={ABOUT_HOLIDAY_BOOKING_PATH}
                                         isIconArrow
                                         className="width-fit-content rounded-pill text-uppercase">
                                         Book a stay
@@ -236,7 +244,7 @@ const AboutUsMain = ({
                             </div>
                         </div>
 
-                        <div className="row g-5 flex-row-reverse mt-70">
+                        <div className="row gx-5 flex-row-reverse mt-70">
                             <div className="col">
                                 <div className="w-100 vstack gap-3 text-grey-200 wp-hover-image">
                                     <WrapImageHoverOverlay
@@ -252,7 +260,11 @@ const AboutUsMain = ({
                                 </div>
                             </div>
                             <div className="col-md-6 font-tt-drugs color-555">
-                                <div className="vstack gap-3 justify-content-center h-100 pe-5">
+                                <div
+                                    className="vstack gap-3 justify-content-center h-100"
+                                    style={{
+                                        paddingRight: '50px',
+                                    }}>
                                     <div>
                                         <p
                                             className="m-0 mb-2 fs-48 text-uppercase"
@@ -286,7 +298,7 @@ const AboutUsMain = ({
                                     </p>
 
                                     <BtnLinkPrimary
-                                        href="#"
+                                        href={ABOUT_PROPERTY_MANAGEMENT_PATH}
                                         isIconArrow
                                         className="width-fit-content rounded-pill text-uppercase">
                                         DISCUSS YOUR PROPERTY
@@ -295,7 +307,7 @@ const AboutUsMain = ({
                             </div>
                         </div>
 
-                        <div className="row g-5 mt-70">
+                        <div className="row gx-5 mt-70">
                             <div className="col">
                                 <div className="w-100 vstack gap-3 text-grey-200 wp-hover-image">
                                     <WrapImageHoverOverlay
@@ -311,7 +323,11 @@ const AboutUsMain = ({
                                 </div>
                             </div>
                             <div className="col-md-6 font-tt-drugs color-555">
-                                <div className="vstack gap-3 justify-content-center h-100 ps-5">
+                                <div
+                                    className="vstack gap-3 justify-content-center h-100"
+                                    style={{
+                                        paddingLeft: '50px',
+                                    }}>
                                     <div>
                                         <p
                                             className="m-0 mb-2 fs-48 text-uppercase"
@@ -378,12 +394,12 @@ const AboutUsMain = ({
 
                     {groupedTeam.map((group, index) => (
                         <div
-                            className="hstack flex-nowrap gap-5 align-items-start mt-70 justify-content-center"
+                            className="row mt-70 gx-120 justify-content-center"
                             key={index}>
                             {group.map((vm) => (
                                 <div
                                     key={vm.id}
-                                    className="col-md-3 overflow-hidden">
+                                    className="col-lg-3 col-sm-6 col-12 overflow-hidden">
                                     <div className="text-center color-555">
                                         <Image
                                             src={vm.photo}

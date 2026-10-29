@@ -46,6 +46,8 @@ export const BLOG_PATH = '/blog'
 export const BLOG_SLUG_PATH = '/blog/'
 
 // About
+export const ABOUT_PROPERTY_MANAGEMENT_PATH = '/about-us/property-management'
+export const ABOUT_HOLIDAY_BOOKING_PATH = '/about-us/holiday-booking'
 
 // Offer's
 export const OFFER_PATH = '/offer'
