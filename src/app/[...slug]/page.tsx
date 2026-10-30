@@ -14,6 +14,8 @@ import {
     TEMPLATE_PROPERTY,
     TEMPLATE_INFO_PRES_AND_MEDIA,
     TEMPLATE_BOAT_TRANSFER,
+    TEMPLATE_SEARCH,
+    TEMPLATE_ABOUT,
 } from '@/config/pageTemplate.config'
 import BlogTemplate from '@/page/@template/BlogTemplate'
 import FAQTemplate from '@/page/@template/FAQTemplate'
@@ -35,6 +37,8 @@ import IslandGuideDetailLevel2Template from '@/page/@template/IslandGuideDetailL
 import PressAndMediaTemplate from '@/page/@template/PressAndMediaTemplate'
 import BoatTransferTemplate from '@/page/@template/BoatTransferTemplate'
 import BoatTransferDetailTemplate from '@/page/@template/BoatTransferDetailTemplate'
+import SearchTemplate from '@/page/@template/SearchTemplate'
+import AboutUsTemplate from '@/page/@template/AboutUsTemplate'
 
 type PropsData = {
     params: Promise<{ slug: string }>
@@ -100,6 +104,9 @@ const page = async ({ params }: PropsData) => {
                         allSlug={slug}
                     />
                 ),
+                [TEMPLATE_BOAT_TRANSFER]: (
+                    <BoatTransferDetailTemplate slug={slug[2]} />
+                ),
             }
 
             if (renderPageTemplateLevel3[template]) {
@@ -120,7 +127,10 @@ const page = async ({ params }: PropsData) => {
                     <IslandGuideDetailLevel1Template slug={slug[1]} />
                 ),
                 [TEMPLATE_BOAT_TRANSFER]: (
-                    <BoatTransferDetailTemplate slug={slug[1]} />
+                    <BoatTransferTemplate content={contentPage} />
+                ),
+                [TEMPLATE_SEARCH]: (
+                    <SearchTemplate slug={slug[1]} content={contentPage} />
                 ),
             }
 
@@ -142,9 +152,7 @@ const page = async ({ params }: PropsData) => {
                 [TEMPLATE_ISLAND_GUIDE]: (
                     <IslandGuideTemplate content={contentPage} />
                 ),
-                [TEMPLATE_BOAT_TRANSFER]: (
-                    <BoatTransferTemplate content={contentPage} />
-                ),
+                [TEMPLATE_ABOUT]: <AboutUsTemplate content={contentPage} />,
 
                 // Info. General
                 [TEMPLATE_INFO_CONTACT]: (
