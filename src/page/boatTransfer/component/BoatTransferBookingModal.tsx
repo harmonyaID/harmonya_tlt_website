@@ -10,8 +10,11 @@ import FormDatepicker from '@/component/form/FormDatepicker'
 import FormRadio from '@/component/form/FormRadio'
 import FormTimePicker from '@/component/form/FormTimePicker'
 import FormPhone from '@/component/form/FormPhone'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import useNestedFormHook from '@/hook/base/useNestedForm.hook'
+import { getBoatDetail } from '@/service/api/boatTransfer.api'
+import { isSuccess } from '@/helper/base/condition.helper'
+import LoadingSpinner from '@/component/loading/LoadingSpinner'
 
 const ONE_WAY = 'one_way'
 const RETURN = 'return'
@@ -20,41 +23,80 @@ const FALSE = '0'
 
 const param = {
     boatId: '',
-    name: '',
-    email: '',
-    phone: '',
     ticketType: ONE_WAY,
-    baliLandLocation: '',
+    fromLocation: '',
+    toLocation: '',
+    departureDate: '',
+    departureTime: '',
+    returnDate: '',
+    returnTime: '',
+    adultCount: TRUE,
+    childCount: FALSE,
+    infantCount: FALSE,
+
+    name: '',
+    phoneCountryCode: '',
+    phone: '',
+    email: '',
+
+    needLandTransport: TRUE,
+    departurePickupPoint: '',
+    departurePickupFlightNumber: '',
+    departurePickupArrivalTime: '',
+    departureDropOffPoint: '',
+    departureDropOffLocation: '',
+    departureDropOffArrivalTime: '',
+
+    returnPickupPoint: '',
+    returnPickupLocation: '',
+    returnPickupCheckoutTime: '',
+    returnDropOffPoint: '',
+    returnDropOffLocation: '',
+
     bookedThroughTlt: TRUE,
-    needLandTransport: FALSE,
     tltBookingRefName: '',
-    adultCount: 1,
-    childCount: 0,
-    infantCount: 0,
-    departureDateFromBali: '',
-    departureTimeFromBali: '',
-    pickUpLocationBali: '',
-    flightNumber: '',
-    arrivalTime: '',
-    hotelNameBali: '',
-    hotelContactBali: '',
-    departureDateFromLembongan: '',
-    departureTimeFromLembongan: '',
-    dropOffLocationBali: '',
-    flightTime: '',
-    hotelNameLembongan: '',
-    accommodationLembongan: '',
-    passengerNames: '',
-    hasSurfboard: TRUE,
-    hearAboutUs: '',
+    hasSurfboard: FALSE,
     message: '',
 }
 
-const BoatTransferBookingModal = () => {
+const BoatTransferBookingModal = ({ boatId }: { boatId?: number }) => {
     const [formRequest, setFormRequest] =
         useState<Record<keyof typeof param, any>>(param)
+    const [boat, setBoat] = useState<any>()
+    const [loadingDetail, setLoadingDetail] = useState<boolean>(false)
 
     const nestedForm = useNestedFormHook(formRequest, setFormRequest as any)
+
+    const _handleGetDetail = async () => {
+        try {
+            const res = await getBoatDetail(boatId)
+
+            if (isSuccess(res)) {
+                const boat = res.result
+                setFormRequest((prev) => ({
+                    ...prev,
+                    boatId: boat.id,
+                    fromLocation: boat.schedules?.[0].from || '',
+                    toLocation: boat.schedules?.[0].to || '',
+                }))
+
+                setBoat(res.result)
+            }
+        } finally {
+            setLoadingDetail(false)
+        }
+    }
+
+    useEffect(() => {
+        if (!boatId) return
+
+        const fetchDetail = async () => {
+            setLoadingDetail(true)
+            await _handleGetDetail()
+        }
+
+        fetchDetail()
+    }, [boatId])
 
     return (
         <div
@@ -94,11 +136,15 @@ const BoatTransferBookingModal = () => {
                             style={{ maxHeight: '80vh', overflowY: 'auto' }}>
                             <div className="container">
                                 <div className="px-5 py-3 vstack gap-4">
-                                    <p
-                                        className="text-uppercase fw-light mb-0"
-                                        style={{ fontSize: '24px' }}>
-                                        D'stars Fast Ferry
-                                    </p>
+                                    {loadingDetail ? (
+                                        <LoadingSpinner />
+                                    ) : (
+                                        <p
+                                            className="text-uppercase fw-light mb-0"
+                                            style={{ fontSize: '24px' }}>
+                                            {boat?.name}
+                                        </p>
+                                    )}
 
                                     <FormWrap
                                         actions={{
