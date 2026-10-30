@@ -17,7 +17,7 @@ export const COPYRIGHT_AND_LEGAL_NOTICE_PATH = '/copyright-and-legal-notice'
 
 export const STAY_PATH = '/stay'
 
-export const BOAT_TRANSFERS_PATH = '/boat-transfers'
+export const BOAT_TRANSFERS_PATH = '/boats/boat-transfers'
 
 export const EXPERIENCE_PATH = '/experience'
 
@@ -28,6 +28,8 @@ export const PRESS_AND_MEDIA_PATH = '/press-and-media'
 export const ABOUT_PATH = '/about'
 
 export const CONTACT_PATH = '/contact'
+
+export const SEARCH_PATH = '/search'
 
 // Villa
 export const VILLA_PATH = '/villa'
@@ -44,6 +46,8 @@ export const BLOG_PATH = '/blog'
 export const BLOG_SLUG_PATH = '/blog/'
 
 // About
+export const ABOUT_PROPERTY_MANAGEMENT_PATH = '/about-us/property-management'
+export const ABOUT_HOLIDAY_BOOKING_PATH = '/about-us/holiday-booking'
 
 // Offer's
 export const OFFER_PATH = '/offer'
