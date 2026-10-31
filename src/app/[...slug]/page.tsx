@@ -74,7 +74,7 @@ const page = async ({ params }: PropsData) => {
     const { template } = contentPage
 
     if (template) {
-        console.log('template: ', template)
+        // console.log('template: ', template)
 
         if (slug[3] && slug.length === 4) {
             const renderPageTemplateLevel4 = {
