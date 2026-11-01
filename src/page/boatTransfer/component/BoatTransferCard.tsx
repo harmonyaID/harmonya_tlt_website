@@ -6,7 +6,7 @@ import {
     BtnPrimary,
     CodeIconArrow,
 } from '@/component/general/Button'
-import BGHero from '@/asset/image/dummy/offer-last-bg-hero-half.jpg'
+import BGHero from '@/asset/image/default/imag-empty.svg'
 import Link from 'next/link'
 import Image from 'next/image'
 import actionModal from '@/helper/base/actionModal.helper'
@@ -55,7 +55,7 @@ const BoatTransferCard = ({
                         </div>
                     }>
                     <Image
-                        src={BGHero}
+                        src={boat?.photos?.[0]?.photo || BGHero}
                         alt="about home"
                         fill
                         priority

@@ -21,9 +21,13 @@ import actionModal from '@/helper/base/actionModal.helper'
 import { MDBoatTransferBooking } from '@/config/modal.config'
 import RenderHtml from '@/component/general/RenderHtml'
 import TextReadMore from '@/component/general/TextReadMore'
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { getBoatList } from '@/service/api/boatTransfer.api'
+import { isSuccess } from '@/helper/base/condition.helper'
 
 const BoatTransferDetail = ({ detail }: { detail: any }) => {
+    const [otherBoats, setOtherBoats] = useState([])
+
     const photos = useMemo(() => {
         return detail?.photos
             ?.sort((a, b) => a.order - b.order)
@@ -32,6 +36,22 @@ const BoatTransferDetail = ({ detail }: { detail: any }) => {
                 title: 'Photo ' + photo.order,
             }))
     }, [detail])
+
+    const _handleGetOtherBoats = () => {
+        getBoatList({
+            boatComponentTypeIds: [detail?.boatComponentType?.id],
+            limit: 3,
+            isRandom: true,
+        }).then((res) => {
+            if (isSuccess(res)) {
+                setOtherBoats(res.result)
+            }
+        })
+    }
+
+    useEffect(() => {
+        _handleGetOtherBoats()
+    }, [])
 
     return (
         <>
@@ -204,15 +224,11 @@ const BoatTransferDetail = ({ detail }: { detail: any }) => {
 
                     <div className="mt-70">
                         <div className="row boat-transfer-card-g ">
-                            <div className="col-md-4 col-12">
-                                <BoatTransferCard isSimple boat={null} />
-                            </div>
-                            <div className="col-md-4 col-12">
-                                <BoatTransferCard isSimple boat={null} />
-                            </div>
-                            <div className="col-md-4 col-12">
-                                <BoatTransferCard isSimple boat={null} />
-                            </div>
+                            {otherBoats.map((boat) => (
+                                <div className="col-md-4 col-12" key={boat.id}>
+                                    <BoatTransferCard isSimple boat={boat} />
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
