@@ -13,6 +13,7 @@ import actionModal from '@/helper/base/actionModal.helper'
 import { MDBoatTransferBooking } from '@/config/modal.config'
 import { BOAT_TRANSFERS_PATH } from '@/config/pagePath.config'
 import { Fragment } from 'react'
+import RenderHtml from '@/component/general/RenderHtml'
 
 const BoatTransferCard = ({
     isSimple = false,
@@ -69,9 +70,13 @@ const BoatTransferCard = ({
 
             {!isSimple && (
                 <>
-                    <div className="fs-16 fw-light mb-1 font-tt-drugs">
-                        {boat?.description}
-                    </div>
+                    {boat?.description && (
+                        <div className="fs-16 fw-light mb-1 font-tt-drugs">
+                            <RenderHtml
+                                html={boat?.description?.substring(0, 200)}
+                            />
+                        </div>
+                    )}
 
                     {boat?.schedule &&
                         boat?.schedule?.map((schedule, index) => (

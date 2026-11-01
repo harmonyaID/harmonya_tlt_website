@@ -33,7 +33,6 @@ const BoatTransferDetail = ({ detail }: { detail: any }) => {
             }))
     }, [detail])
 
-    console.log(detail)
     return (
         <>
             <div className="container-fluid px-5 py-3 font-tt-drugs fs-16 fw-light">
