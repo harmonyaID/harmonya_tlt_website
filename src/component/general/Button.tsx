@@ -118,14 +118,16 @@ export const BtnLinkBasic = ({
     children,
     href = '#',
     className = '',
+    isIconArrow = false,
+    isOutline = false,
     ...other
-}: BtnLinkProps) => {
+}: BtnLinkProps & { isIconArrow?: boolean }) => {
     return (
         <Link
             href={href}
             className={joinClassNameHelper('btn', className)}
             {...other}>
-            {children}
+            {isIconArrow ? <BtnIcon>{children}</BtnIcon> : children}
         </Link>
     )
 }
