@@ -11,12 +11,8 @@ import {
     SrvContentBlogDetail,
 } from '@/service/api/_crm.endPoint'
 
-export const getBoatList = (formSearch: any) =>
-    _shapeMethodGetSearch(
-        SrvBoat,
-        formSearch,
-        'tcSrvBoat_' + formSearch?.typeId || '',
-    )
+export const getBoatList = (formSearch: any, tc: string = 'tcBoatList') =>
+    _shapeMethodGetSearch(SrvBoat, formSearch, tc)
 
 export const getBoatDetail = (id?: any, tc = 'tcSrvBoatDetail') =>
     _shapeMethodGet(SrvBoatDetail(id), tc)

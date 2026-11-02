@@ -8,8 +8,8 @@ import {
 
 const IslandGuideTypeList = ({ list = [] }: { list?: any }) => {
     const pathname = usePathname() || '/'
-    console.log('list: ', list)
-    console.log('pathname: ', pathname)
+    // console.log('list: ', list)
+    // console.log('pathname: ', pathname)
 
     return (
         <>

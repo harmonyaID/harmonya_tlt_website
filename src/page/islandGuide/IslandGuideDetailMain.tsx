@@ -7,6 +7,7 @@ import {
 import SliderBannerWithTopNav from '@/component/swiperSlide/SliderBannerWithTopNav'
 import {
     BtnBasic,
+    BtnLinkBasic,
     BtnLinkPrimary,
     CodeIconArrow,
 } from '@/component/general/Button'
@@ -21,6 +22,8 @@ import { URL_WHATSAPP } from '@/config/url.config'
 import Pagination from '@/component/general/Pagination'
 import InfoNotAvailable from '@/component/general/InfoEmpty'
 import Link from 'next/link'
+import SwipeSlideBanner from '@/component/swiperSlide/SwipeSlideBanner'
+import BGHero from '@/asset/image/dummy/offer-last-bg-hero-half.jpg'
 
 const IslandGuideDetailMain = ({
     detail = {},
@@ -43,7 +46,8 @@ const IslandGuideDetailMain = ({
         useGeneralDataList({
             configSearch: {
                 page: 1,
-                typeId: type?.id || '',
+                isRandom: true,
+                islandGuideTypeIds: type?.id || '',
                 limit: 2,
             },
             urlAPI: getListIslandGuide,
@@ -81,7 +85,7 @@ const IslandGuideDetailMain = ({
                             <div className="col-md-4">
                                 <CardContactInfoMain>
                                     <p className="fs-20 font-tt-drugs fw-600 text-grey-200 text-center pt-3">
-                                        CONTACT & HIRE
+                                        {detail?.openHours || 'CONTACT & HIRE'}
                                     </p>
 
                                     <div className="px-3 vstack gap-2 py-3">
@@ -122,7 +126,7 @@ const IslandGuideDetailMain = ({
             <section className="py-5 bg-neutral-100">
                 <div className="container">
                     <p className="wp-font-tt-drugs fs-40 mb-0 text-uppercase text-center text-grey-200 pb-4">
-                        DISCOVER OTHER TRANSPORT
+                        DISCOVER OTHER {detail?.area?.name}
                     </p>
 
                     {isLoading ? (
@@ -132,8 +136,6 @@ const IslandGuideDetailMain = ({
                             <div className="row justify-content-center g-5">
                                 {list.map((vm: any, index: number) => {
                                     const { slug } = vm?.seo || {}
-
-                                    console.log('description: ', description)
 
                                     return (
                                         <div key={index} className="col-lg-4">
@@ -186,32 +188,6 @@ const IslandGuideDetailMain = ({
                                                         </p>
                                                     ) : null}
                                                 </div>
-
-                                                {/*<div className="hstack gap-3 mt-auto">*/}
-                                                {/*    <BtnLinkPrimary*/}
-                                                {/*        isOutline*/}
-                                                {/*        className="rounded-pill flex-fill"*/}
-                                                {/*        href={*/}
-                                                {/*            slug*/}
-                                                {/*                ? pathname +*/}
-                                                {/*                  '/' +*/}
-                                                {/*                  slug*/}
-                                                {/*                : '#'*/}
-                                                {/*        }>*/}
-                                                {/*        MORE DETAILS*/}
-                                                {/*    </BtnLinkPrimary>*/}
-
-                                                {/*    {vm.whatsapp ? (*/}
-                                                {/*        <BtnLinkPrimary*/}
-                                                {/*            target="_blank"*/}
-                                                {/*            className="rounded-pill flex-fill"*/}
-                                                {/*            href={URL_WHATSAPP(*/}
-                                                {/*                vm.whatsapp,*/}
-                                                {/*            )}>*/}
-                                                {/*            WHATSAPP*/}
-                                                {/*        </BtnLinkPrimary>*/}
-                                                {/*    ) : null}*/}
-                                                {/*</div>*/}
                                             </Link>
                                         </div>
                                     )

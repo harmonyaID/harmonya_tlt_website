@@ -19,21 +19,33 @@ const BoatTransferMain = ({
     SECTION2: any
     SECTION3: any
 }) => {
+    const [selectedId, setSelectedId] = useState<number>()
     const [boatSection2, setBoatSection2] = useState<any>([])
     const [boatSection3, setBoatSection3] = useState<any>([])
 
     const _handleGetData = () => {
-        getBoatList({
-            typeId: SECTION2.boatTypeId,
-        }).then((res) => {
+        getBoatList(
+            {
+                boatComponentTypeIds: [SECTION2.boatTypeId],
+            },
+            'tcBoatSection2',
+        ).then((res) => {
             setBoatSection2(res.result)
         })
 
-        getBoatList({
-            typeId: SECTION3.boatTypeId,
-        }).then((res) => {
+        getBoatList(
+            {
+                boatComponentTypeIds: [SECTION3.boatTypeId],
+            },
+            'tcBoatSection3',
+        ).then((res) => {
             setBoatSection3(res.result)
         })
+    }
+
+    const _handleBook = (boatId: number) => {
+        setSelectedId(boatId)
+        actionModal(MDBoatTransferBooking)
     }
 
     useEffect(() => {
@@ -64,32 +76,6 @@ const BoatTransferMain = ({
                             priority
                             className="object-fit-cover"
                         />
-
-                        <div className="px-50 position-relative d-flex flex-column justify-content-center align-items-end h-100 text-white">
-                            <div>
-                                <div className="vstack gap-3">
-                                    <div className="discount hstack align-items-end  font-tt-drugs">
-                                        <h1 className="mb-0 p-0">20</h1>
-                                        <div className="vstack justify-content-end">
-                                            <h4 className="mb-0 p-0 fw-bold">
-                                                % OFF
-                                            </h4>
-                                            <p className="mb-0 p-0">
-                                                BOAT TRANSFER
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <div className="bg-white bookings text-uppercase text-black px-3 py-2  font-tt-drugs">
-                                        With accommodation bookings
-                                    </div>
-
-                                    <p className="mb-0 text-center exclude">
-                                        *exclude private boat transfers
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                     <div className="mt-70">
@@ -100,9 +86,7 @@ const BoatTransferMain = ({
                                     key={boat.id}>
                                     <BoatTransferCard
                                         boat={boat}
-                                        onBook={() =>
-                                            actionModal(MDBoatTransferBooking)
-                                        }
+                                        onBook={() => _handleBook(boat.id)}
                                     />
                                 </div>
                             ))}
@@ -131,9 +115,7 @@ const BoatTransferMain = ({
                                 <div className="col-md-6 col-12" key={boat.id}>
                                     <BoatTransferCard
                                         boat={boat}
-                                        onBook={() =>
-                                            actionModal(MDBoatTransferBooking)
-                                        }
+                                        onBook={() => _handleBook(boat.id)}
                                     />
                                 </div>
                             ))}
@@ -142,7 +124,7 @@ const BoatTransferMain = ({
                 </div>
             </section>
 
-            <BoatTransferBookingModal />
+            <BoatTransferBookingModal boatId={selectedId} />
         </>
     )
 }

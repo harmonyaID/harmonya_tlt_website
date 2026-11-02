@@ -23,6 +23,8 @@ const SwipeSlideBanner = ({
     passUseRef = '',
     swiperConfig = {},
     className = '',
+    classNameArrowLeft = '',
+    classNameArrowRight = '',
 }: {
     items?: any[]
     contentElement?: any
@@ -31,17 +33,19 @@ const SwipeSlideBanner = ({
     passUseRef?: any
     swiperConfig?: any
     className?: string
+    classNameArrowLeft?: string
+    classNameArrowRight?: string
 }) => {
     const swiperRef = passUseRef || useRef<SwiperType | null>(null)
 
     return (
-        <div className="d-flex justify-content-between align-items-center w-100 gap-4">
+        <div className="d-flex justify-content-between align-items-center w-100 gap-4 position-relative">
             {isNavigation ? (
-                <div className="">
+                <div className={classNameArrowLeft}>
                     <div
                         role="button"
                         onClick={() => swiperRef.current?.slidePrev()}
-                        className="box-40 border-gray-200 border rounded-circle d-flex justify-content-center align-items-center text-grey-200">
+                        className="box-40 border-gray-200 border rounded-circle d-flex justify-content-center align-items-center">
                         <IconArrowLeft />
                     </div>
                 </div>
@@ -67,11 +71,11 @@ const SwipeSlideBanner = ({
             </Swiper>
 
             {isNavigation ? (
-                <div className="">
+                <div className={classNameArrowRight}>
                     <div
                         role="button"
                         onClick={() => swiperRef.current?.slideNext()}
-                        className="box-40 border-gray-200 border rounded-circle d-flex justify-content-center align-items-center text-grey-200">
+                        className="box-40 border-gray-200 border rounded-circle d-flex justify-content-center align-items-center">
                         <IconArrowRight />
                     </div>
                 </div>

@@ -6,11 +6,14 @@ import {
     BtnPrimary,
     CodeIconArrow,
 } from '@/component/general/Button'
-import BGHero from '@/asset/image/dummy/offer-last-bg-hero-half.jpg'
+import BGHero from '@/asset/image/default/imag-empty.svg'
 import Link from 'next/link'
 import Image from 'next/image'
 import actionModal from '@/helper/base/actionModal.helper'
 import { MDBoatTransferBooking } from '@/config/modal.config'
+import { BOAT_TRANSFERS_PATH } from '@/config/pagePath.config'
+import { Fragment } from 'react'
+import RenderHtml from '@/component/general/RenderHtml'
 
 const BoatTransferCard = ({
     isSimple = false,
@@ -21,18 +24,25 @@ const BoatTransferCard = ({
     boat: any
     onBook?: () => void
 }) => {
+    const detailPath = `${BOAT_TRANSFERS_PATH}/${boat?.seo?.slug}`
+
     return (
         <div className="vstack gap-4 position-relative">
-            <div className="position-absolute top-0 end-20 z-1">
-                <div className="boat-transfer-card-promo text-white font-tt-drugs text-center">
-                    <p className="m-0 mt-1 promo-text">20%</p>
-                    <p className="m-0 fs-12 text-uppercase">OFF</p>
+            {boat?.discountLabel && (
+                <div className="position-absolute top-0 end-20 z-1">
+                    <div className="boat-transfer-card-promo text-white font-tt-drugs text-center">
+                        {boat?.discountLabel?.split(' ')?.map((vm, index) => (
+                            <p className="m-0 fs-12 text-uppercase" key={index}>
+                                {vm}
+                            </p>
+                        ))}
+                    </div>
                 </div>
-            </div>
+            )}
 
             <Link
                 className="w-100 vstack gap-3 text-grey-200 wp-hover-image overflow-hidden boat-transfer-card"
-                href={'#'}>
+                href={detailPath}>
                 <WrapImageHoverOverlay
                     className="banner"
                     contentOverlay={
@@ -45,7 +55,7 @@ const BoatTransferCard = ({
                         </div>
                     }>
                     <Image
-                        src={BGHero}
+                        src={boat?.photos?.[0]?.photo || BGHero}
                         alt="about home"
                         fill
                         priority
@@ -60,33 +70,41 @@ const BoatTransferCard = ({
 
             {!isSimple && (
                 <>
-                    <p className="fs-16 fw-light mb-1 font-tt-drugs">
-                        Bali Hai Cruises offers a premium island transfer
-                        experience aboard luxury vessels, complete with onboard
-                        entertainment and full bar service.
-                    </p>
-                    <div>
-                        <p className="font-tt-drugs mb-1 fw-medium">
-                            Benoa → Mushroom Bay
-                        </p>
-
-                        <div className="badge text-black border rounded-pill fw-300 width-fit-content">
-                            9 AM
+                    {boat?.description && (
+                        <div className="fs-16 fw-light mb-1 font-tt-drugs">
+                            <RenderHtml
+                                html={boat?.description?.substring(0, 200)}
+                            />
                         </div>
-                    </div>
-                    <hr className="m-0 p-0" />
-                    <div>
-                        <p className="font-tt-drugs mb-1 fw-medium">
-                            Benoa → Mushroom Bay
-                        </p>
+                    )}
 
-                        <div className="badge text-black border rounded-pill fw-300 width-fit-content">
-                            9 AM
-                        </div>
-                    </div>
+                    {boat?.schedule &&
+                        boat?.schedule?.map((schedule, index) => (
+                            <Fragment key={index}>
+                                <div>
+                                    <p className="font-tt-drugs mb-1 fw-medium">
+                                        {schedule.from} → {schedule.to}
+                                    </p>
+
+                                    <div className="hstack gap-2">
+                                        {schedule.times?.map((time, index) => (
+                                            <div
+                                                key={index}
+                                                className="badge text-black border rounded-pill fw-300 width-fit-content">
+                                                {time}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {index !== boat.schedule.length - 1 && (
+                                    <hr className="m-0 p-0" />
+                                )}
+                            </Fragment>
+                        ))}
                     <div className="hstack gap-2 mt-3">
                         <BtnLinkPrimary
-                            href={`/boat-transfers/${boat.id}`}
+                            href={detailPath}
                             isOutline
                             className="rounded-pill fs-14 w-100">
                             MORE DETAILS
