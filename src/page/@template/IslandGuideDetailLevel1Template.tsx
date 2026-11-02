@@ -4,11 +4,11 @@ import IslandGuideDetailLevel1 from '@/page/islandGuide/IslandGuideDetailLevel1'
 import NotFoundTemplate from '@/page/@template/NotFoundTemplate'
 
 const IslandGuideDetailLevel1Template = async ({ slug }: { slug: string }) => {
-    const typeDetail = await getDetailIslandGuideTypes('5').then(
+    const typeDetail = await getDetailIslandGuideTypes(slug).then(
         (res) => res?.result || {},
     )
 
-    console.log('typeDetail: ', typeDetail)
+    // console.log('typeDetail: ', slug)
 
     const { isPage, id } = typeDetail || {}
 

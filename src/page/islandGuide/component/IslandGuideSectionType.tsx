@@ -42,7 +42,10 @@ const BlockInfo = ({
                 html={description}
             />
 
-            <BtnLinkPrimary href={link} isIconArrow className="rounded-pill">
+            <BtnLinkPrimary
+                href={link}
+                isIconArrow
+                className="rounded-pill py-3 px-4">
                 {buttonName}
             </BtnLinkPrimary>
         </>
