@@ -10,18 +10,18 @@ import LoadingCardListData from '@/component/loading/LoadingCardListData'
 import { isEmpty } from 'lodash'
 import InfoNotAvailable from '@/component/general/InfoEmpty'
 import Pagination from '@/component/general/Pagination'
-import Link from 'next/link'
 import { WrapImageHoverOverlay } from '@/component/general/WrapImage'
 import {
     BtnBasic,
+    BtnLinkBasic,
     BtnLinkPrimary,
     CodeIconArrow,
 } from '@/component/general/Button'
 import Image from 'next/image'
-import { imgReelConfig } from '@/config/urlImage.config'
-import PropertyVilla01 from '@/asset/image/villa/property-villa-01.png'
+import { imgCardConfig } from '@/config/urlImage.config'
 import { usePathname } from 'next/navigation'
 import { URL_WHATSAPP } from '@/config/url.config'
+import Breadcrumb from '@/component/general/Breadcrumb'
 
 const IslandGuideDetailLevel1 = ({ detail = {} }: { detail?: any }) => {
     const pathname = usePathname() || '/'
@@ -32,7 +32,7 @@ const IslandGuideDetailLevel1 = ({ detail = {} }: { detail?: any }) => {
         useGeneralDataList({
             configSearch: {
                 page: 1,
-                typeId: id,
+                islandGuideTypeIds: id,
             },
             urlAPI: getListIslandGuide,
         })
@@ -47,13 +47,17 @@ const IslandGuideDetailLevel1 = ({ detail = {} }: { detail?: any }) => {
                 }}
             />
 
+            <div className="container-fluid px-5 py-3 font-tt-drugs fs-16 fw-light">
+                <Breadcrumb />
+            </div>
+
             <section className="section-space-small">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-6">
                             {excerpt ? (
                                 <RenderHtml
-                                    className="wp-font-tt-drugs text-uppercase text-grey-200"
+                                    className="wp-font-tt-drugs fs-48 text-uppercase text-grey-200"
                                     html={excerpt}
                                 />
                             ) : null}
@@ -75,8 +79,6 @@ const IslandGuideDetailLevel1 = ({ detail = {} }: { detail?: any }) => {
                                 {list.map((vm: any, index: number) => {
                                     const { slug } = vm?.seo || {}
 
-                                    console.log('description: ', description)
-
                                     return (
                                         <div key={index} className="col-lg-4">
                                             <div
@@ -87,16 +89,22 @@ const IslandGuideDetailLevel1 = ({ detail = {} }: { detail?: any }) => {
                                                     className="img-h-332px overflow-hidden"
                                                     contentOverlay={
                                                         <div className="h-100 w-100 d-flex justify-content-center align-items-center">
-                                                            <BtnBasic className="btn-outline-white rounded-pill">
-                                                                <div className="hstack align-items-center gap-1">
-                                                                    Explore{' '}
-                                                                    <CodeIconArrow />
-                                                                </div>
-                                                            </BtnBasic>
+                                                            <BtnLinkBasic
+                                                                isIconArrow
+                                                                href={
+                                                                    slug
+                                                                        ? pathname +
+                                                                          '/' +
+                                                                          slug
+                                                                        : '#'
+                                                                }
+                                                                className="btn-outline-white rounded-pill">
+                                                                Explore
+                                                            </BtnLinkBasic>
                                                         </div>
                                                     }>
                                                     <Image
-                                                        src={imgReelConfig(
+                                                        src={imgCardConfig(
                                                             vm?.thumbnail,
                                                         )}
                                                         alt={

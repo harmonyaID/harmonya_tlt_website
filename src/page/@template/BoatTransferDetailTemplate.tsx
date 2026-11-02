@@ -20,7 +20,7 @@ const BoatTransferDetailTemplate = async ({ slug }: { slug?: string }) => {
             <SectionHeroHalfScreen
                 content={{
                     title: dataBoat.name,
-                    image: '',
+                    image: dataBoat.photos?.[0]?.photo || '',
                 }}
             />
             <BoatTransferDetail detail={dataBoat} />
