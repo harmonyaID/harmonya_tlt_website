@@ -13,6 +13,7 @@ import Pagination from '@/component/general/Pagination'
 import { WrapImageHoverOverlay } from '@/component/general/WrapImage'
 import {
     BtnBasic,
+    BtnLinkBasic,
     BtnLinkPrimary,
     CodeIconArrow,
 } from '@/component/general/Button'
@@ -88,12 +89,18 @@ const IslandGuideDetailLevel1 = ({ detail = {} }: { detail?: any }) => {
                                                     className="img-h-332px overflow-hidden"
                                                     contentOverlay={
                                                         <div className="h-100 w-100 d-flex justify-content-center align-items-center">
-                                                            <BtnBasic className="btn-outline-white rounded-pill">
-                                                                <div className="hstack align-items-center gap-1">
-                                                                    Explore{' '}
-                                                                    <CodeIconArrow />
-                                                                </div>
-                                                            </BtnBasic>
+                                                            <BtnLinkBasic
+                                                                isIconArrow
+                                                                href={
+                                                                    slug
+                                                                        ? pathname +
+                                                                          '/' +
+                                                                          slug
+                                                                        : '#'
+                                                                }
+                                                                className="btn-outline-white rounded-pill">
+                                                                Explore
+                                                            </BtnLinkBasic>
                                                         </div>
                                                     }>
                                                     <Image
