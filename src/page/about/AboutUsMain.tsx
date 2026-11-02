@@ -394,13 +394,13 @@ const AboutUsMain = ({
 
                     {groupedTeam.map((group, index) => (
                         <div
-                            className="row mt-70 gx-120 justify-content-center"
+                            className="row mt-70 gx-5 justify-content-center"
                             key={index}>
                             {group.map((vm) => (
                                 <div
                                     key={vm.id}
-                                    className="col-lg-3 col-sm-6 col-12 overflow-hidden">
-                                    <div className="text-center color-555">
+                                    className="col-lg-3 col-sm-6 col-12">
+                                    <div className="overflow-hidden d-flex justify-content-center">
                                         <Image
                                             src={vm.photo}
                                             alt={vm.name}
@@ -408,6 +408,8 @@ const AboutUsMain = ({
                                             height={459}
                                             className="object-fit-cover"
                                         />
+                                    </div>
+                                    <div className="text-center color-555">
                                         <p className="font-tt-drugs fs-24 text-primary mb-1 mt-3">
                                             {vm.name}
                                         </p>
