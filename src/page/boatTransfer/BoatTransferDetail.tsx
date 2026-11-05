@@ -234,7 +234,7 @@ const BoatTransferDetail = ({ detail }: { detail: any }) => {
                 </div>
             </section>
 
-            <BoatTransferBookingModal />
+            <BoatTransferBookingModal boatId={detail?.id} />
         </>
     )
 }
