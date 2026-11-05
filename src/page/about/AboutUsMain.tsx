@@ -20,6 +20,7 @@ import {
     ABOUT_HOLIDAY_BOOKING_PATH,
     ABOUT_PROPERTY_MANAGEMENT_PATH,
 } from '@/config/pagePath.config'
+import RenderHtml from '@/component/general/RenderHtml'
 
 const AboutUsMain = ({
     SECTION2,
@@ -421,7 +422,7 @@ const AboutUsMain = ({
                                             {vm.question}
                                         </p>
                                         <p className="mb-1 fs-16">
-                                            {vm.answer}
+                                            <RenderHtml html={vm.answer} />
                                         </p>
                                     </div>
                                 </div>
