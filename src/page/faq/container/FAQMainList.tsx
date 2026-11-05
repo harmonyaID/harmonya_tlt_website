@@ -1,6 +1,7 @@
 import useGeneralDataList from '@/hook/useGeneralDataList.hook'
 import { getFAQList } from '@/service/api/contentPage.api'
 import { isEmpty } from 'lodash'
+import RenderHtml from '@/component/general/RenderHtml'
 
 const FAQMainList = ({ configSearch = {} }) => {
     const { list } = useGeneralDataList({
@@ -35,7 +36,7 @@ const FAQMainList = ({ configSearch = {} }) => {
                                       className="accordion-collapse collapse"
                                       data-bs-parent={'#' + idAccordion}>
                                       <div className="accordion-body text-grey-100 fw-light pt-0 pb-4">
-                                          {vm.answer}
+                                          <RenderHtml html={vm.answer} />
                                       </div>
                                   </div>
                               </div>
