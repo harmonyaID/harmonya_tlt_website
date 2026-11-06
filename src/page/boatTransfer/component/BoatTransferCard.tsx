@@ -42,29 +42,31 @@ const BoatTransferCard = ({
                 </div>
             )}
 
-            <Link
-                className="w-100 vstack gap-3 text-grey-200 wp-hover-image overflow-hidden boat-transfer-card"
-                href={detailPath}>
-                <WrapImageHoverOverlay
-                    className="banner"
-                    contentOverlay={
-                        <div className="h-100 w-100 d-flex justify-content-center align-items-center">
-                            <BtnBasic className="btn-outline-white rounded-pill">
-                                <div className="hstack align-items-center gap-1">
-                                    Explore <CodeIconArrow />
-                                </div>
-                            </BtnBasic>
-                        </div>
-                    }>
-                    <Image
-                        src={boat?.photos?.[0]?.photo || BGHero}
-                        alt="about home"
-                        fill
-                        priority
-                        className="object-fit-cover"
-                    />
-                </WrapImageHoverOverlay>
-            </Link>
+            <div>
+                <Link
+                    className="w-100 vstack gap-3 text-grey-200 wp-hover-image overflow-hidden boat-transfer-card"
+                    href={detailPath}>
+                    <WrapImageHoverOverlay
+                        className="banner"
+                        contentOverlay={
+                            <div className="h-100 w-100 d-flex justify-content-center align-items-center">
+                                <BtnBasic className="btn-outline-white rounded-pill">
+                                    <div className="hstack align-items-center gap-1">
+                                        Explore <CodeIconArrow />
+                                    </div>
+                                </BtnBasic>
+                            </div>
+                        }>
+                        <Image
+                            src={boat?.photos?.[0]?.photo || BGHero}
+                            alt="about home"
+                            fill
+                            priority
+                            className="object-fit-cover"
+                        />
+                    </WrapImageHoverOverlay>
+                </Link>
+            </div>
 
             <p className="fs-32 fw-light mb-1 font-tt-drugs text-uppercase">
                 {boat?.name}
@@ -104,7 +106,8 @@ const BoatTransferCard = ({
                                 )}
                             </Fragment>
                         ))}
-                    <div className="hstack gap-2 mt-3">
+
+                    <div className="hstack gap-2 mt-auto">
                         <BtnLinkPrimary
                             href={detailPath}
                             isOutline
