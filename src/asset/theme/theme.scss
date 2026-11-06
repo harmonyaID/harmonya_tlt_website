@@ -506,6 +506,15 @@ a {text-decoration: none;}
   margin: 0;
 }
 
+.btn-outline-list-with-us {
+  background: transparent;
+  @extend .btn-outline-neutral-500;
+
+  &:hover {
+    background: transparent !important;
+  }
+}
+
 
 @import 'base/_typography';
 @import 'base/_navbar';
