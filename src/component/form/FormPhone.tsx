@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import PhoneInput, {
     Country,
     getCountries,
@@ -10,8 +10,10 @@ import 'react-phone-number-input/style.css'
 import { FormInputProps } from '@/component/form/type/componentForm.type'
 import { useHookContextForm } from '@/context/Form.Context'
 import useComponentInputConfigHook from '@/hook/base/useComponentInputConfig.hook'
+import _ from 'lodash'
+import { eventChange } from '@/helper/base/actionEvent.helper'
 
-const FormPhone = (props: FormInputProps) => {
+const FormPhone = (props: FormInputProps & { isUseHook?: boolean }) => {
     const ctx = useHookContextForm()
 
     const { dataValue, handleChange } = useComponentInputConfigHook(
@@ -24,6 +26,7 @@ const FormPhone = (props: FormInputProps) => {
     const {
         id = '',
         className = '',
+        name = '',
         classNameInput = '',
         type = 'text',
         autoComplete = 'off',
@@ -38,8 +41,11 @@ const FormPhone = (props: FormInputProps) => {
         isNumberOnly = false,
         isCheckMinInput = false,
         isCheckMaxInput = false,
+        isUseHook = true,
 
         handleIcon = () => {},
+
+        actions,
 
         min = '',
         max = '',
@@ -47,10 +53,17 @@ const FormPhone = (props: FormInputProps) => {
     } = props
 
     const [country, setCountry] = useState<Country>('ID')
-    const [phone, setPhone] = useState('')
     const [open, setOpen] = useState(false)
 
     const countries = getCountries()
+
+    const _handleChange = (value) => {
+        if (!_.isEmpty(ctx.__value) && isUseHook) {
+            ctx.__handleChange(name, value)
+        } else {
+            actions?.onChange?.(props.name, props.value)
+        }
+    }
 
     return (
         <div>
@@ -92,8 +105,8 @@ const FormPhone = (props: FormInputProps) => {
                 <PhoneNumberInput
                     country={country}
                     international
-                    value={phone}
-                    onChange={(value) => setPhone(value as Country)}
+                    value={dataValue}
+                    onChange={(value) => _handleChange(value as Country)}
                     className="form-control"
                     placeholder="Phone number"
                 />

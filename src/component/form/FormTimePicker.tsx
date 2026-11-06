@@ -73,6 +73,7 @@ const FormTimePicker: FC<FormInputTimePickerProps> = (props) => {
         dateStr: string | any,
         instance: any,
     ) => {
+        instance.minuteElement?.removeAttribute('required')
         const container = instance.calendarContainer
 
         if (container.querySelector('.btn-flatpickr-clear') === null) {
@@ -112,7 +113,7 @@ const FormTimePicker: FC<FormInputTimePickerProps> = (props) => {
         if (modals.length && isResetValue) {
             modals?.forEach((modal) => {
                 modal?.addEventListener('shown.bs.modal', () => {
-                    timePicker?.setDate(timePicker.input.value || '', true)
+                    timePicker?.setDate(timePicker?.input?.value || '', true)
                 })
 
                 modal?.addEventListener('hidden.bs.modal', () => {

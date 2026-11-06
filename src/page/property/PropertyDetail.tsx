@@ -58,10 +58,12 @@ const PropertyDetail = ({
                                     </h1>
 
                                     {/*<SectionDescription>*/}
-                                    {/*    {detail.descriptions[0].summary}*/}
+                                    {/*    {detail?.descriptions[0]?.summary}*/}
                                     {/*</SectionDescription>*/}
                                     <RenderHtml
-                                        html={detail.descriptions[0].summary}
+                                        html={
+                                            detail?.descriptions?.[0]?.summary
+                                        }
                                         className="text-grey-400"
                                     />
                                 </div>
@@ -169,8 +171,8 @@ const PropertyDetail = ({
                                 ) : null}
 
                                 {detail?.descriptions &&
-                                detail.descriptions[1] &&
-                                detail.descriptions[1].summary ? (
+                                detail?.descriptions?.[1] &&
+                                detail?.descriptions?.[1]?.summary ? (
                                     <>
                                         <hr />
                                         <div className="">
@@ -179,8 +181,8 @@ const PropertyDetail = ({
 
                                             <RenderHtml
                                                 html={
-                                                    detail.descriptions[1]
-                                                        .summary
+                                                    detail?.descriptions?.[1]
+                                                        ?.summary
                                                 }
                                                 className="text-grey-400"
                                             />

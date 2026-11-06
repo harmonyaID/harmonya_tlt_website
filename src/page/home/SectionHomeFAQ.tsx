@@ -48,7 +48,9 @@ const SectionHomeFAQ = async ({
                                                   className="accordion-collapse collapse"
                                                   data-bs-parent="#accordionFlushExample">
                                                   <div className="accordion-body text-grey-100 fw-light pt-0 pb-4">
-                                                      {vm.answer}
+                                                      <RenderHtml
+                                                          html={vm.answer}
+                                                      />
                                                   </div>
                                               </div>
                                           </div>

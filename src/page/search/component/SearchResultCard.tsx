@@ -3,14 +3,17 @@ import { WrapImageHoverOverlay } from '@/component/general/WrapImage'
 import { BtnBasic, CodeIconArrow } from '@/component/general/Button'
 import Image from 'next/image'
 import BGHero from '@/asset/image/dummy/offer-last-bg-hero-half.jpg'
+import { actionFormatDateStrict } from '@/helper/actionFormatDate.helper'
 
-const SearchResultCard = () => {
+const SearchResultCard = ({ blog }: { blog: any }) => {
+    const url = blog?.link ? blog?.link : blog?.slug ? '/blog/' + blog?.slug : '#'
+
     return (
         <div className="row g-5">
             <div className="col-md-6">
                 <Link
                     className="w-100 vstack gap-3 text-grey-200 wp-hover-image overflow-hidden"
-                    href={'#'}>
+                    href={url}>
                     <WrapImageHoverOverlay
                         className="search-result-img"
                         contentOverlay={
@@ -23,7 +26,7 @@ const SearchResultCard = () => {
                             </div>
                         }>
                         <Image
-                            src={BGHero}
+                            src={blog.thumbnail}
                             alt="about home"
                             fill
                             priority
@@ -35,27 +38,30 @@ const SearchResultCard = () => {
             <div className="col-md-6">
                 <div className="vstack gap-3 justify-content-center h-100 color-555">
                     <p className="font-tt-drugs text-uppercase fw-light m-0">
-                        August 8, 2025
+                        {actionFormatDateStrict(
+                            blog.publishedAt,
+                            'MMMM DD, YYYY',
+                            'DD/MM/YYYY HH:ii',
+                        )}
                     </p>
                     <p className="font-tt-drugs fs-32 text-uppercase color-555 m-0">
-                        a complete guide to sandy bay, nusa lembongan
+                        {blog.title}
                     </p>
-                    <div
-                        className="badge fs-14 width-fit-content rounded-pill fw-300 px-3 mb-2"
-                        style={{
-                            background: '#EBF7F6',
-                            border: '1px solid #98C9C9',
-                            color: '#555555',
-                        }}>
-                        Island Guide
+                    <div className="hstack gap-3 flex-wrap">
+                        {blog.categories?.map((cat) => (
+                            <div
+                                key={cat.id}
+                                className="badge fs-14 width-fit-content rounded-pill fw-300 px-3 mb-2"
+                                style={{
+                                    background: '#EBF7F6',
+                                    border: '1px solid #98C9C9',
+                                    color: '#555555',
+                                }}>
+                                {cat.name}
+                            </div>
+                        ))}
                     </div>
-                    <p className="m-0">
-                        Over on the western side, near the famous Devil’s Tears,
-                        Sandy Bay Beach Club offers direct beach access paired
-                        with dramatic cliff views. And just offshore, there is
-                        even a floating platform anchored out in the calm, clear
-                        water.
-                    </p>
+                    <p className="m-0">{blog.excerpt || '-'}</p>
                 </div>
             </div>
         </div>

@@ -1,4 +1,5 @@
 import { isEmpty } from 'lodash'
+import RenderHtml from '@/component/general/RenderHtml'
 
 const FAQList = ({ list = [], idAccordion = 'accordionFlushGeneral' }) => {
     return (
@@ -26,7 +27,7 @@ const FAQList = ({ list = [], idAccordion = 'accordionFlushGeneral' }) => {
                                       className="accordion-collapse collapse"
                                       data-bs-parent={'#' + idAccordion}>
                                       <div className="accordion-body text-grey-100 fw-light pt-0 pb-4">
-                                          {vm.answer}
+                                          <RenderHtml html={vm.answer} />
                                       </div>
                                   </div>
                               </div>

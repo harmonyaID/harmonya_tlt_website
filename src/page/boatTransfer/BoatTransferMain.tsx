@@ -11,6 +11,10 @@ import SectionHeroHalfScreen from '@/component/general/SectionHeroHalfScreen'
 import Breadcrumb from '@/component/general/Breadcrumb'
 import { getBoatList } from '@/service/api/boatTransfer.api'
 import { useEffect, useState } from 'react'
+import useGeneralDataList from '@/hook/useGeneralDataList.hook'
+import { getListIslandGuide } from '@/service/api/islandGuide.api'
+import Pagination from '@/component/general/Pagination'
+import LoadingCardListData from '@/component/loading/LoadingCardListData'
 
 const BoatTransferMain = ({
     SECTION2,
@@ -20,37 +24,37 @@ const BoatTransferMain = ({
     SECTION3: any
 }) => {
     const [selectedId, setSelectedId] = useState<number>()
-    const [boatSection2, setBoatSection2] = useState<any>([])
-    const [boatSection3, setBoatSection3] = useState<any>([])
 
-    const _handleGetData = () => {
-        getBoatList(
-            {
-                boatComponentTypeIds: [SECTION2.boatTypeId],
-            },
-            'tcBoatSection2',
-        ).then((res) => {
-            setBoatSection2(res.result)
-        })
+    const {
+        list: boatSection2,
+        isLoading: boatSection2Loading,
+        pagination: boatSection2Pagination,
+        _handleChangePage: _handleChangePageBoatSection2,
+    } = useGeneralDataList({
+        configSearch: {
+            page: 1,
+            boatComponentTypeIds: [SECTION2.boatTypeId],
+        },
+        urlAPI: getBoatList,
+    })
 
-        getBoatList(
-            {
-                boatComponentTypeIds: [SECTION3.boatTypeId],
-            },
-            'tcBoatSection3',
-        ).then((res) => {
-            setBoatSection3(res.result)
-        })
-    }
+    const {
+        list: boatSection3,
+        isLoading: boatSection3Loading,
+        pagination: boatSection3Pagination,
+        _handleChangePage: _handleChangePageBoatSection3,
+    } = useGeneralDataList({
+        configSearch: {
+            page: 1,
+            boatComponentTypeIds: [SECTION3.boatTypeId],
+        },
+        urlAPI: getBoatList,
+    })
 
     const _handleBook = (boatId: number) => {
         setSelectedId(boatId)
         actionModal(MDBoatTransferBooking)
     }
-
-    useEffect(() => {
-        _handleGetData()
-    }, [])
 
     return (
         <>
@@ -79,17 +83,31 @@ const BoatTransferMain = ({
                     </div>
 
                     <div className="mt-70">
-                        <div className="row boat-transfer-card-g ">
-                            {boatSection2.map((boat) => (
-                                <div
-                                    className="col-lg-4 col-md-6 col-12"
-                                    key={boat.id}>
-                                    <BoatTransferCard
-                                        boat={boat}
-                                        onBook={() => _handleBook(boat.id)}
-                                    />
-                                </div>
-                            ))}
+                        {boatSection2Loading ? (
+                            <LoadingCardListData />
+                        ) : (
+                            <div className="row boat-transfer-card-g ">
+                                {boatSection2.map((boat) => (
+                                    <div
+                                        className="col-lg-4 col-md-6 col-12"
+                                        key={boat.id}>
+                                        <BoatTransferCard
+                                            boat={boat}
+                                            onBook={() => _handleBook(boat.id)}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+
+                        <div className="py-5">
+                            <Pagination
+                                // @ts-ignore
+                                pagination={boatSection2Pagination}
+                                onPageChange={(passPage) =>
+                                    _handleChangePageBoatSection2(passPage)
+                                }
+                            />
                         </div>
                     </div>
                 </div>
@@ -110,16 +128,32 @@ const BoatTransferMain = ({
                     </div>
 
                     <div className="mt-70">
-                        <div className="row boat-transfer-card-g ">
-                            {boatSection3.map((boat) => (
-                                <div className="col-md-6 col-12" key={boat.id}>
-                                    <BoatTransferCard
-                                        boat={boat}
-                                        onBook={() => _handleBook(boat.id)}
-                                    />
-                                </div>
-                            ))}
-                        </div>
+                        {boatSection3Loading ? (
+                            <LoadingCardListData />
+                        ) : (
+                            <div className="row boat-transfer-card-g ">
+                                {boatSection3.map((boat) => (
+                                    <div
+                                        className="col-md-6 col-12"
+                                        key={boat.id}>
+                                        <BoatTransferCard
+                                            boat={boat}
+                                            onBook={() => _handleBook(boat.id)}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="py-5">
+                        <Pagination
+                            // @ts-ignore
+                            pagination={boatSection3Pagination}
+                            onPageChange={(passPage) =>
+                                _handleChangePageBoatSection3(passPage)
+                            }
+                        />
                     </div>
                 </div>
             </section>
