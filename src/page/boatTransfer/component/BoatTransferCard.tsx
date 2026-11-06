@@ -27,11 +27,13 @@ const BoatTransferCard = ({
     const detailPath = `${BOAT_TRANSFERS_PATH}/${boat?.seo?.slug}`
 
     return (
-        <div className="vstack gap-4 position-relative">
-            {boat?.discountLabel && (
+        <div
+            className="vstack gap-4 position-relative"
+            style={{ height: '100%' }}>
+            {boat?.promoLabel && (
                 <div className="position-absolute top-0 end-20 z-1">
                     <div className="boat-transfer-card-promo text-white font-tt-drugs text-center">
-                        {boat?.discountLabel?.split(' ')?.map((vm, index) => (
+                        {boat?.promoLabel?.split(' ')?.map((vm, index) => (
                             <p className="m-0 fs-12 text-uppercase" key={index}>
                                 {vm}
                             </p>
@@ -40,29 +42,31 @@ const BoatTransferCard = ({
                 </div>
             )}
 
-            <Link
-                className="w-100 vstack gap-3 text-grey-200 wp-hover-image overflow-hidden boat-transfer-card"
-                href={detailPath}>
-                <WrapImageHoverOverlay
-                    className="banner"
-                    contentOverlay={
-                        <div className="h-100 w-100 d-flex justify-content-center align-items-center">
-                            <BtnBasic className="btn-outline-white rounded-pill">
-                                <div className="hstack align-items-center gap-1">
-                                    Explore <CodeIconArrow />
-                                </div>
-                            </BtnBasic>
-                        </div>
-                    }>
-                    <Image
-                        src={boat?.photos?.[0]?.photo || BGHero}
-                        alt="about home"
-                        fill
-                        priority
-                        className="object-fit-cover"
-                    />
-                </WrapImageHoverOverlay>
-            </Link>
+            <div>
+                <Link
+                    className="w-100 vstack gap-3 text-grey-200 wp-hover-image overflow-hidden boat-transfer-card"
+                    href={detailPath}>
+                    <WrapImageHoverOverlay
+                        className="banner"
+                        contentOverlay={
+                            <div className="h-100 w-100 d-flex justify-content-center align-items-center">
+                                <BtnBasic className="btn-outline-white rounded-pill">
+                                    <div className="hstack align-items-center gap-1">
+                                        Explore <CodeIconArrow />
+                                    </div>
+                                </BtnBasic>
+                            </div>
+                        }>
+                        <Image
+                            src={boat?.photos?.[0]?.photo || BGHero}
+                            alt="about home"
+                            fill
+                            priority
+                            className="object-fit-cover"
+                        />
+                    </WrapImageHoverOverlay>
+                </Link>
+            </div>
 
             <p className="fs-32 fw-light mb-1 font-tt-drugs text-uppercase">
                 {boat?.name}
@@ -102,7 +106,8 @@ const BoatTransferCard = ({
                                 )}
                             </Fragment>
                         ))}
-                    <div className="hstack gap-2 mt-3">
+
+                    <div className="hstack gap-2 mt-auto">
                         <BtnLinkPrimary
                             href={detailPath}
                             isOutline
