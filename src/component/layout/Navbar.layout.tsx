@@ -187,7 +187,7 @@ const NavbarLayout = ({
                                         'btn-outline-white': isBgTransparent
                                             ? !isScrolled
                                             : false,
-                                        'btn-outline-neutral-500':
+                                        'btn-outline-list-with-us':
                                             isScrolled || !isBgTransparent,
                                     },
                                 )}>

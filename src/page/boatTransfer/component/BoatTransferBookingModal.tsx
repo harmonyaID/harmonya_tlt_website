@@ -12,12 +12,16 @@ import FormTimePicker from '@/component/form/FormTimePicker'
 import FormPhone from '@/component/form/FormPhone'
 import { useEffect, useRef, useState } from 'react'
 import useNestedFormHook from '@/hook/base/useNestedForm.hook'
-import { getBoatDetail } from '@/service/api/boatTransfer.api'
+import {
+    createBoatContactForm,
+    getBoatDetail,
+} from '@/service/api/boatTransfer.api'
 import { isSuccess } from '@/helper/base/condition.helper'
 import LoadingSpinner from '@/component/loading/LoadingSpinner'
 import LoadingCardListData from '@/component/loading/LoadingCardListData'
 import joinClassNameHelper from '@/helper/joinClassName.helper'
 import FormSelectOption from '@/component/form/FormSelectOption'
+import actionModal from '@/helper/base/actionModal.helper'
 
 const ONE_WAY = 'one_way'
 const RETURN = 'return'
@@ -67,6 +71,7 @@ const BoatTransferBookingModal = ({ boatId }: { boatId?: number }) => {
     const [formRequest, setFormRequest] = useState<any>(param())
     const [boat, setBoat] = useState<any>()
     const [loadingDetail, setLoadingDetail] = useState<boolean>(false)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const scheduleIndex = useRef(0)
 
     const nestedForm = useNestedFormHook(formRequest, setFormRequest as any)
@@ -117,6 +122,17 @@ const BoatTransferBookingModal = ({ boatId }: { boatId?: number }) => {
             ...prev,
             childCount: Number(prev.childCount) + count,
         }))
+    }
+
+    const _handleSubmit = () => {
+        setIsLoading(true)
+        createBoatContactForm(formRequest)
+            .then((res) => {
+                if (isSuccess(res)) {
+                    actionModal(MDBoatTransferBooking, true)
+                }
+            })
+            .finally(() => setIsLoading(false))
     }
 
     useEffect(() => {
@@ -185,7 +201,7 @@ const BoatTransferBookingModal = ({ boatId }: { boatId?: number }) => {
 
                                             <FormWrap
                                                 actions={{
-                                                    handleSubmit: () => {},
+                                                    handleSubmit: _handleSubmit,
                                                 }}>
                                                 <WrapFormContext
                                                     formRequest={formRequest}
@@ -344,7 +360,6 @@ const BoatTransferBookingModal = ({ boatId }: { boatId?: number }) => {
                                                                 <FormDatepicker
                                                                     label="return date"
                                                                     name="returnDate"
-                                                                    required
                                                                 />
 
                                                                 <div className="hstack gap-2 mt-2">
@@ -611,10 +626,7 @@ const BoatTransferBookingModal = ({ boatId }: { boatId?: number }) => {
                                                                     <div className="mt-4">
                                                                         {formRequest.ticketType ===
                                                                             RETURN && (
-                                                                            <LabelForm
-                                                                                label="Departure"
-                                                                                required
-                                                                            />
+                                                                            <LabelForm label="Departure" />
                                                                         )}
                                                                         <div>
                                                                             <p className="mb-2 text-uppercase fs-14 fw-light">
@@ -655,6 +667,21 @@ const BoatTransferBookingModal = ({ boatId }: { boatId?: number }) => {
                                                                                     <FormTimePicker
                                                                                         placeholder="12:33"
                                                                                         name="departurePickupArrivalTime"
+                                                                                        value={
+                                                                                            formRequest.departurePickupArrivalTime
+                                                                                        }
+                                                                                        actions={{
+                                                                                            onChange:
+                                                                                                (
+                                                                                                    name,
+                                                                                                    value,
+                                                                                                ) => {
+                                                                                                    nestedForm._handleChange(
+                                                                                                        name,
+                                                                                                        value,
+                                                                                                    )
+                                                                                                },
+                                                                                        }}
                                                                                     />
                                                                                 </div>
                                                                             </div>
@@ -699,6 +726,21 @@ const BoatTransferBookingModal = ({ boatId }: { boatId?: number }) => {
                                                                                     <FormTimePicker
                                                                                         placeholder="12:33"
                                                                                         name="departureDropOffArrivalTime"
+                                                                                        value={
+                                                                                            formRequest.departureDropOffArrivalTime
+                                                                                        }
+                                                                                        actions={{
+                                                                                            onChange:
+                                                                                                (
+                                                                                                    name,
+                                                                                                    value,
+                                                                                                ) => {
+                                                                                                    nestedForm._handleChange(
+                                                                                                        name,
+                                                                                                        value,
+                                                                                                    )
+                                                                                                },
+                                                                                        }}
                                                                                     />
                                                                                 </div>
                                                                             </div>
@@ -708,10 +750,7 @@ const BoatTransferBookingModal = ({ boatId }: { boatId?: number }) => {
                                                                     {formRequest.ticketType ===
                                                                         RETURN && (
                                                                         <div className="mt-4">
-                                                                            <LabelForm
-                                                                                label="Return"
-                                                                                required
-                                                                            />
+                                                                            <LabelForm label="Return" />
                                                                             <div>
                                                                                 <p className="mb-2 text-uppercase fs-14 fw-light">
                                                                                     Pick
@@ -750,7 +789,22 @@ const BoatTransferBookingModal = ({ boatId }: { boatId?: number }) => {
                                                                                     <div className="col-6">
                                                                                         <FormTimePicker
                                                                                             placeholder="12:33"
+                                                                                            value={
+                                                                                                formRequest.returnPickupCheckoutTime
+                                                                                            }
                                                                                             name="returnPickupCheckoutTime"
+                                                                                            actions={{
+                                                                                                onChange:
+                                                                                                    (
+                                                                                                        name,
+                                                                                                        value,
+                                                                                                    ) => {
+                                                                                                        nestedForm._handleChange(
+                                                                                                            name,
+                                                                                                            value,
+                                                                                                        )
+                                                                                                    },
+                                                                                            }}
                                                                                         />
                                                                                     </div>
                                                                                 </div>
@@ -835,7 +889,7 @@ const BoatTransferBookingModal = ({ boatId }: { boatId?: number }) => {
                                                                 </p>
 
                                                                 <FormInput
-                                                                    name="hearAboutUs"
+                                                                    name="tltBookingRefName"
                                                                     placeholder="Booking Ref/Name"
                                                                 />
                                                             </div>
@@ -877,9 +931,14 @@ const BoatTransferBookingModal = ({ boatId }: { boatId?: number }) => {
                                                 </WrapFormContext>
 
                                                 <BtnPrimary
-                                                    handle={() => {}}
+                                                    disabled={isLoading}
+                                                    type="submit"
                                                     className="rounded-pill text-white fs-14 w-100 text-uppercase mt-4 mb-5">
-                                                    Submit
+                                                    {isLoading ? (
+                                                        <LoadingSpinner />
+                                                    ) : (
+                                                        'Submit'
+                                                    )}
                                                 </BtnPrimary>
                                             </FormWrap>
                                         </>
