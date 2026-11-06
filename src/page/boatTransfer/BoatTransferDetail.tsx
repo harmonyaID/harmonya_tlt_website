@@ -224,7 +224,7 @@ const BoatTransferDetail = ({ detail }: { detail: any }) => {
 
                     <div className="mt-70">
                         <div className="row boat-transfer-card-g ">
-                            {otherBoats.map((boat) => (
+                            {otherBoats.slice(0, 3).map((boat) => (
                                 <div className="col-md-4 col-12" key={boat.id}>
                                     <BoatTransferCard isSimple boat={boat} />
                                 </div>

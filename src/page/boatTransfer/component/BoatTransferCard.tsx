@@ -27,11 +27,13 @@ const BoatTransferCard = ({
     const detailPath = `${BOAT_TRANSFERS_PATH}/${boat?.seo?.slug}`
 
     return (
-        <div className="vstack gap-4 position-relative">
-            {boat?.discountLabel && (
+        <div
+            className="vstack gap-4 position-relative"
+            style={{ height: '100%' }}>
+            {boat?.promoLabel && (
                 <div className="position-absolute top-0 end-20 z-1">
                     <div className="boat-transfer-card-promo text-white font-tt-drugs text-center">
-                        {boat?.discountLabel?.split(' ')?.map((vm, index) => (
+                        {boat?.promoLabel?.split(' ')?.map((vm, index) => (
                             <p className="m-0 fs-12 text-uppercase" key={index}>
                                 {vm}
                             </p>
