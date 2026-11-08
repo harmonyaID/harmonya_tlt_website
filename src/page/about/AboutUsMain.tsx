@@ -59,48 +59,17 @@ const AboutUsMain = ({
         <>
             <section className="section-space-small">
                 <div className="container">
-                    <div className="text-center vstack gap-4 px-5">
-                        <SectionTitle className="font-tt-drugs text-uppercase fw-light">
-                            our story
+                    <div className="text-center vstack gap-4 px-5 font-tt-drugs ">
+                        <SectionTitle className="text-uppercase fw-light">
+                            {SECTION2?.title}
                         </SectionTitle>
-                        <p className="font-tt-drugs fw-light">
-                            The Walker family has been returning to Nusa
-                            Lembongan for their annual holidays since the early
-                            2000s.. What began as a holiday tradition grew into
-                            something more for Tania and Mal Walker. They fell
-                            in love with the island’s crystal-clear waters,
-                            close-knit community and village way of life and
-                            wanted to find a way to stay connected while helping
-                            others experience Lembongan too.
-                        </p>
-                        <p className="font-tt-drugs fw-light">
-                            In 2013, that idea became The Lembongan Traveller a
-                            platform created to share the island we loved,
-                            support local businesses and make it easier for
-                            travellers to experience Nusa Lembongan.
-                        </p>
+                        <RenderHtml html={SECTION2?.description} />
                     </div>
                 </div>
 
                 <div className="container-fluid mt-70 px-5">
                     <SwipeSlideBanner
-                        items={[
-                            {
-                                buttonLink: '#',
-                                image: BGHero,
-                                title: 'Test',
-                            },
-                            {
-                                buttonLink: '#',
-                                image: BGHero,
-                                title: 'Test',
-                            },
-                            {
-                                buttonLink: '#',
-                                image: BGHero,
-                                title: 'Test',
-                            },
-                        ]}
+                        items={SECTION2?.posts || []}
                         breakpoints={{
                             576: { slidesPerView: 1, spaceBetween: 20 },
                             992: { slidesPerView: 1, spaceBetween: 24 },
@@ -120,7 +89,7 @@ const AboutUsMain = ({
                                             contentOverlay={null}>
                                             <Image
                                                 src={dataElement?.image}
-                                                alt={dataElement.title}
+                                                alt={dataElement.year}
                                                 fill
                                                 className="object-fit-cover"
                                             />
@@ -133,22 +102,12 @@ const AboutUsMain = ({
                                         style={{
                                             maxWidth: '380px',
                                         }}>
-                                        <p className="mb-0 fs-48">2013</p>
-                                        <p className="m-0 fw-light">
-                                            They founded The Lembongan
-                                            Traveller, starting with an
-                                            Instagram account to share and
-                                            promote the island they had come to
-                                            love.{' '}
+                                        <p className="mb-0 fs-48">
+                                            {dataElement?.year}
                                         </p>
-                                        <p className="m-0 fw-light">
-                                            Initially run by just three people
-                                            from a home office in Western
-                                            Australia, we slowly began helping
-                                            friends, family and fellow
-                                            travellers discover this little
-                                            island paradise.
-                                        </p>
+                                        <RenderHtml
+                                            html={dataElement?.description}
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -162,33 +121,28 @@ const AboutUsMain = ({
                     <div className="row">
                         <div className="col-md-4">
                             <SectionTitle className="font-tt-drugs text-uppercase fw-light">
-                                WHAT WE DO
+                                {SECTION3?.title}
                             </SectionTitle>
                         </div>
 
-                        <div className="col offset-1">
-                            <p className="font-tt-drugs fw-light">
-                                For more than a decade, we’ve been helping
-                                guests find the best Nusa Lembongan
-                                accommodation, arrange boat transfers, and
-                                discover local experiences. <br /> We also
-                                provide property management for villa owners who
-                                want a reliable team on the ground, and help
-                                local businesses reach a wider audience through
-                                our website and social media.
-                            </p>
+                        <div className="col offset-1 font-tt-drugs">
+                            <RenderHtml html={SECTION3?.subTitle} />
                         </div>
                     </div>
 
                     <div className="mt-70">
-                        <div className="row gx-5">
+                        <div
+                            className="row gx-5"
+                            style={{
+                                margin: '120px 0',
+                            }}>
                             <div className="col">
                                 <div className="w-100 vstack gap-3 text-grey-200 wp-hover-image">
                                     <WrapImageHoverOverlay
                                         className="section-boat-banner-reel"
                                         contentOverlay={null}>
                                         <Image
-                                            src={BGHero}
+                                            src={SECTION3?.SubSection1?.image}
                                             alt="test"
                                             fill
                                             className="object-fit-cover"
@@ -208,32 +162,20 @@ const AboutUsMain = ({
                                             style={{
                                                 lineHeight: '100%',
                                             }}>
-                                            Holiday Booking
+                                            {SECTION3?.SubSection1?.title}
                                         </p>
                                         <p className="m-0 fs-24 text-uppercase">
-                                            YOUR ISLAND GUIDE
+                                            {SECTION3?.SubSection1?.subTitle}
                                         </p>
                                     </div>
-                                    <p className="m-0 fw-light">
-                                        From finding the right Nusa Lembongan
-                                        accommodation to arranging your boat
-                                        transfer, we make planning your island
-                                        stay simple.
-                                    </p>
-                                    <p className="m-0 fw-light">
-                                        With local knowledge, personalised
-                                        recommendations and accommodation
-                                        options for every style and budget, we
-                                        help you plan a trip that suits you.
-                                    </p>
-                                    <p className="m-0 fw-light">
-                                        And once you arrive, our on-island team
-                                        is just one message away.
-                                    </p>
-
-                                    <p className="fw-medium">
-                                        We make Lembongan holidays easy
-                                    </p>
+                                    <div className="font-tt-drugs">
+                                        <RenderHtml
+                                            html={
+                                                SECTION3?.SubSection1
+                                                    ?.description
+                                            }
+                                        />
+                                    </div>
 
                                     <BtnLinkPrimary
                                         href={ABOUT_HOLIDAY_BOOKING_PATH}
@@ -245,14 +187,18 @@ const AboutUsMain = ({
                             </div>
                         </div>
 
-                        <div className="row gx-5 flex-row-reverse mt-70">
+                        <div
+                            className="row gx-5 flex-row-reverse"
+                            style={{
+                                margin: '120px 0',
+                            }}>
                             <div className="col">
                                 <div className="w-100 vstack gap-3 text-grey-200 wp-hover-image">
                                     <WrapImageHoverOverlay
                                         className="section-boat-banner-reel"
                                         contentOverlay={null}>
                                         <Image
-                                            src={BGHero}
+                                            src={SECTION3?.SubSection2?.image}
                                             alt="test"
                                             fill
                                             className="object-fit-cover"
@@ -272,31 +218,20 @@ const AboutUsMain = ({
                                             style={{
                                                 lineHeight: '100%',
                                             }}>
-                                            PROPERTY MANAGEMENT
+                                            {SECTION3?.SubSection2?.title}
                                         </p>
                                         <p className="m-0 fs-24 text-uppercase">
-                                            Your Property, Our Priority
+                                            {SECTION3?.SubSection2?.subTitle}
                                         </p>
                                     </div>
-                                    <p className="m-0 fw-light">
-                                        <span className="fw-medium">
-                                            Do you own a property or are you
-                                            thinking of building one?
-                                        </span>{' '}
-                                        Let our experienced island team take
-                                        care of the day-to-day, so you can enjoy
-                                        the benefits of owning a holiday home
-                                        without the stress of managing it
-                                        yourself.
-                                    </p>
-                                    <p className="m-0 fw-light">
-                                        From operations and guest experience to
-                                        marketing and revenue management, we
-                                        combine local expertise, a trusted
-                                        network of vendors, a loyal customer
-                                        base and smart technology to help your
-                                        property perform at its best.
-                                    </p>
+                                    <div className="font-tt-drugs">
+                                        <RenderHtml
+                                            html={
+                                                SECTION3?.SubSection2
+                                                    ?.description
+                                            }
+                                        />
+                                    </div>
 
                                     <BtnLinkPrimary
                                         href={ABOUT_PROPERTY_MANAGEMENT_PATH}
@@ -308,14 +243,18 @@ const AboutUsMain = ({
                             </div>
                         </div>
 
-                        <div className="row gx-5 mt-70">
+                        <div
+                            className="row gx-5"
+                            style={{
+                                margin: '120px 0',
+                            }}>
                             <div className="col">
                                 <div className="w-100 vstack gap-3 text-grey-200 wp-hover-image">
                                     <WrapImageHoverOverlay
                                         className="section-boat-banner-reel"
                                         contentOverlay={null}>
                                         <Image
-                                            src={BGHero}
+                                            src={SECTION3?.SubSection3?.image}
                                             alt="test"
                                             fill
                                             className="object-fit-cover"
@@ -335,41 +274,26 @@ const AboutUsMain = ({
                                             style={{
                                                 lineHeight: '100%',
                                             }}>
-                                            Business Listing
+                                            {SECTION3?.SubSection3?.title}
                                         </p>
                                         <p className="m-0 fs-24 text-uppercase">
-                                            REACH MORE TRAVELLERS
+                                            {SECTION3?.SubSection3?.subTitle}
                                         </p>
                                     </div>
-                                    <p className="m-0 fw-light">
-                                        Put your business in front of travellers
-                                        already planning their trip to Nusa
-                                        Lembongan and Nusa Ceningan.
-                                    </p>
-                                    <p className="m-0 fw-light">
-                                        With a strong online presence, a
-                                        well-established website and an engaged
-                                        Instagram and Facebook community, we
-                                        connect businesses with travellers
-                                        actively looking for places to eat,
-                                        things to do and services on the
-                                        islands.
-                                    </p>
-                                    <p className="fw-medium">
-                                        Get your business in front of travellers
-                                        before they arrive.
-                                    </p>
-                                    <p className="m-0 fw-light">
-                                        Our platform connects you with people
-                                        actively planning where to eat, what to
-                                        do and which services to book.
-                                    </p>
+                                    <div className="font-tt-drugs">
+                                        <RenderHtml
+                                            html={
+                                                SECTION3?.SubSection3
+                                                    ?.description
+                                            }
+                                        />
+                                    </div>
 
                                     <BtnLinkPrimary
-                                        href="#"
+                                        href={SECTION3?.SubSection3?.buttonLink}
                                         isIconArrow
                                         className="width-fit-content rounded-pill text-uppercase">
-                                        List with us
+                                        {SECTION3?.SubSection3?.buttonTitle}
                                     </BtnLinkPrimary>
                                 </div>
                             </div>
@@ -382,15 +306,11 @@ const AboutUsMain = ({
                 <div className="container">
                     <div className="text-center vstack gap-4 px-5">
                         <SectionTitle className="font-tt-drugs text-uppercase fw-light">
-                            MEET the team
+                            {SECTION4?.title}
                         </SectionTitle>
-                        <p className="font-tt-drugs fw-light">
-                            Meet the faces behind The Lembongan Traveller and
-                            get to know the people behind your island holiday.
-                            From why they love calling Lembongan home to their
-                            favourite places to eat, explore and unwind,
-                            discover the island through the eyes of our team.
-                        </p>
+                        <div className="font-tt-drugs">
+                            <RenderHtml html={SECTION4?.subTitle} />
+                        </div>
                     </div>
 
                     {groupedTeam.map((group, index) => (
@@ -421,9 +341,7 @@ const AboutUsMain = ({
                                         <p className="mb-1 fs-16 fw-semibold">
                                             {vm.question}
                                         </p>
-                                        <p className="mb-1 fs-16">
-                                            <RenderHtml html={vm.answer} />
-                                        </p>
+                                        <RenderHtml html={vm.answer} />
                                     </div>
                                 </div>
                             ))}
