@@ -74,6 +74,7 @@ const ContactForm = () => {
                         />
 
                         <FormTextArea
+                            rows={8}
                             label="Message"
                             placeholder="e.g Send"
                             name="message"
