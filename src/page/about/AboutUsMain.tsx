@@ -2,23 +2,17 @@
 
 import { SectionTitle } from '@/component/text/Heading'
 import SwipeSlideBanner from '@/component/swiperSlide/SwipeSlideBanner'
-import BGHero from '@/asset/image/dummy/offer-last-bg-hero-half.jpg'
 import Link from 'next/link'
 import { WrapImageHoverOverlay } from '@/component/general/WrapImage'
-import {
-    BtnBasic,
-    BtnLinkPrimary,
-    BtnPrimary,
-    CodeIconArrow,
-} from '@/component/general/Button'
+import { BtnLinkPrimary } from '@/component/general/Button'
 import Image from 'next/image'
 import { useEffect, useMemo, useState } from 'react'
 import { getTeamList } from '@/service/api/about.api'
 import { isSuccess } from '@/helper/base/condition.helper'
-import { imgLandscapeConfig } from '@/config/urlImage.config'
 import {
     ABOUT_HOLIDAY_BOOKING_PATH,
     ABOUT_PROPERTY_MANAGEMENT_PATH,
+    STAY_PATH,
 } from '@/config/pagePath.config'
 import RenderHtml from '@/component/general/RenderHtml'
 
@@ -178,7 +172,7 @@ const AboutUsMain = ({
                                     </div>
 
                                     <BtnLinkPrimary
-                                        href={ABOUT_HOLIDAY_BOOKING_PATH}
+                                        href={STAY_PATH}
                                         isIconArrow
                                         className="width-fit-content rounded-pill text-uppercase">
                                         Book a stay
@@ -290,10 +284,11 @@ const AboutUsMain = ({
                                     </div>
 
                                     <BtnLinkPrimary
-                                        href={SECTION3?.SubSection3?.buttonLink}
+                                        href={SECTION3?.SubSection3?.file}
+                                        target="_blank"
                                         isIconArrow
                                         className="width-fit-content rounded-pill text-uppercase">
-                                        {SECTION3?.SubSection3?.buttonTitle}
+                                        List With us
                                     </BtnLinkPrimary>
                                 </div>
                             </div>
