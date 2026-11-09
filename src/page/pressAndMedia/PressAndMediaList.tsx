@@ -8,11 +8,14 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { imgReelConfig } from '@/config/urlImage.config'
 import { BtnBasic, BtnIcon, BtnLinkBasic } from '@/component/general/Button'
+import { actionFormatDateStrict } from '@/helper/actionFormatDate.helper'
+import Pagination from '@/component/general/Pagination'
 
 const PressAndMediaList = () => {
-    const { list, setList, isLoading, pagination } = useGeneralDataList({
-        urlAPI: getMediaPartner,
-    })
+    const { list, setList, isLoading, pagination, _handleChangePage } =
+        useGeneralDataList({
+            urlAPI: getMediaPartner,
+        })
 
     return (
         <section className="section-space-small">
@@ -21,7 +24,7 @@ const PressAndMediaList = () => {
                     <LoadingCardListData />
                 ) : !isEmpty(list) ? (
                     <>
-                        <div className="row g-4">
+                        <div className="row g-4 gy-5">
                             {list.map((vm: any, index) => {
                                 return (
                                     <div className="col-md-3" key={index}>
@@ -29,37 +32,59 @@ const PressAndMediaList = () => {
                                             href={vm?.url || '#'}
                                             target={vm.url ? '_blank' : ''}
                                             className="w-100">
-                                            <div className="border border-neutral-200 px-3 pt-3 pb-4">
-                                                <div className="position-relative text-center px-2 w-100 h-258-px">
-                                                    <Image
-                                                        src={imgReelConfig(
-                                                            vm.logo,
+                                            <div className="border border-neutral-200 px-3 pt-3 pb-4 h-100">
+                                                <div className="vstack gap-2 h-100">
+                                                    <div className="position-relative text-center w-100 h-258-px">
+                                                        <Image
+                                                            src={imgReelConfig(
+                                                                vm.featuredImage,
+                                                            )}
+                                                            alt={vm.name || ''}
+                                                            fill
+                                                            className="h-100 h-100 position-relative object-fit-cover"
+                                                        />
+                                                    </div>
+                                                    <p className="font-tt-drugs mb-0 fs-16 text-neutral-400 mt-3">
+                                                        {actionFormatDateStrict(
+                                                            vm.date,
+                                                            'MMMM DD, YYYY',
+                                                            'DD/MM/YYYY HH:ii',
                                                         )}
-                                                        alt={vm.name || ''}
-                                                        fill
-                                                        className="h-100 h-100 position-relative object-fit-contain"
-                                                    />
-                                                </div>
+                                                    </p>
 
-                                                <p className="fs-20 font-tt-drugs text-gray-400 mb-0">
-                                                    {vm.name}
-                                                </p>
-                                                <p className="fs-16 text-gray-200 fw-300 mb-0">
-                                                    {vm.description}
-                                                </p>
+                                                    <p className="fs-20 font-tt-drugs text-gray-400 mb-0 fw-semibold text-uppercase">
+                                                        {vm.name}
+                                                    </p>
+                                                    <p className="fs-20 font-tt-drugs text-gray-400 mb-0 text-uppercase mt-3">
+                                                        {vm.title}
+                                                    </p>
+                                                    <p className="fs-16 text-neutral-500 fw-300 mb-0 fw-light">
+                                                        {vm.description}
+                                                    </p>
 
-                                                <div className="pt-3">
-                                                    <BtnBasic className="btn-outline-gray-200 rounded-pill">
-                                                        <BtnIcon>
-                                                            Read Article
-                                                        </BtnIcon>
-                                                    </BtnBasic>
+                                                    <div className="mt-auto">
+                                                        <BtnBasic className="btn-outline-gray-200 rounded-pill">
+                                                            <BtnIcon>
+                                                                Read Article
+                                                            </BtnIcon>
+                                                        </BtnBasic>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </Link>
                                     </div>
                                 )
                             })}
+                        </div>
+
+                        <div className="mt-5">
+                            <Pagination
+                                // @ts-ignore
+                                pagination={pagination}
+                                onPageChange={(passPage) =>
+                                    _handleChangePage(passPage)
+                                }
+                            />
                         </div>
                     </>
                 ) : (
