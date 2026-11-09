@@ -12,7 +12,9 @@ const PropertyManagementForm = ({ content = {} }: { content?: any }) => {
         usePropertyManagementFormHook()
 
     return (
-        <section className="section-space-small bg-neutral-100">
+        <section
+            className="section-space-small bg-neutral-100"
+            id="propertyManagementForm">
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-lg-8 col-md-8">

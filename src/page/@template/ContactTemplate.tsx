@@ -6,8 +6,8 @@ import SectionContactAddress from '@/page/contact/SectionContactAddress'
 const ContactTemplate = async ({ content }: PropsSectionContent) => {
     const { SECTION1 = {}, SECTION2 = {}, SECTION3 } = content?.content || {}
 
-    console.log('SECTION1: ', SECTION1)
-    console.log('SECTION3: ', SECTION3)
+    // console.log('SECTION1: ', SECTION1)
+    // console.log('SECTION3: ', SECTION3)
 
     return (
         <TemplatePageBaseLayout
