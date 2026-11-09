@@ -61,7 +61,7 @@ export const IslandSectionImageAndContent = ({
 }: BlockInfoProps & { image?: string }) => (
     <section className="section-space-small">
         <div className="container">
-            <div className="row gx-8 gy-5 align-items-center">
+            <div className="row g-5 align-items-center">
                 <div className="col-md-6">
                     <WrapImageHoverOverlay className="h-480-px">
                         <Image
@@ -77,7 +77,7 @@ export const IslandSectionImageAndContent = ({
                 </div>
 
                 <div className="col-md-6">
-                    <div className="pe-5">
+                    <div className="ps-5 ms-auto">
                         <BlockInfo
                             title={title}
                             subTitle={subTitle}
@@ -100,8 +100,8 @@ export const IslandSectionContentAndImage = ({
 }: BlockInfoProps & { image?: string }) => (
     <section className="section-space-small bg-neutral-100">
         <div className="container">
-            <div className="row gx-8 gy-5 align-items-center">
-                <div className="col-md-5">
+            <div className="row align-items-center">
+                <div className="col-md-6">
                     <div className="pe-5">
                         <BlockInfo
                             title={title}
@@ -112,7 +112,7 @@ export const IslandSectionContentAndImage = ({
                     </div>
                 </div>
 
-                <div className="col-md-7 ">
+                <div className="col-md-6 ">
                     <WrapImageHoverOverlay className="h-480-px">
                         <Image
                             src={image || IMAGE_EMPTY}
