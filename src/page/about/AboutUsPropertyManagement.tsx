@@ -2,9 +2,22 @@
 
 import { WrapImageHoverOverlay } from '@/component/general/WrapImage'
 import Image from 'next/image'
-import BGHero from '@/asset/image/dummy/offer-last-bg-hero-half.jpg'
+import Resto from '@/asset/image/aboutUs/resto.png'
+import Reservation from '@/asset/image/aboutUs/reservation.png'
+import Resepsionis from '@/asset/image/aboutUs/resepsionis.png'
+import Porto3 from '@/asset/image/aboutUs/porto3.png'
+import Porto2 from '@/asset/image/aboutUs/porto2.png'
+import Porto1 from '@/asset/image/aboutUs/porto1.png'
+import Operations from '@/asset/image/aboutUs/operations.png'
+import Marketing from '@/asset/image/aboutUs/marketing.png'
+import Kolam2 from '@/asset/image/aboutUs/kolam2.png'
+import Kolam from '@/asset/image/aboutUs/kolam1.png'
+import Kamar from '@/asset/image/aboutUs/kamar.png'
+import Founder from '@/asset/image/aboutUs/founder.png'
+import Finance from '@/asset/image/aboutUs/finance.png'
+import Engineering from '@/asset/image/aboutUs/engineering.png'
 import { BtnLinkPrimary } from '@/component/general/Button'
-import { ABOUT_HOLIDAY_BOOKING_PATH } from '@/config/pagePath.config'
+import { ABOUT_HOLIDAY_BOOKING_PATH, STAY_PATH } from '@/config/pagePath.config'
 import { SectionTitle } from '@/component/text/Heading'
 import {
     IconCalendarCheck,
@@ -30,8 +43,8 @@ const AboutUsPropertyManagement = () => {
                                     className="section-boat-banner-reel"
                                     contentOverlay={null}>
                                     <Image
-                                        src={BGHero}
-                                        alt="test"
+                                        src={Kolam}
+                                        alt="Lembongan Property Management & Destination Specialist."
                                         fill
                                         className="object-fit-cover"
                                     />
@@ -65,7 +78,7 @@ const AboutUsPropertyManagement = () => {
                                 </p>
 
                                 <BtnLinkPrimary
-                                    href={ABOUT_HOLIDAY_BOOKING_PATH}
+                                    href="#propertyManagementForm"
                                     isIconArrow
                                     className="width-fit-content rounded-pill text-uppercase">
                                     Discuss your property
@@ -81,8 +94,9 @@ const AboutUsPropertyManagement = () => {
                                     className="section-boat-banner-reel"
                                     contentOverlay={null}>
                                     <Image
-                                        src={BGHero}
-                                        alt="test"
+                                        src={Resto}
+                                        alt="LOCAL EXPERTISE. PROFESSIONAL
+                                        MANAGEMENT."
                                         fill
                                         className="object-fit-cover"
                                     />
@@ -222,7 +236,7 @@ const AboutUsPropertyManagement = () => {
                         <div className="col-md-4 font-tt-drugs color-555">
                             <div className="vstack gap-4 overflow-hidden">
                                 <Image
-                                    src={BGHero}
+                                    src={Kamar}
                                     alt="Full Property Management"
                                     width={480}
                                     height={350}
@@ -240,8 +254,8 @@ const AboutUsPropertyManagement = () => {
                         <div className="col-md-4 font-tt-drugs color-555">
                             <div className="vstack gap-4 overflow-hidden">
                                 <Image
-                                    src={BGHero}
-                                    alt="Full Property Management"
+                                    src={Resepsionis}
+                                    alt="Booking Management"
                                     width={480}
                                     height={350}
                                     className="object-fit-cover"
@@ -258,8 +272,8 @@ const AboutUsPropertyManagement = () => {
                         <div className="col-md-4 font-tt-drugs color-555">
                             <div className="vstack gap-4 overflow-hidden">
                                 <Image
-                                    src={BGHero}
-                                    alt="Full Property Management"
+                                    src={Kolam2}
+                                    alt="Commercial & Booking Management"
                                     width={480}
                                     height={350}
                                     className="object-fit-cover"
@@ -399,8 +413,8 @@ const AboutUsPropertyManagement = () => {
                         <div className="col-md-4 font-tt-drugs color-555">
                             <div className="vstack gap-4 overflow-hidden">
                                 <Image
-                                    src={BGHero}
-                                    alt="Full Property Management"
+                                    src={Founder}
+                                    alt="founder"
                                     width={480}
                                     height={350}
                                     className="object-fit-cover"
@@ -415,8 +429,8 @@ const AboutUsPropertyManagement = () => {
                         <div className="col-md-4 font-tt-drugs color-555">
                             <div className="vstack gap-4 overflow-hidden">
                                 <Image
-                                    src={BGHero}
-                                    alt="Full Property Management"
+                                    src={Reservation}
+                                    alt="Reservation"
                                     width={480}
                                     height={350}
                                     className="object-fit-cover"
@@ -431,8 +445,8 @@ const AboutUsPropertyManagement = () => {
                         <div className="col-md-4 font-tt-drugs color-555">
                             <div className="vstack gap-4 overflow-hidden">
                                 <Image
-                                    src={BGHero}
-                                    alt="Full Property Management"
+                                    src={Marketing}
+                                    alt="Marketing"
                                     width={480}
                                     height={350}
                                     className="object-fit-cover"
@@ -447,8 +461,8 @@ const AboutUsPropertyManagement = () => {
                         <div className="col-md-4 font-tt-drugs color-555">
                             <div className="vstack gap-4 overflow-hidden">
                                 <Image
-                                    src={BGHero}
-                                    alt="Full Property Management"
+                                    src={Operations}
+                                    alt="Operations"
                                     width={480}
                                     height={350}
                                     className="object-fit-cover"
@@ -463,8 +477,8 @@ const AboutUsPropertyManagement = () => {
                         <div className="col-md-4 font-tt-drugs color-555">
                             <div className="vstack gap-4 overflow-hidden">
                                 <Image
-                                    src={BGHero}
-                                    alt="Full Property Management"
+                                    src={Engineering}
+                                    alt="engineering"
                                     width={480}
                                     height={350}
                                     className="object-fit-cover"
@@ -479,8 +493,8 @@ const AboutUsPropertyManagement = () => {
                         <div className="col-md-4 font-tt-drugs color-555">
                             <div className="vstack gap-4 overflow-hidden">
                                 <Image
-                                    src={BGHero}
-                                    alt="Full Property Management"
+                                    src={Finance}
+                                    alt="finance"
                                     width={480}
                                     height={350}
                                     className="object-fit-cover"
@@ -508,19 +522,22 @@ const AboutUsPropertyManagement = () => {
                         <SwipeSlideBanner
                             items={[
                                 {
-                                    buttonLink: '#',
-                                    image: BGHero,
-                                    title: 'Test',
+                                    description:
+                                        'We work exclusively in Nusa Lembongan & Nusa Ceningan. That focus gives owners an experienced local team ',
+                                    image: Porto1,
+                                    title: ' Villa',
                                 },
                                 {
-                                    buttonLink: '#',
-                                    image: BGHero,
-                                    title: 'Test',
+                                    description:
+                                        'Boutique resorts with up to 11 rooms, offering personalised service and shared facilities.',
+                                    image: Porto2,
+                                    title: 'Resort',
                                 },
                                 {
-                                    buttonLink: '#',
-                                    image: BGHero,
-                                    title: 'Test',
+                                    description:
+                                        'Bungalow complexes suited to solo travellers, couples and small retreat groups.',
+                                    image: Porto3,
+                                    title: 'bungalow',
                                 },
                             ]}
                             breakpoints={{
@@ -564,14 +581,10 @@ const AboutUsPropertyManagement = () => {
                                                 maxWidth: '380px',
                                             }}>
                                             <p className="mb-0 fs-48 text-uppercase">
-                                                Villa
+                                                {dataElement?.title}
                                             </p>
                                             <p className="m-0 fw-light fs-20">
-                                                They founded The Lembongan
-                                                Traveller, starting with an
-                                                Instagram account to share and
-                                                promote the island they had come
-                                                to love.{' '}
+                                                {dataElement?.description}
                                             </p>
                                         </div>
                                     </div>
@@ -582,6 +595,7 @@ const AboutUsPropertyManagement = () => {
 
                     <div className="hstack justify-content-center mt-70">
                         <BtnLinkPrimary
+                            href={STAY_PATH}
                             isIconArrow
                             className="rounded-pill text-uppercase">
                             Explore more

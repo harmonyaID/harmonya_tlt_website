@@ -25,6 +25,7 @@ import {
     BOAT_TRANSFERS_PATH,
     CONTACT_US_PATH,
     HOME_PATH,
+    SEARCH_PATH,
     STAY_PATH,
 } from '@/config/pagePath.config'
 import {
@@ -35,6 +36,9 @@ import {
     ISLAND_GUIDE_MENU,
     STAY_MENU,
 } from '@/config/pageMenu.config'
+import { Search, X } from 'feather-icons-react'
+import { slugify } from '@/helper/slugify.helper'
+import { useRouter } from 'next/navigation'
 
 const LabelGroup = ({ name = '' }: { name?: string }) => (
     <p className="fs-24 font-tt-drugs mb-0">{name}</p>
@@ -71,6 +75,7 @@ const NavbarLayout = ({
     menus = {
         items: [],
     },
+    isInSearch = false,
 }: {
     isBgTransparent?: boolean
     isStartFix?: boolean
@@ -78,8 +83,14 @@ const NavbarLayout = ({
         items?: any[]
         [key: string]: any
     }
+    isInSearch?: boolean
 }) => {
     const [isScrolled, setIsScrolled] = useState(false)
+    const router = useRouter()
+
+    const [formRequest, setFormRequest] = useState({
+        search: '',
+    })
 
     const _handleDropdownMegaMenu = async () => {
         const { Dropdown } = await loadBootstrapHelper()
@@ -137,6 +148,11 @@ const NavbarLayout = ({
         })
     }
 
+    const _handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value
+        setFormRequest({ search: value })
+    }
+
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 50)
@@ -171,7 +187,7 @@ const NavbarLayout = ({
                                         'btn-outline-white': isBgTransparent
                                             ? !isScrolled
                                             : false,
-                                        'btn-outline-neutral-500':
+                                        'btn-outline-list-with-us':
                                             isScrolled || !isBgTransparent,
                                     },
                                 )}>
@@ -194,22 +210,32 @@ const NavbarLayout = ({
                         </div>
                         <div className="cta col-md-2 text-end hstack gap-4 justify-content-end">
                             <div className="icon-search">
-                                <div
-                                    role="button"
-                                    onClick={() =>
-                                        actionModal(MDGlobalSearchDat)
-                                    }>
-                                    <Image
-                                        src={IconSearchDefault}
-                                        className="icon-search-default"
-                                        alt="the lembongan"
-                                    />
-                                    <Image
-                                        src={IconSearchWhite}
-                                        className="icon-search-white"
-                                        alt="the lembongan"
-                                    />
-                                </div>
+                                {isInSearch ? (
+                                    <div
+                                        role="button"
+                                        onClick={() =>
+                                            actionModal(MDGlobalSearchDat, true)
+                                        }>
+                                        <X className="text-primary" size={28} />
+                                    </div>
+                                ) : (
+                                    <div
+                                        role="button"
+                                        onClick={() =>
+                                            actionModal(MDGlobalSearchDat)
+                                        }>
+                                        <Image
+                                            src={IconSearchDefault}
+                                            className="icon-search-default"
+                                            alt="the lembongan"
+                                        />
+                                        <Image
+                                            src={IconSearchWhite}
+                                            className="icon-search-white"
+                                            alt="the lembongan"
+                                        />
+                                    </div>
+                                )}
                             </div>
                             <BtnLinkPrimary
                                 href="#"
@@ -515,6 +541,36 @@ const NavbarLayout = ({
                     )}
                 </div>
             </div>
+
+            {isInSearch && (
+                <div className="hstack w-100 justify-content-center">
+                    <div className="position-relative search-input-container">
+                        <span className="search-input-icon text-primary">
+                            <Search />
+                        </span>
+
+                        <input
+                            type="text"
+                            className="rounded-pill w-100 search-input font-tt-drugs"
+                            placeholder="SEARCH..."
+                            onChange={_handleChange}
+                            onKeyDown={(e) => {
+                                if (
+                                    e.key === 'Enter' &&
+                                    formRequest.search?.trim()
+                                ) {
+                                    router.push(
+                                        SEARCH_PATH +
+                                            '/' +
+                                            slugify(formRequest.search),
+                                    )
+                                    actionModal(MDGlobalSearchDat, true)
+                                }
+                            }}
+                        />
+                    </div>
+                </div>
+            )}
         </nav>
     )
 }

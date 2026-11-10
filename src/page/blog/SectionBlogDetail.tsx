@@ -3,7 +3,10 @@ import { IMAGE_EMPTY } from '@/config/asset.config'
 import Image from 'next/image'
 import RenderHtml from '@/component/general/RenderHtml'
 import { H1 } from '@/component/text/Heading'
-import { formatDateTimeByTlt } from '@/helper/actionFormatDate.helper'
+import {
+    actionFormatDateStrict,
+    formatDateTimeByTlt,
+} from '@/helper/actionFormatDate.helper'
 import { BadgeRow } from '@/component/general/Badge'
 import { ReactNode } from 'react'
 import joinClassNameHelper from '@/helper/joinClassName.helper'
@@ -59,9 +62,11 @@ const SectionBlogDetail = ({ detail = {} }: { detail?: any }) => {
                         <>
                             <SectionContent>
                                 {detail?.publishedAt ? (
-                                    <p className="fs-16 mb-4 font-tt-drugs">
-                                        {formatDateTimeByTlt(
+                                    <p className="fs-16 mb-4 font-tt-drugs text-uppercase">
+                                        {actionFormatDateStrict(
                                             detail.publishedAt,
+                                            'MMMM DD, YYYY',
+                                            'DD/MM/YYYY HH:ii',
                                         )}
                                     </p>
                                 ) : null}

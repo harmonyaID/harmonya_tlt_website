@@ -4,9 +4,13 @@ import Image from 'next/image'
 import BlogThumbnailDefault from '@/asset/image/default/blog-thumbnail-default.jpg'
 import { BtnBasic, BtnIcon } from '@/component/general/Button'
 import { BadgeRow } from '@/component/general/Badge'
-import { formatDateTimeByTlt } from '@/helper/actionFormatDate.helper'
+import {
+    actionFormatDateStrict,
+    formatDateTimeByTlt,
+} from '@/helper/actionFormatDate.helper'
 import Link from 'next/link'
 import { WrapImageHoverOverlay } from '@/component/general/WrapImage'
+import RenderHtml from '@/component/general/RenderHtml'
 
 const SectionBlogHero = ({
     content = {},
@@ -50,15 +54,17 @@ const SectionBlogHero = ({
                             />
                         </WrapImageHoverOverlay>
                     </div>
-                    <div className="col-md-6 ">
+                    <div className="col-md-6">
                         <div className="bg-green-400 text-white py-5 px-5 vstack justify-content-center h-100">
-                            <div className="">
-                                <p className="">
-                                    {blog.publishedAt
-                                        ? formatDateTimeByTlt(blog.publishedAt)
-                                        : '-'}
+                            <div className="vstack gap-3">
+                                <p className="font-tt-drugs text-uppercase mb-0 fs-20">
+                                    {actionFormatDateStrict(
+                                        blog.publishedAt,
+                                        'MMMM DD, YYYY',
+                                        'DD/MM/YYYY HH:ii',
+                                    )}
                                 </p>
-                                <h1 className="fs-40 font-weight-bold mb-4 desc-two-line">
+                                <h1 className="fs-40 font-weight-bold desc-two-line font-tt-drugs text-uppercase">
                                     {blog.title || 'Blog Empty'}
                                 </h1>
 
@@ -68,23 +74,28 @@ const SectionBlogHero = ({
                                 {/*    Discover*/}
                                 {/*</BtnBasic>*/}
 
-                                {blog.tags ? (
-                                    <BadgeRow
-                                        badges={blog.tags}
-                                        // className="pt-4"
-                                        classNameBadge="py-2 px-3"
-                                    />
-                                ) : null}
+                                <div className="hstack gap-3 flex-wrap">
+                                    {blog.categories?.map((cat) => (
+                                        <div
+                                            key={cat.id}
+                                            className="badge fs-14 width-fit-content rounded-pill fw-300 px-3 mb-2"
+                                            style={{
+                                                border: '1px solid #ffff',
+                                                color: '#ffff',
+                                                padding: '0.5rem 0.5rem',
+                                            }}>
+                                            {cat.name}
+                                        </div>
+                                    ))}
+                                </div>
 
                                 {/*<p className="pt-3 mb-0">*/}
                                 {/*    On many islands, the beach club is something*/}
                                 {/*    you do between other plans. On Nusa*/}
                                 {/*    Lembongan, it pretty much is the plan.*/}
                                 {/*</p>*/}
-                                {seo?.description ? (
-                                    <p className="fs-16 pt-3 mb-0 fext-grey-400 desc-two-line">
-                                        {seo?.description}
-                                    </p>
+                                {blog?.excerpt ? (
+                                    <RenderHtml html={blog?.excerpt} />
                                 ) : null}
                             </div>
                         </div>

@@ -500,6 +500,21 @@ a {text-decoration: none;}
   left: 5%;
 }
 
+#modal-global-search-data .modal-dialog {
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+.btn-outline-list-with-us {
+  background: transparent;
+  @extend .btn-outline-neutral-500;
+
+  &:hover {
+    background: transparent !important;
+  }
+}
+
 
 @import 'base/_typography';
 @import 'base/_navbar';
