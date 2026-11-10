@@ -76,8 +76,7 @@ const SectionExpList = ({ slug = '' }: { slug?: string | number }) => {
                                                     }>
                                                     <Image
                                                         src={imgReelConfig(
-                                                            vm?.thumbnail ||
-                                                                PropertyVilla01,
+                                                            vm?.thumbnail,
                                                         )}
                                                         alt={
                                                             vm.name ||

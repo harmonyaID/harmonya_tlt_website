@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import { BtnPrimary } from '@/component/general/Button'
+import {BtnLinkPrimary, BtnPrimary} from '@/component/general/Button'
 import { imgLandscapeConfig } from '@/config/urlImage.config'
 
 const SectionHomeHero = ({ content = {} }: { content?: any | {} }) => {
@@ -104,11 +104,12 @@ const SectionHomeHero = ({ content = {} }: { content?: any | {} }) => {
                                     </div>
                                 </div>
                                 <div className="col-md-auto">
-                                    <BtnPrimary
+                                    <BtnLinkPrimary
                                         type="button"
+                                        href={content?.buttonLink || '#'}
                                         className="rounded-pill">
                                         {content?.buttonText || 'SEARCH'}
-                                    </BtnPrimary>
+                                    </BtnLinkPrimary>
                                 </div>
                             </div>
                         </div>

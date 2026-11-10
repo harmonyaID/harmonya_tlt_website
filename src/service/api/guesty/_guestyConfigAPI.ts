@@ -43,6 +43,7 @@ guestyApi.interceptors.request.use(async (config) => {
     return config
 })
 
-export const guestyGet = (endpoint, params) =>
-    guestyApi.get(endpoint, { params })
+export const guestyGet = (endpoint, params = null) =>
+    guestyApi.get(endpoint, params ? { params } : {})
+
 export const guestyPost = (endpoint, body) => guestyApi.post(endpoint, body)
