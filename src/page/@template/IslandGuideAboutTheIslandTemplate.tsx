@@ -3,6 +3,7 @@ import NavbarLayout from '@/component/layout/Navbar.layout'
 import FooterNewsLatterStaticLayout from '@/component/layout/FooterNewsLatterStatic.layout'
 import FooterLayout from '@/component/layout/Footer.layout'
 import Breadcrumb from '@/component/general/Breadcrumb'
+import IslandGuideAboutTheIsland from '@/page/islandGuide/IslandGuideAboutTheIsland'
 
 const IslandGuideAboutTheIslandTemplate = async ({
     content,
@@ -23,6 +24,7 @@ const IslandGuideAboutTheIslandTemplate = async ({
             <section className="container py-4">
                 <Breadcrumb />
             </section>
+            <IslandGuideAboutTheIsland content={content} />
             <FooterNewsLatterStaticLayout />
             <FooterLayout />
         </>
