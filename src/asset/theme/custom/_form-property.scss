@@ -1,0 +1,7 @@
+.form-property {
+  .form-control {
+    border: 0;
+    border-bottom: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: 0;
+  }
+}

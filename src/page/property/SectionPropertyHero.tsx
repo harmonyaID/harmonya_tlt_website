@@ -1,5 +1,7 @@
+'use client'
+
 import Image from 'next/image'
-import {BtnLinkPrimary, BtnPrimary} from '@/component/general/Button'
+import { BtnLinkPrimary, BtnPrimary } from '@/component/general/Button'
 import { imgLandscapeConfig } from '@/config/urlImage.config'
 
 const SectionPropertyHero = ({ content = {} }: { content?: any | {} }) => {
