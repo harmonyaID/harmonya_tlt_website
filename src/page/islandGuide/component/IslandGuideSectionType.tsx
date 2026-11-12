@@ -37,7 +37,7 @@ const BlockInfo = ({
             {/*    {description}*/}
             {/*</p>*/}
             <RenderHtml
-                className="fs-20 text-grey-400 wp-head-font-tt-drugs mb-4"
+                className="fs-20 text-grey-400 wp-head-font-tt-drugs mb-4 text-clamp-3"
                 // @ts-ignore
                 html={description}
             />

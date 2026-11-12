@@ -113,7 +113,7 @@ const BoatTransferDetail = ({ detail }: { detail: any }) => {
                         Price
                     </SectionTitle>
 
-                    {detail?.promoPhotos && (
+                    {detail?.promoPhotos?.length > 0 && (
                         <div className="boat-transfer-banner-sm">
                             <Image
                                 src={detail?.promoPhotos?.[0]?.file || ''}
