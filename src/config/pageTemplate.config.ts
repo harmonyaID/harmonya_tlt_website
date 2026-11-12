@@ -22,3 +22,5 @@ export const TEMPLATE_OFFER = 'template-page-offer'
 export const TEMPLATE_OFFER_DETAIL = 'template-page-offer-detail'
 export const TEMPLATE_PROPERTY = 'template-page-property'
 export const TEMPLATE_PROPERTY_DETAIL = 'template-page-property-detail'
+export const TEMPLATE_ISLAND_GUIDE_ABOUT_THE_ISLAND =
+    'template-page-island-guide-about-the-island'

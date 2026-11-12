@@ -77,6 +77,7 @@ const BoatTransferCard = ({
                     {boat?.description && (
                         <div className="fs-16 fw-light mb-1 font-tt-drugs">
                             <RenderHtml
+                                className="text-clamp-3"
                                 html={boat?.description?.substring(0, 200)}
                             />
                         </div>
