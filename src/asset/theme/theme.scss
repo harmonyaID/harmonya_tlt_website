@@ -522,6 +522,10 @@ a {text-decoration: none;}
   overflow: hidden;
 }
 
+.banner-overlay {
+  filter: brightness(50%);
+}
+
 
 @import 'base/_typography';
 @import 'base/_navbar';
