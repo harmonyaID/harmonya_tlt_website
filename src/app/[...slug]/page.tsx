@@ -39,6 +39,7 @@ import BoatTransferTemplate from '@/page/@template/BoatTransferTemplate'
 import BoatTransferDetailTemplate from '@/page/@template/BoatTransferDetailTemplate'
 import SearchTemplate from '@/page/@template/SearchTemplate'
 import AboutUsTemplate from '@/page/@template/AboutUsTemplate'
+import IslandGuideAboutTheIslandTemplate from '@/page/@template/IslandGuideAboutTheIslandTemplate'
 
 type PropsData = {
     params: Promise<{ slug: string }>
