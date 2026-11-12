@@ -6,9 +6,11 @@ import { imgLandscapeConfig } from '@/config/urlImage.config'
 import FormRangeDatepicker from '@/component/form/FormRangeDatepicker'
 import FormWrap from '@/component/wrapping/Form.wrap'
 import { WrapFormContext } from '@/context/Form.Context'
+import usePropertyHeroSearch from '@/page/property/hook/usePropertyHeroSearch'
 
 const SectionPropertyHero = ({ content = {} }: { content?: any | {} }) => {
-    console.log('content: ', content)
+    const { formSearch, _handleChange } = usePropertyHeroSearch()
+
     return (
         <>
             <section className="section-hero-general bg-green-800">
@@ -42,7 +44,9 @@ const SectionPropertyHero = ({ content = {} }: { content?: any | {} }) => {
                         <div className="col-lg-9">
                             <div className="content-hero-search-cardP bg-white py-3 px-4 rounded-3">
                                 <FormWrap actions={{ handleSubmit: () => {} }}>
-                                    <WrapFormContext formRequest={{}}>
+                                    <WrapFormContext
+                                        formRequest={formSearch}
+                                        actions={{ change: _handleChange }}>
                                         <div className="row align-items-end g-3">
                                             <div className="col-md">
                                                 <div className="">
