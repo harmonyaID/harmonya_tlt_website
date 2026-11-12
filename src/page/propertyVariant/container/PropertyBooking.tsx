@@ -33,6 +33,7 @@ const PropertyBooking = ({
                                     config={{
                                         format: 'dd M yyyy',
                                     }}
+                                    isIconArrow
                                 />
                             </div>
                             <div className="border-bottomP pb-0">

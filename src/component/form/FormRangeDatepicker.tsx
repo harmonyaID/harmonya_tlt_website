@@ -6,7 +6,9 @@ import { FormInputDateRangePickerProps } from '@/component/form/type/componentFo
 import { isEmpty, isFunction } from 'lodash'
 import joinClassNameHelper from '@/helper/joinClassName.helper'
 
-const FormInputDateRangePicker: FC<FormInputDateRangePickerProps> = (props) => {
+const FormInputDateRangePicker: FC<FormInputDateRangePickerProps> = (
+    props: any,
+) => {
     const ctx = useHookContextForm()
     const defaultId = useId()
 
@@ -42,6 +44,11 @@ const FormInputDateRangePicker: FC<FormInputDateRangePickerProps> = (props) => {
         config = {},
 
         other,
+
+        isIconArrow = false,
+
+        placeholderFrom = '',
+        placeholderTo = '',
     } = props
 
     const idInput = id || 'text-daterangepicker-' + (name || '') + defaultId
@@ -150,7 +157,7 @@ const FormInputDateRangePicker: FC<FormInputDateRangePickerProps> = (props) => {
                             )}
                             disabled={disabled || disabledStartDate}
                             autoComplete={autoComplete}
-                            placeholder={placeholder}
+                            placeholder={placeholderFrom || placeholder}
                             readOnly={readOnly}
                             required={required}
                             {...other}
@@ -169,7 +176,9 @@ const FormInputDateRangePicker: FC<FormInputDateRangePickerProps> = (props) => {
                 </div>
 
                 <div className="col-auto px-0">
-                    <div className="input-group-addon">to</div>
+                    <div className="input-group-addon">
+                        {isIconArrow ? '→' : 'to'}
+                    </div>
                 </div>
 
                 <div className="col ps-0">
@@ -186,7 +195,7 @@ const FormInputDateRangePicker: FC<FormInputDateRangePickerProps> = (props) => {
                             }
                             disabled={disabled || disabledEndDate}
                             autoComplete={autoComplete}
-                            placeholder={placeholder}
+                            placeholder={placeholderTo || placeholder}
                             readOnly={readOnly}
                             required={required}
                             {...other}
