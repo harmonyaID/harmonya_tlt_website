@@ -6,7 +6,7 @@ export const getListingGuesty = (params = {}) =>
     guestyGet(API_VERSION + '/listings', params)
 
 export const getDetailListingGuesty = (id) =>
-    guestyGet('API_VERSION + /listings/' + id)
+    guestyGet(API_VERSION + '/listings/' + id)
 
 // ex params = {from: 'YYYY-MM-DD', to: 'YYYY-MM-DD'}
 export const getCalendarListingGuesty = (id, params) =>
@@ -16,7 +16,7 @@ export const getPaymentProviderListingGuesty = (id) =>
     guestyGet(API_VERSION + '/listings/' + id + '/payment-provider')
 
 export const addQuoteGuesty = (formParams = {}) =>
-    guestyPost(API_VERSION + '/reservations/quotes', formParams)
+    guestyPost(API_VERSION + '/reservations-v3/quote', formParams)
 
 export const getQuoteGuesty = (quoteId) =>
     guestyGet(API_VERSION + '/reservations/quotes/' + quoteId)

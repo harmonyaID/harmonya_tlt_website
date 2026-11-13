@@ -1,25 +1,31 @@
 'use client'
-import Image from 'next/image'
 import { BtnLinkPrimary, BtnPrimary } from '@/component/general/Button'
-import { imgLandscapeConfig } from '@/config/urlImage.config'
+import VideoBackground from '@/component/general/VideoBackground'
 import FormRangeDatepicker from '@/component/form/FormRangeDatepicker'
 import FormWrap from '@/component/wrapping/Form.wrap'
 import { WrapFormContext } from '@/context/Form.Context'
 import usePropertyHeroSearch from '@/page/property/hook/usePropertyHeroSearch'
+import PropertyFormSelectTreeOption from '@/page/property/component/PropertyFormSelectColection'
+import { isBoolean } from 'lodash'
 
 const SectionHomeHero = ({ content = {} }: { content?: any | {} }) => {
     const { formSearch, _handleChange } = usePropertyHeroSearch()
 
+    console.log('SectionHomeHero: ', content)
+
     return (
         <section className="section-hero-general bg-green-800">
-            <div className="general-hero-full-screen">
-                <Image
-                    src={imgLandscapeConfig(content.videoThumbnail)}
-                    className="h-100 banner-image"
-                    alt="The Lembongan Traveller - Your Guide to Nusa Lembongan"
-                    fill
-                />
-            </div>
+            <VideoBackground
+                src={
+                    content.isVideo &&
+                    (isBoolean(content.isVideo) || content.isVideo === 'true')
+                        ? content?.backgroundVideo || ''
+                        : ''
+                }
+                poster={content?.videoThumbnail}
+                alt="The Lembongan Traveller - Your Guide to Nusa Lembongan"
+                // showControls
+            />
 
             {/*Title*/}
             <div className="container content-hero-position-default text-center z-1">
@@ -75,6 +81,8 @@ const SectionHomeHero = ({ content = {} }: { content?: any | {} }) => {
                                                     isIconArrow
                                                     placeholderFrom="Check-In"
                                                     placeholderTo="Check-Out"
+                                                    startName="fromDate"
+                                                    endName="toDate"
                                                 />
                                             </div>
                                         </div>
@@ -90,6 +98,7 @@ const SectionHomeHero = ({ content = {} }: { content?: any | {} }) => {
                                                     type="text"
                                                     className="form-control form-transparent-underline"
                                                     id="inputDates"
+                                                    name="guest"
                                                     placeholder={
                                                         content.searchPlaceholderGuest ||
                                                         'e.g name'
@@ -105,24 +114,27 @@ const SectionHomeHero = ({ content = {} }: { content?: any | {} }) => {
                                                     {content?.searchLabelCollection ||
                                                         'COLLECTIONS'}
                                                 </label>
-                                                {/*<input*/}
-                                                {/*    type="text"*/}
-                                                {/*    className="form-control form-transparent-underline"*/}
-                                                {/*    id="inputDates"*/}
-                                                {/*    placeholder={*/}
-                                                {/*        content?.searchPlaceholderCollection ||*/}
-                                                {/*        'e.g Placeholder'*/}
-                                                {/*    }*/}
-                                                {/*/>*/}
-                                                <select
-                                                    name=""
+
+                                                {/*<select*/}
+                                                {/*    name=""*/}
+                                                {/*    id="selectCollction"*/}
+                                                {/*    className="form-control form-transparent-underline">*/}
+                                                {/*    <option value="">*/}
+                                                {/*        {content?.searchPlaceholderCollection ||*/}
+                                                {/*            'e.g Placeholder'}*/}
+                                                {/*    </option>*/}
+                                                {/*</select>*/}
+
+                                                <PropertyFormSelectTreeOption
+                                                    name="typeId"
+                                                    // className="form-control form-transparent-underline"
+                                                    classNameSelect="form-transparent-underline"
+                                                    placeholder={
+                                                        content?.searchPlaceholderCollection ||
+                                                        'Collection'
+                                                    }
                                                     id="selectCollction"
-                                                    className="form-control form-transparent-underline">
-                                                    <option value="">
-                                                        {content?.searchPlaceholderCollection ||
-                                                            'e.g Placeholder'}
-                                                    </option>
-                                                </select>
+                                                />
                                             </div>
                                         </div>
                                         <div className="col-md-auto">

@@ -7,6 +7,7 @@ import FormRangeDatepicker from '@/component/form/FormRangeDatepicker'
 import FormWrap from '@/component/wrapping/Form.wrap'
 import { WrapFormContext } from '@/context/Form.Context'
 import usePropertyHeroSearch from '@/page/property/hook/usePropertyHeroSearch'
+import PropertyFormSelectTreeOption from '@/page/property/component/PropertyFormSelectColection'
 
 const SectionPropertyHero = ({ content = {} }: { content?: any | {} }) => {
     const { formSearch, _handleChange } = usePropertyHeroSearch()
@@ -72,6 +73,8 @@ const SectionPropertyHero = ({ content = {} }: { content?: any | {} }) => {
                                                         isIconArrow
                                                         placeholderFrom="Check-In"
                                                         placeholderTo="Check-Out"
+                                                        startName="fromDate"
+                                                        endName="toDate"
                                                     />
                                                 </div>
                                             </div>
@@ -87,6 +90,7 @@ const SectionPropertyHero = ({ content = {} }: { content?: any | {} }) => {
                                                         type="text"
                                                         className="form-control form-transparent-underline-black"
                                                         id="inputGues"
+                                                        name="gues"
                                                         placeholder="e.g 2 Adults, 0 Children"
                                                     />
                                                 </div>
@@ -98,15 +102,24 @@ const SectionPropertyHero = ({ content = {} }: { content?: any | {} }) => {
                                                         className="form-label font-tt-drugs fw-500">
                                                         COLLECTIONS
                                                     </label>
-                                                    <select
-                                                        name=""
-                                                        id="selectCollction"
-                                                        className="form-control form-transparent-underline-black">
-                                                        <option value="">
-                                                            {content?.searchPlaceholderCollection ||
-                                                                'e.g Choose your preferences'}
-                                                        </option>
-                                                    </select>
+                                                    {/*<select*/}
+                                                    {/*    name=""*/}
+                                                    {/*    id="selectCollction"*/}
+                                                    {/*    className="form-control form-transparent-underline-black">*/}
+                                                    {/*    <option value="">*/}
+                                                    {/*        {content?.searchPlaceholderCollection ||*/}
+                                                    {/*            'e.g Choose your preferences'}*/}
+                                                    {/*    </option>*/}
+                                                    {/*</select>*/}
+
+                                                    <PropertyFormSelectTreeOption
+                                                        name="typeId"
+                                                        classNameSelect="form-control form-transparent-underline-black"
+                                                        placeholder={
+                                                            content?.searchPlaceholderCollection ||
+                                                            'Collection'
+                                                        }
+                                                    />
                                                 </div>
                                             </div>
                                             <div className="col-md-auto">

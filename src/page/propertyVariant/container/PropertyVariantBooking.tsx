@@ -4,6 +4,7 @@ import FormRangeDatepicker from '@/component/form/FormRangeDatepicker'
 import { BtnPrimary } from '@/component/general/Button'
 import { ReactNode } from 'react'
 import FormInput from '@/component/form/FormInput'
+import usePropertyVariantBooking from '@/page/propertyVariant/hook/usePropertyVariantBooking.hook'
 
 const LabelForm = ({ children }: { children?: ReactNode }) => (
     <p className="fs-14 text-neutral-500 mb-2 font-tt-drugs text-uppercase fw-500">
@@ -11,11 +12,14 @@ const LabelForm = ({ children }: { children?: ReactNode }) => (
     </p>
 )
 
-const PropertyBooking = ({
+const PropertyVariantBooking = ({
     propertyVariant = {},
 }: {
     propertyVariant?: any
 }) => {
+    const { formRequest, _handleChange, _handleSubmit } =
+        usePropertyVariantBooking(propertyVariant?.guestyId || '')
+
     return (
         <>
             <div className="p-4 border border-neutral-200 rounded-4">
@@ -23,8 +27,12 @@ const PropertyBooking = ({
                     {propertyVariant?.nickname || 'Villa tanjung - 4 bedrooms'}
                 </p>
 
-                <FormWrap actions={{ handleSubmit: () => {} }}>
-                    <WrapFormContext formRequest={{}}>
+                <FormWrap actions={{ handleSubmit: () => _handleSubmit() }}>
+                    <WrapFormContext
+                        formRequest={{ formRequest }}
+                        actions={{
+                            change: _handleChange,
+                        }}>
                         <div className="vstack gap-3 mb-4">
                             <div className="border-bottomP pb-0">
                                 <LabelForm>check-in & Check-out</LabelForm>
@@ -34,6 +42,8 @@ const PropertyBooking = ({
                                         format: 'dd M yyyy',
                                     }}
                                     isIconArrow
+                                    placeholderFrom="Check-In"
+                                    placeholderTo="Check-Out"
                                 />
                             </div>
                             <div className="border-bottomP pb-0">
@@ -42,7 +52,9 @@ const PropertyBooking = ({
                                     name="guest"
                                     placeholder="e.g 8"
                                     className="form-property"
-                                    type="number"
+                                    // type="number"
+                                    isNumberOnly
+                                    value={formRequest.guest}
                                 />
                             </div>
                         </div>
@@ -85,4 +97,4 @@ const PropertyBooking = ({
     )
 }
 
-export default PropertyBooking
+export default PropertyVariantBooking

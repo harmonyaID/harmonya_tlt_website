@@ -11,7 +11,7 @@ import PropertyOther from '@/page/property/container/PropertyOther'
 import PropertyFormInquiry from '@/page/property/container/PropertyFormInquiry'
 import PropertyInfoWhyYouLoveThis from '@/page/property/component/PropertyInfoWhyYouLoveThis'
 import usePropertyVariantGuesty from '@/page/property/hook/usePropertyVariantGuesty'
-import PropertyBooking from '@/page/propertyVariant/container/PropertyBooking'
+import PropertyVariantBooking from '@/page/propertyVariant/container/PropertyVariantBooking'
 
 const TitleSection = ({ title }: { title: string }) => (
     <>
@@ -232,7 +232,7 @@ const PropertyDetail = ({
                             {/*    </div>*/}
                             {/*</div>*/}
 
-                            <PropertyBooking />
+                            <PropertyVariantBooking propertyVariant={detail} />
                         </div>
                     </div>
                 </div>
