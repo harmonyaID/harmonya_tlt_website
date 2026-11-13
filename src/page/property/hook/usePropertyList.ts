@@ -44,10 +44,15 @@ const usePropertyList = () => {
     }
 
     const _handleChange = (name: string = '', value: any) => {
-        setSearch((prevState) => ({
-            ...prevState,
-            [name]: value,
-        }))
+        setSearch((prevState) => {
+            const newState = { ...prevState }
+            newState[name] = value
+            newState.page = 1
+
+            _handleGet(newState)
+
+            return { ...newState }
+        })
     }
 
     useEffect(() => {

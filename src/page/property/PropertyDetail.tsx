@@ -10,6 +10,8 @@ import PropertyThingsToExplore from '@/page/property/container/PropertyThingsToE
 import PropertyOther from '@/page/property/container/PropertyOther'
 import PropertyFormInquiry from '@/page/property/container/PropertyFormInquiry'
 import PropertyInfoWhyYouLoveThis from '@/page/property/component/PropertyInfoWhyYouLoveThis'
+import usePropertyVariantGuesty from '@/page/property/hook/usePropertyVariantGuesty'
+import PropertyVariantBooking from '@/page/propertyVariant/container/PropertyVariantBooking'
 
 const TitleSection = ({ title }: { title: string }) => (
     <>
@@ -34,6 +36,8 @@ const PropertyDetail = ({
         whyYoullLoveThis = [],
         seo = {},
     } = detail
+
+    const { propertyList } = usePropertyVariantGuesty(detail?.guestyId || '')
 
     return (
         <>
@@ -205,28 +209,30 @@ const PropertyDetail = ({
                         </div>
 
                         <div className="col-md-4">
-                            <div className="p-4 border border-neutral-200 rounded-4">
-                                <p className="fs-18 font-tt-drugs fw-600 text-grey-200 pt-3">
-                                    SEARCH AVAILABLE DATE
-                                </p>
+                            {/*<div className="p-4 border border-neutral-200 rounded-4">*/}
+                            {/*    <p className="fs-18 font-tt-drugs fw-600 text-grey-200 pt-3">*/}
+                            {/*        SEARCH AVAILABLE DATE*/}
+                            {/*    </p>*/}
 
-                                <hr />
+                            {/*    <hr />*/}
 
-                                <div className="row g-2">
-                                    <div className="col-lg-6 col-md-12">
-                                        <BtnPrimary className="rounded-pill w-100">
-                                            SHARE
-                                        </BtnPrimary>
-                                    </div>
-                                    <div className="col-lg-6 col-md-12">
-                                        <BtnPrimary
-                                            className="rounded-pill w-100"
-                                            isOutline>
-                                            ASK QUESTION
-                                        </BtnPrimary>
-                                    </div>
-                                </div>
-                            </div>
+                            {/*    <div className="row g-2">*/}
+                            {/*        <div className="col-lg-6 col-md-12">*/}
+                            {/*            <BtnPrimary className="rounded-pill w-100">*/}
+                            {/*                SHARE*/}
+                            {/*            </BtnPrimary>*/}
+                            {/*        </div>*/}
+                            {/*        <div className="col-lg-6 col-md-12">*/}
+                            {/*            <BtnPrimary*/}
+                            {/*                className="rounded-pill w-100"*/}
+                            {/*                isOutline>*/}
+                            {/*                ASK QUESTION*/}
+                            {/*            </BtnPrimary>*/}
+                            {/*        </div>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
+
+                            <PropertyVariantBooking propertyVariant={detail} />
                         </div>
                     </div>
                 </div>

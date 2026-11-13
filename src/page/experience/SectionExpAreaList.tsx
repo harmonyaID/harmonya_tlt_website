@@ -6,15 +6,23 @@ import Image from 'next/image'
 import { slugify } from '@/helper/slugify.helper'
 import { usePathname } from 'next/navigation'
 
-const SectionExpAreaList = ({ slug = '' }: { slug?: string | number }) => {
+const SectionExpAreaList = ({
+    slug = '',
+    typeId = '',
+}: {
+    slug?: string | number
+    typeId?: string | number
+}) => {
     const pathname = usePathname() || '/'
 
     const { list, isLoading, pagination, _handleChangePage } =
         useExpAreaListHook({
             configSearch: {
-                typeId: slug,
+                typeId: typeId,
             },
         })
+
+    console.log('list: ', list)
 
     return (
         <>

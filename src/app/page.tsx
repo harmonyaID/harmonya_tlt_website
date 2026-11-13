@@ -36,14 +36,15 @@ const Home = async () => {
         (res) => res?.result || {},
     )
 
-    const partners = await getMediaPartner({ locale: 'en' }).then(
-        (res) => res?.result || {},
-    )
+    const partners = await getMediaPartner({
+        locale: 'en',
+        isPublishHomepage: 1,
+    }).then((res) => res?.result || {})
 
     const { menus } = await dataMenuNavbarServerside()
 
     const propertys = await getPropertyHomePage().then((res) => {
-        console.log('propertys: ', res?.result)
+        // console.log('propertys: ', res?.result)
         return res?.result || {}
     })
 

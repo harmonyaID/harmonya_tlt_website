@@ -8,7 +8,7 @@ const SectionHeroHalfScreen = ({ content = {} }: { content?: any | {} }) => {
                 <div className="general-hero-full-screen">
                     <Image
                         src={imgLandscapeConfig(content.image)}
-                        className="h-100 banner-image"
+                        className="h-100 banner-image banner-overlay "
                         alt={
                             content.title ||
                             'The Lembongan Traveller - Your Guide to Nusa Lembongan'
