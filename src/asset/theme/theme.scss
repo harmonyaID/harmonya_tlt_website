@@ -522,6 +522,10 @@ a {text-decoration: none;}
   overflow: hidden;
 }
 
+.banner-overlay {
+  filter: brightness(50%);
+}
+
 
 @import 'base/_typography';
 @import 'base/_navbar';
@@ -534,3 +538,4 @@ a {text-decoration: none;}
 @import 'custom/_search.scss';
 @import 'custom/_form-property.scss';
 @import 'custom/_video-background.scss';
+@import 'custom/whatsapp.scss';
