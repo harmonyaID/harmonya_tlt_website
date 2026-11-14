@@ -1,0 +1,13 @@
+.form-property {
+  .form-control {
+    border: 0;
+    border-bottom: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: 0;
+  }
+
+  .input-group-addon {
+    background-color: unset !important;
+    height: 37px!important;
+    border-bottom: var(--bs-border-width) solid var(--bs-border-color);
+  }
+}

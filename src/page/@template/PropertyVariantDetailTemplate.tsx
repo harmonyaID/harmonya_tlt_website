@@ -1,10 +1,9 @@
-import { getPropertyDetail } from '@/service/api/property.api'
 import { getPropertyVariantDetail } from '@/service/api/propertyVariant.api'
 import SEOBasicGeneral from '@/component/seo/SEOBasicGeneral'
 import NavbarLayout from '@/component/layout/Navbar.layout'
-import PropertyDetail from '@/page/property/PropertyDetail'
 import FooterNewsLatterStaticLayout from '@/component/layout/FooterNewsLatterStatic.layout'
 import FooterLayout from '@/component/layout/Footer.layout'
+import PropertyVariantDetail from '@/page/propertyVariant/PropertyVariantDetail'
 
 const PropertyVariantDetailTemplate = async ({
     slug,
@@ -24,7 +23,7 @@ const PropertyVariantDetailTemplate = async ({
         <>
             <SEOBasicGeneral seo={seo} />
             <NavbarLayout isStartFix={false} />
-            <PropertyDetail detail={dataProperty} allSlug={allSlug} />
+            <PropertyVariantDetail detail={dataProperty} allSlug={allSlug} />
             <FooterNewsLatterStaticLayout />
             <FooterLayout />
         </>
