@@ -30,6 +30,7 @@ import { WrapFormContext } from '@/context/Form.Context'
 import PropertyFormSelectBathRoom from '@/page/property/component/PropertyFormSelectBathRoom'
 import { countTotalBeds } from '@/helper/count.helper'
 import PropertyFormSelectTreeType from '@/page/property/component/PropertyFormSelectTreeType'
+import PropertyFormSelectAmenities from '@/page/property/component/PropertyFormSelectAmenities'
 
 const SectionListProperty = () => {
     const pathname = usePathname() || '/'
@@ -86,6 +87,9 @@ const SectionListProperty = () => {
                                     </div>
                                     <div className="col-md-2">
                                         <PropertyFormSelectBathRoom />
+                                    </div>
+                                    <div className="col-md-2">
+                                        <PropertyFormSelectAmenities classNameSelect="rounded-pill" />
                                     </div>
                                 </WrapFormContext>
                             </div>

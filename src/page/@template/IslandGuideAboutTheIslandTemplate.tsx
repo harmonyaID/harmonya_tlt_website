@@ -4,6 +4,7 @@ import FooterNewsLatterStaticLayout from '@/component/layout/FooterNewsLatterSta
 import FooterLayout from '@/component/layout/Footer.layout'
 import Breadcrumb from '@/component/general/Breadcrumb'
 import IslandGuideAboutTheIsland from '@/page/islandGuide/IslandGuideAboutTheIsland'
+import WhatsAppChat from '@/component/general/WhatsappChat'
 
 const IslandGuideAboutTheIslandTemplate = async ({
     content,
