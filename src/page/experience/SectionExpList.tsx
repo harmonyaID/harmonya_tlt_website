@@ -13,6 +13,7 @@ import { WrapImageHoverOverlay } from '@/component/general/WrapImage'
 import { imgReelConfig } from '@/config/urlImage.config'
 import PropertyVilla01 from '@/asset/image/villa/property-villa-01.png'
 import Image from 'next/image'
+import ValidImage from '@/component/general/ValidImage'
 
 const SectionExpList = ({ slug = '' }: { slug?: string | number }) => {
     const pathname = usePathname() || '/'
@@ -74,7 +75,7 @@ const SectionExpList = ({ slug = '' }: { slug?: string | number }) => {
                                                             </BtnBasic>
                                                         </div>
                                                     }>
-                                                    <Image
+                                                    <ValidImage
                                                         src={imgReelConfig(
                                                             vm?.thumbnail ||
                                                                 PropertyVilla01,

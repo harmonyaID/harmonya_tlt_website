@@ -15,6 +15,8 @@ import {
     STAY_PATH,
 } from '@/config/pagePath.config'
 import RenderHtml from '@/component/general/RenderHtml'
+import { imgReelConfig } from '@/config/urlImage.config'
+import ValidImage from '@/component/general/ValidImage'
 
 const AboutUsMain = ({
     SECTION2,
@@ -81,8 +83,10 @@ const AboutUsMain = ({
                                         <WrapImageHoverOverlay
                                             className="section-boat-banner-reel"
                                             contentOverlay={null}>
-                                            <Image
-                                                src={dataElement?.image}
+                                            <ValidImage
+                                                src={imgReelConfig(
+                                                    dataElement?.image,
+                                                )}
                                                 alt={dataElement.year}
                                                 fill
                                                 className="object-fit-cover"
@@ -135,8 +139,10 @@ const AboutUsMain = ({
                                     <WrapImageHoverOverlay
                                         className="section-boat-banner-reel"
                                         contentOverlay={null}>
-                                        <Image
-                                            src={SECTION3?.SubSection1?.image}
+                                        <ValidImage
+                                            src={imgReelConfig(
+                                                SECTION3?.SubSection1?.image,
+                                            )}
                                             alt="test"
                                             fill
                                             className="object-fit-cover"
@@ -191,8 +197,10 @@ const AboutUsMain = ({
                                     <WrapImageHoverOverlay
                                         className="section-boat-banner-reel"
                                         contentOverlay={null}>
-                                        <Image
-                                            src={SECTION3?.SubSection2?.image}
+                                        <ValidImage
+                                            src={imgReelConfig(
+                                                SECTION3?.SubSection2?.image,
+                                            )}
                                             alt="test"
                                             fill
                                             className="object-fit-cover"
@@ -247,8 +255,10 @@ const AboutUsMain = ({
                                     <WrapImageHoverOverlay
                                         className="section-boat-banner-reel"
                                         contentOverlay={null}>
-                                        <Image
-                                            src={SECTION3?.SubSection3?.image}
+                                        <ValidImage
+                                            src={imgReelConfig(
+                                                SECTION3?.SubSection3?.image,
+                                            )}
                                             alt="test"
                                             fill
                                             className="object-fit-cover"
@@ -317,8 +327,8 @@ const AboutUsMain = ({
                                     key={vm.id}
                                     className="col-lg-3 col-sm-6 col-12">
                                     <div className="overflow-hidden d-flex justify-content-center">
-                                        <Image
-                                            src={vm.photo}
+                                        <ValidImage
+                                            src={imgReelConfig(vm.photo)}
                                             alt={vm.name}
                                             width={342}
                                             height={459}

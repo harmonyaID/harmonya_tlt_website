@@ -29,6 +29,7 @@ import {
 import Pagination from '@/component/general/Pagination'
 import InfoNotAvailable from '@/component/general/InfoEmpty'
 import usePropertyVariantMainHook from '@/page/propertyVariant/hook/usePropertyVariantMain.hook'
+import ValidImage from '@/component/general/ValidImage'
 
 const PropertyVariantMain = () => {
     const pathname = usePathname() || '/'
@@ -132,10 +133,11 @@ const PropertyVariantMain = () => {
                                                             </BtnBasic>
                                                         </div>
                                                     }>
-                                                    <Image
-                                                        src={imgReelConfig(
-                                                            dataElement?.coverPhoto,
-                                                        )}
+                                                    <ValidImage
+                                                        src={
+                                                            dataElement?.coverPhoto
+                                                        }
+                                                        fallbackSrc={imgReelConfig()}
                                                         alt={
                                                             dataElement.nickname ||
                                                             'Property'

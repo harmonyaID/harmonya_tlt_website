@@ -5,6 +5,7 @@ import { imgReelConfig } from '@/config/urlImage.config'
 import Image from 'next/image'
 import { slugify } from '@/helper/slugify.helper'
 import { usePathname } from 'next/navigation'
+import ValidImage from '@/component/general/ValidImage'
 
 const SectionExpAreaList = ({ slug = '' }: { slug?: string | number }) => {
     const pathname = usePathname() || '/'
@@ -36,7 +37,7 @@ const SectionExpAreaList = ({ slug = '' }: { slug?: string | number }) => {
                                             }
                                             className="">
                                             <div className="exp-area-card-img wp-hover-image">
-                                                <Image
+                                                <ValidImage
                                                     src={imgReelConfig(
                                                         vm.banner,
                                                     )}

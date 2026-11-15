@@ -9,6 +9,7 @@ import PropertyVilla01 from '@/asset/image/villa/property-villa-01.png'
 import { WrapImageHoverOverlay } from '@/component/general/WrapImage'
 import IconArrowLeft from '@/component/icon/IconArrowLeft'
 import IconArrowRight from '@/component/icon/IconArrowRight'
+import ValidImage from '@/component/general/ValidImage'
 
 const ExpSlideImage = ({ list = [] }: { list?: any[] }) => {
     const swiperRef = useRef<SwiperType | null>(null)
@@ -77,7 +78,7 @@ const ExpSlideImage = ({ list = [] }: { list?: any[] }) => {
                                     //     </div>
                                     // }
                                 >
-                                    <Image
+                                    <ValidImage
                                         src={imgReelConfig(
                                             dataElement.photo || '',
                                         )}

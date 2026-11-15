@@ -24,6 +24,7 @@ import TextReadMore from '@/component/general/TextReadMore'
 import { useEffect, useMemo, useState } from 'react'
 import { getBoatList } from '@/service/api/boatTransfer.api'
 import { isSuccess } from '@/helper/base/condition.helper'
+import ValidImage from '@/component/general/ValidImage'
 
 const BoatTransferDetail = ({ detail }: { detail: any }) => {
     const [otherBoats, setOtherBoats] = useState([])
@@ -115,8 +116,10 @@ const BoatTransferDetail = ({ detail }: { detail: any }) => {
 
                     {detail?.promoPhotos?.length > 0 && (
                         <div className="boat-transfer-banner-sm">
-                            <Image
-                                src={detail?.promoPhotos?.[0]?.file || ''}
+                            <ValidImage
+                                src={imgReelConfig(
+                                    detail?.promoPhotos?.[0]?.file,
+                                )}
                                 alt="about home"
                                 fill
                                 priority
@@ -177,7 +180,7 @@ const BoatTransferDetail = ({ detail }: { detail: any }) => {
                                 position: 'relative',
                                 overflow: 'hidden',
                             }}>
-                            <Image
+                            <ValidImage
                                 src={detail?.mapImage || ''}
                                 alt="about home"
                                 fill
@@ -202,8 +205,10 @@ const BoatTransferDetail = ({ detail }: { detail: any }) => {
                             <>
                                 <div className="w-100 vstack gap-3 text-grey-200 wp-hover-image">
                                     <WrapImageHoverOverlay className="section-boat-banner-reel">
-                                        <Image
-                                            src={dataElement?.image}
+                                        <ValidImage
+                                            src={imgReelConfig(
+                                                dataElement?.image,
+                                            )}
                                             alt={dataElement.title}
                                             fill
                                             className="object-fit-cover"

@@ -30,6 +30,7 @@ import {
 } from '@/page/about/component/AboutUsIcons'
 import Link from 'next/link'
 import SwipeSlideBanner from '@/component/swiperSlide/SwipeSlideBanner'
+import ValidImage from '@/component/general/ValidImage'
 
 const AboutUsPropertyManagement = () => {
     return (
@@ -42,7 +43,7 @@ const AboutUsPropertyManagement = () => {
                                 <WrapImageHoverOverlay
                                     className="section-boat-banner-reel"
                                     contentOverlay={null}>
-                                    <Image
+                                    <ValidImage
                                         src={Kolam}
                                         alt="Lembongan Property Management & Destination Specialist."
                                         fill
@@ -93,7 +94,7 @@ const AboutUsPropertyManagement = () => {
                                 <WrapImageHoverOverlay
                                     className="section-boat-banner-reel"
                                     contentOverlay={null}>
-                                    <Image
+                                    <ValidImage
                                         src={Resto}
                                         alt="LOCAL EXPERTISE. PROFESSIONAL
                                         MANAGEMENT."
@@ -235,7 +236,7 @@ const AboutUsPropertyManagement = () => {
                     <div className="row gx-5">
                         <div className="col-md-4 font-tt-drugs color-555">
                             <div className="vstack gap-4 overflow-hidden">
-                                <Image
+                                <ValidImage
                                     src={Kamar}
                                     alt="Full Property Management"
                                     width={480}
@@ -253,7 +254,7 @@ const AboutUsPropertyManagement = () => {
                         </div>
                         <div className="col-md-4 font-tt-drugs color-555">
                             <div className="vstack gap-4 overflow-hidden">
-                                <Image
+                                <ValidImage
                                     src={Resepsionis}
                                     alt="Booking Management"
                                     width={480}
@@ -271,7 +272,7 @@ const AboutUsPropertyManagement = () => {
                         </div>
                         <div className="col-md-4 font-tt-drugs color-555">
                             <div className="vstack gap-4 overflow-hidden">
-                                <Image
+                                <ValidImage
                                     src={Kolam2}
                                     alt="Commercial & Booking Management"
                                     width={480}
@@ -412,7 +413,7 @@ const AboutUsPropertyManagement = () => {
                     <div className="row g-5 mt-70">
                         <div className="col-md-4 font-tt-drugs color-555">
                             <div className="vstack gap-4 overflow-hidden">
-                                <Image
+                                <ValidImage
                                     src={Founder}
                                     alt="founder"
                                     width={480}
@@ -428,7 +429,7 @@ const AboutUsPropertyManagement = () => {
                         </div>
                         <div className="col-md-4 font-tt-drugs color-555">
                             <div className="vstack gap-4 overflow-hidden">
-                                <Image
+                                <ValidImage
                                     src={Reservation}
                                     alt="Reservation"
                                     width={480}
@@ -444,7 +445,7 @@ const AboutUsPropertyManagement = () => {
                         </div>
                         <div className="col-md-4 font-tt-drugs color-555">
                             <div className="vstack gap-4 overflow-hidden">
-                                <Image
+                                <ValidImage
                                     src={Marketing}
                                     alt="Marketing"
                                     width={480}
@@ -460,7 +461,7 @@ const AboutUsPropertyManagement = () => {
                         </div>
                         <div className="col-md-4 font-tt-drugs color-555">
                             <div className="vstack gap-4 overflow-hidden">
-                                <Image
+                                <ValidImage
                                     src={Operations}
                                     alt="Operations"
                                     width={480}
@@ -476,7 +477,7 @@ const AboutUsPropertyManagement = () => {
                         </div>
                         <div className="col-md-4 font-tt-drugs color-555">
                             <div className="vstack gap-4 overflow-hidden">
-                                <Image
+                                <ValidImage
                                     src={Engineering}
                                     alt="engineering"
                                     width={480}
@@ -492,7 +493,7 @@ const AboutUsPropertyManagement = () => {
                         </div>
                         <div className="col-md-4 font-tt-drugs color-555">
                             <div className="vstack gap-4 overflow-hidden">
-                                <Image
+                                <ValidImage
                                     src={Finance}
                                     alt="finance"
                                     width={480}
@@ -558,7 +559,7 @@ const AboutUsPropertyManagement = () => {
                                         <WrapImageHoverOverlay
                                             className="section-about-banner-reel"
                                             contentOverlay={null}>
-                                            <Image
+                                            <ValidImage
                                                 src={dataElement?.image}
                                                 alt={dataElement.title}
                                                 fill

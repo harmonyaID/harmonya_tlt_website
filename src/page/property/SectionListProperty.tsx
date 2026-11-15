@@ -30,6 +30,7 @@ import { WrapFormContext } from '@/context/Form.Context'
 import PropertyFormSelectBathRoom from '@/page/property/component/PropertyFormSelectBathRoom'
 import { countTotalBeds } from '@/helper/count.helper'
 import PropertyFormSelectTreeType from '@/page/property/component/PropertyFormSelectTreeType'
+import ValidImage from '@/component/general/ValidImage'
 
 const SectionListProperty = () => {
     const pathname = usePathname() || '/'
@@ -134,10 +135,11 @@ const SectionListProperty = () => {
                                                             </BtnBasic>
                                                         </div>
                                                     }>
-                                                    <Image
-                                                        src={imgReelConfig(
-                                                            dataElement?.coverPhoto,
-                                                        )}
+                                                    <ValidImage
+                                                        src={
+                                                            dataElement?.coverPhoto
+                                                        }
+                                                        fallbackSrc={imgReelConfig()}
                                                         alt={
                                                             dataElement.nickname ||
                                                             'Property'

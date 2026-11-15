@@ -10,6 +10,7 @@ import BannerPlay from '@/asset/image/dummy/exp-play.jpg'
 import BannerWellness from '@/asset/image/dummy/exp-wellness.jpg'
 import { usePathname } from 'next/navigation'
 import { slugify } from '@/helper/slugify.helper'
+import ValidImage from '@/component/general/ValidImage'
 
 interface BlockInfoProps {
     title?: string
@@ -65,7 +66,7 @@ const SectionImageAndContent = ({
             <div className="row gx-8 gy-5 align-items-center">
                 <div className="col-md-6">
                     <WrapImageHoverOverlay className="h-480-px">
-                        <Image
+                        <ValidImage
                             src={image || IMAGE_EMPTY}
                             alt={
                                 title || 'Adventure Awaits Beneath the Surface'
@@ -115,7 +116,7 @@ const SectionContentAndImage = ({
 
                 <div className="col-md-7 ">
                     <WrapImageHoverOverlay className="h-480-px">
-                        <Image
+                        <ValidImage
                             src={image || IMAGE_EMPTY}
                             alt={
                                 title || 'Adventure Awaits Beneath the Surface'

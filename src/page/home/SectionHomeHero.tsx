@@ -2,13 +2,15 @@
 import Image from 'next/image'
 import { BtnPrimary } from '@/component/general/Button'
 import { imgLandscapeConfig } from '@/config/urlImage.config'
+import ValidImage from '@/component/general/ValidImage'
 
 const SectionHomeHero = ({ content = {} }: { content?: any | {} }) => {
     return (
         <section className="section-hero-general bg-green-800">
             <div className="general-hero-full-screen">
-                <Image
-                    src={imgLandscapeConfig(content.videoThumbnail)}
+                <ValidImage
+                    src={content.videoThumbnail}
+                    fallbackSrc={imgLandscapeConfig()}
                     className="h-100 banner-image"
                     alt="The Lembongan Traveller - Your Guide to Nusa Lembongan"
                     fill

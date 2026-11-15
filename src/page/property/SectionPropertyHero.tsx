@@ -1,14 +1,18 @@
+'use client'
+
 import Image from 'next/image'
 import { BtnPrimary } from '@/component/general/Button'
 import { imgLandscapeConfig } from '@/config/urlImage.config'
+import ValidImage from '@/component/general/ValidImage'
 
 const SectionPropertyHero = ({ content = {} }: { content?: any | {} }) => {
     return (
         <>
             <section className="section-hero-general bg-green-800">
                 <div className="general-hero-full-screen">
-                    <Image
-                        src={imgLandscapeConfig(content.backgroundImage)}
+                    <ValidImage
+                        src={content.backgroundImage}
+                        fallbackSrc={imgLandscapeConfig()}
                         // className="object-fit-cover w-100 h-100"
                         className="h-100 banner-image"
                         alt="The lembongan traveller villa bali"

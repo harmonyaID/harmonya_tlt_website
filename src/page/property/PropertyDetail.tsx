@@ -10,6 +10,7 @@ import PropertyThingsToExplore from '@/page/property/container/PropertyThingsToE
 import PropertyOther from '@/page/property/container/PropertyOther'
 import PropertyFormInquiry from '@/page/property/container/PropertyFormInquiry'
 import PropertyInfoWhyYouLoveThis from '@/page/property/component/PropertyInfoWhyYouLoveThis'
+import ValidImage from '@/component/general/ValidImage'
 
 const TitleSection = ({ title }: { title: string }) => (
     <>
@@ -131,7 +132,7 @@ const PropertyDetail = ({
                                             <TitleSection title="Floor Plan" />
                                             {/*Floor Plan*/}
                                             <div className="w-100 h-320-px position-relative overflow-hidden">
-                                                <Image
+                                                <ValidImage
                                                     src={floorplanImage}
                                                     alt={
                                                         detail.nickname ||

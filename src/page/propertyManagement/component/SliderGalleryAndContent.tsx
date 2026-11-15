@@ -12,6 +12,7 @@ import IconArrowRight from '@/component/icon/IconArrowRight'
 import { isEmpty } from 'lodash'
 import joinClassNameHelper from '@/helper/joinClassName.helper'
 import { imgLandscapeConfig } from '@/config/urlImage.config'
+import ValidImage from '@/component/general/ValidImage'
 
 type Photo = {
     id: number
@@ -72,10 +73,9 @@ const SlideGalleryAndContent = ({
                                   className="w-100 position-relative"
                                   style={{ height: '70vh' }}>
                                   <div className="general-hero-full-screen">
-                                      <Image
-                                          src={imgLandscapeConfig(
-                                              item.backgroundImage,
-                                          )}
+                                      <ValidImage
+                                          src={item.backgroundImage}
+                                          fallbackSrc={imgLandscapeConfig()}
                                           alt="photos"
                                           className="object-fit-cover"
                                           fill

@@ -1,3 +1,5 @@
+'use client'
+
 import SectionHorizontalTitleAndDesc from '@/component/section/SectionHorizontalTitleAndDesc'
 import SliderBannerWithTopNav from '@/component/swiperSlide/SliderBannerWithTopNav'
 import RenderHtml from '@/component/general/RenderHtml'
@@ -13,6 +15,7 @@ import {
 import { ReactNode, useMemo } from 'react'
 import FAQList from '@/page/faq/component/FAQList'
 import { isEmpty } from 'lodash'
+import ValidImage from '@/component/general/ValidImage'
 
 const MapList = ({
     icon,
@@ -89,7 +92,7 @@ const IslandGuideAboutTheIsland = ({ content }: { content: any }) => {
                                         position: 'relative',
                                         overflow: 'hidden',
                                     }}>
-                                    <Image
+                                    <ValidImage
                                         src={SECTION2?.mapImage || ''}
                                         alt="about home"
                                         fill
@@ -227,7 +230,7 @@ const IslandGuideAboutTheIsland = ({ content }: { content: any }) => {
                                 position: 'relative',
                                 overflow: 'hidden',
                             }}>
-                            <Image
+                            <ValidImage
                                 src={SECTION3?.image || ''}
                                 alt="about home"
                                 fill
@@ -255,7 +258,7 @@ const IslandGuideAboutTheIsland = ({ content }: { content: any }) => {
                                             position: 'relative',
                                             overflow: 'hidden',
                                         }}>
-                                        <Image
+                                        <ValidImage
                                             src={vm?.image || ''}
                                             alt="about home"
                                             fill
