@@ -24,6 +24,7 @@ import InfoNotAvailable from '@/component/general/InfoEmpty'
 import Link from 'next/link'
 import SwipeSlideBanner from '@/component/swiperSlide/SwipeSlideBanner'
 import BGHero from '@/asset/image/dummy/offer-last-bg-hero-half.jpg'
+import ValidImage from '@/component/general/ValidImage'
 
 const IslandGuideDetailMain = ({
     detail = {},
@@ -163,10 +164,9 @@ const IslandGuideDetailMain = ({
                                                             </BtnBasic>
                                                         </div>
                                                     }>
-                                                    <Image
-                                                        src={imgReelConfig(
-                                                            vm?.thumbnail,
-                                                        )}
+                                                    <ValidImage
+                                                        src={vm?.thumbnail}
+                                                        fallbackSrc={imgReelConfig()}
                                                         alt={
                                                             vm.name ||
                                                             'experience'

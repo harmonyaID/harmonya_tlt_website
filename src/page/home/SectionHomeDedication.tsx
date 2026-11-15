@@ -4,14 +4,16 @@ import { BtnIcon, BtnLinkBasic } from '@/component/general/Button'
 import { PropsSectionContent } from '@/type/sectionContent.type'
 import RenderHtml from '@/component/general/RenderHtml'
 import { imgBoxConfig, imgLandscapeConfig } from '@/config/urlImage.config'
+import ValidImage from '@/component/general/ValidImage'
 
 const SectionHomeDedication = ({ content = {} }: PropsSectionContent) => {
     return (
         <section className="position-relative overflow-hidden section-home-dedication">
             <div className="position-absolute banner-image overflow-hidden">
-                <Image
+                <ValidImage
                     fill
-                    src={imgLandscapeConfig(content?.backgroundImage)}
+                    src={content?.backgroundImage}
+                    fallbackSrc={imgLandscapeConfig()}
                     alt="banner"
                     className="object-fit-cover"
                 />
@@ -23,7 +25,7 @@ const SectionHomeDedication = ({ content = {} }: PropsSectionContent) => {
                         <div className="vstack gap-4 text-white">
                             {content?.logo ? (
                                 <div className="lembongan-logo">
-                                    <Image
+                                    <ValidImage
                                         src={content.logo}
                                         alt="logo lembongan"
                                         fill
@@ -47,8 +49,9 @@ const SectionHomeDedication = ({ content = {} }: PropsSectionContent) => {
                     </div>
 
                     <div className="col-lg-5">
-                        <Image
-                            src={imgBoxConfig(content.image)}
+                        <ValidImage
+                            src={content.image}
+                            fallbackSrc={imgBoxConfig()}
                             className="w-100 h-auto position-relative"
                             fill
                             alt="data"

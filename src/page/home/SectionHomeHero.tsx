@@ -24,7 +24,6 @@ const SectionHomeHero = ({ content = {} }: { content?: any | {} }) => {
                 }
                 poster={content?.videoThumbnail}
                 alt="The Lembongan Traveller - Your Guide to Nusa Lembongan"
-                // showControls
             />
 
             {/*Title*/}

@@ -11,6 +11,7 @@ import { WrapImageHoverOverlay } from '@/component/general/WrapImage'
 import { ReactNode } from 'react'
 import Link from 'next/link'
 import { imgReelConfig } from '@/config/urlImage.config'
+import ValidImage from '@/component/general/ValidImage'
 
 const CardImage = ({
     src,
@@ -30,8 +31,9 @@ const CardImage = ({
             <WrapImageHoverOverlay
                 className="wp-banner-img"
                 contentOverlay={message}>
-                <Image
-                    src={imgReelConfig(src)}
+                <ValidImage
+                    src={src}
+                    fallbackSrc={imgReelConfig()}
                     className="object-fit-cover w-100 h-100"
                     alt={alt}
                 />

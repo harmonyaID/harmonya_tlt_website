@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { WrapImageHoverOverlay } from '@/component/general/WrapImage'
 import { BtnBasic, CodeIconArrow } from '@/component/general/Button'
 import { imgReelConfig } from '@/config/urlImage.config'
+import ValidImage from '@/component/general/ValidImage'
 
 const SectionHomeNeighbourhoods = ({ content = {} }: PropsSectionContent) => {
     const contentItems = content?.items || []
@@ -37,8 +38,9 @@ const SectionHomeNeighbourhoods = ({ content = {} }: PropsSectionContent) => {
                                                 </BtnBasic>
                                             </div>
                                         }>
-                                        <Image
-                                            src={imgReelConfig(vm?.image)}
+                                        <ValidImage
+                                            src={vm?.image}
+                                            fallbackSrc={imgReelConfig()}
                                             alt={vm.title}
                                             fill
                                             className="object-fit-cover"

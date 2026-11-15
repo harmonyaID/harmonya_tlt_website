@@ -6,6 +6,7 @@ import SwipeSlideBanner from '@/component/swiperSlide/SwipeSlideBanner'
 import Image from 'next/image'
 import { isEmpty } from 'lodash'
 import IconArrowRight from '@/component/icon/IconArrowRight'
+import ValidImage from '@/component/general/ValidImage'
 
 const SectionHomePartner = ({
     content = {},
@@ -43,7 +44,7 @@ const SectionHomePartner = ({
                             }}
                             contentElement={(dataElement: any) => (
                                 <div className="position-relative section-home-logo-partner">
-                                    <Image
+                                    <ValidImage
                                         src={dataElement.logo || ''}
                                         alt={''}
                                         className="h-auto mh-100 w-100 position-relative"

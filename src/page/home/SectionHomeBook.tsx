@@ -8,6 +8,7 @@ import {
 } from '@/component/general/CarouselDefault'
 import RenderHtml from '@/component/general/RenderHtml'
 import { imgLandscapeConfig } from '@/config/urlImage.config'
+import ValidImage from '@/component/general/ValidImage'
 
 const SectionHomeBook = ({ items = [] }: { items?: any[] }) => {
     return (
@@ -19,8 +20,8 @@ const SectionHomeBook = ({ items = [] }: { items?: any[] }) => {
                         className="position-relative overflow-hidden section-home-carousel-book-banner"
                         isActive={index < 1}>
                         {/*<div className="position-absolute">*/}
-                        <Image
-                            src={imgLandscapeConfig(vm?.background)}
+                        <ValidImage
+                            src={vm?.background}
                             className="position-absolute banner-image"
                             alt={vm.label || ''}
                             fill

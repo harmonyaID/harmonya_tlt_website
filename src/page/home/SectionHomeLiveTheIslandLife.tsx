@@ -7,6 +7,7 @@ import { BtnBasic, CodeIconArrow } from '@/component/general/Button'
 import Image from 'next/image'
 import Link from 'next/link'
 import { imgReelConfig } from '@/config/urlImage.config'
+import ValidImage from '@/component/general/ValidImage'
 
 const SectionHomeLiveTheIslandLife = ({
     content = {},
@@ -93,10 +94,9 @@ const SectionHomeLiveTheIslandLife = ({
                                                             </BtnBasic>
                                                         </div>
                                                     }>
-                                                    <Image
-                                                        src={imgReelConfig(
-                                                            dataElement?.image,
-                                                        )}
+                                                    <ValidImage
+                                                        src={dataElement?.image}
+                                                        fallbackSrc={imgReelConfig()}
                                                         alt={dataElement.title}
                                                         fill
                                                         className="object-fit-cover"

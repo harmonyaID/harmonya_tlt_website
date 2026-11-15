@@ -6,6 +6,7 @@ import { IMAGE_EMPTY } from '@/config/asset.config'
 import { WrapImageHoverOverlay } from '@/component/general/WrapImage'
 import { usePathname } from 'next/navigation'
 import { slugify } from '@/helper/slugify.helper'
+import ValidImage from '@/component/general/ValidImage'
 
 interface BlockInfoProps {
     title?: string
@@ -45,7 +46,10 @@ const BlockInfo = ({
             <BtnLinkPrimary
                 href={link}
                 isIconArrow
-                className="rounded-pill py-3 px-4">
+                style={{
+                    padding: '.85rem 1.5rem',
+                }}
+                className="rounded-pill fs-14">
                 {buttonName}
             </BtnLinkPrimary>
         </>
@@ -64,7 +68,7 @@ export const IslandSectionImageAndContent = ({
             <div className="row g-5 align-items-center">
                 <div className="col-md-6">
                     <WrapImageHoverOverlay className="h-480-px">
-                        <Image
+                        <ValidImage
                             src={image || IMAGE_EMPTY}
                             alt={
                                 title || 'Adventure Awaits Beneath the Surface'
@@ -114,7 +118,7 @@ export const IslandSectionContentAndImage = ({
 
                 <div className="col-md-6 ">
                     <WrapImageHoverOverlay className="h-480-px">
-                        <Image
+                        <ValidImage
                             src={image || IMAGE_EMPTY}
                             alt={
                                 title || 'Adventure Awaits Beneath the Surface'
