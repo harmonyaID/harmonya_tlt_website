@@ -526,6 +526,16 @@ a {text-decoration: none;}
   filter: brightness(50%);
 }
 
+.thank-you-overlay {
+  filter: brightness(40%);
+}
+
+.section-thank-you-page {
+  position: relative;
+  min-height: 90vh;
+  width: 100%;
+}
+
 
 @import 'base/_typography';
 @import 'base/_navbar';
