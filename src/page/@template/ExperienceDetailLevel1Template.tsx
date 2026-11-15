@@ -14,7 +14,7 @@ const ExperienceDetailLevel1Template = async ({ slug }: { slug?: string }) => {
         'tcSrvContentExpTypeDetail',
     ).then((res) => res?.result || {})
 
-    const { name, banner, description } = typeDetail || {}
+    const { name, banner, description, title = '' } = typeDetail || {}
 
     console.log('typeDetail: ', typeDetail)
 
@@ -39,7 +39,7 @@ const ExperienceDetailLevel1Template = async ({ slug }: { slug?: string }) => {
                         <div className="col-md-6">
                             <RenderHtml
                                 className="wp-font-tt-drugs text-uppercase text-grey-200"
-                                html={'<h3>NEIGHBOURHOOD</h3>'}
+                                html={title || '<h3>NEIGHBOURHOOD</h3>'}
                             />
                         </div>
 
@@ -52,7 +52,7 @@ const ExperienceDetailLevel1Template = async ({ slug }: { slug?: string }) => {
                     </div>
                 </div>
             </section>
-            <SectionExpAreaList slug={slug} />
+            <SectionExpAreaList slug={slug} typeId={typeDetail?.id || ''} />
             <SectionExpList slug={slug} />
             <FooterNewsLatterStaticLayout />
             <FooterLayout />

@@ -69,6 +69,11 @@ export interface FormInputDateRangePickerProps {
     }
     config?: object | any
     other?: object | any
+
+    isIconArrow?: boolean
+
+    placeholderFrom?: string
+    placeholderTo?: string
 }
 
 // Form Input Time

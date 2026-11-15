@@ -43,10 +43,14 @@ const usePropertyVariantMainHook = () => {
     }
 
     const _handleChange = (name: string = '', value: any) => {
-        setSearch((prevState) => ({
-            ...prevState,
-            [name]: value,
-        }))
+        setSearch((prevState) => {
+            const newState = { ...prevState }
+            newState[name] = value
+
+            _handleGet(newState)
+
+            return newState
+        })
     }
 
     useEffect(() => {

@@ -37,6 +37,8 @@ export const SrvPropertyType = baseApi + '/property-types'
 
 export const SrvPropertyTag = baseApi + '/property-tags'
 
+export const SrvPropertyAmenities = baseApi + '/amenities'
+
 // Property -> Form
 export const SrvPropertyContact = baseApi + '/property-contact-forms'
 

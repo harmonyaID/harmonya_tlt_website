@@ -77,8 +77,7 @@ const SectionExpList = ({ slug = '' }: { slug?: string | number }) => {
                                                     }>
                                                     <ValidImage
                                                         src={imgReelConfig(
-                                                            vm?.thumbnail ||
-                                                                PropertyVilla01,
+                                                            vm?.thumbnail,
                                                         )}
                                                         alt={
                                                             vm.name ||

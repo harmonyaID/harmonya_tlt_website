@@ -5,13 +5,13 @@ import FooterLayout from '@/component/layout/Footer.layout'
 
 const PaymentMain = () => (
     <>
-        <NavbarLayout isBgTransparent isStartFix />
+        <NavbarLayout />
 
-        <section className="section-space-small">
-            <div className="container">
+        <section className="section-space-small mt-5">
+            <div className="container pt-5">
                 <div className="row justify-content-between">
                     <div className="col-md-5">
-                        <h1 className="text-grey-400 text-uppercase font-tt-drugs">
+                        <h1 className="text-grey-400 fs-48 text-uppercase font-tt-drugs">
                             Guest information
                         </h1>
                     </div>

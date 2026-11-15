@@ -13,6 +13,7 @@ const IslandGuideDetailLevel1Template = async ({ slug }: { slug: string }) => {
     const { isPage, id } = typeDetail || {}
 
     if (id) {
+        console.log('isPage: ', isPage)
         return isPage ? (
             <IslandGuideDetailLevel1OfPage detail={typeDetail} />
         ) : (
