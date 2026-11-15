@@ -42,12 +42,18 @@ const BlockInfo = ({
             {/*    {description}*/}
             {/*</p>*/}
             <RenderHtml
-                className="fs-20 text-grey-400 wp-head-font-tt-drugs mb-4"
+                className="fs-20 text-grey-400 wp-head-font-tt-drugs mb-4 text-clamp-3"
                 // @ts-ignore
                 html={description}
             />
 
-            <BtnLinkPrimary href={link} isIconArrow className="rounded-pill">
+            <BtnLinkPrimary
+                href={link}
+                isIconArrow
+                style={{
+                    padding: '.85rem 1.5rem',
+                }}
+                className="rounded-pill fs-14">
                 {buttonName}
             </BtnLinkPrimary>
         </>
@@ -63,7 +69,7 @@ const SectionImageAndContent = ({
 }: BlockInfoProps & { image?: string }) => (
     <section className="section-space-small">
         <div className="container">
-            <div className="row gx-8 gy-5 align-items-center">
+            <div className="row g-5 align-items-center">
                 <div className="col-md-6">
                     <WrapImageHoverOverlay className="h-480-px">
                         <ValidImage
@@ -79,7 +85,7 @@ const SectionImageAndContent = ({
                 </div>
 
                 <div className="col-md-6">
-                    <div className="pe-5">
+                    <div className="ps-5 ms-auto">
                         <BlockInfo
                             title={title}
                             subTitle={subTitle}
@@ -102,8 +108,8 @@ const SectionContentAndImage = ({
 }: BlockInfoProps & { image?: string }) => (
     <section className="section-space-small bg-neutral-100">
         <div className="container">
-            <div className="row gx-8 gy-5 align-items-center">
-                <div className="col-md-5">
+            <div className="row align-items-center">
+                <div className="col-md-6">
                     <div className="pe-5">
                         <BlockInfo
                             title={title}
@@ -114,7 +120,7 @@ const SectionContentAndImage = ({
                     </div>
                 </div>
 
-                <div className="col-md-7 ">
+                <div className="col-md-6 ">
                     <WrapImageHoverOverlay className="h-480-px">
                         <ValidImage
                             src={image || IMAGE_EMPTY}

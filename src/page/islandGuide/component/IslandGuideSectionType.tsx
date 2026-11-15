@@ -46,7 +46,10 @@ const BlockInfo = ({
             <BtnLinkPrimary
                 href={link}
                 isIconArrow
-                className="rounded-pill py-3 px-4">
+                style={{
+                    padding: '.85rem 1.5rem',
+                }}
+                className="rounded-pill fs-14">
                 {buttonName}
             </BtnLinkPrimary>
         </>
