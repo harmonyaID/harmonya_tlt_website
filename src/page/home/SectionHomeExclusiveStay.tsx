@@ -30,6 +30,7 @@ import { imgReelConfig } from '@/config/urlImage.config'
 import canonicalURLHelper from '@/helper/canonicalURL.helper'
 import { countTotalBeds } from '@/helper/count.helper'
 import PropertyAmities from '@/page/property/component/PropertyAmities'
+import ValidImage from '@/component/general/ValidImage'
 
 const tags = ['Family Friendly', 'Guest’s Favorite', 'Breakfast']
 
@@ -153,10 +154,9 @@ const SectionHomeExclusiveStay = ({
                                                     </BtnBasic>
                                                 </div>
                                             }>
-                                            <Image
-                                                src={imgReelConfig(
-                                                    dataElement?.coverPhoto,
-                                                )}
+                                            <ValidImage
+                                                src={dataElement?.coverPhoto}
+                                                fallbackSrc={imgReelConfig()}
                                                 alt={dataElement.nickname}
                                                 fill
                                                 className="object-fit-cover"

@@ -10,6 +10,7 @@ import { imgReelConfig } from '@/config/urlImage.config'
 import { BtnBasic, BtnIcon, BtnLinkBasic } from '@/component/general/Button'
 import { actionFormatDateStrict } from '@/helper/actionFormatDate.helper'
 import Pagination from '@/component/general/Pagination'
+import ValidImage from '@/component/general/ValidImage'
 
 const PressAndMediaList = () => {
     const { list, setList, isLoading, pagination, _handleChangePage } =
@@ -35,10 +36,11 @@ const PressAndMediaList = () => {
                                             <div className="border border-neutral-200 px-3 pt-3 pb-4 h-100">
                                                 <div className="vstack gap-2 h-100">
                                                     <div className="position-relative text-center w-100 h-258-px">
-                                                        <Image
-                                                            src={imgReelConfig(
-                                                                vm.featuredImage,
-                                                            )}
+                                                        <ValidImage
+                                                            src={
+                                                                vm.featuredImage
+                                                            }
+                                                            fallbackSrc={imgReelConfig()}
                                                             alt={vm.name || ''}
                                                             fill
                                                             className="h-100 h-100 position-relative object-fit-cover"

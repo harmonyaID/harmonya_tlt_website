@@ -11,17 +11,13 @@ import { isEmpty } from 'lodash'
 import InfoNotAvailable from '@/component/general/InfoEmpty'
 import Pagination from '@/component/general/Pagination'
 import { WrapImageHoverOverlay } from '@/component/general/WrapImage'
-import {
-    BtnBasic,
-    BtnLinkBasic,
-    BtnLinkPrimary,
-    CodeIconArrow,
-} from '@/component/general/Button'
-import Image from 'next/image'
+import { BtnLinkBasic, BtnLinkPrimary } from '@/component/general/Button'
 import { imgCardConfig } from '@/config/urlImage.config'
 import { usePathname } from 'next/navigation'
 import { URL_WHATSAPP } from '@/config/url.config'
 import Breadcrumb from '@/component/general/Breadcrumb'
+import { IMAGE_EMPTY } from '@/config/asset.config'
+import ValidImage from '@/component/general/ValidImage'
 
 const IslandGuideDetailLevel1 = ({ detail = {} }: { detail?: any }) => {
     const pathname = usePathname() || '/'
@@ -103,7 +99,7 @@ const IslandGuideDetailLevel1 = ({ detail = {} }: { detail?: any }) => {
                                                             </BtnLinkBasic>
                                                         </div>
                                                     }>
-                                                    <Image
+                                                    <ValidImage
                                                         src={imgCardConfig(
                                                             vm?.thumbnail,
                                                         )}
@@ -113,6 +109,9 @@ const IslandGuideDetailLevel1 = ({ detail = {} }: { detail?: any }) => {
                                                         }
                                                         fill
                                                         className="object-fit-cover"
+                                                        onError={() =>
+                                                            IMAGE_EMPTY
+                                                        }
                                                     />
                                                 </WrapImageHoverOverlay>
 

@@ -13,6 +13,7 @@ import { imgReelConfig } from '@/config/urlImage.config'
 import PropertyVilla01 from '@/asset/image/villa/property-villa-01.png'
 import Pagination from '@/component/general/Pagination'
 import InfoNotAvailable from '@/component/general/InfoEmpty'
+import ValidImage from '@/component/general/ValidImage'
 
 const ExpOtherList = ({
     title,
@@ -83,7 +84,7 @@ const ExpOtherList = ({
                                                             </BtnBasic>
                                                         </div>
                                                     }>
-                                                    <Image
+                                                    <ValidImage
                                                         src={imgReelConfig(
                                                             vm?.thumbnail ||
                                                                 PropertyVilla01,

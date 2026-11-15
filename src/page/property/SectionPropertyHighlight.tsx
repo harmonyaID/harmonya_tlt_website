@@ -1,7 +1,10 @@
+'use client'
+
 import Image from 'next/image'
 import Banner from '@/asset/image/villa/feature-banner.jpg'
 import { SectionTitle } from '@/component/text/Heading'
 import { BtnIcon, BtnLinkBasic } from '@/component/general/Button'
+import ValidImage from '@/component/general/ValidImage'
 
 const SectionPropertyHighlight = ({ content = {} }: { content?: any }) => {
     return (
@@ -10,7 +13,7 @@ const SectionPropertyHighlight = ({ content = {} }: { content?: any }) => {
                 <div className="container">
                     <div className="row gx-5 justify-content-between">
                         <div className="col-md-6 px-5">
-                            <Image
+                            <ValidImage
                                 src={Banner}
                                 className="w-100 h-100 object-cover"
                                 alt="villa stay"

@@ -1,3 +1,5 @@
+'use client'
+
 import Breadcrumb from '@/component/general/Breadcrumb'
 import RenderHtml from '@/component/general/RenderHtml'
 import SectionContent from '@/component/general/SectionContent'
@@ -19,6 +21,7 @@ import {
 } from '@/component/general/IconSvg'
 import canonicalURLHelper from '@/helper/canonicalURL.helper'
 import { countTotalBeds } from '@/helper/count.helper'
+import ValidImage from '@/component/general/ValidImage'
 
 const SectionOfferDetail = ({ detail = {} }: { detail?: any }) => {
     const properties = detail?.properties || []
@@ -81,11 +84,12 @@ const SectionOfferDetail = ({ detail = {} }: { detail?: any }) => {
                                                             </BtnBasic>
                                                         </div>
                                                     }>
-                                                    <Image
-                                                        src={imgReelConfig(
+                                                    <ValidImage
+                                                        src={
                                                             vm?.coverPhoto ||
-                                                                PropertyVilla01,
-                                                        )}
+                                                            PropertyVilla01
+                                                        }
+                                                        fallbackSrc={imgReelConfig()}
                                                         alt={
                                                             vm.nickname ||
                                                             'Property'

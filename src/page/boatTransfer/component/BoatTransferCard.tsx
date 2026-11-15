@@ -14,6 +14,8 @@ import { MDBoatTransferBooking } from '@/config/modal.config'
 import { BOAT_TRANSFERS_PATH } from '@/config/pagePath.config'
 import { Fragment } from 'react'
 import RenderHtml from '@/component/general/RenderHtml'
+import { imgReelConfig } from '@/config/urlImage.config'
+import ValidImage from '@/component/general/ValidImage'
 
 const BoatTransferCard = ({
     isSimple = false,
@@ -57,8 +59,8 @@ const BoatTransferCard = ({
                                 </BtnBasic>
                             </div>
                         }>
-                        <Image
-                            src={boat?.photos?.[0]?.photo || BGHero}
+                        <ValidImage
+                            src={imgReelConfig(boat?.photos?.[0]?.photo)}
                             alt="about home"
                             fill
                             priority

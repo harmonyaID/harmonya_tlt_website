@@ -14,6 +14,7 @@ import Pagination from '@/component/general/Pagination'
 import InfoNotAvailable from '@/component/general/InfoEmpty'
 import LoadingSpinner from '@/component/loading/LoadingSpinner'
 import RenderHtml from '@/component/general/RenderHtml'
+import ValidImage from '@/component/general/ValidImage'
 
 const SectionBlogList = ({
     passBlogs = [],
@@ -52,7 +53,7 @@ const SectionBlogList = ({
                                               className="w-100 vstack gap-3 text-grey-200 wp-hover-image"
                                               href={url || '#'}>
                                               <WrapImageHoverOverlay className="section-blog-banner-reel">
-                                                  <Image
+                                                  <ValidImage
                                                       src={
                                                           vm?.thumbnail ||
                                                           IMAGE_EMPTY
