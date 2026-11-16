@@ -13,6 +13,9 @@ import PropertyInfoWhyYouLoveThis from '@/page/property/component/PropertyInfoWh
 import usePropertyVariantGuesty from '@/page/property/hook/usePropertyVariantGuesty'
 import PropertyVariantBooking from '@/page/propertyVariant/container/PropertyVariantBooking'
 import ValidImage from '@/component/general/ValidImage'
+import AvailabilityCalendar from '@/component/general/AvailabilityCalendar'
+import usePropertyAvailabilityCalendar from '@/page/property/hook/usePropertyAvailabilityCalendar'
+import useLocationCoordinate from '@/hook/useLocationCoordinate.hook'
 
 const TitleSection = ({ title }: { title: string }) => (
     <>
@@ -38,7 +41,13 @@ const PropertyDetail = ({
         seo = {},
     } = detail
 
+    const { hasLocation, mapEmbedUrl } = useLocationCoordinate(
+        detail?.addresses?.[0],
+    )
+
     const { propertyList } = usePropertyVariantGuesty(detail?.guestyId || '')
+    const { calendar: availabilityCalendar, fetchCalendar } =
+        usePropertyAvailabilityCalendar(detail?.guestyId || '')
 
     return (
         <>
@@ -154,6 +163,11 @@ const PropertyDetail = ({
                                 <div className="">
                                     <TitleSection title="Availability" />
                                     {/*Availability*/}
+                                    <AvailabilityCalendar
+                                        availability={detail?.availability}
+                                        calendar={availabilityCalendar}
+                                        onMonthChange={fetchCalendar}
+                                    />
                                 </div>
 
                                 <hr />
@@ -195,11 +209,28 @@ const PropertyDetail = ({
                                     </>
                                 ) : null}
 
-                                <hr />
-                                <div className="">
-                                    <TitleSection title="Location" />
-                                    {/*Location*/}
-                                </div>
+                                {hasLocation ? (
+                                    <>
+                                        <hr />
+                                        <div className="">
+                                            <TitleSection title="Location" />
+                                            {/*Location*/}
+                                            <div className="ratio ratio-16x9">
+                                                <iframe
+                                                    src={mapEmbedUrl}
+                                                    title={
+                                                        detail?.nickname ||
+                                                        'Property location'
+                                                    }
+                                                    className="border-0"
+                                                    loading="lazy"
+                                                    referrerPolicy="no-referrer-when-downgrade"
+                                                    allowFullScreen
+                                                />
+                                            </div>
+                                        </div>
+                                    </>
+                                ) : null}
 
                                 <hr />
                                 <div className="">
