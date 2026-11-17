@@ -118,10 +118,26 @@ const PropertyVariantDetail = ({
                                                             key={index}>
                                                             <div className="hstack gap-3 align-items-start text-grey-200">
                                                                 <div className="">
-                                                                    <CheckCircle
-                                                                        size="20"
-                                                                        strokeWidth="2"
-                                                                    />
+                                                                    {vm.icon ? (
+                                                                        <div className="position-relative ratio ratio-4x3 box-28">
+                                                                            <Image
+                                                                                src={
+                                                                                    vm.icon
+                                                                                }
+                                                                                alt={
+                                                                                    vm.name ||
+                                                                                    'Property TLT'
+                                                                                }
+                                                                                fill
+                                                                                className="w-100 h-100"
+                                                                            />
+                                                                        </div>
+                                                                    ) : (
+                                                                        <CheckCircle
+                                                                            size="20"
+                                                                            strokeWidth="2"
+                                                                        />
+                                                                    )}
                                                                 </div>
 
                                                                 <p className="fs-20 mb-0 text-grey-200">
