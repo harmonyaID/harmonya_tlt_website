@@ -11,6 +11,7 @@ import IconArrowLeft from '@/component/icon/IconArrowLeft'
 import IconArrowRight from '@/component/icon/IconArrowRight'
 import { isEmpty } from 'lodash'
 import joinClassNameHelper from '@/helper/joinClassName.helper'
+import ValidImage from '@/component/general/ValidImage'
 
 type Photo = {
     id: number
@@ -63,7 +64,7 @@ const PropertySliderAndGallery = ({ photos = [] }: { photos?: Photo[] }) => {
                     ? photos?.map((item, index) => (
                           <SwiperSlide key={index}>
                               <div className="w-100" style={{ height: '70vh' }}>
-                                  <Image
+                                  <ValidImage
                                       src={item.url}
                                       alt="photos"
                                       className="object-fit-cover"

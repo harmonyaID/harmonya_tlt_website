@@ -4,6 +4,7 @@ import { IMAGE_EMPTY } from '@/config/asset.config'
 import { formatDateTimeByTlt } from '@/helper/actionFormatDate.helper'
 import { BadgeRow } from '@/component/general/Badge'
 import Link from 'next/link'
+import ValidImage from '@/component/general/ValidImage'
 
 const CardPlaceholder = ({ isLast }: { isLast?: boolean }) => (
     <div className="row flex-row gx-3 gy-3 text-grey-400 placeholder-glow">
@@ -67,7 +68,7 @@ const BlogListSideRight = () => {
 
                                   <div className="col-md-4">
                                       <div className="sc-blog-banner-right-bar">
-                                          <Image
+                                          <ValidImage
                                               src={vm?.thumbnail || IMAGE_EMPTY}
                                               alt={vm.title}
                                               className="img-cover-general"

@@ -52,3 +52,9 @@ export const ABOUT_HOLIDAY_BOOKING_PATH = '/about-us/holiday-booking'
 // Offer's
 export const OFFER_PATH = '/offer'
 export const OFFER_SLUG_PATH = '/offer/'
+
+// Thank You
+export const THANK_YOU_BOAT = '/success/boat-booking'
+export const THANK_YOU_BOOKEASY = '/success/bookeasy'
+export const THANK_YOU_GUESTY = '/success/guesty'
+export const THANK_YOU_CONTACT = '/success/contact'

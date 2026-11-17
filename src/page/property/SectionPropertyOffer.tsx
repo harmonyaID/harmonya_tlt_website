@@ -1,3 +1,5 @@
+'use client'
+
 import SectionGeneral from '@/component/general/SectionGeneral'
 import { H3, SectionTitle } from '@/component/text/Heading'
 import Image from 'next/image'
@@ -12,6 +14,7 @@ import Link from 'next/link'
 import RenderHtml from '@/component/general/RenderHtml'
 import { OFFER_SLUG_PATH } from '@/config/pagePath.config'
 import canonicalURLHelper from '@/helper/canonicalURL.helper'
+import ValidImage from '@/component/general/ValidImage'
 
 const SectionPropertyOffer = ({ list = [] }: { list?: [] }) => {
     console.log('list: ', list)
@@ -30,11 +33,9 @@ const SectionPropertyOffer = ({ list = [] }: { list?: [] }) => {
                                 return (
                                     <div className="col-md-6" key={index}>
                                         <WrapImageHoverOverlay className="h-320-px w-100">
-                                            <Image
+                                            <ValidImage
                                                 // src={vm.image}
-                                                src={imgReelConfig(
-                                                    vm.thumbnail,
-                                                )}
+                                                src={vm.thumbnail}
                                                 alt={vm.title}
                                                 fill
                                                 className="object-fit-cover"

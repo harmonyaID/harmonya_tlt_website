@@ -11,6 +11,7 @@ import {
 import Link from 'next/link'
 import { WrapImageHoverOverlay } from '@/component/general/WrapImage'
 import RenderHtml from '@/component/general/RenderHtml'
+import ValidImage from '@/component/general/ValidImage'
 
 const SectionBlogHero = ({
     content = {},
@@ -32,8 +33,9 @@ const SectionBlogHero = ({
     return (
         <section className="section-blog-hero section-blog-hero-v2">
             <div className="banner-image position-absolute">
-                <Image
+                <ValidImage
                     src={content.backgroundImage || BlogBannerDefault}
+                    fallbackSrc={BlogBannerDefault}
                     // src={HomeBanner}
                     className="object-fit-cover w-100 h-100 "
                     alt="Home Banner"
@@ -45,8 +47,9 @@ const SectionBlogHero = ({
                 <Link href={url || '#'} className="row g-0 wp-hover-image">
                     <div className="col-md-6">
                         <WrapImageHoverOverlay className="overflow-hidden position-relative w-100 blog-thumbnail-first">
-                            <Image
+                            <ValidImage
                                 src={blog.thumbnail || BlogThumbnailDefault}
+                                fallbackSrc={BlogThumbnailDefault}
                                 // src={HomeBanner}
                                 className="object-fit-cover w-100 h-100"
                                 alt={blog.title || 'Default Blog Banner'}

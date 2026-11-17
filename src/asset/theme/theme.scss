@@ -230,6 +230,11 @@ a {text-decoration: none;}
   }
 }
 
+.box-28 {
+  height: 28px !important;
+  width: 28px !important;
+}
+
 .box-32 {
   height: 32px !important;
   width: 32px !important;
@@ -526,6 +531,16 @@ a {text-decoration: none;}
   filter: brightness(50%);
 }
 
+.thank-you-overlay {
+  filter: brightness(40%);
+}
+
+.section-thank-you-page {
+  position: relative;
+  min-height: 90vh;
+  width: 100%;
+}
+
 
 @import 'base/_typography';
 @import 'base/_navbar';
@@ -534,6 +549,7 @@ a {text-decoration: none;}
 @import 'base/_form.scss';
 @import 'base/_partial.scss';
 @import 'custom/_datepicker.scss';
+@import 'custom/_availability-calendar.scss';
 @import 'custom/_boat-transfer.scss';
 @import 'custom/_search.scss';
 @import 'custom/_form-property.scss';

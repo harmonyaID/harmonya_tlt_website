@@ -20,6 +20,7 @@ import {
 } from '@/component/general/IconSvg'
 import canonicalURLHelper from '@/helper/canonicalURL.helper'
 import { countTotalBeds } from '@/helper/count.helper'
+import ValidImage from '@/component/general/ValidImage'
 
 const PropertyOther = ({ allSlug = [] }: { allSlug?: any }) => {
     const { list, isLoading } = useGeneralDataList({
@@ -76,10 +77,8 @@ const PropertyOther = ({ allSlug = [] }: { allSlug?: any }) => {
                                                     </BtnBasic>
                                                 </div>
                                             }>
-                                            <Image
-                                                src={imgReelConfig(
-                                                    dataElement?.coverPhoto,
-                                                )}
+                                            <ValidImage
+                                                src={dataElement?.coverPhoto}
                                                 alt={
                                                     dataElement.nickname ||
                                                     'Property'

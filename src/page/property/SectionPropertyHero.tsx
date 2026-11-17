@@ -8,6 +8,7 @@ import FormWrap from '@/component/wrapping/Form.wrap'
 import { WrapFormContext } from '@/context/Form.Context'
 import usePropertyHeroSearch from '@/page/property/hook/usePropertyHeroSearch'
 import PropertyFormSelectTreeOption from '@/page/property/component/PropertyFormSelectColection'
+import ValidImage from '@/component/general/ValidImage'
 
 const SectionPropertyHero = ({ content = {} }: { content?: any | {} }) => {
     const { formSearch, _handleChange } = usePropertyHeroSearch()
@@ -16,8 +17,9 @@ const SectionPropertyHero = ({ content = {} }: { content?: any | {} }) => {
         <>
             <section className="section-hero-general bg-green-800">
                 <div className="general-hero-full-screen">
-                    <Image
-                        src={imgLandscapeConfig(content.backgroundImage)}
+                    <ValidImage
+                        src={content.backgroundImage}
+                        fallbackSrc={imgLandscapeConfig()}
                         // className="object-fit-cover w-100 h-100"
                         className="h-100 banner-image"
                         alt="The lembongan traveller villa bali"

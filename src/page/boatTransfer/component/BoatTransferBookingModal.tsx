@@ -22,6 +22,8 @@ import LoadingCardListData from '@/component/loading/LoadingCardListData'
 import joinClassNameHelper from '@/helper/joinClassName.helper'
 import FormSelectOption from '@/component/form/FormSelectOption'
 import actionModal from '@/helper/base/actionModal.helper'
+import { useRouter } from 'next/navigation'
+import { THANK_YOU_BOAT } from '@/config/pagePath.config'
 
 const ONE_WAY = 'one_way'
 const RETURN = 'return'
@@ -68,6 +70,8 @@ const param = (boat?: any) => ({
 })
 
 const BoatTransferBookingModal = ({ boatId }: { boatId?: number }) => {
+    const router = useRouter()
+
     const [formRequest, setFormRequest] = useState<any>(param())
     const [boat, setBoat] = useState<any>()
     const [loadingDetail, setLoadingDetail] = useState<boolean>(false)
@@ -130,6 +134,7 @@ const BoatTransferBookingModal = ({ boatId }: { boatId?: number }) => {
             .then((res) => {
                 if (isSuccess(res)) {
                     actionModal(MDBoatTransferBooking, true)
+                    router.push(THANK_YOU_BOAT)
                 }
             })
             .finally(() => setIsLoading(false))

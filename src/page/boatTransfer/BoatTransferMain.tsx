@@ -15,6 +15,8 @@ import useGeneralDataList from '@/hook/useGeneralDataList.hook'
 import { getListIslandGuide } from '@/service/api/islandGuide.api'
 import Pagination from '@/component/general/Pagination'
 import LoadingCardListData from '@/component/loading/LoadingCardListData'
+import { imgReelConfig } from '@/config/urlImage.config'
+import ValidImage from '@/component/general/ValidImage'
 
 const BoatTransferMain = ({
     SECTION2,
@@ -73,8 +75,8 @@ const BoatTransferMain = ({
                     </div>
 
                     <div className="boat-transfer-banner">
-                        <Image
-                            src={SECTION2.bannerPromoImage}
+                        <ValidImage
+                            src={imgReelConfig(SECTION2.bannerPromoImage)}
                             alt="about home"
                             fill
                             priority

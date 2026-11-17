@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { imgLandscapeConfig } from '@/config/urlImage.config'
 import RenderHtml from '@/component/general/RenderHtml'
 import { BtnLinkPrimary } from '@/component/general/Button'
+import ValidImage from '@/component/general/ValidImage'
 
 const CarouselPortfolio = ({ items = [] }: { items?: any[] }) => {
     return (
@@ -17,8 +18,9 @@ const CarouselPortfolio = ({ items = [] }: { items?: any[] }) => {
                         className="position-relative overflow-hidden section-home-carousel-book-banner"
                         isActive={index < 1}>
                         {/*<div className="position-absolute">*/}
-                        <Image
-                            src={imgLandscapeConfig(vm?.backgroundImage)}
+                        <ValidImage
+                            src={vm?.backgroundImage}
+                            fallbackSrc={imgLandscapeConfig()}
                             className="position-absolute banner-image"
                             alt={vm.title || ''}
                             fill

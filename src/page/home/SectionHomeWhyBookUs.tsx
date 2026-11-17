@@ -5,6 +5,7 @@ import IconCircle from '@/asset/image/home/home-icon-circle.png'
 import Image from 'next/image'
 import { PropsSectionContent } from '@/type/sectionContent.type'
 import RenderHtml from '@/component/general/RenderHtml'
+import ValidImage from '@/component/general/ValidImage'
 
 const SectionHomeWhyBookUs = ({ content = {} }: PropsSectionContent) => {
     return (
@@ -19,8 +20,9 @@ const SectionHomeWhyBookUs = ({ content = {} }: PropsSectionContent) => {
                     {content?.items?.map((vm: any, key: number) => (
                         <div className="col-lg-3 vstack gap-3 px-5" key={key}>
                             <div className="">
-                                <Image
-                                    src={vm.icon || IconCircle}
+                                <ValidImage
+                                    src={vm.icon}
+                                    fallbackSrc={IconCircle}
                                     className=""
                                     alt="image"
                                     width="100"

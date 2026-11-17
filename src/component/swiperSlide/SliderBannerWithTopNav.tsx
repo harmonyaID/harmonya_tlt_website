@@ -7,6 +7,7 @@ import { imgReelConfig } from '@/config/urlImage.config'
 import { WrapImageHoverOverlay } from '@/component/general/WrapImage'
 import IconArrowLeft from '@/component/icon/IconArrowLeft'
 import IconArrowRight from '@/component/icon/IconArrowRight'
+import ValidImage from '@/component/general/ValidImage'
 
 const SliderBannerWithTopNav = ({ list = [] }: { list?: any[] }) => {
     const swiperRef = useRef<SwiperType | null>(null)
@@ -75,7 +76,7 @@ const SliderBannerWithTopNav = ({ list = [] }: { list?: any[] }) => {
                                     //     </div>
                                     // }
                                 >
-                                    <Image
+                                    <ValidImage
                                         src={imgReelConfig(
                                             dataElement.photo || '',
                                         )}

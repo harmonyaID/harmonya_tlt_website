@@ -13,6 +13,7 @@ import {
     imgLandscapeConfig,
     imgReelConfig,
 } from '@/config/urlImage.config'
+import ValidImage from '@/component/general/ValidImage'
 
 const SectionHomeAbout = ({ content = {} }: { content?: any }) => {
     return (
@@ -29,8 +30,9 @@ const SectionHomeAbout = ({ content = {} }: { content?: any }) => {
                     </div>
 
                     <div className="wp-image-map">
-                        <Image
-                            src={imgLandscapeConfig(content?.mapImage)}
+                        <ValidImage
+                            src={content?.mapImage}
+                            fallbackSrc={imgLandscapeConfig()}
                             alt="about home"
                             fill
                             className=""
@@ -40,8 +42,8 @@ const SectionHomeAbout = ({ content = {} }: { content?: any }) => {
                 <div className="col-lg-6">
                     <div className="col-lg-8">
                         <div className="wp-image-map">
-                            <Image
-                                src={imgReelConfig(content?.image)}
+                            <ValidImage
+                                src={content?.image}
                                 alt="about banner"
                                 fill
                                 className="w-100 h-100"
