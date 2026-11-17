@@ -15,6 +15,7 @@ import { isEmpty } from 'lodash'
 import Breadcrumb from '@/component/general/Breadcrumb'
 import ShareBlog from '@/component/general/ShareBlog'
 import { useState, useEffect } from 'react'
+import ValidImage from '@/component/general/ValidImage'
 
 const SectionContent = ({
     children,
@@ -44,7 +45,7 @@ const SectionBlogDetail = ({ detail = {} }: { detail?: any }) => {
     return (
         <section className="container py-3 py-md-5 position-relative overflow-hidden">
             <div className="section-blog-detail-banner-main overflow-hidden">
-                <Image
+                <ValidImage
                     src={detail?.thumbnail || IMAGE_EMPTY}
                     alt={detail?.title || 'blog the lembongan travel'}
                     className="object-fit-cover"

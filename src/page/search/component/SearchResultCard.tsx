@@ -4,9 +4,14 @@ import { BtnBasic, CodeIconArrow } from '@/component/general/Button'
 import Image from 'next/image'
 import BGHero from '@/asset/image/dummy/offer-last-bg-hero-half.jpg'
 import { actionFormatDateStrict } from '@/helper/actionFormatDate.helper'
+import ValidImage from '@/component/general/ValidImage'
 
 const SearchResultCard = ({ blog }: { blog: any }) => {
-    const url = blog?.link ? blog?.link : blog?.slug ? '/blog/' + blog?.slug : '#'
+    const url = blog?.link
+        ? blog?.link
+        : blog?.slug
+          ? '/blog/' + blog?.slug
+          : '#'
 
     return (
         <div className="row g-5">
@@ -25,7 +30,7 @@ const SearchResultCard = ({ blog }: { blog: any }) => {
                                 </BtnBasic>
                             </div>
                         }>
-                        <Image
+                        <ValidImage
                             src={blog.thumbnail}
                             alt="about home"
                             fill

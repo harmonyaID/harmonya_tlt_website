@@ -14,6 +14,7 @@ import PropertyVilla01 from '@/asset/image/villa/property-villa-01.png'
 import Pagination from '@/component/general/Pagination'
 import InfoNotAvailable from '@/component/general/InfoEmpty'
 import joinClassNameHelper from '@/helper/joinClassName.helper'
+import ValidImage from '@/component/general/ValidImage'
 
 const ExpMainList = ({
     title = '',
@@ -85,7 +86,7 @@ const ExpMainList = ({
                                                             </BtnBasic>
                                                         </div>
                                                     }>
-                                                    <Image
+                                                    <ValidImage
                                                         src={imgReelConfig(
                                                             vm?.thumbnail ||
                                                                 PropertyVilla01,

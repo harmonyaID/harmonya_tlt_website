@@ -1,3 +1,5 @@
+'use client'
+
 import {
     DescriptionContentText,
     TitleContentText,
@@ -13,6 +15,7 @@ import { BtnBasic, BtnLinkBasic } from '@/component/general/Button'
 import IconArrowRight from '@/component/icon/IconArrowRight'
 import RenderHtml from '@/component/general/RenderHtml'
 import { OFFER_SLUG_PATH } from '@/config/pagePath.config'
+import ValidImage from '@/component/general/ValidImage'
 
 const OfferContentCard = ({
     src = '',
@@ -28,8 +31,9 @@ const OfferContentCard = ({
                 href={href}
                 className="w-100 vstack gap-3 text-grey-200 wp-hover-image overflow-hidden">
                 <WrapImageHoverOverlay className="overflow-hidden img-h-392px">
-                    <Image
-                        src={imgReelConfig(src)}
+                    <ValidImage
+                        src={src}
+                        fallbackSrc={imgReelConfig()}
                         alt={title || 'Offer Content'}
                         fill
                         className="object-fit-cover"

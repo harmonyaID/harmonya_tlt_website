@@ -8,6 +8,7 @@ import PropertyResort02 from '@/asset/image/villa/property-resort-02.png'
 import Image from 'next/image'
 import { isEmpty } from 'lodash'
 import { BadgeTag } from '@/component/general/Badge'
+import ValidImage from '@/component/general/ValidImage'
 
 const otherInfo = (bad: '', guest: '', dineIn: true, pool: true) => ({
     bad,
@@ -78,7 +79,7 @@ const SectionVillaProperty = () => {
                         return (
                             <div className="col-lg-4 col-md-6" key={index}>
                                 <div className="overflow-hidden position-relative">
-                                    <Image
+                                    <ValidImage
                                         src={vm.image}
                                         alt={vm.name}
                                         className="w-100"

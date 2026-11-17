@@ -6,6 +6,7 @@ import PropertyVilla02 from '@/asset/image/villa/villa-offers-02.jpg'
 import { SectionDescription } from '@/component/text/Paragraph'
 import { BtnLinkBasic } from '@/component/general/Button'
 import { ReactNode } from 'react'
+import ValidImage from '@/component/general/ValidImage'
 
 const objDataOffer = (title?: string, description?: string, image?: any) => ({
     description,
@@ -39,7 +40,7 @@ const SectionVillaFeatureOffer = () => {
                         {offers.map((vm, index) => {
                             return (
                                 <div className="col-md-6" key={index}>
-                                    <Image
+                                    <ValidImage
                                         src={vm.image}
                                         alt="bali"
                                         className="w-100 h-auto"

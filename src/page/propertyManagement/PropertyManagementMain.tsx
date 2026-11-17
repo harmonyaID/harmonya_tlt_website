@@ -1,3 +1,5 @@
+'use client'
+
 import NavbarLayout from '@/component/layout/Navbar.layout'
 import FooterLayout from '@/component/layout/Footer.layout'
 import BGHero from '@/asset/image/propertyManagement/hero-bg-property-management.jpg'
@@ -12,6 +14,7 @@ import HorizontalTitleAndDesc from '@/component/general/HorizontalTitleAndDesc'
 import SlideGalleryAndContent from '@/page/propertyManagement/component/SliderGalleryAndContent'
 import CarouselPortfolio from '@/page/propertyManagement/container/CarouselPortfolio'
 import PropertyManagementForm from '@/page/propertyManagement/container/PropertyManagementForm'
+import ValidImage from '@/component/general/ValidImage'
 
 const PropertyManagementMain = ({ content = {} }: { content?: any }) => {
     const {
@@ -48,10 +51,9 @@ const PropertyManagementMain = ({ content = {} }: { content?: any }) => {
                     <div className="row align-items-center gx-8 gy-4 mb-5 pb-4">
                         <div className="col-md-6">
                             <WrapImageHoverOverlay className="h-480-px">
-                                <Image
-                                    src={imgLandscapeConfig(
-                                        SECTION2[0].backgroundImage,
-                                    )}
+                                <ValidImage
+                                    src={SECTION2[0].backgroundImage}
+                                    fallbackSrc={imgLandscapeConfig()}
                                     alt={
                                         SECTION2[0].title ||
                                         'Adventure Awaits Beneath the Surface'
@@ -110,10 +112,9 @@ const PropertyManagementMain = ({ content = {} }: { content?: any }) => {
 
                         <div className="col-md-7">
                             <WrapImageHoverOverlay className="h-480-px">
-                                <Image
-                                    src={imgLandscapeConfig(
-                                        SECTION2[1].backgroundImage,
-                                    )}
+                                <ValidImage
+                                    src={SECTION2[1].backgroundImage}
+                                    fallbackSrc={imgLandscapeConfig()}
                                     alt={
                                         SECTION2[1].title ||
                                         'Adventure Awaits Beneath the Surface'
@@ -140,10 +141,9 @@ const PropertyManagementMain = ({ content = {} }: { content?: any }) => {
                                 <div key={index} className="col-md-4">
                                     <div className="vstack gap-3 align-items-center">
                                         <div className="box-80 position-relative">
-                                            <Image
-                                                src={imgLandscapeConfig(
-                                                    vm.icon,
-                                                )}
+                                            <ValidImage
+                                                src={vm.icon}
+                                                fallbackSrc={imgLandscapeConfig()}
                                                 fill
                                                 className="object-fit-cover w-100"
                                                 alt={vm.title}
@@ -179,10 +179,9 @@ const PropertyManagementMain = ({ content = {} }: { content?: any }) => {
                             return (
                                 <div key={index} className="col-md-4">
                                     <div className="h-320-px position-relative mb-4">
-                                        <Image
-                                            src={imgLandscapeConfig(
-                                                vm.backgroundImage,
-                                            )}
+                                        <ValidImage
+                                            src={vm.backgroundImage}
+                                            fallbackSrc={imgLandscapeConfig()}
                                             fill
                                             className="object-fit-cover w-100"
                                             alt={vm.title}
@@ -217,10 +216,9 @@ const PropertyManagementMain = ({ content = {} }: { content?: any }) => {
                                 <div key={index} className="col-md-3">
                                     <div className="vstack gap-3 align-items-center">
                                         <div className="box-80 position-relative mb-4">
-                                            <Image
-                                                src={imgLandscapeConfig(
-                                                    vm.icon,
-                                                )}
+                                            <ValidImage
+                                                src={vm.icon}
+                                                fallbackSrc={imgLandscapeConfig()}
                                                 fill
                                                 className="object-fit-cover w-100"
                                                 alt={vm.title}
@@ -255,7 +253,7 @@ const PropertyManagementMain = ({ content = {} }: { content?: any }) => {
                                 return (
                                     <div key={index} className="col-md-4">
                                         <div className="h-320-px position-relative mb-4">
-                                            <Image
+                                            <ValidImage
                                                 src={vm.backgroundImage}
                                                 alt={vm.title}
                                                 fill
