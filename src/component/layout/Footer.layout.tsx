@@ -205,10 +205,7 @@ const FooterLayout = () => {
                 </div>
             </section>
 
-            <WhatsAppChat
-                phoneNumber="61478928925"
-                defaultMessage="Hello! I am interested in your services."
-            />
+            <WhatsAppChat defaultMessage="Hello! I am interested in your services." />
         </>
     )
 }

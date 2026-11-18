@@ -5,6 +5,7 @@ import {
 import {
     SrvContentPropertyDetail,
     SrvContentPropertyHomePage,
+    SrvContentPropertyReview,
     SrvPropertyAmenities,
     SrvPropertyType,
 } from '@/service/api/_crm.endPoint'
@@ -40,3 +41,13 @@ export const getPropertyType = async (tc: string = 'tcGetPropertyType') =>
 export const getPropertyAmenities = async (
     tc: string = 'tcSrvPropertyAmenities',
 ) => await _shapeMethodGetSearch(SrvPropertyAmenities, { limit: 0 }, tc)
+
+export const getPropertyReview = async (
+    propertyId,
+    tc = 'tcSrvContentPropertyReview',
+) =>
+    await _shapeMethodGetSearch(
+        SrvContentPropertyReview(),
+        { limit: 0, propertyId },
+        tc,
+    )

@@ -32,6 +32,8 @@ export const SrvContentPropertyHomePage = baseApi + '/properties'
 export const SrvContentPropertyDetail = (slug?: string) =>
     baseApi + '/properties/' + slug
 
+export const SrvContentPropertyReview = () => baseApi + '/properties/reviews'
+
 // Property -> Attribute
 export const SrvPropertyType = baseApi + '/property-types'
 
@@ -49,6 +51,9 @@ export const SrvContentPropertyVariant = baseApi + '/property-variants'
 
 export const SrvContentPropertyVariantDetail = (slug?: string) =>
     baseApi + '/property-variants/' + slug
+
+export const SrvContentPropertyVariantReview = (propertyVariantId) =>
+    baseApi + '/properties/reviews/' + propertyVariantId
 
 // Offers
 export const SrvContentOfferPage = baseApi + '/offers'
@@ -99,3 +104,6 @@ export const SrvBoatContactForm = baseApi + '/boat-contact-forms'
 
 // Team
 export const SrvTeam = baseApi + '/teams'
+
+// Web info
+export const SrvWebInfo = baseApi + '/website-information'
