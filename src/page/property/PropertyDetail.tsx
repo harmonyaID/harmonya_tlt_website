@@ -16,6 +16,9 @@ import ValidImage from '@/component/general/ValidImage'
 import AvailabilityCalendar from '@/component/general/AvailabilityCalendar'
 import usePropertyAvailabilityCalendar from '@/page/property/hook/usePropertyAvailabilityCalendar'
 import useLocationCoordinate from '@/hook/useLocationCoordinate.hook'
+import useGeneralDataList from '@/hook/useGeneralDataList.hook'
+import { getPropertyReview } from '@/service/api/property.api'
+import PropertyReviewSlider from '@/page/property/component/PropertyReviewSlider'
 
 const TitleSection = ({ title }: { title: string }) => (
     <>
@@ -39,6 +42,7 @@ const PropertyDetail = ({
         floorplanImage = '',
         whyYoullLoveThis = [],
         seo = {},
+        id,
     } = detail
 
     const { hasLocation, mapEmbedUrl } = useLocationCoordinate(
@@ -46,8 +50,13 @@ const PropertyDetail = ({
     )
 
     const { propertyList } = usePropertyVariantGuesty(detail?.guestyId || '')
+
     const { calendar: availabilityCalendar, fetchCalendar } =
         usePropertyAvailabilityCalendar(detail?.guestyId || '')
+
+    const { list: reviews, isLoading: isLoadingReviews } = useGeneralDataList({
+        urlAPI: () => getPropertyReview(id),
+    })
 
     return (
         <>
@@ -248,11 +257,17 @@ const PropertyDetail = ({
                                     </>
                                 ) : null}
 
-                                <hr />
-                                <div className="">
-                                    <TitleSection title="REVIEWS" />
-                                    {/*REVIEWS*/}
-                                </div>
+                                {!isLoadingReviews &&
+                                reviews &&
+                                reviews.length > 0 ? (
+                                    <>
+                                        <hr />
+                                        {/*REVIEWS*/}
+                                        <PropertyReviewSlider
+                                            reviews={reviews}
+                                        />
+                                    </>
+                                ) : null}
                             </div>
                         </div>
 
