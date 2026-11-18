@@ -178,9 +178,11 @@ const IslandGuideAboutTheIsland = ({ content }: { content: any }) => {
                                 <p className="text-uppercase fs-48 font-tt-drugs mb-3">
                                     {SECTION3?.title}
                                 </p>
-                                <p className="fs-20">
-                                    <RenderHtml html={SECTION3?.description} />
-                                </p>
+
+                                <RenderHtml
+                                    className="fs-20"
+                                    html={SECTION3?.description}
+                                />
 
                                 <div className="w-100 mt-5">
                                     <div
@@ -275,8 +277,8 @@ const IslandGuideAboutTheIsland = ({ content }: { content: any }) => {
                     </p>
 
                     <div className="row g-5 mt-4">
-                        {SECTION3?.funFacts?.map((vm) => (
-                            <div className="col-md-3 h-100" key={vm.id}>
+                        {SECTION3?.funFacts?.map((vm, idx) => (
+                            <div className="col-md-3 h-100" key={idx}>
                                 <div className="text-center vstack gap-3">
                                     <div
                                         style={{
@@ -295,12 +297,11 @@ const IslandGuideAboutTheIsland = ({ content }: { content: any }) => {
                                     <p className="m-0 mt-3 fs-24 text-uppercase color-555 font-tt-drugs">
                                         {vm.title}
                                     </p>
-                                    <p className="m-0 fs-16 text-light">
-                                        <RenderHtml
-                                            html={vm.description}
-                                            className="text-clamp-3"
-                                        />
-                                    </p>
+
+                                    <RenderHtml
+                                        html={vm.description}
+                                        className="text-clamp-3 m-0 fs-16 text-light"
+                                    />
                                 </div>
                             </div>
                         ))}
@@ -327,10 +328,10 @@ const IslandGuideAboutTheIsland = ({ content }: { content: any }) => {
                     </div>
 
                     <div className="row mt-70">
-                        {SECTION4?.vsContents?.map((vm) => (
+                        {SECTION4?.vsContents?.map((vm, idx) => (
                             <div
                                 className="col-md-6 h-100 overflow-hidden"
-                                key={vm.id}>
+                                key={idx}>
                                 <div className="row g-5">
                                     <div
                                         className="col-md-6"
@@ -354,11 +355,10 @@ const IslandGuideAboutTheIsland = ({ content }: { content: any }) => {
                                             <p className="m-0 fs-20 text-primary mb-4">
                                                 {vm.subTitle}
                                             </p>
-                                            <p className="m-0 fs-20 text-light color-555">
-                                                <RenderHtml
-                                                    html={vm.description}
-                                                />
-                                            </p>
+                                            <RenderHtml
+                                                className="m-0 fs-20 text-light color-555"
+                                                html={vm.description}
+                                            />
                                         </div>
                                     </div>
                                 </div>
