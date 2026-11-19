@@ -19,7 +19,6 @@ import { isEmpty } from 'lodash'
 import IconArrowBottom2 from '@/component/icon/IconArrowBottom2'
 import loadBootstrapHelper from '@/helper/base/loadBootstrap.helper'
 import BannerMegaMenu from '@/asset/image/default/default-mega-menu-banner-image.jpg'
-import BannerMegaMenuEpx from '@/asset/image/default/default-mega-menu-banner-image-exp.jpg'
 import {
     ABOUT_US_PATH,
     BOAT_TRANSFERS_PATH,
@@ -39,32 +38,123 @@ import {
 import { Search, X } from 'feather-icons-react'
 import { slugify } from '@/helper/slugify.helper'
 import { useRouter } from 'next/navigation'
+import useMenuNavigation from '@/hook/useMenuNavigation.hook'
 
-const LabelGroup = ({ name = '' }: { name?: string }) => (
-    <p className="fs-24 font-tt-drugs mb-0">{name}</p>
+const MEGA_MENU_TYPE = 'Mega Menu'
+
+const isMegaMenu = (item: any) => item?.type?.name === MEGA_MENU_TYPE
+
+// Dipakai selama data API belum tampil / gagal dimuat
+const FALLBACK_MENUS = [
+    { menuLabel: ABOUT_US_MENU, menuUrl: ABOUT_US_PATH },
+    { menuLabel: STAY_MENU, menuUrl: STAY_PATH },
+    { menuLabel: BOAT_TRANSFERS_MENU, menuUrl: BOAT_TRANSFERS_PATH },
+    { menuLabel: EXPERIENCE_MENU, menuUrl: '/experience' },
+    { menuLabel: ISLAND_GUIDE_MENU, menuUrl: '/island-guide' },
+    { menuLabel: CONTACT_MENU, menuUrl: CONTACT_US_PATH },
+]
+
+const LabelGroup = ({ name = '', url = '' }: { name?: string; url?: string }) =>
+    url ? (
+        <Link href={url} className="fs-24 font-tt-drugs d-block">
+            {name}
+        </Link>
+    ) : (
+        <p className="fs-24 font-tt-drugs mb-0">{name}</p>
+    )
+
+const GroupMegaMenu = ({ group }: { group: any }) => (
+    <div className="vstack gap-3">
+        <LabelGroup name={group.menuLabel} url={group.menuUrl} />
+        {group.children?.map((child: any) => (
+            <Link href={child.menuUrl || '#'} className="fs-16" key={child.id}>
+                {child.menuLabel}
+            </Link>
+        ))}
+    </div>
 )
 
-const objectChildOfGroup = (name: string, url = '#') => ({ url, name })
+// Struktur mega menu dari API:
+// - child type "Menu"      -> grup (label) + children sebagai link
+// - child type "Mega Menu" -> blok promo (judul, deskripsi, banner dari children[0])
+const MegaMenuItem = ({ item }: { item: any }) => {
+    const groups = (item.children || []).filter((c: any) => !isMegaMenu(c))
+    const promo = (item.children || []).find((c: any) => isMegaMenu(c))
+    const banner = promo?.children?.[0]
 
-const LinkChildOfGroup = ({
-    url = '#',
-    name = '',
-}: {
-    url?: string
-    name?: string
-}) => (
-    <Link href={url} className="fs-16">
-        {name}
-    </Link>
-)
+    const half = Math.ceil(groups.length / 2)
+    const columns = [groups.slice(0, half), groups.slice(half)]
 
-const GroupMegaMenu = ({ name, list = [] }: { name: string; list?: any[] }) => {
     return (
-        <div className="vstack gap-3">
-            <LabelGroup name={name} />
-            {list?.map((item, index) => {
-                return <LinkChildOfGroup {...item} key={index} />
-            })}
+        <div className="dropdown navbar-menga-menu">
+            <a
+                className="nav-link dropdown-toggle text-uppercase font-tt-drugs"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                data-bs-display="static"
+                aria-expanded="false">
+                {item.menuLabel} <IconArrowBottom2 />
+            </a>
+            <div className="dropdown-menu w-100 rounded-0 py-5 px-4 mt-2">
+                <div className="container">
+                    <div className="row g-5 justify-content-end">
+                        <div className={promo ? 'col-md-6 border-end' : 'col-12'}>
+                            <div className="row gx-3 gy-5">
+                                {columns.map((col, index) => (
+                                    <div
+                                        className="col-md-6 vstack gap-5"
+                                        key={index}>
+                                        {col.map((group: any) => (
+                                            <GroupMegaMenu
+                                                group={group}
+                                                key={group.id}
+                                            />
+                                        ))}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {promo ? (
+                            <div className="col-md-5 px-md-5">
+                                <div className="ps-3">
+                                    <LabelGroup
+                                        name={promo.menuLabel}
+                                        url={promo.menuUrl}
+                                    />
+                                    {promo.description ? (
+                                        <p className="fs-16 mt-2 mb-5">
+                                            {promo.description}
+                                        </p>
+                                    ) : null}
+
+                                    {banner ? (
+                                        <Link
+                                            href={banner.menuUrl || '#'}
+                                            className="wrap-banner-img d-block">
+                                            <Image
+                                                src={
+                                                    banner.featuredImage ||
+                                                    BannerMegaMenu
+                                                }
+                                                alt={banner.menuLabel}
+                                                className="object-fit-cover"
+                                                fill
+                                            />
+                                            <div className="message text-white p-5">
+                                                <p className="fs-24 font-tt-drugs mb-0">
+                                                    {banner.menuLabel}
+                                                </p>
+                                            </div>
+                                        </Link>
+                                    ) : null}
+                                </div>
+                            </div>
+                        ) : null}
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
@@ -86,6 +176,7 @@ const NavbarLayout = ({
     isInSearch?: boolean
 }) => {
     const [isScrolled, setIsScrolled] = useState(false)
+    const { items: navItems } = useMenuNavigation()
     const router = useRouter()
 
     const [formRequest, setFormRequest] = useState({
@@ -160,11 +251,14 @@ const NavbarLayout = ({
 
         handleScroll()
 
-        _handleDropdownMegaMenu()
-
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
+
+    // pasang hover dropdown setelah mega menu dari API dirender
+    useEffect(() => {
+        if (navItems.length > 0) _handleDropdownMegaMenu()
+    }, [navItems])
 
     return (
         <nav
@@ -248,297 +342,29 @@ const NavbarLayout = ({
             </div>
             <div className="container py-3">
                 <div className="hstack flex-wrap h-gap-menu flex-row align-items-center justify-content-center">
-                    {!isEmpty(menus) && !isEmpty(menus.items) && false ? (
-                        menus?.items?.map((vm, index) => {
-                            return (
-                                <div className="font-tt-drugs" key={index}>
-                                    <Link href={vm.url || '#'}>{vm.name}</Link>
-                                </div>
-                            )
-                        })
-                    ) : (
-                        <>
-                            <div className="text-uppercase font-tt-drugs">
-                                <Link href={ABOUT_US_PATH}>
-                                    {ABOUT_US_MENU}
-                                </Link>
-                            </div>
-                            <div className="text-uppercase font-tt-drugs">
-                                <Link href={STAY_PATH}>{STAY_MENU}</Link>
-                            </div>
-                            <div className="text-uppercase font-tt-drugs">
-                                <Link href={BOAT_TRANSFERS_PATH}>
-                                    {BOAT_TRANSFERS_MENU}
-                                </Link>
-                            </div>
-                            <div className="dropdown navbar-menga-menu">
-                                <a
-                                    className="nav-link dropdown-toggle text-uppercase font-tt-drugs"
-                                    href="#"
-                                    role="button"
-                                    data-bs-toggle="dropdown"
-                                    data-bs-display="static" // posisi dinamis
-                                    aria-expanded="false">
-                                    {EXPERIENCE_MENU} <IconArrowBottom2 />
-                                </a>
-                                <div className="dropdown-menu w-100 rounded-0 py-5 px-4 mt-2">
-                                    <div className="container">
-                                        <div className="row g-5 justify-content-centerP justify-content-end">
-                                            <div className="col-md-6 border-end">
-                                                <div className="row gx-3 gy-5">
-                                                    <div className="col-md-6 vstack gap-5">
-                                                        <GroupMegaMenu
-                                                            name="EAT"
-                                                            list={[
-                                                                objectChildOfGroup(
-                                                                    'JUNGUTBATU',
-                                                                    '/experience/play/jungutbatu',
-                                                                ),
-                                                                objectChildOfGroup(
-                                                                    'NUSA CENINGAN',
-                                                                    '/experience/play/nusa-ceningan',
-                                                                ),
-                                                                objectChildOfGroup(
-                                                                    'MUSHROOM & SANDY BY',
-                                                                    '/experience/play/mushroom-and-sandy-bay',
-                                                                ),
-                                                                objectChildOfGroup(
-                                                                    'ALL RESTAURANT',
-                                                                    '/experience/eat',
-                                                                ),
-                                                            ]}
-                                                        />
-
-                                                        <GroupMegaMenu
-                                                            name="PLAY"
-                                                            list={[
-                                                                objectChildOfGroup(
-                                                                    'OCEAN ADVENTURE',
-                                                                    '#',
-                                                                ),
-                                                                objectChildOfGroup(
-                                                                    'ADRENALINES',
-                                                                    '#',
-                                                                ),
-                                                                objectChildOfGroup(
-                                                                    'PADEL',
-                                                                    '#',
-                                                                ),
-                                                                objectChildOfGroup(
-                                                                    'TOURS',
-                                                                    '#',
-                                                                ),
-                                                                objectChildOfGroup(
-                                                                    'SHOPPING',
-                                                                    '#',
-                                                                ),
-                                                                objectChildOfGroup(
-                                                                    'BEACH CLUB',
-                                                                    '#',
-                                                                ),
-                                                            ]}
-                                                        />
-                                                    </div>
-
-                                                    <div className="col-md-6 vstack gap-5">
-                                                        <GroupMegaMenu
-                                                            name="WELLNESS"
-                                                            list={[
-                                                                objectChildOfGroup(
-                                                                    'SPA DAY',
-                                                                    '#',
-                                                                ),
-                                                                objectChildOfGroup(
-                                                                    'YOGA',
-                                                                    '#',
-                                                                ),
-                                                                objectChildOfGroup(
-                                                                    'BREATH WORK',
-                                                                    '#',
-                                                                ),
-                                                                objectChildOfGroup(
-                                                                    'PILATES',
-                                                                    '#',
-                                                                ),
-                                                                objectChildOfGroup(
-                                                                    'JIUJITSU',
-                                                                    '#',
-                                                                ),
-                                                                objectChildOfGroup(
-                                                                    'GYM',
-                                                                    '#',
-                                                                ),
-                                                                objectChildOfGroup(
-                                                                    'SAUNA & ICE BATH',
-                                                                    '#',
-                                                                ),
-                                                            ]}
-                                                        />
-
-                                                        <GroupMegaMenu
-                                                            name="WEDDING & RETREATS"
-                                                            list={[]}
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-md-5 px-md-5">
-                                                <div className="ps-3">
-                                                    <LabelGroup name="WHAT TO DO IN LEMBONGAN" />
-                                                    <p className="fs-16 mt-2 mb-5 ">
-                                                        Amazing diving spot,
-                                                        meet the turtles sea
-                                                        creatuires. Amazing
-                                                        diving spot, meet the
-                                                        turtles sea creatuires
-                                                        Amazing diving spo
-                                                    </p>
-
-                                                    <div className="wrap-banner-img">
-                                                        <Image
-                                                            src={BannerMegaMenu}
-                                                            alt="WHAT TO DO IN LEMBONGAN"
-                                                            className="object-fit-cover"
-                                                            fill
-                                                        />
-
-                                                        <div className="message text-white p-5">
-                                                            <p className="fs-24 font-tt-drugs mb-0">
-                                                                BALI HAI DIVING{' '}
-                                                                <br />
-                                                                ADVENTURES
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="dropdown navbar-menga-menu">
-                                <a
-                                    className="nav-link dropdown-toggle text-uppercase font-tt-drugs"
-                                    href="#"
-                                    role="button"
-                                    data-bs-toggle="dropdown"
-                                    data-bs-display="static" // posisi dinamis
-                                    aria-expanded="false">
-                                    {ISLAND_GUIDE_MENU} <IconArrowBottom2 />
-                                </a>
-                                <div className="dropdown-menu w-100 rounded-0 py-5 px-4 mt-2">
-                                    <div className="container">
-                                        <div className="row g-5 justify-content-end">
-                                            <div className="col-md-6 border-end">
-                                                <div className="row gx-3 gy-5">
-                                                    <div className="col-md-6">
-                                                        <GroupMegaMenu
-                                                            name="LEMBONGAN"
-                                                            list={[
-                                                                objectChildOfGroup(
-                                                                    'GET TO KNOW LEMBONGAN',
-                                                                    '#',
-                                                                ),
-                                                                objectChildOfGroup(
-                                                                    'ISLAND’S FAQ',
-                                                                    '#',
-                                                                ),
-                                                            ]}
-                                                        />
-                                                    </div>
-
-                                                    <div className="col-md-6">
-                                                        <GroupMegaMenu
-                                                            name="ISLAND TRANSPORT"
-                                                            list={[
-                                                                objectChildOfGroup(
-                                                                    'MADE LEMBONGAN TRANSPORT',
-                                                                    '#',
-                                                                ),
-                                                                objectChildOfGroup(
-                                                                    'KADEK LEMBONGAN TAXI',
-                                                                    '#',
-                                                                ),
-                                                            ]}
-                                                        />
-                                                    </div>
-
-                                                    <div className="col-md-6">
-                                                        <GroupMegaMenu
-                                                            name="ISLAND SERVICE"
-                                                            list={[
-                                                                objectChildOfGroup(
-                                                                    'VICTORY CARGO',
-                                                                    '#',
-                                                                ),
-                                                            ]}
-                                                        />
-                                                    </div>
-
-                                                    <div className="col-md-6">
-                                                        <GroupMegaMenu
-                                                            name="LEMBONGAN"
-                                                            list={[
-                                                                objectChildOfGroup(
-                                                                    'GET TO KNOW LEMBONGAN',
-                                                                    '#',
-                                                                ),
-                                                                objectChildOfGroup(
-                                                                    'ISLAND’S FAQ',
-                                                                    '#',
-                                                                ),
-                                                            ]}
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-md-5 px-md-5">
-                                                <div className="ps-3">
-                                                    <LabelGroup name="WHAT TO DO IN LEMBONGAN" />
-                                                    <p className="fs-16 mt-2 mb-5">
-                                                        Amazing diving spot,
-                                                        meet the turtles sea
-                                                        creatuires. Amazing
-                                                        diving spot, meet the
-                                                        turtles sea creatuires
-                                                        Amazing diving spo
-                                                    </p>
-
-                                                    <div className="wrap-banner-img">
-                                                        <Image
-                                                            src={
-                                                                BannerMegaMenuEpx
-                                                            }
-                                                            alt="WHAT TO DO IN LEMBONGAN"
-                                                            className="object-fit-cover"
-                                                            fill
-                                                        />
-
-                                                        <div className="message text-white p-5">
-                                                            <p className="fs-24 font-tt-drugs mb-0">
-                                                                BALI HAI DIVING{' '}
-                                                                <br />
-                                                                ADVENTURES
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="text-uppercase">
-                                <Link href={CONTACT_US_PATH}>
-                                    {CONTACT_MENU}
-                                </Link>
-                            </div>
-                        </>
-                    )}
+                    {navItems.length > 0
+                        ? navItems.map((item) =>
+                              isMegaMenu(item) && item.children?.length ? (
+                                  <MegaMenuItem key={item.id} item={item} />
+                              ) : (
+                                  <div
+                                      className="text-uppercase font-tt-drugs"
+                                      key={item.id}>
+                                      <Link href={item.menuUrl || '#'}>
+                                          {item.menuLabel}
+                                      </Link>
+                                  </div>
+                              ),
+                          )
+                        : FALLBACK_MENUS.map((item) => (
+                              <div
+                                  className="text-uppercase font-tt-drugs"
+                                  key={item.menuLabel}>
+                                  <Link href={item.menuUrl}>
+                                      {item.menuLabel}
+                                  </Link>
+                              </div>
+                          ))}
                 </div>
             </div>
 
