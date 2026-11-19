@@ -45,8 +45,6 @@ const SectionListProperty = () => {
         _handleChange,
     } = usePropertyList()
 
-    console.log('search: ', search)
-
     return (
         <>
             <section className="section-space-small">
