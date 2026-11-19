@@ -18,6 +18,14 @@ const getRating = (review: any) => {
     return Math.max(0, Math.min(MAX_RATING, Math.round(normalized)))
 }
 
+// country bisa berupa string atau objek ({ name } / { countryName })
+const getCountry = (review: any) => {
+    const c = review?.country ?? review?.location
+    if (!c) return ''
+    if (typeof c === 'string') return c
+    return c?.name || c?.countryName || c?.label || ''
+}
+
 const ReviewStars = ({ rating = MAX_RATING }: { rating?: number }) => (
     <div className="hstack gap-1 text-primary flex-shrink-0">
         {Array.from({ length: MAX_RATING }).map((_, index) => (
@@ -33,7 +41,7 @@ const ReviewStars = ({ rating = MAX_RATING }: { rating?: number }) => (
 
 const PropertyReviewSlider = ({
     reviews = [],
-    title = 'Property Review',
+    title = 'Reviews',
 }: {
     reviews?: any[]
     title?: string
@@ -85,11 +93,7 @@ const PropertyReviewSlider = ({
                         review?.reviewerName ||
                         review?.name ||
                         'Guest'
-                    const country =
-                        review?.country?.name ||
-                        review?.country ||
-                        review?.location ||
-                        ''
+                    const country = getCountry(review)
                     const content =
                         review?.content ||
                         review?.comment ||
