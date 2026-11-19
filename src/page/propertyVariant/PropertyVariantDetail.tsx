@@ -4,8 +4,10 @@ import RenderHtml from '@/component/general/RenderHtml'
 import PropertySliderAndGallery from '@/page/property/container/PropertySliderAndGallery'
 import { CardContactInfoMain } from '@/component/general/CardContactInfo'
 import { BtnLinkPrimary, BtnPrimary } from '@/component/general/Button'
-import { CheckCircle, ArrowRight } from 'feather-icons-react'
+import { CheckCircle, ArrowRight, MapPin } from 'feather-icons-react'
 import Image from 'next/image'
+import { URL_GOOGLE_MAPS_DIRECTION } from '@/config/url.config'
+import PropertyFeatureList from '@/page/property/component/PropertyFeatureList'
 import PropertyThingsToExplore from '@/page/property/container/PropertyThingsToExplore'
 import PropertyOther from '@/page/property/container/PropertyOther'
 import PropertyFormInquiry from '@/page/property/container/PropertyFormInquiry'
@@ -35,6 +37,7 @@ const PropertyVariantDetail = ({
 
     const {
         amenities = [],
+        features = [],
         floorplanImage = '',
         whyYoullLoveThis = [],
         seo = {},
@@ -43,9 +46,9 @@ const PropertyVariantDetail = ({
     const { propertyList } = usePropertyVariantGuesty(detail?.guestyId || '')
     const { calendar: availabilityCalendar, fetchCalendar } =
         usePropertyAvailabilityCalendar(detail?.guestyId || '')
-    const { hasLocation, mapEmbedUrl } = useLocationCoordinate(
-        detail?.addresses?.[0],
-    )
+    const { hasLocation, mapEmbedUrl, latitude, longitude } =
+        useLocationCoordinate(detail?.addresses?.[0])
+    const locationAddress = detail?.addresses?.[0]?.address
 
     return (
         <>
@@ -80,28 +83,19 @@ const PropertyVariantDetail = ({
                                     />
                                 </div>
 
-                                <hr />
+                                {features && features.length ? (
+                                    <>
+                                        <hr />
 
-                                <div className="">
-                                    <TitleSection title="Features" />
+                                        <div className="">
+                                            <TitleSection title="Features" />
 
-                                    <div className="row">
-                                        <div className="col-lg-4 col-md-6">
-                                            <div className="hstack gap-3 align-items-start text-grey-200">
-                                                <div className="">
-                                                    <CheckCircle
-                                                        size="20"
-                                                        strokeWidth="2"
-                                                    />
-                                                </div>
-
-                                                <p className="fs-20 mb-0 text-grey-200">
-                                                    {detail.occupancy} Guest
-                                                </p>
-                                            </div>
+                                            <PropertyFeatureList
+                                                features={features}
+                                            />
                                         </div>
-                                    </div>
-                                </div>
+                                    </>
+                                ) : null}
 
                                 {amenities && amenities.length > 0 ? (
                                     <>
@@ -184,11 +178,11 @@ const PropertyVariantDetail = ({
                                     />
                                 </div>
 
-                                <hr />
-                                <div className="">
-                                    <TitleSection title="ACCOMMODATION" />
-                                    {/*ACCOMMODATION*/}
-                                </div>
+                                {/*<hr />*/}
+                                {/*<div className="">*/}
+                                {/*    <TitleSection title="ACCOMMODATION" />*/}
+                                {/*    /!*ACCOMMODATION*!/*/}
+                                {/*</div>*/}
 
                                 {whyYoullLoveThis && whyYoullLoveThis.length ? (
                                     <>
@@ -229,6 +223,29 @@ const PropertyVariantDetail = ({
                                         <div className="">
                                             <TitleSection title="Location" />
                                             {/*Location*/}
+                                            <div className="d-flex justify-content-between align-items-start gap-3 pt-3 pb-4">
+                                                <div className="hstack gap-2 align-items-start text-grey-300">
+                                                    <MapPin
+                                                        size="20"
+                                                        className="flex-shrink-0 mt-1"
+                                                    />
+                                                    <p className="fs-20 mb-0">
+                                                        {locationAddress}
+                                                    </p>
+                                                </div>
+
+                                                <a
+                                                    href={URL_GOOGLE_MAPS_DIRECTION(
+                                                        latitude ?? '',
+                                                        longitude ?? '',
+                                                    )}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="fs-20 text-grey-300 text-uppercase text-decoration-none border-bottom text-nowrap">
+                                                    Get Direction
+                                                </a>
+                                            </div>
+
                                             <div className="ratio ratio-16x9">
                                                 <iframe
                                                     src={mapEmbedUrl}
@@ -246,11 +263,11 @@ const PropertyVariantDetail = ({
                                     </>
                                 ) : null}
 
-                                <hr />
-                                <div className="">
-                                    <TitleSection title="REVIEWS" />
-                                    {/*REVIEWS*/}
-                                </div>
+                                {/*<hr />*/}
+                                {/*<div className="">*/}
+                                {/*    <TitleSection title="REVIEWS" />*/}
+                                {/*    /!*REVIEWS*!/*/}
+                                {/*</div>*/}
                             </div>
                         </div>
 

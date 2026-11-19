@@ -7,10 +7,10 @@ const PropertyFormSelectAmenities = (props: any) => {
     return (
         <>
             <FormSelectOption
-                name={props.name || 'typeId'}
+                name={props.name || 'amenitiesId'}
                 className={props?.className || ''}
                 classNameSelect={props?.classNameSelect || ''}>
-                <option value="">{props.placeholder || 'Type All'}</option>
+                <option value="">{props.placeholder || 'Amenities All'}</option>
                 {amenitiesList.map((vm, index) => (
                     <option value={vm.value} key={index}>
                         {/*{value === vm.toString() ? 'Bedroom: ' : ''}*/}
