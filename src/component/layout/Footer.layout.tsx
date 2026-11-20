@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import LogoWhite from '@/asset/image/navbar/logo-white.svg'
@@ -38,13 +40,23 @@ import {
     TERMS_AND_CONDITION_MENU,
 } from '@/config/pageMenu.config'
 import WhatsAppChat from '@/component/general/WhatsappChat'
+import useWebInformation from '@/hook/useWebInformation.hook'
+import { formatPhoneNumberIntl } from 'react-phone-number-input'
 
 const shapeMenu = (name: string, href: any = '#') => ({
     name,
     href,
 })
 
+const iconMap = {
+    youtube: IconYoutube,
+    instagram: IconIG,
+    facebook: IconFB,
+}
+
 const FooterLayout = () => {
+    const { __webInformation } = useWebInformation()
+
     const listMenusOne = [
         shapeMenu(ABOUT_US_MENU, ABOUT_US_PATH),
         shapeMenu(STAY_MENU, STAY_PATH),
@@ -89,12 +101,14 @@ const FooterLayout = () => {
                         <div className="row gx-5 gy-3">
                             <div className="col-lg">
                                 <p className="fs-20 mb-0">OUR OFFICE</p>
-                                <p className="fs-16">(+62) 81 3921 83002</p>
+                                <p className="fs-16">
+                                    {formatPhoneNumberIntl(
+                                        __webInformation?.phones?.[0]?.phone,
+                                    )}
+                                </p>
 
                                 <p className="fs-14 mb-0">
-                                    Nusa Lembongan, Jl. Jungutbatu, Jungutbatu,
-                                    Kec. Nusa Penida, Kabupaten Klungkung, Bali
-                                    80361
+                                    {__webInformation?.address}
                                 </p>
                             </div>
 
@@ -132,31 +146,24 @@ const FooterLayout = () => {
                             </div>
                             <div className="col-lg">
                                 <div className="vstack gap-3">
-                                    <div className="vstack gap-1">
-                                        <p className="mb-0 fs-16">
-                                            RESERVATION
-                                        </p>
-                                        <p className="mb-0">
-                                            <a
-                                                href="#"
-                                                className="text-white text-break fs-14">
-                                                holiday@thelembongantraveller.com
-                                            </a>
-                                        </p>
-                                    </div>
-
-                                    <div className="vstack gap-1">
-                                        <p className="mb-0 fs-16">
-                                            VILLA MANAGEMENT
-                                        </p>
-                                        <p className="mb-0">
-                                            <a
-                                                href="#"
-                                                className="text-white text-break fs-14">
-                                                holiday@thelembongantraveller.com
-                                            </a>
-                                        </p>
-                                    </div>
+                                    {__webInformation?.emails?.map(
+                                        (mail, idx) => (
+                                            <div
+                                                className="vstack gap-1"
+                                                key={idx}>
+                                                <p className="mb-0 fs-16 text-uppercase">
+                                                    {mail.title}
+                                                </p>
+                                                <p className="mb-0">
+                                                    <a
+                                                        href={`mailto:${mail.email}`}
+                                                        className="text-white text-break fs-14">
+                                                        {mail.email}
+                                                    </a>
+                                                </p>
+                                            </div>
+                                        ),
+                                    )}
                                 </div>
                             </div>
 
@@ -164,24 +171,20 @@ const FooterLayout = () => {
                                 <p className="fs-16">CONNECT WITH US</p>
 
                                 <div className="hstack flex-wrap gap-3">
-                                    <div className="">
-                                        <Image
-                                            src={IconIG}
-                                            alt="ig the lembongan bali"
-                                        />
-                                    </div>
-                                    <div className="">
-                                        <Image
-                                            src={IconFB}
-                                            alt="ig the lembongan bali"
-                                        />
-                                    </div>
-                                    <div className="">
-                                        <Image
-                                            src={IconYoutube}
-                                            alt="ig the lembongan bali"
-                                        />
-                                    </div>
+                                    {__webInformation?.socialMedia?.map(
+                                        (social, idx) => (
+                                            <Link
+                                                target="_blank"
+                                                href={social.link}
+                                                className=""
+                                                key={idx}>
+                                                <Image
+                                                    src={iconMap[social.icon]}
+                                                    alt={social.name}
+                                                />
+                                            </Link>
+                                        ),
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -205,10 +208,7 @@ const FooterLayout = () => {
                 </div>
             </section>
 
-            <WhatsAppChat
-                phoneNumber="61478928925"
-                defaultMessage="Hello! I am interested in your services."
-            />
+            <WhatsAppChat defaultMessage="Hello! I am interested in your services." />
         </>
     )
 }

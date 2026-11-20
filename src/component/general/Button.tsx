@@ -122,10 +122,12 @@ export const BtnLinkBasic = ({
     isOutline = false,
     ...other
 }: BtnLinkProps & { isIconArrow?: boolean }) => {
+    const configBtnClass: string = isOutline ? 'border border-neutral-400' : ''
+
     return (
         <Link
             href={href}
-            className={joinClassNameHelper('btn', className)}
+            className={joinClassNameHelper('btn', configBtnClass, className)}
             {...other}>
             {isIconArrow ? <BtnIcon>{children}</BtnIcon> : children}
         </Link>

@@ -36,38 +36,82 @@
 //
 // export const guestyPost = (endpoint, body) => guestyApi.post(endpoint, body)
 
-// V2 Finnal
+// V3 — token disimpan di cookie (key: COOKIE_TOKEN_GUESTY), fetch hanya saat expired
 import axios from 'axios'
+import { COOKIE_TOKEN_GUESTY } from '@/config/cacheClient.config'
 
 const BASE_API_CRM = process.env.NEXT_PUBLIC_CRM_BASE_API
-// const BASE_URL = 'https://open-api.guesty.com'
 const BASE_URL = 'https://open-api.guesty.com'
-const REFRESH_BUFFER_MS = 5 * 60 * 1000 // refresh 5 menit sebelum habis
+const REFRESH_BUFFER_MS = 5 * 60 * 1000 // anggap expired 5 menit sebelum habis
 
-let cache = { token: null, exp: 0 }
+// Token yang sudah terlanjur diambil, dipakai sebagai seed cookie awal
+const INITIAL_TOKEN =
+    'eyJraWQiOiJ6Uk50b3FxLVU2eTlqZ21VdFRHZ21HOE9rZG1vcW9ldnNsZzliWldhQ29nIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULlRZbHdQS2VYdHM0d1ZSN2tZQUtLRV9TS1hGRDlWdmFmZF9uUG9pVER6MlEiLCJpc3MiOiJodHRwczovL2xvZ2luLmd1ZXN0eS5jb20vb2F1dGgyL2F1czFwOHFyaDUzQ2NRVEk5NWQ3IiwiYXVkIjoiaHR0cHM6Ly9vcGVuLWFwaS5ndWVzdHkuY29tIiwiaWF0IjoxNzk1MDIyMzk3LCJleHAiOjE3OTUxMDg3OTcsImNpZCI6IjBvYXVteW16bzZzbnRiUnJpNWQ3Iiwic2NwIjpbIm9wZW4tYXBpIl0sInJlcXVlc3RlciI6IkVYVEVSTkFMIiwiYWNjb3VudElkIjoiNjhkNjM4ZDVlYTE4OTVkOTAwNWVhNDFlIiwic3ViIjoiMG9hdW15bXpvNnNudGJScmk1ZDciLCJ1c2VyUm9sZXMiOlt7InJvbGVJZCI6eyJwZXJtaXNzaW9ucyI6WyJhZG1pbiJdfX1dLCJyb2xlIjoidXNlciIsImNsaWVudFR5cGUiOiJvcGVuYXBpIiwiaWFtIjoidjMiLCJhY2NvdW50TmFtZSI6IlRoZSBMZW1ib25nYW4gVHJhdmVsbGVyIiwibmFtZSI6IlRMVCBBUEkifQ.13I8EL6v-zBG1yTnnCHKuHafq1NeH8oJ8XjT5XMVrv-H5kb9EHj4kQ-wsB0fWtZFqONUQ51qzZmSaM7AtUnWNd82XjrzJmbSlagFj13_oczfZXsen8eqpR9VN7YIin9XlXi3egYGRu7ampRVNSTrmFuDkXgcqTS4zAHXROo3d-T13mRotP4pIqyQxsGCiHVff_k2H9Hb14wQFd6gQIWV-BZbRB7nHTwPUsuotnCZmz9_FnUxubGeKXNOeGLp-Zj5FZqWnfPyjoMmDBXIsEVDMwjjjtYMYih04ilVF1lqIfsZhOX4-3TzcK1ORrAfI0LSuSthTY8abIFRsJS_CL7Mmw'
+
 let pending = null // mencegah banyak request token berjalan bersamaan
+
+// ambil waktu expired (ms) dari klaim `exp` JWT
+const getJwtExpMs = (token) => {
+    try {
+        const base64 = token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')
+        const json =
+            typeof atob === 'function'
+                ? atob(base64)
+                : Buffer.from(base64, 'base64').toString()
+        return Number(JSON.parse(json).exp) * 1000
+    } catch {
+        return 0
+    }
+}
+
+const readCookie = () => {
+    if (typeof document === 'undefined') return null
+    const match = document.cookie
+        .split('; ')
+        .find((c) => c.startsWith(`${COOKIE_TOKEN_GUESTY}=`))
+    return match
+        ? decodeURIComponent(match.split('=').slice(1).join('='))
+        : null
+}
+
+const writeCookie = (token, expMs) => {
+    if (typeof document === 'undefined') return
+    const secure = location.protocol === 'https:' ? '; Secure' : ''
+    document.cookie =
+        `${COOKIE_TOKEN_GUESTY}=${encodeURIComponent(token)}` +
+        `; Expires=${new Date(expMs).toUTCString()}; Path=/; SameSite=Lax${secure}`
+}
+
+const clearCookie = () => {
+    if (typeof document === 'undefined') return
+    document.cookie = `${COOKIE_TOKEN_GUESTY}=; Max-Age=0; Path=/`
+}
+
+const isValid = (token) =>
+    !!token && Date.now() < getJwtExpMs(token) - REFRESH_BUFFER_MS
+
+const saveToken = (token) => writeCookie(token, getJwtExpMs(token))
 
 const fetchToken = async () => {
     const { data } = await axios.get(`${BASE_API_CRM}/guesty/token`)
-    const result = data?.result || {}
+    const accessToken = data?.result?.accessToken
 
-    if (!result.accessToken) {
+    if (!accessToken) {
         throw new Error('accessToken Guesty tidak ada di response')
     }
 
-    const expiresInMs = Number(result.expiresInSeconds) * 1000
-
-    cache = {
-        token: result.accessToken,
-        exp: Date.now() + Math.max(expiresInMs - REFRESH_BUFFER_MS, 0),
-    }
-    return cache.token
+    saveToken(accessToken)
+    return accessToken
 }
 
 const getToken = () => {
-    if (cache.token && Date.now() < cache.exp)
-        return Promise.resolve(cache.token)
+    // seed cookie dengan token awal jika belum ada
+    if (!readCookie() && isValid(INITIAL_TOKEN)) saveToken(INITIAL_TOKEN)
 
+    const cached = readCookie()
+    if (isValid(cached)) return Promise.resolve(cached)
+
+    // expired / tidak ada -> ambil yang terbaru (hanya sekali)
     if (!pending) {
         pending = fetchToken().finally(() => {
             pending = null
@@ -82,6 +126,12 @@ const guestyApi = axios.create({ baseURL: `${BASE_URL}` })
 guestyApi.interceptors.request.use(async (config) => {
     config.headers.Authorization = `Bearer ${await getToken()}`
     return config
+})
+
+// token ditolak (mis. dicabut) -> hapus cookie agar request berikutnya ambil baru
+guestyApi.interceptors.response.use(undefined, (error) => {
+    if (error?.response?.status === 401) clearCookie()
+    return Promise.reject(error)
 })
 
 export const guestyGet = (endpoint, params = null) =>

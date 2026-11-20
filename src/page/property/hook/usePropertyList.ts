@@ -13,13 +13,23 @@ const usePropertyList = () => {
         limit: 30,
         bathroom: '',
         bedroom: '',
+        typeId: '',
+        amenitiesId: '',
     })
 
     const [isLoading, setIsLoading] = useState(false)
 
-    const _handleGet = (passSearch = {}) => {
+    const _handleParamSearch = (passData: any) => {
+        return passData ? [passData] : []
+    }
+
+    const _handleGet = (passSearch: any = {}) => {
         setIsLoading(true)
-        getPropertyList(passSearch)
+        getPropertyList({
+            ...passSearch,
+            propertyTypeIds: _handleParamSearch(passSearch?.typeId),
+            amenitiesCategoryIds: _handleParamSearch(passSearch?.amenitiesId),
+        })
             .then((res) => {
                 setList(res?.result || [])
                 setPagination(res?.pagination || {})

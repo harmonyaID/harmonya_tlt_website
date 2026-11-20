@@ -3,7 +3,7 @@ import usePropertyManagementFormHook from '@/page/propertyManagement/hook/usePro
 import FormWrap from '@/component/wrapping/Form.wrap'
 import { WrapFormContext } from '@/context/Form.Context'
 import FormInput from '@/component/form/FormInput'
-import FormSelectOption from '@/component/form/FormSelectOption'
+import SelectOptionGeneral from '@/common/dataForm/SelectOptionGeneral'
 import FormTextArea from '@/component/form/FormTextarea'
 import { BtnPrimary } from '@/component/general/Button'
 
@@ -75,14 +75,18 @@ const PropertyManagementForm = ({ content = {} }: { content?: any }) => {
                                             />
                                         </div>
                                         <div className="col-md-6">
-                                            <FormSelectOption
+                                            <SelectOptionGeneral
                                                 label="Property Type"
                                                 required
-                                                name="propertyTypeId">
-                                                <option value="">
-                                                    - Select Type -
-                                                </option>
-                                            </FormSelectOption>
+                                                placeholder="Select Type"
+                                                name="propertyTypeId"
+                                                options={[
+                                                    {
+                                                        value: '',
+                                                        label: '- Select Type -',
+                                                    },
+                                                ]}
+                                            />
                                         </div>
                                         <div className="col-md-6">
                                             <FormInput
@@ -102,14 +106,18 @@ const PropertyManagementForm = ({ content = {} }: { content?: any }) => {
                                         </div>
                                     </div>
 
-                                    <FormSelectOption
-                                        label=" Service of Interest"
+                                    <SelectOptionGeneral
+                                        label="Service of Interest"
                                         required
-                                        name="serviceOfInterestId">
-                                        <option value="">
-                                            - Select Type -
-                                        </option>
-                                    </FormSelectOption>
+                                        placeholder="Select Type"
+                                        name="serviceOfInterestId"
+                                        options={[
+                                            {
+                                                value: '',
+                                                label: '- Select Type -',
+                                            },
+                                        ]}
+                                    />
 
                                     <FormTextArea
                                         label="Short Message"

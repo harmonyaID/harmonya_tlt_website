@@ -22,6 +22,8 @@ import dataMenuNavbarServerside from '@/hook/dataMenuNavbarServerside.hook'
 import FooterNewsLatterStatic from '@/component/layout/FooterNewsLatterStatic.layout'
 import { getPropertyHomePage } from '@/service/api/property.api'
 import FooterNewsLatterStaticLayout from '@/component/layout/FooterNewsLatterStatic.layout'
+import { getListExpTypes } from '@/service/api/experience.api'
+import { getListOffers } from '@/service/api/offer.api'
 
 export const dynamic = 'force-dynamic'
 
@@ -48,6 +50,17 @@ const Home = async () => {
         return res?.result || {}
     })
 
+    const typeExperiences = await getListExpTypes({ limit: 50, page: 1 }).then(
+        (res) => res?.result || {},
+    )
+
+    const offers = await getListOffers({
+        page: 0,
+        isActive: true,
+    }).then((res) => {
+        return res?.result || []
+    })
+
     return (
         <>
             <NavbarLayout menus={menus} isBgTransparent />
@@ -55,7 +68,7 @@ const Home = async () => {
             <SectionHomeAbout content={value?.SECTION2 || {}} />
             <SectionHomeLiveTheIslandLife content={value?.SECTION3 || {}} />
             <SectionHomeNeighbourhoods content={value?.SECTION4 || {}} />
-            <SectionHomeBook items={value?.SECTION5 || []} />
+            <SectionHomeBook items={value?.SECTION5 || []} list={offers} />
             <SectionHomeExclusiveStay
                 content={value.SECTION6 || {}}
                 propertys={propertys || []}
@@ -66,7 +79,10 @@ const Home = async () => {
                 partners={partners || []}
             />
             <SectionHomeDedication content={value?.SECTION9 || {}} />
-            <SectionHomeKeepWithUs content={value?.SECTION10 || {}} />
+            <SectionHomeKeepWithUs
+                content={value?.SECTION10 || {}}
+                list={typeExperiences || []}
+            />
             <SectionHomeLocation content={value?.SECTION11 || {}} />
             <SectionHomeFAQ content={value?.SECTION12 || {}} list={dataFAQs} />
             {/*<FooterNewsLetterLayout content={value?.SECTION13 || {}} />*/}

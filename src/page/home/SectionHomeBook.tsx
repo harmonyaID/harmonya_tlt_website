@@ -10,54 +10,67 @@ import RenderHtml from '@/component/general/RenderHtml'
 import { imgLandscapeConfig } from '@/config/urlImage.config'
 import ValidImage from '@/component/general/ValidImage'
 
-const SectionHomeBook = ({ items = [] }: { items?: any[] }) => {
+const SectionHomeBook = ({
+    items = [],
+    list = [],
+}: {
+    items?: any[]
+    list?: any[]
+}) => {
     return (
         <section className="position-relative">
             <CarouselDefaultWrap className="slide">
-                {items?.map((vm, index) => (
-                    <CarouselItem
-                        key={index}
-                        className="position-relative overflow-hidden section-home-carousel-book-banner"
-                        isActive={index < 1}>
-                        {/*<div className="position-absolute">*/}
-                        <ValidImage
-                            src={vm?.background}
-                            className="position-absolute banner-image"
-                            alt={vm.label || ''}
-                            fill
-                        />
-                        {/*</div>*/}
+                {list?.map((vm, index) => {
+                    const { seo } = vm
 
-                        <div className="banner-wp-content-text">
-                            <div className="container position-relative z-1">
-                                <div className="row justify-content-center">
-                                    <div className="col-lg-5 text-center text-white">
-                                        <div className="vstack gap-5">
-                                            <p className="fs-20 font-tt-drugs mb-0">
-                                                {vm.label}
-                                            </p>
-                                            <div className="">
-                                                <RenderHtml
-                                                    className="fw-light"
-                                                    html={vm.content}
-                                                />
-                                            </div>
+                    return (
+                        <CarouselItem
+                            key={index}
+                            className="position-relative overflow-hidden section-home-carousel-book-banner"
+                            isActive={index < 1}>
+                            {/*<div className="position-absolute">*/}
+                            <ValidImage
+                                src={vm?.thumbnail}
+                                className="position-absolute banner-image"
+                                alt={vm.title || ''}
+                                fill
+                            />
+                            {/*</div>*/}
 
-                                            <div className="">
-                                                <BtnLinkPrimary
-                                                    className="rounded-pill"
-                                                    isIconArrow
-                                                    href={vm.buttonLink}>
-                                                    {vm.buttonText}
-                                                </BtnLinkPrimary>
+                            <div className="banner-wp-content-text">
+                                <div className="container position-relative z-1">
+                                    <div className="row justify-content-center">
+                                        <div className="col-lg-5 text-center text-white">
+                                            <div className="vstack gap-5">
+                                                <p className="fs-20 font-tt-drugs mb-0">
+                                                    {vm.title}
+                                                </p>
+                                                <div className="">
+                                                    <RenderHtml
+                                                        className="fw-light"
+                                                        html={vm.excerpt}
+                                                    />
+                                                </div>
+
+                                                <div className="">
+                                                    <BtnLinkPrimary
+                                                        className="rounded-pill"
+                                                        isIconArrow
+                                                        href={
+                                                            seo?.canonicalUrl ||
+                                                            '#'
+                                                        }>
+                                                        BOOK NOW
+                                                    </BtnLinkPrimary>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </CarouselItem>
-                ))}
+                        </CarouselItem>
+                    )
+                })}
             </CarouselDefaultWrap>
         </section>
     )
