@@ -1,23 +1,27 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { MessageCircle, Send, Whatsapp } from 'iconsax-reactjs'
 import { X } from 'feather-icons-react'
+import useWebInformation from '@/hook/useWebInformation.hook'
 
 interface WhatsAppChatProps {
-    phoneNumber: string
     defaultMessage?: string
 }
 
 export default function WhatsAppChat({
-    phoneNumber,
     defaultMessage = 'Hello, I would like to know more about your services.',
 }: WhatsAppChatProps) {
     const [isOpen, setIsOpen] = useState(false)
     const [message, setMessage] = useState(defaultMessage)
 
+    const { __webInformation: webInformation } = useWebInformation()
+
     const handleSend = () => {
         if (!message.trim()) return
+
+        const phoneNumber = webInformation?.phones?.[0]?.phone
+        if (!phoneNumber) return
 
         const url = `https://wa.me/${phoneNumber.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`
 

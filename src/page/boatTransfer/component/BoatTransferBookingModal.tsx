@@ -24,6 +24,7 @@ import FormSelectOption from '@/component/form/FormSelectOption'
 import actionModal from '@/helper/base/actionModal.helper'
 import { useRouter } from 'next/navigation'
 import { THANK_YOU_BOAT } from '@/config/pagePath.config'
+import SelectOptionGeneral from '@/common/dataForm/SelectOptionGeneral'
 
 const ONE_WAY = 'one_way'
 const RETURN = 'return'
@@ -639,28 +640,29 @@ const BoatTransferBookingModal = ({ boatId }: { boatId?: number }) => {
                                                                                 up
                                                                                 Point
                                                                             </p>
-                                                                            <FormSelectOption
+                                                                            <SelectOptionGeneral
                                                                                 placeholder="Airport"
                                                                                 name="departurePickupPoint"
-                                                                                className="mb-2">
-                                                                                <option value="">
-                                                                                    Select
-                                                                                    Pickup
-                                                                                    Point
-                                                                                </option>
-                                                                                <option value="airport">
-                                                                                    Airport
-                                                                                </option>
-                                                                                <option value="hotel_villa">
-                                                                                    Hotel
-                                                                                    /
-                                                                                    Villa
-                                                                                </option>
-                                                                                <option value="not_applicable">
-                                                                                    Not
-                                                                                    Applicable
-                                                                                </option>
-                                                                            </FormSelectOption>
+                                                                                className="mb-2"
+                                                                                options={[
+                                                                                    {
+                                                                                        value: '',
+                                                                                        label: 'Select Pickup Point',
+                                                                                    },
+                                                                                    {
+                                                                                        value: 'airport',
+                                                                                        label: 'Airport',
+                                                                                    },
+                                                                                    {
+                                                                                        value: 'hotel_villa',
+                                                                                        label: 'Hotel/Villa',
+                                                                                    },
+                                                                                    {
+                                                                                        value: 'not_applicable',
+                                                                                        label: 'Not Applicable',
+                                                                                    },
+                                                                                ]}
+                                                                            />
                                                                             <div className="row g-3">
                                                                                 <div className="col-6">
                                                                                     <FormInput
@@ -697,29 +699,29 @@ const BoatTransferBookingModal = ({ boatId }: { boatId?: number }) => {
                                                                                 off
                                                                                 Point
                                                                             </p>
-                                                                            <FormSelectOption
+                                                                            <SelectOptionGeneral
                                                                                 placeholder="Airport"
                                                                                 name="departureDropOffPoint"
-                                                                                className="mb-2">
-                                                                                <option value="">
-                                                                                    Select
-                                                                                    Drop
-                                                                                    off
-                                                                                    Point
-                                                                                </option>
-                                                                                <option value="airport">
-                                                                                    Airport
-                                                                                </option>
-                                                                                <option value="hotel_villa">
-                                                                                    Hotel
-                                                                                    /
-                                                                                    Villa
-                                                                                </option>
-                                                                                <option value="not_applicable">
-                                                                                    Not
-                                                                                    Applicable
-                                                                                </option>
-                                                                            </FormSelectOption>
+                                                                                className="mb-2"
+                                                                                options={[
+                                                                                    {
+                                                                                        value: '',
+                                                                                        label: 'Select Pickup Point',
+                                                                                    },
+                                                                                    {
+                                                                                        value: 'airport',
+                                                                                        label: 'Airport',
+                                                                                    },
+                                                                                    {
+                                                                                        value: 'hotel_villa',
+                                                                                        label: 'Hotel/Villa',
+                                                                                    },
+                                                                                    {
+                                                                                        value: 'not_applicable',
+                                                                                        label: 'Not Applicable',
+                                                                                    },
+                                                                                ]}
+                                                                            />
                                                                             <div className="row g-3">
                                                                                 <div className="col-6">
                                                                                     <FormInput
@@ -762,28 +764,29 @@ const BoatTransferBookingModal = ({ boatId }: { boatId?: number }) => {
                                                                                     up
                                                                                     Point
                                                                                 </p>
-                                                                                <FormSelectOption
+                                                                                <SelectOptionGeneral
                                                                                     placeholder="Airport"
                                                                                     name="returnPickupPoint"
-                                                                                    className="mb-2">
-                                                                                    <option value="">
-                                                                                        Select
-                                                                                        Pickup
-                                                                                        Point
-                                                                                    </option>
-                                                                                    <option value="airport">
-                                                                                        Airport
-                                                                                    </option>
-                                                                                    <option value="hotel_villa">
-                                                                                        Hotel
-                                                                                        /
-                                                                                        Villa
-                                                                                    </option>
-                                                                                    <option value="not_applicable">
-                                                                                        Not
-                                                                                        Applicable
-                                                                                    </option>
-                                                                                </FormSelectOption>
+                                                                                    className="mb-2"
+                                                                                    options={[
+                                                                                        {
+                                                                                            value: '',
+                                                                                            label: 'Select Pickup Point',
+                                                                                        },
+                                                                                        {
+                                                                                            value: 'airport',
+                                                                                            label: 'Airport',
+                                                                                        },
+                                                                                        {
+                                                                                            value: 'hotel_villa',
+                                                                                            label: 'Hotel/Villa',
+                                                                                        },
+                                                                                        {
+                                                                                            value: 'not_applicable',
+                                                                                            label: 'Not Applicable',
+                                                                                        },
+                                                                                    ]}
+                                                                                />
                                                                                 <div className="row g-3">
                                                                                     <div className="col-6">
                                                                                         <FormInput
@@ -820,29 +823,29 @@ const BoatTransferBookingModal = ({ boatId }: { boatId?: number }) => {
                                                                                     off
                                                                                     Point
                                                                                 </p>
-                                                                                <FormSelectOption
+                                                                                <SelectOptionGeneral
                                                                                     placeholder="Airport"
                                                                                     name="returnDropOffPoint"
-                                                                                    className="mb-2">
-                                                                                    <option value="">
-                                                                                        Select
-                                                                                        Drop
-                                                                                        off
-                                                                                        Point
-                                                                                    </option>
-                                                                                    <option value="airport">
-                                                                                        Airport
-                                                                                    </option>
-                                                                                    <option value="hotel_villa">
-                                                                                        Hotel
-                                                                                        /
-                                                                                        Villa
-                                                                                    </option>
-                                                                                    <option value="not_applicable">
-                                                                                        Not
-                                                                                        Applicable
-                                                                                    </option>
-                                                                                </FormSelectOption>
+                                                                                    className="mb-2"
+                                                                                    options={[
+                                                                                        {
+                                                                                            value: '',
+                                                                                            label: 'Select Pickup Point',
+                                                                                        },
+                                                                                        {
+                                                                                            value: 'airport',
+                                                                                            label: 'Airport',
+                                                                                        },
+                                                                                        {
+                                                                                            value: 'hotel_villa',
+                                                                                            label: 'Hotel/Villa',
+                                                                                        },
+                                                                                        {
+                                                                                            value: 'not_applicable',
+                                                                                            label: 'Not Applicable',
+                                                                                        },
+                                                                                    ]}
+                                                                                />
                                                                                 <FormInput
                                                                                     placeholder="Location"
                                                                                     name="returnDropOffLocation"
@@ -886,18 +889,23 @@ const BoatTransferBookingModal = ({ boatId }: { boatId?: number }) => {
                                                                 </div>
                                                             </div>
 
-                                                            <div>
-                                                                <p className="mb-2 text-uppercase fs-14 mt-3 fw-light">
-                                                                    Property
-                                                                    Name /
-                                                                    Booking Info
-                                                                </p>
+                                                            {formRequest.bookedThroughTlt ===
+                                                                TRUE && (
+                                                                <div>
+                                                                    <p className="mb-2 text-uppercase fs-14 mt-3 fw-light">
+                                                                        Property
+                                                                        Name /
+                                                                        Booking
+                                                                        Info
+                                                                    </p>
 
-                                                                <FormInput
-                                                                    name="tltBookingRefName"
-                                                                    placeholder="Booking Ref/Name"
-                                                                />
-                                                            </div>
+                                                                    <FormInput
+                                                                        required
+                                                                        name="tltBookingRefName"
+                                                                        placeholder="Booking Ref/Name"
+                                                                    />
+                                                                </div>
+                                                            )}
 
                                                             <div className="border rounded-3 py-3 hstack justify-content-between align-items-center px-4 mt-3">
                                                                 <p className="m-0 fs-16">

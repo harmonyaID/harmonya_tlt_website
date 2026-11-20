@@ -4,7 +4,8 @@ import { useId, useState, useEffect, useLayoutEffect } from 'react'
 import { useHookContextForm } from '@/context/Form.Context'
 import { getPropertyType } from '@/service/api/property.api'
 import useComponentInputConfigHook from '@/hook/base/useComponentInputConfig.hook'
-import FormSelectOption from '@/component/form/FormSelectOption'
+import SelectOptionGeneral from '@/common/dataForm/SelectOptionGeneral'
+import joinClassNameHelper from '@/helper/joinClassName.helper'
 
 const PropertyFormSelectTreeType = (props: any) => {
     const uniqueId = useId()
@@ -53,15 +54,16 @@ const PropertyFormSelectTreeType = (props: any) => {
             {/*    handleChoose={handleChange}*/}
             {/*/>*/}
 
-            <FormSelectOption name="typeId" classNameSelect="rounded-pill">
-                <option value="">Type All</option>
-                {list.map((vm, index) => (
-                    <option value={vm.value} key={index}>
-                        {/*{value === vm.toString() ? 'Bedroom: ' : ''}*/}
-                        {vm.label}
-                    </option>
-                ))}
-            </FormSelectOption>
+            <SelectOptionGeneral
+                name={props.name || 'typeId'}
+                className={joinClassNameHelper(
+                    'rounded-pill',
+                    props?.classNameSelect,
+                    props?.className,
+                )}
+                placeholder="Type"
+                options={[{ value: '', label: 'Type All' }, ...list]}
+            />
         </>
     )
 }

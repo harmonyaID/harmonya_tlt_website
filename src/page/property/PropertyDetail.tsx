@@ -4,7 +4,7 @@ import RenderHtml from '@/component/general/RenderHtml'
 import PropertySliderAndGallery from '@/page/property/container/PropertySliderAndGallery'
 import { CardContactInfoMain } from '@/component/general/CardContactInfo'
 import { BtnLinkPrimary, BtnPrimary } from '@/component/general/Button'
-import { CheckCircle, ArrowRight } from 'feather-icons-react'
+import { CheckCircle, ArrowRight, MapPin } from 'feather-icons-react'
 import Image from 'next/image'
 import PropertyThingsToExplore from '@/page/property/container/PropertyThingsToExplore'
 import PropertyOther from '@/page/property/container/PropertyOther'
@@ -16,6 +16,11 @@ import ValidImage from '@/component/general/ValidImage'
 import AvailabilityCalendar from '@/component/general/AvailabilityCalendar'
 import usePropertyAvailabilityCalendar from '@/page/property/hook/usePropertyAvailabilityCalendar'
 import useLocationCoordinate from '@/hook/useLocationCoordinate.hook'
+import useGeneralDataList from '@/hook/useGeneralDataList.hook'
+import { getPropertyReview } from '@/service/api/property.api'
+import { URL_GOOGLE_MAPS_DIRECTION } from '@/config/url.config'
+import PropertyFeatureList from '@/page/property/component/PropertyFeatureList'
+import PropertyReviewSlider from '@/page/property/component/PropertyReviewSlider'
 
 const TitleSection = ({ title }: { title: string }) => (
     <>
@@ -36,18 +41,27 @@ const PropertyDetail = ({
 
     const {
         amenities = [],
+        features = [],
         floorplanImage = '',
         whyYoullLoveThis = [],
         seo = {},
+        id,
     } = detail
 
-    const { hasLocation, mapEmbedUrl } = useLocationCoordinate(
-        detail?.addresses?.[0],
-    )
+    const { hasLocation, mapEmbedUrl, latitude, longitude } =
+        useLocationCoordinate(detail?.addresses?.[0])
+    const locationAddress = detail?.addresses?.[0]?.address
 
     const { propertyList } = usePropertyVariantGuesty(detail?.guestyId || '')
+
     const { calendar: availabilityCalendar, fetchCalendar } =
         usePropertyAvailabilityCalendar(detail?.guestyId || '')
+
+    const { list: reviews, isLoading: isLoadingReviews } = useGeneralDataList({
+        urlAPI: () => getPropertyReview(id),
+    })
+
+    console.log('propertyList: ', propertyList)
 
     return (
         <>
@@ -82,28 +96,19 @@ const PropertyDetail = ({
                                     />
                                 </div>
 
-                                <hr />
+                                {features && features.length ? (
+                                    <>
+                                        <hr />
 
-                                <div className="">
-                                    <TitleSection title="Features" />
+                                        <div className="">
+                                            <TitleSection title="Features" />
 
-                                    <div className="row">
-                                        <div className="col-lg-4 col-md-6">
-                                            <div className="hstack gap-3 align-items-start text-grey-200">
-                                                <div className="">
-                                                    <CheckCircle
-                                                        size="20"
-                                                        strokeWidth="2"
-                                                    />
-                                                </div>
-
-                                                <p className="fs-20 mb-0 text-grey-200">
-                                                    {detail.occupancy} Guest
-                                                </p>
-                                            </div>
+                                            <PropertyFeatureList
+                                                features={features}
+                                            />
                                         </div>
-                                    </div>
-                                </div>
+                                    </>
+                                ) : null}
 
                                 {amenities && amenities.length > 0 ? (
                                     <>
@@ -121,7 +126,7 @@ const PropertyDetail = ({
                                                             <div className="hstack gap-3 align-items-start text-grey-200">
                                                                 <div className="">
                                                                     {vm.icon ? (
-                                                                        <div className="position-relative ratio ratio-4x3 box-28">
+                                                                        <div className="position-relative ratio ratio-4x3 box-40">
                                                                             <Image
                                                                                 src={
                                                                                     vm.icon
@@ -136,7 +141,7 @@ const PropertyDetail = ({
                                                                         </div>
                                                                     ) : (
                                                                         <CheckCircle
-                                                                            size="20"
+                                                                            size="24"
                                                                             strokeWidth="2"
                                                                         />
                                                                     )}
@@ -231,6 +236,29 @@ const PropertyDetail = ({
                                         <div className="">
                                             <TitleSection title="Location" />
                                             {/*Location*/}
+                                            <div className="d-flex justify-content-between align-items-start gap-3 pt-3 pb-4">
+                                                <div className="hstack gap-2 align-items-start text-grey-300">
+                                                    <MapPin
+                                                        size="20"
+                                                        className="flex-shrink-0 mt-1"
+                                                    />
+                                                    <p className="fs-20 mb-0">
+                                                        {locationAddress}
+                                                    </p>
+                                                </div>
+
+                                                <a
+                                                    href={URL_GOOGLE_MAPS_DIRECTION(
+                                                        latitude ?? '',
+                                                        longitude ?? '',
+                                                    )}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="fs-20 text-grey-300 text-uppercase text-decoration-none border-bottom text-nowrap">
+                                                    Get Direction
+                                                </a>
+                                            </div>
+
                                             <div className="ratio ratio-16x9">
                                                 <iframe
                                                     src={mapEmbedUrl}
@@ -248,11 +276,17 @@ const PropertyDetail = ({
                                     </>
                                 ) : null}
 
-                                <hr />
-                                <div className="">
-                                    <TitleSection title="REVIEWS" />
-                                    {/*REVIEWS*/}
-                                </div>
+                                {!isLoadingReviews &&
+                                reviews &&
+                                reviews.length > 0 ? (
+                                    <>
+                                        <hr />
+                                        {/*REVIEWS*/}
+                                        <PropertyReviewSlider
+                                            reviews={reviews}
+                                        />
+                                    </>
+                                ) : null}
                             </div>
                         </div>
 
