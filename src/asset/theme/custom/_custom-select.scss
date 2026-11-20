@@ -1,0 +1,24 @@
+
+.slc-gx__menu {
+  background-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+.slc-gx__menu-list {
+  background-color: #ffffff !important;
+}
+
+.slc-gx__option {
+  opacity: 1 !important;
+}
+.slc-gx__option--is-selected {
+  background-color: #138f8f !important;
+  color: #ffffff !important;
+}
+
+.slc-gx__option--is-focused:not(.slc-gx__option--is-selected) {
+  background-color: #e8f5f5 !important;
+  color: #212529 !important;
+}
+
+
