@@ -1,19 +1,26 @@
-import FormSelectOption from '@/component/form/FormSelectOption'
+import SelectOptionGeneral from '@/common/dataForm/SelectOptionGeneral'
+import joinClassNameHelper from '@/helper/joinClassName.helper'
 
-const PropertyFormSelectBathRoom = () => {
+const PropertyFormSelectBathRoom = (props: any) => {
     const count = Array.from({ length: 8 }, (_, i) => i + 1)
 
     return (
-        <>
-            <FormSelectOption name="bathroom" classNameSelect="rounded-pill">
-                <option value="">Bathroom All</option>
-                {count.map((vm) => (
-                    <option value={vm} key={vm}>
-                        Bathroom {vm}
-                    </option>
-                ))}
-            </FormSelectOption>
-        </>
+        <SelectOptionGeneral
+            name={props.name || 'bathroom'}
+            className={joinClassNameHelper(
+                'rounded-pill',
+                props?.classNameSelect,
+                props?.className,
+            )}
+            placeholder="Bathroom"
+            options={[
+                { value: '', label: 'Bathroom All' },
+                ...count.map((vm) => ({
+                    value: String(vm),
+                    label: `Bathroom ${vm}`,
+                })),
+            ]}
+        />
     )
 }
 
