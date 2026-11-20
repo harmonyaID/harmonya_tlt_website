@@ -8,6 +8,7 @@ import FormTextArea from '@/component/form/FormTextarea'
 import { BtnPrimary } from '@/component/general/Button'
 import useContactType from '@/page/contact/hook/useContactType'
 import FormSelectOption from '@/component/form/FormSelectOption'
+import SelectOptionGeneral from '@/common/dataForm/SelectOptionGeneral'
 
 const ContactForm = () => {
     const { formRequest, isLoading, _handleChange, _handleSubmit } =
@@ -54,17 +55,19 @@ const ContactForm = () => {
                             </div>
                         </div>
 
-                        <FormSelectOption
+                        <SelectOptionGeneral
                             label="Type of Inquiry"
                             required
-                            name="formTypeId">
-                            <option value="">- Select Type -</option>
-                            {listType?.map((vm: any, index) => (
-                                <option value={vm.id} key={index}>
-                                    {vm.name}
-                                </option>
-                            ))}
-                        </FormSelectOption>
+                            placeholder="Select Type"
+                            name="formTypeId"
+                            options={[
+                                { value: '', label: '- Select Type -' },
+                                ...listType?.map((vm: any, index) => ({
+                                    value: vm.id,
+                                    label: vm.name,
+                                })),
+                            ]}
+                        />
 
                         <FormInput
                             label="Subject"
