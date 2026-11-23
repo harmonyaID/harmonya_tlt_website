@@ -60,7 +60,13 @@
 
     &__day {
         position: relative;
-        height: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 52px;
+        padding: 0;
+        line-height: 1.15;
         border: 0;
         background: transparent;
         color: var(--ac-text);
@@ -105,6 +111,18 @@
             color: #fff;
             font-weight: 700;
         }
+    }
+
+    &__day-price {
+        font-size: 0.625rem;
+        font-weight: 600;
+        color: $grey-200;
+        white-space: nowrap;
+    }
+
+    &__day.is-selected .availability-calendar__day-price,
+    &__day.is-onRequest .availability-calendar__day-price {
+        color: #fff;
     }
 
     &__footer {

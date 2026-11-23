@@ -10,7 +10,7 @@ import PropertyThingsToExplore from '@/page/property/container/PropertyThingsToE
 import PropertyOther from '@/page/property/container/PropertyOther'
 import PropertyFormInquiry from '@/page/property/container/PropertyFormInquiry'
 import PropertyInfoWhyYouLoveThis from '@/page/property/component/PropertyInfoWhyYouLoveThis'
-import usePropertyVariantGuesty from '@/page/property/hook/usePropertyVariantGuesty'
+import usePropertyAccommodation from '@/page/property/hook/usePropertyAccommodation'
 import PropertyVariantBooking from '@/page/propertyVariant/container/PropertyVariantBooking'
 import ValidImage from '@/component/general/ValidImage'
 import AvailabilityCalendar from '@/component/general/AvailabilityCalendar'
@@ -19,6 +19,7 @@ import useLocationCoordinate from '@/hook/useLocationCoordinate.hook'
 import useGeneralDataList from '@/hook/useGeneralDataList.hook'
 import { getPropertyReview } from '@/service/api/property.api'
 import { URL_GOOGLE_MAPS_DIRECTION } from '@/config/url.config'
+import PropertyAccommodation from '@/page/property/component/PropertyAccommodation'
 import PropertyFeatureList from '@/page/property/component/PropertyFeatureList'
 import PropertyReviewSlider from '@/page/property/component/PropertyReviewSlider'
 
@@ -52,7 +53,8 @@ const PropertyDetail = ({
         useLocationCoordinate(detail?.addresses?.[0])
     const locationAddress = detail?.addresses?.[0]?.address
 
-    const { propertyList } = usePropertyVariantGuesty(detail?.guestyId || '')
+    const { list: accommodations, isLoading: isLoadingAccommodation } =
+        usePropertyAccommodation(id)
 
     const { calendar: availabilityCalendar, fetchCalendar } =
         usePropertyAvailabilityCalendar(detail?.guestyId || '')
@@ -60,8 +62,6 @@ const PropertyDetail = ({
     const { list: reviews, isLoading: isLoadingReviews } = useGeneralDataList({
         urlAPI: () => getPropertyReview(id),
     })
-
-    console.log('propertyList: ', propertyList)
 
     return (
         <>
@@ -191,11 +191,19 @@ const PropertyDetail = ({
                                     />
                                 </div>
 
-                                <hr />
-                                <div className="">
-                                    <TitleSection title="ACCOMMODATION" />
-                                    {/*ACCOMMODATION*/}
-                                </div>
+                                {isLoadingAccommodation || accommodations.length ? (
+                                    <>
+                                        <hr />
+                                        <div className="">
+                                            <TitleSection title="ACCOMMODATION" />
+                                            {/*ACCOMMODATION*/}
+                                            <PropertyAccommodation
+                                                list={accommodations}
+                                                isLoading={isLoadingAccommodation}
+                                            />
+                                        </div>
+                                    </>
+                                ) : null}
 
                                 {whyYoullLoveThis && whyYoullLoveThis.length ? (
                                     <>
