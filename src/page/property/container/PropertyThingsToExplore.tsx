@@ -17,17 +17,26 @@ import IconPropertyPool from '@/component/icon/IconPropertyPool'
 import { BadgeTag } from '@/component/general/Badge'
 import SwipeSlideBanner from '@/component/swiperSlide/SwipeSlideBanner'
 import RenderHtml from '@/component/general/RenderHtml'
+import useExpListHook from '@/page/experience/hook/useExpList.hook'
+import ValidImage from '@/component/general/ValidImage'
 
 const PropertyThingsToExplore = () => {
     const swiperRef = useRef<SwiperType | null>(null)
 
-    const { list, isLoading, pagination, _handleChangePage } =
-        useExpAreaListHook({
-            configSearch: {
-                // search: 'play',
-                typeId: 2,
-            },
-        })
+    // const { list, isLoading, pagination, _handleChangePage } =
+    //     useExpAreaListHook({
+    //         configSearch: {
+    //             // search: 'play',
+    //             typeId: 2,
+    //         },
+    //     })
+
+    const { list } = useExpListHook({
+        configSearch: {
+            typeId: 1,
+            limit: 20,
+        },
+    })
 
     console.log('list: ', list)
 
@@ -84,9 +93,21 @@ const PropertyThingsToExplore = () => {
                                                         </BtnBasic>
                                                     </div>
                                                 }>
-                                                <Image
+                                                {/*<Image*/}
+                                                {/*    src={imgReelConfig(*/}
+                                                {/*        dataElement?.thumbnail,*/}
+                                                {/*    )}*/}
+                                                {/*    alt={*/}
+                                                {/*        dataElement.name ||*/}
+                                                {/*        'Area Play'*/}
+                                                {/*    }*/}
+                                                {/*    fill*/}
+                                                {/*    className="object-fit-cover"*/}
+                                                {/*/>*/}
+
+                                                <ValidImage
                                                     src={imgReelConfig(
-                                                        dataElement?.banner,
+                                                        dataElement?.thumbnail,
                                                     )}
                                                     alt={
                                                         dataElement.name ||

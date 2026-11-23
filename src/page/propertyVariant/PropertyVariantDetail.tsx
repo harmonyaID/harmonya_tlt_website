@@ -12,7 +12,6 @@ import PropertyThingsToExplore from '@/page/property/container/PropertyThingsToE
 import PropertyOther from '@/page/property/container/PropertyOther'
 import PropertyFormInquiry from '@/page/property/container/PropertyFormInquiry'
 import PropertyInfoWhyYouLoveThis from '@/page/property/component/PropertyInfoWhyYouLoveThis'
-import usePropertyVariantGuesty from '@/page/property/hook/usePropertyVariantGuesty'
 import PropertyVariantBooking from '@/page/propertyVariant/container/PropertyVariantBooking'
 import AvailabilityCalendar from '@/component/general/AvailabilityCalendar'
 import usePropertyAvailabilityCalendar from '@/page/property/hook/usePropertyAvailabilityCalendar'
@@ -43,7 +42,6 @@ const PropertyVariantDetail = ({
         seo = {},
     } = detail
 
-    const { propertyList } = usePropertyVariantGuesty(detail?.guestyId || '')
     const { calendar: availabilityCalendar, fetchCalendar } =
         usePropertyAvailabilityCalendar(detail?.guestyId || '')
     const { hasLocation, mapEmbedUrl, latitude, longitude } =
