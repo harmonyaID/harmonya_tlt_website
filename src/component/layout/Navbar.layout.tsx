@@ -1,5 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
+import CreatePortalLayout from '@/component/layout/CreatePortal.layout'
 import Image from 'next/image'
 import Link from 'next/link'
 import IconSearchWhite from '@/asset/image/navbar/nav-icon-search-white.svg'
@@ -54,7 +56,13 @@ const FALLBACK_MENUS = [
     { menuLabel: CONTACT_MENU, menuUrl: CONTACT_US_PATH },
 ]
 
-const LabelGroup = ({ name = '', url = '' }: { name?: string; url?: string }) =>
+const LabelGroup = ({
+    name = '',
+    url = '',
+}: {
+    name?: string
+    url?: string
+}) =>
     url ? (
         <Link href={url} className="fs-24 font-tt-drugs d-block">
             {name}
@@ -99,7 +107,10 @@ const MegaMenuItem = ({ item }: { item: any }) => {
             <div className="dropdown-menu w-100 rounded-0 py-5 px-4 mt-2">
                 <div className="container">
                     <div className="row g-5 justify-content-end">
-                        <div className={promo ? 'col-md-6 border-end' : 'col-12'}>
+                        <div
+                            className={
+                                promo ? 'col-md-6 border-end' : 'col-12'
+                            }>
                             <div className="row gx-3 gy-5">
                                 {columns.map((col, index) => (
                                     <div
@@ -159,6 +170,182 @@ const MegaMenuItem = ({ item }: { item: any }) => {
     )
 }
 
+// ================= MOBILE MENU (< 992px) =================
+const MobileMegaMenuItem = ({
+    item,
+    isOpen,
+    onToggle,
+}: {
+    item: any
+    isOpen: boolean
+    onToggle: () => void
+}) => {
+    const groups = (item.children || []).filter((c: any) => !isMegaMenu(c))
+
+    return (
+        <div
+            className={joinClassNameHelper('nav-mobile-item', {
+                'is-open': isOpen,
+            })}>
+            <button
+                type="button"
+                className="nav-mobile-link nav-mobile-toggle"
+                aria-expanded={isOpen}
+                onClick={onToggle}>
+                <span>{item.menuLabel}</span>
+                <span className="nav-mobile-chevron">
+                    <IconArrowBottom2 />
+                </span>
+            </button>
+            <div className="nav-mobile-submenu">
+                <div className="nav-mobile-submenu-inner">
+                    <div className="vstack gap-4 pt-3 pb-2 ps-3">
+                        {groups.map((group: any) => (
+                            <GroupMegaMenu group={group} key={group.id} />
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+const MobilePromo = ({ promo }: { promo: any }) => {
+    const banner = promo?.children?.[0]
+
+    return (
+        <div className="nav-mobile-promo">
+            <LabelGroup name={promo.menuLabel} url={promo.menuUrl} />
+            {promo.description ? (
+                <p className="fs-14 mt-2 mb-4">{promo.description}</p>
+            ) : null}
+            {banner ? (
+                <Link
+                    href={banner.menuUrl || '#'}
+                    className="nav-mobile-banner d-block">
+                    <Image
+                        src={banner.featuredImage || BannerMegaMenu}
+                        alt={banner.menuLabel}
+                        className="object-fit-cover"
+                        fill
+                    />
+                    <div className="message text-white p-3">
+                        <p className="fs-20 font-tt-drugs text-uppercase mb-0">
+                            {banner.menuLabel}
+                        </p>
+                    </div>
+                </Link>
+            ) : null}
+        </div>
+    )
+}
+
+const NavbarMobileMenu = ({
+    isOpen,
+    onClose,
+    navItems,
+}: {
+    isOpen: boolean
+    onClose: () => void
+    navItems: any[]
+}) => {
+    const [openId, setOpenId] = useState<any>(null)
+
+    // promo dari mega menu yang sedang dibuka, default promo pertama
+    const promoSource =
+        navItems.find((item) => item.id === openId) ||
+        navItems.find((item) =>
+            (item.children || []).some((c: any) => isMegaMenu(c)),
+        )
+    const promo = (promoSource?.children || []).find((c: any) => isMegaMenu(c))
+
+    return (
+        <CreatePortalLayout>
+            <div
+                className={joinClassNameHelper('navbar-mobile-menu', {
+                    show: isOpen,
+                })}
+                aria-hidden={!isOpen}
+                role="dialog"
+                aria-modal="true">
+                <div className="navbar-mobile-menu-header">
+                    <button
+                        type="button"
+                        className="navbar-hamburger is-active"
+                        aria-label="Close menu"
+                        onClick={onClose}>
+                        <X size={28} />
+                    </button>
+                    <div className="hstack gap-2">
+                        <BtnLinkBasic
+                            href={STAY_PATH}
+                            className="rounded-pill fs-14 btn-outline-list-with-us">
+                            LIST WITH US
+                        </BtnLinkBasic>
+                        <BtnLinkPrimary
+                            href="#"
+                            className="rounded-pill text-white fs-14">
+                            BOOK NOW
+                        </BtnLinkPrimary>
+                    </div>
+                </div>
+
+                <div className="navbar-mobile-menu-body">
+                    <div className="nav-mobile-list">
+                        {navItems.length > 0
+                            ? navItems.map((item) =>
+                                  isMegaMenu(item) && item.children?.length ? (
+                                      <MobileMegaMenuItem
+                                          key={item.id}
+                                          item={item}
+                                          isOpen={openId === item.id}
+                                          onToggle={() =>
+                                              setOpenId(
+                                                  openId === item.id
+                                                      ? null
+                                                      : item.id,
+                                              )
+                                          }
+                                      />
+                                  ) : (
+                                      <div
+                                          className="nav-mobile-item"
+                                          key={item.id}>
+                                          <Link
+                                              href={item.menuUrl || '#'}
+                                              className="nav-mobile-link"
+                                              onClick={onClose}>
+                                              {item.menuLabel}
+                                          </Link>
+                                      </div>
+                                  ),
+                              )
+                            : FALLBACK_MENUS.map((item) => (
+                                  <div
+                                      className="nav-mobile-item"
+                                      key={item.menuLabel}>
+                                      <Link
+                                          href={item.menuUrl}
+                                          className="nav-mobile-link"
+                                          onClick={onClose}>
+                                          {item.menuLabel}
+                                      </Link>
+                                  </div>
+                              ))}
+                    </div>
+
+                    {promo ? (
+                        <>
+                            <hr className="nav-mobile-divider" />
+                            <MobilePromo promo={promo} />
+                        </>
+                    ) : null}
+                </div>
+            </div>
+        </CreatePortalLayout>
+    )
+}
+
 const NavbarLayout = ({
     isBgTransparent = false,
     isStartFix = true,
@@ -176,8 +363,17 @@ const NavbarLayout = ({
     isInSearch?: boolean
 }) => {
     const [isScrolled, setIsScrolled] = useState(false)
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const { items: navItems } = useMenuNavigation()
     const router = useRouter()
+    const pathname = usePathname()
+    const [prevPathname, setPrevPathname] = useState(pathname)
+
+    // tutup menu mobile saat pindah halaman
+    if (prevPathname !== pathname) {
+        setPrevPathname(pathname)
+        setIsMobileMenuOpen(false)
+    }
 
     const [formRequest, setFormRequest] = useState({
         search: '',
@@ -255,6 +451,30 @@ const NavbarLayout = ({
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
+
+    // kunci scroll body, tutup dengan Escape / saat layar >= lg
+    useEffect(() => {
+        if (!isMobileMenuOpen) return
+
+        const prevOverflow = document.body.style.overflow
+        document.body.style.overflow = 'hidden'
+
+        const handleKey = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') setIsMobileMenuOpen(false)
+        }
+        const handleResize = () => {
+            if (window.innerWidth >= 992) setIsMobileMenuOpen(false)
+        }
+
+        window.addEventListener('keydown', handleKey)
+        window.addEventListener('resize', handleResize)
+        return () => {
+            document.body.style.overflow = prevOverflow
+            window.removeEventListener('keydown', handleKey)
+            window.removeEventListener('resize', handleResize)
+        }
+    }, [isMobileMenuOpen])
+
     // pasang hover dropdown setelah mega menu dari API dirender
     useEffect(() => {
         if (navItems.length > 0) _handleDropdownMegaMenu()
@@ -269,7 +489,73 @@ const NavbarLayout = ({
                     'navbar-scrolled': !isBgTransparent || isScrolled,
                 },
             )}>
-            <div className="section-logo py-3">
+            {/* ===== MOBILE BAR (< 992px) ===== */}
+            <div className="navbar-mobile-bar d-lg-none">
+                <div className="container">
+                    <div className="d-flex align-items-center justify-content-between py-3">
+                        <button
+                            type="button"
+                            className="navbar-hamburger"
+                            aria-label="Open menu"
+                            aria-expanded={isMobileMenuOpen}
+                            onClick={() => setIsMobileMenuOpen(true)}>
+                            <span />
+                            <span />
+                        </button>
+                        <div className="logo">
+                            <Link href={HOME_PATH}>
+                                <Image
+                                    src={LogoWhite}
+                                    className="logo-white"
+                                    alt="the lembongan"
+                                />
+                                <Image
+                                    src={LogoDefault}
+                                    className="logo-default"
+                                    alt="the lembongan"
+                                />
+                            </Link>
+                        </div>
+                        <div className="icon-search">
+                            {isInSearch ? (
+                                <div
+                                    role="button"
+                                    onClick={() =>
+                                        actionModal(MDGlobalSearchDat, true)
+                                    }>
+                                    <X className="text-primary" size={26} />
+                                </div>
+                            ) : (
+                                <div
+                                    role="button"
+                                    onClick={() =>
+                                        actionModal(MDGlobalSearchDat)
+                                    }>
+                                    <Image
+                                        src={IconSearchDefault}
+                                        className="icon-search-default"
+                                        alt="search"
+                                    />
+                                    <Image
+                                        src={IconSearchWhite}
+                                        className="icon-search-white"
+                                        alt="search"
+                                    />
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <NavbarMobileMenu
+                isOpen={isMobileMenuOpen}
+                onClose={() => setIsMobileMenuOpen(false)}
+                navItems={navItems}
+            />
+
+            {/* ===== DESKTOP (>= 992px) ===== */}
+            <div className="section-logo py-3 d-none d-lg-block">
                 <div className="container">
                     <div className="d-flex flex-row align-items-center justify-content-center">
                         <div className="col-md-2">
@@ -340,11 +626,12 @@ const NavbarLayout = ({
                     </div>
                 </div>
             </div>
-            <div className="container py-3">
+            <div className="container py-3 d-none d-lg-block">
                 <div className="hstack flex-wrap h-gap-menu flex-row align-items-center justify-content-center">
                     {navItems.length > 0
-                        ? navItems.map((item) =>
-                              isMegaMenu(item) && item.children?.length ? (
+                        ? navItems.map((item) => {
+                              return isMegaMenu(item) &&
+                                  item.children?.length ? (
                                   <MegaMenuItem key={item.id} item={item} />
                               ) : (
                                   <div
@@ -354,8 +641,8 @@ const NavbarLayout = ({
                                           {item.menuLabel}
                                       </Link>
                                   </div>
-                              ),
-                          )
+                              )
+                          })
                         : FALLBACK_MENUS.map((item) => (
                               <div
                                   className="text-uppercase font-tt-drugs"
