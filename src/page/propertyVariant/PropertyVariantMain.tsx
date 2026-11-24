@@ -149,7 +149,7 @@ const PropertyVariantMain = () => {
 
                                                 <div className="">
                                                     <p className="fs-20 text-primary mb-0">
-                                                        {dataElement?.category
+                                                        {dataElement?.type
                                                             ?.name || ''}
                                                     </p>
 
