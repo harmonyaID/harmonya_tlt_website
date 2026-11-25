@@ -1,0 +1,228 @@
+// =====================================================================
+// NAVBAR RESPONSIVE (< 992px / lg)
+// - .navbar-mobile-bar   : bar atas (hamburger, logo, search) di dalam .navbar-config
+// - .navbar-mobile-menu  : overlay menu fullscreen (di-render via portal ke <body>)
+// Desktop navbar tetap di _navbar.scss
+// =====================================================================
+
+$nav-mobile-text: var(--bs-grey-300);
+$nav-mobile-transition: 0.35s ease;
+
+// ---------- Hamburger / Close button ----------
+.navbar-hamburger {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 7px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--bs-white);
+  cursor: pointer;
+
+  span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    border-radius: 2px;
+    background-color: currentColor;
+    transition: background-color 0.3s ease;
+  }
+
+  &.is-active {
+    align-items: center;
+    color: var(--bs-primary);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--bs-primary);
+    outline-offset: 2px;
+  }
+}
+
+// ---------- Mobile bar (di dalam navbar) ----------
+.navbar-config {
+  .navbar-mobile-bar {
+    .logo img {
+      height: 36px;
+      width: auto;
+    }
+
+    .icon-search {
+      display: inline-flex;
+      img {
+        width: 22px;
+        height: 22px;
+      }
+    }
+  }
+
+  // background putih (scrolled / !isBgTransparent)
+  &.navbar-scrolled {
+    .navbar-hamburger {
+      color: var(--bs-primary);
+    }
+  }
+}
+
+// ---------- Mobile menu overlay ----------
+.navbar-mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 1060; // di atas navbar & modal backdrop bootstrap
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bs-white);
+  color: $nav-mobile-text;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-12px);
+  pointer-events: none;
+  transition: opacity $nav-mobile-transition, transform $nav-mobile-transition,
+  visibility $nav-mobile-transition;
+
+  &.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  a {
+    color: $nav-mobile-text;
+    &:hover,
+    &:focus {
+      color: var(--bs-primary);
+    }
+  }
+
+  .navbar-mobile-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.5rem 1.5rem 1rem;
+
+    .btn {
+      padding: 0.5rem 1rem;
+      white-space: nowrap;
+    }
+  }
+
+  .navbar-mobile-menu-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem 1.5rem 3rem;
+  }
+
+  // List menu
+  .nav-mobile-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .nav-mobile-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font-family: 'TT Drugs Trial', sans-serif;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    text-align: left;
+    color: $nav-mobile-text;
+  }
+
+  .nav-mobile-chevron {
+    display: inline-flex;
+    transition: transform 0.3s ease;
+  }
+
+  // Accordion sub menu (mega menu)
+  .nav-mobile-submenu {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease;
+
+    .nav-mobile-submenu-inner {
+      overflow: hidden;
+    }
+
+    .fs-24 {
+      font-size: 1.125rem !important;
+    }
+  }
+
+  .nav-mobile-item.is-open {
+    .nav-mobile-chevron {
+      transform: rotate(180deg);
+    }
+    .nav-mobile-submenu {
+      grid-template-rows: 1fr;
+    }
+  }
+
+  .nav-mobile-divider {
+    margin: 2rem 0 1.5rem;
+    border-color: var(--bs-grey-300);
+    opacity: 1;
+  }
+
+  // Promo
+  .nav-mobile-promo {
+    .fs-24 {
+      font-size: 1.25rem !important;
+      text-transform: uppercase;
+    }
+
+    p {
+      color: var(--bs-grey-400);
+    }
+  }
+
+  .nav-mobile-banner {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+
+    .message {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      z-index: 1;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.45), transparent);
+    }
+  }
+}
+
+// ---------- Breakpoint adjustments ----------
+@include media-breakpoint-down(lg) {
+  // search input saat modal global search terbuka
+  .navbar-config .search-input-container {
+    width: 100%;
+    margin: 1.5rem 1rem 2rem;
+  }
+
+  .navbar-config .search-input {
+    padding: 13px 20px 13px 60px;
+  }
+
+  .navbar-config .search-input-icon {
+    left: 20px;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .navbar-mobile-menu {
+    display: none;
+  }
+}

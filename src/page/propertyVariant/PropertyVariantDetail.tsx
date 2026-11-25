@@ -12,11 +12,11 @@ import PropertyThingsToExplore from '@/page/property/container/PropertyThingsToE
 import PropertyOther from '@/page/property/container/PropertyOther'
 import PropertyFormInquiry from '@/page/property/container/PropertyFormInquiry'
 import PropertyInfoWhyYouLoveThis from '@/page/property/component/PropertyInfoWhyYouLoveThis'
-import usePropertyVariantGuesty from '@/page/property/hook/usePropertyVariantGuesty'
 import PropertyVariantBooking from '@/page/propertyVariant/container/PropertyVariantBooking'
 import AvailabilityCalendar from '@/component/general/AvailabilityCalendar'
 import usePropertyAvailabilityCalendar from '@/page/property/hook/usePropertyAvailabilityCalendar'
 import useLocationCoordinate from '@/hook/useLocationCoordinate.hook'
+import PropertySectionTab from '@/page/property/component/PropertySectionTab'
 
 const TitleSection = ({ title }: { title: string }) => (
     <>
@@ -43,19 +43,52 @@ const PropertyVariantDetail = ({
         seo = {},
     } = detail
 
-    const { propertyList } = usePropertyVariantGuesty(detail?.guestyId || '')
     const { calendar: availabilityCalendar, fetchCalendar } =
         usePropertyAvailabilityCalendar(detail?.guestyId || '')
     const { hasLocation, mapEmbedUrl, latitude, longitude } =
         useLocationCoordinate(detail?.addresses?.[0])
     const locationAddress = detail?.addresses?.[0]?.address
 
+    const hasFinePrint = !!detail?.descriptions?.[1]?.summary
+
+    // property variant tidak punya section Accommodation & Reviews,
+    // dan tab hanya tampil untuk section yang ada datanya
+    const sectionTabs = [
+        { id: 'property-features', label: 'Features', show: features?.length },
+        {
+            id: 'property-amenities',
+            label: 'Amenities & Service',
+            show: amenities?.length,
+        },
+        {
+            id: 'property-floor-plan',
+            label: 'Floor Plan',
+            show: floorplanImage,
+        },
+        { id: 'property-availability', label: 'Availability', show: true },
+        {
+            id: 'property-why-you-love-this',
+            label: 'Why You’ll Love This',
+            show: whyYoullLoveThis?.length,
+        },
+        { id: 'property-fine-print', label: 'Fine Print', show: hasFinePrint },
+        { id: 'property-location', label: 'Location', show: hasLocation },
+    ]
+        .filter((tab) => !!tab.show)
+        .map(({ id, label }) => ({ id, label }))
+
     return (
         <>
             {/*Slider*/}
             <section className="w-100 py-4">
-                <PropertySliderAndGallery photos={detail.photos} />
+                <PropertySliderAndGallery
+                    photos={detail.photos}
+                    title={detail?.nickname}
+                />
             </section>
+
+            {/*Section Tab*/}
+            <PropertySectionTab tabs={sectionTabs} />
 
             {/*Information*/}
             <section className="pt-4 section-space-small-bottom">
@@ -87,7 +120,7 @@ const PropertyVariantDetail = ({
                                     <>
                                         <hr />
 
-                                        <div className="">
+                                        <div id="property-features">
                                             <TitleSection title="Features" />
 
                                             <PropertyFeatureList
@@ -100,7 +133,7 @@ const PropertyVariantDetail = ({
                                 {amenities && amenities.length > 0 ? (
                                     <>
                                         <hr />
-                                        <div className="">
+                                        <div id="property-amenities">
                                             <TitleSection title="AMENITIES & SERVICES" />
                                             {/*AMENITIES & Services*/}
 
@@ -149,7 +182,7 @@ const PropertyVariantDetail = ({
                                 {floorplanImage ? (
                                     <>
                                         <hr />
-                                        <div className="">
+                                        <div id="property-floor-plan">
                                             <TitleSection title="Floor Plan" />
                                             {/*Floor Plan*/}
                                             <div className="w-100 h-320-px position-relative overflow-hidden">
@@ -168,7 +201,7 @@ const PropertyVariantDetail = ({
                                 ) : null}
 
                                 <hr />
-                                <div className="">
+                                <div id="property-availability">
                                     <TitleSection title="Availability" />
                                     {/*Availability*/}
                                     <AvailabilityCalendar
@@ -187,7 +220,7 @@ const PropertyVariantDetail = ({
                                 {whyYoullLoveThis && whyYoullLoveThis.length ? (
                                     <>
                                         <hr />
-                                        <div className="">
+                                        <div id="property-why-you-love-this">
                                             <TitleSection title="Why you’ll love this" />
                                             {/*Why you’ll love this*/}
                                             <PropertyInfoWhyYouLoveThis
@@ -202,7 +235,7 @@ const PropertyVariantDetail = ({
                                 detail?.descriptions?.[1]?.summary ? (
                                     <>
                                         <hr />
-                                        <div className="">
+                                        <div id="property-fine-print">
                                             <TitleSection title="Fine Print" />
                                             {/*Fine Print*/}
 
@@ -220,7 +253,7 @@ const PropertyVariantDetail = ({
                                 {hasLocation ? (
                                     <>
                                         <hr />
-                                        <div className="">
+                                        <div id="property-location">
                                             <TitleSection title="Location" />
                                             {/*Location*/}
                                             <div className="d-flex justify-content-between align-items-start gap-3 pt-3 pb-4">

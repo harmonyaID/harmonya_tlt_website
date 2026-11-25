@@ -29,6 +29,8 @@ const usePropertyAvailabilityCalendar = (guestyId: string = '') => {
                                 map.set(d.date, {
                                     date: d.date,
                                     status: d.status,
+                                    price: d.price ?? null,
+                                    currency: d.currency ?? null,
                                 })
                         })
                         return [...map.values()]

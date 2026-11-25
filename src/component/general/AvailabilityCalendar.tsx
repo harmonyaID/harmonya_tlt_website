@@ -79,6 +79,32 @@ const buildRules = (availability?: PropertyAvailabilitySetting | null) => {
     }
 }
 
+// Harga ringkas per malam, mis. 'IDR 1.5M' / '$250'
+const formatPrice = (price?: number | null, currency?: string | null) => {
+    const value = toNumber(price)
+    if (value === null || value <= 0) return ''
+    try {
+        return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: currency || 'USD',
+            notation: 'compact',
+            maximumFractionDigits: 1,
+        }).format(value)
+    } catch {
+        return String(Math.round(value))
+    }
+}
+
+const buildPriceMap = (calendar: AvailabilityCalendarDay[] = []) => {
+    const map = new Map<string, string>()
+    calendar.forEach((day) => {
+        const label = formatPrice(day?.price, day?.currency)
+        if (day?.date && label)
+            map.set(moment(day.date).format(DATE_FORMAT), label)
+    })
+    return map
+}
+
 const buildStatusMap = (
     calendar: AvailabilityCalendarDay[] = [],
     preparationDays = 0,
@@ -129,6 +155,8 @@ const AvailabilityCalendar: FC<AvailabilityCalendarProps> = ({
         () => buildStatusMap(calendar, rules.preparationDays),
         [calendar, rules.preparationDays],
     )
+
+    const priceMap = useMemo(() => buildPriceMap(calendar), [calendar])
 
     const [viewMonth, setViewMonth] = useState<Moment>(() =>
         moment(initialMonth || undefined).startOf('month'),
@@ -260,7 +288,14 @@ const AvailabilityCalendar: FC<AvailabilityCalendarProps> = ({
                 aria-pressed={isStart || isEnd}
                 onClick={() => handleSelect(date)}
                 onMouseEnter={() => pickingCheckOut && setHoverDate(key)}>
-                {date.date()}
+                <span className="availability-calendar__day-number">
+                    {date.date()}
+                </span>
+                {status === 'available' || status === 'onRequest' ? (
+                    <span className="availability-calendar__day-price">
+                        {priceMap.get(key) || ''}
+                    </span>
+                ) : null}
             </button>
         )
     }

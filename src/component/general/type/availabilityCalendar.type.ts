@@ -27,6 +27,8 @@ export type AvailabilityDayStatus =
 export interface AvailabilityCalendarDay {
     date: string // 'YYYY-MM-DD'
     status: string
+    price?: number | null // harga per malam dari Guesty
+    currency?: string | null
 }
 
 export interface AvailabilityDateRange {
