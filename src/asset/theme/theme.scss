@@ -553,6 +553,7 @@ a {text-decoration: none;}
 
 @import 'base/_typography';
 @import 'base/_navbar';
+@import 'base/_navbar-responsive';
 @import 'base/_accordion';
 @import 'base/_navTab.scss';
 @import 'base/_form.scss';
@@ -565,3 +566,5 @@ a {text-decoration: none;}
 @import 'custom/_video-background.scss';
 @import 'custom/whatsapp.scss';
 @import 'custom/custom-select';
+@import 'custom/property-section-tab';
+@import 'custom/property-gallery';

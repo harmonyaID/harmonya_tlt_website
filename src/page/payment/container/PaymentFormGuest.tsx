@@ -3,6 +3,7 @@ import FormInput from '@/component/form/FormInput'
 import FormPhone from '@/component/form/FormPhone'
 import FormTextArea from '@/component/form/FormTextarea'
 import LabelForm from '@/component/form/LabelForm'
+import { CARD_CONTAINER_ID } from '@/page/payment/hook/usePaymentBook'
 import joinClassNameHelper from '@/helper/joinClassName.helper'
 
 const PAYMENT_METHODS = [
@@ -80,11 +81,17 @@ const PaymentFormGuest = ({
                 })}
             </div>
 
-            <p className="fs-14 text-grey-300 mt-4 mb-0 col-lg-10">
-                Once you book your stay, the accommodation will be pre-reserved
-                for you. Then, someone from our team will reach out with payment
-                instructions.
-            </p>
+            {formRequest.paymentMethod === 'credit_card' ? (
+                <div className="mt-4 col-lg-10">
+                    <div id={CARD_CONTAINER_ID} />
+                </div>
+            ) : (
+                <p className="fs-14 text-grey-300 mt-4 mb-0 col-lg-10">
+                    Once you book your stay, the accommodation will be
+                    pre-reserved for you. Then, someone from our team will reach
+                    out with payment instructions.
+                </p>
+            )}
         </div>
 
         {/*Agreement*/}

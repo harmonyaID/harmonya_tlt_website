@@ -40,7 +40,9 @@ export const getCalendarListingGuestyV2 = (
     )
 
 export const getPaymentProviderListingGuestyV2 = (id: string) =>
-    guestyGet(API_VERSION + '/listings/' + id, { fields: 'paymentProviderId' })
+    guestyGet(API_VERSION + '/payment-providers/provider-by-listing', {
+        listingId: id,
+    })
 
 // ========== QUOTES
 
@@ -54,7 +56,7 @@ export const getPaymentProviderListingGuestyV2 = (id: string) =>
 //     couponCode: '',
 // }
 export const addQuoteGuestyV2 = (formParams = {}) =>
-    guestyPost(API_VERSION + '/quote', formParams)
+    guestyPost(API_VERSION + '/quotes', formParams)
 
 export const getQuoteGuestyV2 = (quoteId: string, params = {}) =>
     guestyGet(API_VERSION + '/quotes/' + quoteId, params)
@@ -119,3 +121,13 @@ export const addPaymentGuestyV2 = (formParams = {}) =>
 
 export const getPaymentReservationGuestyV2 = (reservationId: string) =>
     guestyGet(API_VERSION + '/payments', { reservationId })
+
+// Charge langsung ke reservasi memakai payment method milik guest
+export const addReservationPaymentGuestyV2 = (
+    reservationId: string,
+    formParams = {},
+) =>
+    guestyPost(
+        API_VERSION + '/reservations/' + reservationId + '/payments',
+        formParams,
+    )
