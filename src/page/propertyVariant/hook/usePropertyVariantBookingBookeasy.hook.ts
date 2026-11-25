@@ -60,7 +60,7 @@ const usePropertyVariantBookingBookeasy = (propertyVariant: any) => {
             })
             .finally(() => setIsLoading(false))
     }
-    console.log(propertyVariant)
+    // console.log(propertyVariant)
     useEffect(() => {
         if (propertyVariant) {
             setFormRequest((prev) => ({
