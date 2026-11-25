@@ -74,6 +74,8 @@ export interface FormInputDateRangePickerProps {
 
     placeholderFrom?: string
     placeholderTo?: string
+    icon?: any
+    classNameIcon?: string
 }
 
 // Form Input Time
