@@ -4,14 +4,10 @@ import FormRangeDatepicker from '@/component/form/FormRangeDatepicker'
 import { BtnBasic, BtnPrimary } from '@/component/general/Button'
 import { ReactNode } from 'react'
 import FormInput from '@/component/form/FormInput'
-import usePropertyVariantBooking from '@/page/propertyVariant/hook/usePropertyVariantBooking.hook'
-import { formatMoney } from '@/helper/guestyBooking.helper'
-import { formatAUD } from '@/helper/currency.helper'
 import FormCheckbox from '@/component/form/FormCheckBox'
 import {
     IconCalendar,
     IconGuest,
-    IconInfo,
     IconMail,
     IconShare,
 } from '@/page/propertyVariant/component/PropertyVariantIcons'
@@ -34,9 +30,11 @@ const PropertyVariantBookingBookeasy = ({
     return (
         <>
             <div className="p-4 border border-neutral-200 rounded-4">
-                <p className="fs-18 font-tt-drugs fw-600 text-grey-200 pt-2">
-                    {propertyVariant?.nickname || 'Villa tanjung - 4 bedrooms'}
-                </p>
+                {propertyVariant?.nickname ? (
+                    <p className="fs-18 font-tt-drugs fw-600 text-grey-200 pt-2">
+                        {propertyVariant.nickname}
+                    </p>
+                ) : null}
 
                 <FormWrap actions={{ handleSubmit: () => _handleSubmit() }}>
                     <WrapFormContext
@@ -52,7 +50,9 @@ const PropertyVariantBookingBookeasy = ({
                                     config={{
                                         format: 'dd M yyyy',
                                         // tanggal yang sudah lewat tidak bisa dipilih
-                                        minDate: new Date(),
+                                        minDate: new Date(
+                                            new Date().setHours(0, 0, 0, 0),
+                                        ),
                                     }}
                                     startName="checkInDate"
                                     endName="checkOutDate"
@@ -67,7 +67,7 @@ const PropertyVariantBookingBookeasy = ({
                                 <LabelForm>Guest</LabelForm>
                                 <FormInput
                                     name="adultCount"
-                                    placeholder="e.g 8"
+                                    placeholder="Number of guests"
                                     className="form-property"
                                     // type="number"
                                     isNumberOnly
@@ -108,45 +108,7 @@ const PropertyVariantBookingBookeasy = ({
                                 />
                             </div>
 
-                            <div className="border-bottomP pb-0">
-                                <div className="border-bottom hstack justify-content-between py-2">
-                                    <LabelForm>Price</LabelForm>
-                                    <p className="m-0 fs-20 fw-semibold font-tt-drugs color-555">
-                                        {formatAUD(6750)}
-                                        <span className="fw-light fs-16">
-                                            /Night
-                                        </span>
-                                    </p>
-                                </div>
-                            </div>
-
                             <div className="">
-                                <div className="hstack justify-content-between py-2">
-                                    <LabelForm>Fee</LabelForm>
-                                    <p className="m-0 fw-light fs-16 font-tt-drugs color-555">
-                                        {formatAUD(185.63)}
-                                    </p>
-                                </div>
-
-                                <div className="hstack gap-2 pb-3">
-                                    <div
-                                        className=" rounded-3 fs-14"
-                                        style={{
-                                            padding: '0.1rem .5rem',
-                                            border: '1px solid #707070',
-                                        }}>
-                                        Non-Refundable
-                                    </div>
-                                    <div
-                                        className=" rounded-3 fs-14"
-                                        style={{
-                                            padding: '0.1rem .5rem',
-                                            border: '1px solid #707070',
-                                        }}>
-                                        Breakfast Included
-                                    </div>
-                                </div>
-
                                 <div className="pb-3">
                                     <FormCheckbox
                                         label="I Have A Coupon"
@@ -172,41 +134,6 @@ const PropertyVariantBookingBookeasy = ({
                                         <hr />
                                     )}
                                 </div>
-                            </div>
-
-                            <div className="hstack justify-content-between">
-                                <LabelForm>Total</LabelForm>
-                                <div className="text-end">
-                                    <p className="m-0 fs-24 fw-semibold font-tt-drugs color-555">
-                                        {formatAUD(6935.63)}
-                                    </p>
-                                    <p
-                                        className="m-0 fs-14 fw-light"
-                                        style={{
-                                            color: '#878787',
-                                        }}>
-                                        For 4 Nights Stay
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div
-                                className="hstack gap-2 align-items-start"
-                                style={{
-                                    background: 'rgba(0, 167, 156, 0.2)',
-                                    borderRadius: '12px',
-                                    padding: '1.3rem 1.3rem',
-                                }}>
-                                <div>
-                                    <IconInfo />
-                                </div>
-                                <p className="m-0 fs-14 color-555">
-                                    You&#39;ll pay A$5,779.69. The price
-                                    displayed is an estimation based on the
-                                    current exchange rate. The amount you&#39;ll
-                                    pay may change based on the exchange rate at
-                                    the moment of the final payment.
-                                </p>
                             </div>
                         </div>
                     </WrapFormContext>

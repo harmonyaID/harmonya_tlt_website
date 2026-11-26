@@ -86,9 +86,14 @@ const FormInputDateRangePicker: FC<FormInputDateRangePickerProps> = (
 
     useEffect(() => {
         let dateRangePicker = null
+        let isCancelled = false
         const elem = document.getElementById(idInput)
 
         import('vanillajs-datepicker').then((module) => {
+            // effect sudah di-cleanup sebelum import selesai -> jangan buat picker
+            // (mencegah picker & listener dobel pada elemen yang sama)
+            if (isCancelled || !elem) return
+
             const { DateRangePicker } = module.default || module
 
             // clear button
@@ -117,6 +122,7 @@ const FormInputDateRangePicker: FC<FormInputDateRangePickerProps> = (
         })
 
         return () => {
+            isCancelled = true
             dateRangePicker?.destroy()
         }
     }, [config])
