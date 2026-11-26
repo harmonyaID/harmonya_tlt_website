@@ -11,16 +11,15 @@ import {
     parseQuote,
     saveBookingResult,
 } from '@/helper/guestyBooking.helper'
+// sama seperti create quote: Bearer Token dinamis via /guesty-open-api (tanpa CORS)
 import {
-    addGuestGuesty,
-    addReservationFromQuoteGuesty,
-    getPaymentProviderListingGuesty,
-    getQuoteGuesty,
-} from '@/service/api/guesty/guesty.api'
-import {
-    guestyPaymentAddToReservations,
-    guestyPaymentCreatePaymentMethod,
-} from '@/service/api/guesty/guestyPayment.api'
+    addGuestGuestyServerV2,
+    addReservationFromQuoteGuestyServerV2,
+    getPaymentProviderListingGuestyServerV2,
+    getQuoteGuestyServerV2,
+    guestyPaymentAddToReservationsServerV2,
+    guestyPaymentCreatePaymentMethodServerV2,
+} from '@/service/api/guesty/server/guestyServerV2.api'
 import { THANK_YOU_GUESTY } from '@/config/pagePath.config'
 import useSessionStorageJson from '@/hook/useSessionStorageJson.hook'
 
@@ -86,7 +85,7 @@ const addPaymentWithRetry = async (formParams: any) => {
     const delays = [1000, 2000, 4000]
     for (let i = 0; ; i++) {
         try {
-            return await guestyPaymentAddToReservations(formParams)
+            return await guestyPaymentAddToReservationsServerV2(formParams)
         } catch (err: any) {
             if (err?.response?.status === 503 && i < delays.length) {
                 await sleep(delays[i])
@@ -123,7 +122,7 @@ const usePaymentBook = () => {
     // Payment provider listing (dibutuhkan form kartu GuestyPay)
     useEffect(() => {
         if (!booking?.listingId) return
-        getPaymentProviderListingGuesty(booking.listingId)
+        getPaymentProviderListingGuestyServerV2(booking.listingId)
             .then((res: any) => {
                 const id = res?.data?.paymentProviderId || ''
                 if (!id)
@@ -236,7 +235,7 @@ const usePaymentBook = () => {
 
         try {
             // 1. Ambil ulang quote -> pastikan masih valid & pakai harga terbaru
-            const quoteRes: any = await getQuoteGuesty(booking.quoteId)
+            const quoteRes: any = await getQuoteGuestyServerV2(booking.quoteId)
             const quote = quoteRes?.data
             if (quote?.status && quote.status !== 'valid')
                 throw new Error(
@@ -268,15 +267,15 @@ const usePaymentBook = () => {
             }
 
             // 3. Guest (Guesty otomatis memakai guest lama jika email sama)
-            const guestRes: any = await addGuestGuesty(guest)
+            const guestRes: any = await addGuestGuestyServerV2(guest)
             const guestId = guestRes?.data?._id
             if (!guestId) throw new Error('Unable to create guest.')
 
             // 4. Reservasi dari quote (skip jika retry pembayaran)
             let { reservationId, confirmationCode } = pendingReservation
             if (!reservationId) {
-                const reservationRes: any = await addReservationFromQuoteGuesty(
-                    {
+                const reservationRes: any =
+                    await addReservationFromQuoteGuestyServerV2({
                         quoteId: booking.quoteId,
                         ...(latest.ratePlanId
                             ? { ratePlanId: latest.ratePlanId }
@@ -289,9 +288,10 @@ const usePaymentBook = () => {
                         ignoreCalendar: false,
                         ignoreTerms: false,
                         ignoreBlocks: false,
-                    },
-                )
-                reservationId = reservationRes?.data?.reservationId
+                    })
+                reservationId =
+                    reservationRes?.data?.reservationId ||
+                    reservationRes?.data?._id
                 confirmationCode = reservationRes?.data?.confirmationCode || ''
                 if (!reservationId)
                     throw new Error('Unable to create reservation.')
@@ -316,13 +316,14 @@ const usePaymentBook = () => {
                 )
             let paymentMethodId = ''
             try {
-                const pmRes: any = await guestyPaymentCreatePaymentMethod({
-                    guestId,
-                    paymentProviderId: providerId,
-                    confirmationCode,
-                    _id: cardToken,
-                    reuse: false,
-                })
+                const pmRes: any =
+                    await guestyPaymentCreatePaymentMethodServerV2({
+                        guestId,
+                        paymentProviderId: providerId,
+                        confirmationCode,
+                        _id: cardToken,
+                        reuse: false,
+                    })
                 const pm = pmRes?.data
                 if (pm?.status && pm.status !== 'ACTIVE')
                     throw new Error(

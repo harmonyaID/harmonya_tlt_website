@@ -2,7 +2,8 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { formatDateOnly } from '@/helper/formatDate.helper'
-import { addQuoteGuesty } from '@/service/api/guesty/guesty.api'
+// create quote lewat server (hindari CORS Guesty)
+import { addQuoteGuestyServerV2 } from '@/service/api/guesty/server/guestyServerV2.api'
 import {
     GuestyBooking,
     parseQuote,
@@ -86,7 +87,7 @@ const usePropertyVariantBooking = (
         setBooking(null)
 
         // quote = cek ketersediaan + harga (preview)
-        addQuoteGuesty({
+        addQuoteGuestyServerV2({
             listingId,
             checkInDateLocalized: checkIn,
             checkOutDateLocalized: checkOut,
