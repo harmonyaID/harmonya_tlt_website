@@ -20,7 +20,7 @@ import { MDGlobalSearchDat } from '@/config/modal.config'
 import { isEmpty } from 'lodash'
 import IconArrowBottom2 from '@/component/icon/IconArrowBottom2'
 import loadBootstrapHelper from '@/helper/base/loadBootstrap.helper'
-import BannerMegaMenu from '@/asset/image/default/default-mega-menu-banner-image.jpg'
+import ValidImage from '@/component/general/ValidImage'
 import {
     ABOUT_US_PATH,
     BOAT_TRANSFERS_PATH,
@@ -45,6 +45,74 @@ import useMenuNavigation from '@/hook/useMenuNavigation.hook'
 const MEGA_MENU_TYPE = 'Mega Menu'
 
 const isMegaMenu = (item: any) => item?.type?.name === MEGA_MENU_TYPE
+
+// item top level punya children -> tampil sebagai dropdown mega menu
+const hasMegaMenu = (item: any) => !isEmpty(item?.children)
+
+// Struktur respon API /menus/main-navigation:
+// - item top level (type "Mega Menu" / "Menu") + children -> dropdown
+// - blok kanan (promo), semua dari API, yang kosong tidak ditampilkan:
+//   - judul  : baris pertama `description` item (dipisah baris kosong)
+//              atau `menuLabel` child promo
+//   - teks   : sisa `description` item, atau `description` child promo
+//   - gambar : `featuredImage` item / child promo / banner
+//   - label di gambar : `menuLabel` children[0] dari child promo
+// - child promo = child type "Mega Menu" atau child yang punya `description`
+// - child lain -> grup kiri (judul + children sebagai link)
+const splitDescription = (text?: string | null) => {
+    const parts = (text || '')
+        .split(/\r?\n\s*\r?\n/)
+        .map((v) => v.replace(/\s+/g, ' ').trim())
+        .filter(Boolean)
+    if (parts.length > 1)
+        return { title: parts[0], body: parts.slice(1).join(' ') }
+    return { title: '', body: parts[0] || '' }
+}
+
+const getMegaMenuParts = (item: any) => {
+    const children: any[] = item?.children || []
+    const promoChild =
+        children.find((c) => isMegaMenu(c)) ||
+        children.find((c) => !isEmpty(c?.description?.trim?.()))
+
+    const seen = new Set<string>()
+    const groups = children.filter((c) => {
+        if (c === promoChild) return false
+        const key = `${c.menuLabel}|${c.menuUrl}` // data duplikat dari API
+        if (seen.has(key)) return false
+        seen.add(key)
+        return true
+    })
+
+    const banner = promoChild?.children?.[0] || null
+    const desc = splitDescription(item?.description)
+
+    const title = desc.title || promoChild?.menuLabel || ''
+    const text = desc.body || promoChild?.description?.trim() || ''
+    const image =
+        item?.featuredImage ||
+        promoChild?.featuredImage ||
+        banner?.featuredImage ||
+        ''
+
+    const promo =
+        title || text || image
+            ? {
+                  title,
+                  text,
+                  image,
+                  url: promoChild?.menuUrl || item?.menuUrl || '',
+                  label: banner?.menuLabel || '',
+                  labelUrl:
+                      banner?.menuUrl ||
+                      promoChild?.menuUrl ||
+                      item?.menuUrl ||
+                      '',
+              }
+            : null
+
+    return { groups, promo }
+}
 
 // Dipakai selama data API belum tampil / gagal dimuat
 const FALLBACK_MENUS = [
@@ -71,6 +139,7 @@ const LabelGroup = ({
         <p className="fs-24 font-tt-drugs mb-0">{name}</p>
     )
 
+// dipakai menu mobile
 const GroupMegaMenu = ({ group }: { group: any }) => (
     <div className="vstack gap-3">
         <LabelGroup name={group.menuLabel} url={group.menuUrl} />
@@ -82,16 +151,33 @@ const GroupMegaMenu = ({ group }: { group: any }) => (
     </div>
 )
 
-// Struktur mega menu dari API:
-// - child type "Menu"      -> grup (label) + children sebagai link
-// - child type "Mega Menu" -> blok promo (judul, deskripsi, banner dari children[0])
+// ================= DESKTOP MEGA MENU (>= 992px) =================
+const MegaMenuGroup = ({ group }: { group: any }) => (
+    <div className="mega-menu-group">
+        <Link href={group.menuUrl || '#'} className="mega-menu-title">
+            {group.menuLabel}
+        </Link>
+        {!isEmpty(group.children) ? (
+            <ul className="mega-menu-links">
+                {group.children.map((child: any) => (
+                    <li key={child.id}>
+                        <Link href={child.menuUrl || '#'}>
+                            {child.menuLabel}
+                        </Link>
+                    </li>
+                ))}
+            </ul>
+        ) : null}
+    </div>
+)
+
 const MegaMenuItem = ({ item }: { item: any }) => {
-    const groups = (item.children || []).filter((c: any) => !isMegaMenu(c))
-    const promo = (item.children || []).find((c: any) => isMegaMenu(c))
-    const banner = promo?.children?.[0]
+    const { groups, promo } = getMegaMenuParts(item)
 
     const half = Math.ceil(groups.length / 2)
-    const columns = [groups.slice(0, half), groups.slice(half)]
+    const columns = [groups.slice(0, half), groups.slice(half)].filter(
+        (col) => col.length > 0,
+    )
 
     return (
         <div className="dropdown navbar-menga-menu">
@@ -104,63 +190,59 @@ const MegaMenuItem = ({ item }: { item: any }) => {
                 aria-expanded="false">
                 {item.menuLabel} <IconArrowBottom2 />
             </a>
-            <div className="dropdown-menu w-100 rounded-0 py-5 px-4 mt-2">
+            <div className="dropdown-menu mega-menu-panel rounded-0">
                 <div className="container">
-                    <div className="row g-5 justify-content-end">
-                        <div
-                            className={
-                                promo ? 'col-md-6 border-end' : 'col-12'
-                            }>
-                            <div className="row gx-3 gy-5">
-                                {columns.map((col, index) => (
-                                    <div
-                                        className="col-md-6 vstack gap-5"
-                                        key={index}>
-                                        {col.map((group: any) => (
-                                            <GroupMegaMenu
-                                                group={group}
-                                                key={group.id}
-                                            />
-                                        ))}
-                                    </div>
-                                ))}
-                            </div>
+                    <div className="mega-menu-inner">
+                        <div className="mega-menu-groups">
+                            {columns.map((col, index) => (
+                                <div className="mega-menu-column" key={index}>
+                                    {col.map((group: any) => (
+                                        <MegaMenuGroup
+                                            group={group}
+                                            key={group.id}
+                                        />
+                                    ))}
+                                </div>
+                            ))}
                         </div>
 
                         {promo ? (
-                            <div className="col-md-5 px-md-5">
-                                <div className="ps-3">
-                                    <LabelGroup
-                                        name={promo.menuLabel}
-                                        url={promo.menuUrl}
-                                    />
-                                    {promo.description ? (
-                                        <p className="fs-16 mt-2 mb-5">
-                                            {promo.description}
-                                        </p>
-                                    ) : null}
+                            <div className="mega-menu-promo">
+                                {promo.title ? (
+                                    <Link
+                                        href={promo.url || '#'}
+                                        className="mega-menu-title">
+                                        {promo.title}
+                                    </Link>
+                                ) : null}
+                                {promo.text ? (
+                                    <p className="mega-menu-desc">
+                                        {promo.text}
+                                    </p>
+                                ) : null}
 
-                                    {banner ? (
-                                        <Link
-                                            href={banner.menuUrl || '#'}
-                                            className="wrap-banner-img d-block">
-                                            <Image
-                                                src={
-                                                    banner.featuredImage ||
-                                                    BannerMegaMenu
-                                                }
-                                                alt={banner.menuLabel}
-                                                className="object-fit-cover"
-                                                fill
-                                            />
-                                            <div className="message text-white p-5">
-                                                <p className="fs-24 font-tt-drugs mb-0">
-                                                    {banner.menuLabel}
-                                                </p>
-                                            </div>
-                                        </Link>
-                                    ) : null}
-                                </div>
+                                {promo.image ? (
+                                    <Link
+                                        href={promo.labelUrl || '#'}
+                                        className="mega-menu-banner">
+                                        <ValidImage
+                                            src={promo.image}
+                                            alt={
+                                                promo.label ||
+                                                promo.title ||
+                                                item.menuLabel
+                                            }
+                                            className="object-fit-cover"
+                                            sizes="400px"
+                                            fill
+                                        />
+                                        {promo.label ? (
+                                            <span className="mega-menu-banner-label">
+                                                {promo.label}
+                                            </span>
+                                        ) : null}
+                                    </Link>
+                                ) : null}
                             </div>
                         ) : null}
                     </div>
@@ -180,7 +262,7 @@ const MobileMegaMenuItem = ({
     isOpen: boolean
     onToggle: () => void
 }) => {
-    const groups = (item.children || []).filter((c: any) => !isMegaMenu(c))
+    const { groups } = getMegaMenuParts(item)
 
     return (
         <div
@@ -210,30 +292,36 @@ const MobileMegaMenuItem = ({
     )
 }
 
-const MobilePromo = ({ promo }: { promo: any }) => {
-    const banner = promo?.children?.[0]
+const MobilePromo = ({ item }: { item: any }) => {
+    const { promo } = getMegaMenuParts(item)
+    if (!promo) return null
 
     return (
         <div className="nav-mobile-promo">
-            <LabelGroup name={promo.menuLabel} url={promo.menuUrl} />
-            {promo.description ? (
-                <p className="fs-14 mt-2 mb-4">{promo.description}</p>
+            {promo.title ? (
+                <LabelGroup name={promo.title} url={promo.url} />
             ) : null}
-            {banner ? (
+            {promo.text ? (
+                <p className="fs-14 mt-2 mb-4">{promo.text}</p>
+            ) : null}
+            {promo.image ? (
                 <Link
-                    href={banner.menuUrl || '#'}
+                    href={promo.labelUrl || '#'}
                     className="nav-mobile-banner d-block">
-                    <Image
-                        src={banner.featuredImage || BannerMegaMenu}
-                        alt={banner.menuLabel}
+                    <ValidImage
+                        src={promo.image}
+                        alt={promo.label || promo.title || item.menuLabel}
                         className="object-fit-cover"
+                        sizes="100vw"
                         fill
                     />
-                    <div className="message text-white p-3">
-                        <p className="fs-20 font-tt-drugs text-uppercase mb-0">
-                            {banner.menuLabel}
-                        </p>
-                    </div>
+                    {promo.label ? (
+                        <div className="message text-white p-3">
+                            <p className="fs-20 font-tt-drugs text-uppercase mb-0">
+                                {promo.label}
+                            </p>
+                        </div>
+                    ) : null}
                 </Link>
             ) : null}
         </div>
@@ -252,12 +340,10 @@ const NavbarMobileMenu = ({
     const [openId, setOpenId] = useState<any>(null)
 
     // promo dari mega menu yang sedang dibuka, default promo pertama
+    const hasPromo = (item: any) => !!getMegaMenuParts(item).promo
     const promoSource =
-        navItems.find((item) => item.id === openId) ||
-        navItems.find((item) =>
-            (item.children || []).some((c: any) => isMegaMenu(c)),
-        )
-    const promo = (promoSource?.children || []).find((c: any) => isMegaMenu(c))
+        navItems.find((item) => item.id === openId && hasPromo(item)) ||
+        navItems.find((item) => hasMegaMenu(item) && hasPromo(item))
 
     return (
         <CreatePortalLayout>
@@ -294,7 +380,7 @@ const NavbarMobileMenu = ({
                     <div className="nav-mobile-list">
                         {navItems.length > 0
                             ? navItems.map((item) =>
-                                  isMegaMenu(item) && item.children?.length ? (
+                                  hasMegaMenu(item) ? (
                                       <MobileMegaMenuItem
                                           key={item.id}
                                           item={item}
@@ -334,10 +420,10 @@ const NavbarMobileMenu = ({
                               ))}
                     </div>
 
-                    {promo ? (
+                    {promoSource ? (
                         <>
                             <hr className="nav-mobile-divider" />
-                            <MobilePromo promo={promo} />
+                            <MobilePromo item={promoSource} />
                         </>
                     ) : null}
                 </div>
@@ -450,7 +536,6 @@ const NavbarLayout = ({
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
-
 
     // kunci scroll body, tutup dengan Escape / saat layar >= lg
     useEffect(() => {
@@ -630,8 +715,7 @@ const NavbarLayout = ({
                 <div className="hstack flex-wrap h-gap-menu flex-row align-items-center justify-content-center">
                     {navItems.length > 0
                         ? navItems.map((item) => {
-                              return isMegaMenu(item) &&
-                                  item.children?.length ? (
+                              return hasMegaMenu(item) ? (
                                   <MegaMenuItem key={item.id} item={item} />
                               ) : (
                                   <div
