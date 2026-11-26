@@ -17,6 +17,11 @@ import AvailabilityCalendar from '@/component/general/AvailabilityCalendar'
 import usePropertyAvailabilityCalendar from '@/page/property/hook/usePropertyAvailabilityCalendar'
 import useLocationCoordinate from '@/hook/useLocationCoordinate.hook'
 import PropertySectionTab from '@/page/property/component/PropertySectionTab'
+import PropertyVariantBookingBookeasy from '@/page/propertyVariant/container/PropertyVariantBookingBookeasy'
+import {
+    SOURCE_TYPE_BOOKEASY_ID,
+    SOURCE_TYPE_GUESTY_ID,
+} from '@/config/property.config'
 
 const TitleSection = ({ title }: { title: string }) => (
     <>
@@ -31,9 +36,8 @@ const PropertyVariantDetail = ({
     detail?: any
     allSlug?: any
 }) => {
-    console.log('propertyDetail: ', detail)
-
-    console.log('description: ', detail.descriptions)
+    //
+    // console.log('description: ', detail.descriptions)
 
     const {
         amenities = [],
@@ -76,6 +80,15 @@ const PropertyVariantDetail = ({
     ]
         .filter((tab) => !!tab.show)
         .map(({ id, label }) => ({ id, label }))
+
+    const BookingForm = {
+        [SOURCE_TYPE_BOOKEASY_ID]: (
+            <PropertyVariantBookingBookeasy propertyVariant={detail} />
+        ),
+        [SOURCE_TYPE_GUESTY_ID]: (
+            <PropertyVariantBooking propertyVariant={detail} />
+        ),
+    }
 
     return (
         <>
@@ -328,7 +341,7 @@ const PropertyVariantDetail = ({
                             {/*    </div>*/}
                             {/*</div>*/}
 
-                            <PropertyVariantBooking propertyVariant={detail} />
+                            {BookingForm[detail?.sourceType?.id]}
                         </div>
                     </div>
                 </div>
@@ -336,7 +349,7 @@ const PropertyVariantDetail = ({
 
             {/*<PropertyThingsToExplore />*/}
             {/*<PropertyOther allSlug={allSlug} />*/}
-            <PropertyFormInquiry />
+            <PropertyFormInquiry propertyId={detail?.id} />
         </>
     )
 }

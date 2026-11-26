@@ -23,6 +23,11 @@ import PropertyAccommodation from '@/page/property/component/PropertyAccommodati
 import PropertyFeatureList from '@/page/property/component/PropertyFeatureList'
 import PropertyReviewSlider from '@/page/property/component/PropertyReviewSlider'
 import PropertySectionTab from '@/page/property/component/PropertySectionTab'
+import PropertyVariantBookingBookeasy from '@/page/propertyVariant/container/PropertyVariantBookingBookeasy'
+import {
+    SOURCE_TYPE_BOOKEASY_ID,
+    SOURCE_TYPE_GUESTY_ID,
+} from '@/config/property.config'
 
 const TitleSection = ({ title }: { title: string }) => (
     <>
@@ -37,9 +42,9 @@ const PropertyDetail = ({
     detail?: any
     allSlug?: any
 }) => {
-    console.log('propertyDetail: ', detail)
-
-    console.log('description: ', detail.descriptions)
+    // console.log('propertyDetail: ', detail)
+    //
+    // console.log('description: ', detail.descriptions)
 
     const {
         amenities = [],
@@ -97,6 +102,33 @@ const PropertyDetail = ({
     ]
         .filter((tab) => !!tab.show)
         .map(({ id, label }) => ({ id, label }))
+
+    // pilihan property (variant/accommodation) untuk booking Guesty.
+    // Property tanpa variant tapi punya listing Guesty -> property itu sendiri.
+    const bookingVariants = accommodations.length
+        ? accommodations.map((a) => ({
+              guestyId: a.guestyId,
+              nickname: a.nickname,
+              guests: a.guests,
+          }))
+        : detail?.guestyId
+          ? [{ guestyId: detail.guestyId, nickname: detail.nickname || '' }]
+          : []
+
+    const BookingForm = {
+        [SOURCE_TYPE_BOOKEASY_ID]: (
+            <PropertyVariantBookingBookeasy propertyVariant={detail} />
+        ),
+        [SOURCE_TYPE_GUESTY_ID]: (
+            <PropertyVariantBooking
+                propertyVariant={detail}
+                variants={bookingVariants}
+                isLoadingVariants={isLoadingAccommodation}
+            />
+        ),
+    }
+
+    console.log('id: ', id)
 
     return (
         <>
@@ -368,7 +400,7 @@ const PropertyDetail = ({
                             {/*    </div>*/}
                             {/*</div>*/}
 
-                            <PropertyVariantBooking propertyVariant={detail} />
+                            {BookingForm[detail?.sourceType?.id]}
                         </div>
                     </div>
                 </div>
@@ -376,7 +408,7 @@ const PropertyDetail = ({
 
             <PropertyThingsToExplore />
             <PropertyOther allSlug={allSlug} />
-            <PropertyFormInquiry />
+            <PropertyFormInquiry propertyId={id} />
         </>
     )
 }

@@ -5,9 +5,13 @@ import FormTextArea from '@/component/form/FormTextarea'
 import { BtnPrimary } from '@/component/general/Button'
 import FormWrap from '@/component/wrapping/Form.wrap'
 
-const PropertyFormInquiry = () => {
+const PropertyFormInquiry = ({
+    propertyId = '',
+}: {
+    propertyId?: string | number
+}) => {
     const { formRequest, isLoading, _handleChange, _handleSubmit } =
-        usePropertyFormInquiryHook()
+        usePropertyFormInquiryHook(propertyId)
 
     return (
         <section className="section-space-small bg-neutral-100">
@@ -54,6 +58,13 @@ const PropertyFormInquiry = () => {
                                         </div>
 
                                         <FormInput
+                                            label="Phone Number"
+                                            placeholder="e.g +62812345678"
+                                            name="phone"
+                                            type="tel"
+                                        />
+
+                                        <FormInput
                                             label="Subject"
                                             placeholder="e.g Price"
                                             name="subject"
@@ -63,7 +74,7 @@ const PropertyFormInquiry = () => {
                                         <FormTextArea
                                             label="Message"
                                             placeholder="e.g Send"
-                                            name="comments"
+                                            name="message"
                                             required
                                         />
 

@@ -2,24 +2,15 @@
 import { useState, useEffect } from 'react'
 import { getBlogList } from '@/service/api/blog.api'
 
-const useBlogs = ({
-    passBlogs = [],
-    passPagination = {},
-    passPage = 1,
-    passLimit = 12,
-}: {
-    passBlogs?: any[]
-    passPagination?: any
-    passPage?: number | string
-    passLimit?: number | string
-} = {}) => {
-    const [list, setList] = useState(passBlogs)
+const useBlogs = ({ passLimit = 12 }: { passLimit?: number } = {}) => {
+    const [list, setList] = useState([])
 
-    const [pagination, setPagination] = useState(passPagination)
+    const [pagination, setPagination] = useState()
 
     const [search, setSearch] = useState<any>({
-        page: passPage,
+        page: 1,
         limit: passLimit,
+        categoryIds: '',
     })
 
     const [isLoading, setIsLoading] = useState(false)
@@ -42,31 +33,35 @@ const useBlogs = ({
             })
     }
 
+    const _updateSearch = (patch: Record<string, any>) => {
+        const newState = { ...search, ...patch }
+        setSearch(newState)
+        _handleGet(newState)
+    }
+
     const _handleChangePage = (page: number | string) => {
-        setSearch((prev: any) => {
-            const newState = { ...prev }
+        _updateSearch({ page })
+    }
 
-            newState.page = page
-
-            _handleGet(newState)
-
-            return newState
+    // Click the active category again (or pass '') to clear the filter
+    const _handleChangeCategory = (categoryId: number | string = '') => {
+        _updateSearch({
+            page: 1,
+            categoryIds: search.categoryIds === categoryId ? '' : categoryId,
         })
     }
 
     useEffect(() => {
-        if (passBlogs.length < 1) {
-            const startPage = 1
-            // @ts-ignore
-            _handleChangePage(startPage)
-        }
+        _handleChangePage(1)
     }, [])
 
     return {
         list,
         isLoading,
         setList,
+        search,
         _handleChangePage,
+        _handleChangeCategory,
         pagination: pagination,
     }
 }

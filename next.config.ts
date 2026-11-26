@@ -24,6 +24,18 @@ const nextConfig: NextConfig = {
     // Handle Stop Double Get
     reactStrictMode: false,
 
+    // Guesty Open API tidak mengizinkan CORS dari browser.
+    // Browser memanggil /guesty-open-api/... (same origin), Next meneruskan
+    // request apa adanya (Authorization Bearer, Content-Type) ke Guesty.
+    async rewrites() {
+        return [
+            {
+                source: '/guesty-open-api/:path*',
+                destination: 'https://open-api.guesty.com/:path*',
+            },
+        ]
+    },
+
     // API handle file llms.txt
     async headers() {
         return [

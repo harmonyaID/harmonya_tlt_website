@@ -13,7 +13,11 @@ import useComponentInputConfigHook from '@/hook/base/useComponentInputConfig.hoo
 import _ from 'lodash'
 import { eventChange } from '@/helper/base/actionEvent.helper'
 
-const FormPhone = (props: FormInputProps & { isUseHook?: boolean }) => {
+const FormPhone = (props: FormInputProps & {
+        isUseHook?: boolean
+        variant?: 'default' | 'underline'
+        defaultCountry?: Country
+    }) => {
     const ctx = useHookContextForm()
 
     const { dataValue, handleChange } = useComponentInputConfigHook(
@@ -42,6 +46,8 @@ const FormPhone = (props: FormInputProps & { isUseHook?: boolean }) => {
         isCheckMinInput = false,
         isCheckMaxInput = false,
         isUseHook = true,
+        variant = 'default',
+        defaultCountry = 'AU',
 
         handleIcon = () => {},
 
@@ -52,7 +58,7 @@ const FormPhone = (props: FormInputProps & { isUseHook?: boolean }) => {
         other,
     } = props
 
-    const [country, setCountry] = useState<Country>('ID')
+    const [country, setCountry] = useState<Country>(defaultCountry)
     const [open, setOpen] = useState(false)
 
     const countries = getCountries()
@@ -65,16 +71,28 @@ const FormPhone = (props: FormInputProps & { isUseHook?: boolean }) => {
         }
     }
 
+    const isUnderline = variant === 'underline'
+
+    const underlineReset = {
+        border: 'none',
+        borderBottom: '1px solid var(--bs-border-color, #dee2e6)',
+        borderRadius: 0,
+        boxShadow: 'none',
+        backgroundColor: 'transparent',
+    }
+
     return (
-        <div>
-            <div className="input-group">
+        <div className={className}>
+            <div className="input-group flex-nowrap">
                 <div className="dropdown">
                     <button
                         type="button"
-                        className="btn border dropdown-toggle"
-                        style={{
-                            borderRadius: '7px 0 0 7px',
-                        }}
+                        className={`btn dropdown-toggle ${isUnderline ? '' : 'border'}`}
+                        style={
+                            isUnderline
+                                ? underlineReset
+                                : { borderRadius: '7px 0 0 7px' }
+                        }
                         onClick={() => setOpen(!open)}>
                         +{getCountryCallingCode(country)}
                     </button>
@@ -108,7 +126,8 @@ const FormPhone = (props: FormInputProps & { isUseHook?: boolean }) => {
                     value={dataValue}
                     onChange={(value) => _handleChange(value as Country)}
                     className="form-control"
-                    placeholder="Phone number"
+                    style={isUnderline ? underlineReset : undefined}
+                    placeholder={placeholder || 'Phone number'}
                 />
             </div>
         </div>

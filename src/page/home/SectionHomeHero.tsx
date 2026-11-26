@@ -75,6 +75,15 @@ const SectionHomeHero = ({ content = {} }: { content?: any | {} }) => {
                                                     id="inputDates"
                                                     config={{
                                                         format: 'dd M yyyy',
+                                                        // tanggal yang sudah lewat tidak bisa dipilih
+                                                        minDate: new Date(
+                                                            new Date().setHours(
+                                                                0,
+                                                                0,
+                                                                0,
+                                                                0,
+                                                            ),
+                                                        ),
                                                     }}
                                                     classInput="form-transparent-underline px-2"
                                                     isIconArrow

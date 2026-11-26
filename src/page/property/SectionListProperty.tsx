@@ -49,45 +49,45 @@ const SectionListProperty = () => {
         <>
             <section className="section-space-small">
                 <div className="container">
-                    <SectionTitle className="font-tt-drugs mb-4">
+                    <SectionTitle className="font-tt-drugs mb-4 fs-md-48 fs-32">
                         ALL PROPERTIES
                     </SectionTitle>
 
-                    <div className="row align-items-center pb-5 mb-4 pt-2">
-                        <div className="col-auto">
+                    <div className="row align-items-center gy-3 pb-5 mb-4 pt-2">
+                        <div className="col-lg-auto">
                             <div className="hstack align-items-center gap-3">
                                 <IconFilter />
                                 <div className="">
-                                    <p className="mb-0 fs-20 text-grey-400">
+                                    <p className="mb-0 fs-18 fs-md-20 text-grey-400">
                                         FILTER
                                     </p>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="col-auto">
+                        <div className="col-auto d-none d-md-block">
                             <div className="vr"></div>
                         </div>
 
-                        <div className="col">
+                        <div className="col-lg">
                             <div className="row gx-2 gy-3">
                                 <WrapFormContext
                                     formRequest={search}
                                     actions={{
                                         change: _handleChange,
                                     }}>
-                                    <div className="col-md-2">
+                                    <div className="col-lg-2 col-md-6 col-12">
                                         <PropertyFormSelectTreeType />
                                     </div>
-                                    <div className="col-md-2">
+                                    <div className="col-lg-2 col-md-6 col-12">
                                         <PropertyFormSelectBedRooms
                                             value={search.bedroom}
                                         />
                                     </div>
-                                    <div className="col-md-2">
+                                    <div className="col-lg-2 col-md-6 col-12">
                                         <PropertyFormSelectBathRoom />
                                     </div>
-                                    <div className="col-md-2">
+                                    <div className="col-lg-2 col-md-6 col-12">
                                         <PropertyFormSelectAmenities classNameSelect="rounded-pill" />
                                     </div>
                                 </WrapFormContext>

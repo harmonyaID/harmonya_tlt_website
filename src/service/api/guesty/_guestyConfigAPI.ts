@@ -82,7 +82,7 @@ const writeCookie = (token, expMs) => {
         `; Expires=${new Date(expMs).toUTCString()}; Path=/; SameSite=Lax${secure}`
 }
 
-const clearCookie = () => {
+export const clearCookie = () => {
     if (typeof document === 'undefined') return
     document.cookie = `${COOKIE_TOKEN_GUESTY}=; Max-Age=0; Path=/`
 }
@@ -104,7 +104,8 @@ const fetchToken = async () => {
     return accessToken
 }
 
-const getToken = () => {
+// dipakai juga oleh _guestyPaymentConfigAPI (pay.guesty.com)
+export const getToken = () => {
     // seed cookie dengan token awal jika belum ada
     if (!readCookie() && isValid(INITIAL_TOKEN)) saveToken(INITIAL_TOKEN)
 
