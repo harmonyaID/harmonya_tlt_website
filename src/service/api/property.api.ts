@@ -8,6 +8,7 @@ import {
     SrvContentPropertyHomePage,
     SrvContentPropertyReview,
     SrvPropertyAmenities,
+    SrvPropertyContact,
     SrvPropertyInquiry,
     SrvPropertyType,
 } from '@/service/api/_crm.endPoint'
@@ -56,3 +57,6 @@ export const getPropertyReview = async (
 
 export const createPropertyInquiryForm = async (form: any) =>
     await _shapeMethodPost(SrvPropertyInquiry, form)
+
+export const createPropertyContactForm = async (form: any) =>
+    await _shapeMethodPost(SrvPropertyContact, form)

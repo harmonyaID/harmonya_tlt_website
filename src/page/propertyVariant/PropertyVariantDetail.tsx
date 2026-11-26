@@ -349,7 +349,7 @@ const PropertyVariantDetail = ({
 
             {/*<PropertyThingsToExplore />*/}
             {/*<PropertyOther allSlug={allSlug} />*/}
-            <PropertyFormInquiry />
+            <PropertyFormInquiry propertyId={detail?.id} />
         </>
     )
 }

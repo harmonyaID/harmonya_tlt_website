@@ -26,10 +26,14 @@ const fmtDate = (d: string) => moment(d, 'YYYY-MM-DD').format('D MMM YYYY')
 const PaymentSummary = ({
     booking,
     isLoading = false,
+    isCard = true,
+    isRetryPayment = false,
     error = '',
 }: {
     booking: GuestyBooking | null
     isLoading?: boolean
+    isCard?: boolean
+    isRetryPayment?: boolean
     error?: string
 }) => {
     if (!booking) return null
@@ -105,8 +109,19 @@ const PaymentSummary = ({
                     isLoading={isLoading}
                     isDisabled={isLoading}
                     className="w-100 text-uppercase font-tt-drugs">
-                    Book Now
+                    {isRetryPayment
+                        ? 'Try Payment Again'
+                        : isCard
+                          ? `Pay ${money(booking.total)}`
+                          : 'Book Now'}
                 </BtnPrimary>
+
+                {isLoading ? (
+                    <p className="fs-12 text-grey-300 text-center mb-0">
+                        Processing your booking, please don&apos;t close this
+                        page…
+                    </p>
+                ) : null}
 
                 <hr className="m-0" />
 
