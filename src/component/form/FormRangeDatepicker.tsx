@@ -210,6 +210,12 @@ const FormInputDateRangePicker: FC<FormInputDateRangePickerProps> = (
                             type="button">
                             <X size={14} strokeWidth={5} />
                         </button>
+
+                        {props.icon ? (
+                            <span className={props.classNameIcon}>
+                                {props.icon}
+                            </span>
+                        ) : null}
                     </div>
                 </div>
             </div>

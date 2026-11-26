@@ -30,6 +30,9 @@ const ONE_WAY = 'one_way'
 const RETURN = 'return'
 const TRUE = '1'
 const FALSE = '0'
+const AIRPORT = 'airport'
+const HOTEL_VILLA = 'hotel_villa'
+const NOT_APPLICABLE = 'not_applicable'
 
 const param = (boat?: any) => ({
     boatId: boat?.id || '',
@@ -51,18 +54,22 @@ const param = (boat?: any) => ({
     email: '',
 
     needLandTransport: TRUE,
-    departurePickupPoint: '',
+    departurePickupPoint: AIRPORT,
     departurePickupFlightNumber: '',
+    departurePickupLocation: '',
     departurePickupArrivalTime: '',
-    departureDropOffPoint: '',
+    departureDropOffPoint: HOTEL_VILLA,
     departureDropOffLocation: '',
+    departureDropOffFlightNumber: '',
     departureDropOffArrivalTime: '',
 
     returnPickupPoint: '',
     returnPickupLocation: '',
+    returnPickupFlightNumber: '',
     returnPickupCheckoutTime: '',
     returnDropOffPoint: '',
     returnDropOffLocation: '',
+    returnDropOffFlightNumber: '',
 
     bookedThroughTlt: TRUE,
     tltBookingRefName: '',
@@ -141,6 +148,24 @@ const BoatTransferBookingModal = ({ boatId }: { boatId?: number }) => {
             .finally(() => setIsLoading(false))
     }
 
+    const _handleReturn = () => {
+        setFormRequest((prev) => ({
+            ...prev,
+            ticketType: RETURN,
+            returnPickupPoint: HOTEL_VILLA,
+            returnDropOffPoint: AIRPORT,
+        }))
+    }
+
+    const _handleOneWay = () => {
+        setFormRequest((prev) => ({
+            ...prev,
+            ticketType: ONE_WAY,
+            returnPickupPoint: '',
+            returnDropOffPoint: '',
+        }))
+    }
+
     useEffect(() => {
         if (!boatId) return
 
@@ -217,11 +242,8 @@ const BoatTransferBookingModal = ({ boatId }: { boatId?: number }) => {
                                                     <div className="row mb-4">
                                                         <div className="col-6">
                                                             <BtnBasic
-                                                                handle={() =>
-                                                                    nestedForm._handleChange(
-                                                                        'ticketType',
-                                                                        ONE_WAY,
-                                                                    )
+                                                                handle={
+                                                                    _handleOneWay
                                                                 }
                                                                 className={`w-100 text-uppercase ${
                                                                     formRequest.ticketType ===
@@ -239,11 +261,8 @@ const BoatTransferBookingModal = ({ boatId }: { boatId?: number }) => {
                                                         </div>
                                                         <div className="col-6">
                                                             <BtnBasic
-                                                                handle={() =>
-                                                                    nestedForm._handleChange(
-                                                                        'ticketType',
-                                                                        RETURN,
-                                                                    )
+                                                                handle={
+                                                                    _handleReturn
                                                                 }
                                                                 type="button"
                                                                 className={`w-100 text-uppercase ${
@@ -650,26 +669,37 @@ const BoatTransferBookingModal = ({ boatId }: { boatId?: number }) => {
                                                                                         label: 'Select Pickup Point',
                                                                                     },
                                                                                     {
-                                                                                        value: 'airport',
+                                                                                        value: AIRPORT,
                                                                                         label: 'Airport',
                                                                                     },
                                                                                     {
-                                                                                        value: 'hotel_villa',
+                                                                                        value: HOTEL_VILLA,
                                                                                         label: 'Hotel/Villa',
                                                                                     },
                                                                                     {
-                                                                                        value: 'not_applicable',
+                                                                                        value: NOT_APPLICABLE,
                                                                                         label: 'Not Applicable',
                                                                                     },
                                                                                 ]}
                                                                             />
                                                                             <div className="row g-3">
-                                                                                <div className="col-6">
-                                                                                    <FormInput
-                                                                                        placeholder="Flight Number"
-                                                                                        name="departurePickupFlightNumber"
-                                                                                    />
-                                                                                </div>
+                                                                                {formRequest.departurePickupPoint ==
+                                                                                AIRPORT ? (
+                                                                                    <div className="col-6">
+                                                                                        <FormInput
+                                                                                            placeholder="Flight Number"
+                                                                                            name="departurePickupFlightNumber"
+                                                                                        />
+                                                                                    </div>
+                                                                                ) : formRequest.departurePickupPoint ==
+                                                                                  HOTEL_VILLA ? (
+                                                                                    <div className="col-6">
+                                                                                        <FormInput
+                                                                                            placeholder="Hotel/Villa Name"
+                                                                                            name="departurePickupLocation"
+                                                                                        />
+                                                                                    </div>
+                                                                                ) : null}
                                                                                 <div className="col-6">
                                                                                     <FormTimePicker
                                                                                         placeholder="12:33"
@@ -709,26 +739,37 @@ const BoatTransferBookingModal = ({ boatId }: { boatId?: number }) => {
                                                                                         label: 'Select Pickup Point',
                                                                                     },
                                                                                     {
-                                                                                        value: 'airport',
+                                                                                        value: AIRPORT,
                                                                                         label: 'Airport',
                                                                                     },
                                                                                     {
-                                                                                        value: 'hotel_villa',
+                                                                                        value: HOTEL_VILLA,
                                                                                         label: 'Hotel/Villa',
                                                                                     },
                                                                                     {
-                                                                                        value: 'not_applicable',
+                                                                                        value: NOT_APPLICABLE,
                                                                                         label: 'Not Applicable',
                                                                                     },
                                                                                 ]}
                                                                             />
                                                                             <div className="row g-3">
-                                                                                <div className="col-6">
-                                                                                    <FormInput
-                                                                                        placeholder="Location"
-                                                                                        name="departureDropOffLocation"
-                                                                                    />
-                                                                                </div>
+                                                                                {formRequest.departureDropOffPoint ==
+                                                                                AIRPORT ? (
+                                                                                    <div className="col-6">
+                                                                                        <FormInput
+                                                                                            placeholder="Flight Number"
+                                                                                            name="departureDropOffFlightNumber"
+                                                                                        />
+                                                                                    </div>
+                                                                                ) : formRequest.departureDropOffPoint ==
+                                                                                  HOTEL_VILLA ? (
+                                                                                    <div className="col-6">
+                                                                                        <FormInput
+                                                                                            placeholder="Location"
+                                                                                            name="departureDropOffLocation"
+                                                                                        />
+                                                                                    </div>
+                                                                                ) : null}
                                                                                 <div className="col-6">
                                                                                     <FormTimePicker
                                                                                         placeholder="12:33"
@@ -774,26 +815,37 @@ const BoatTransferBookingModal = ({ boatId }: { boatId?: number }) => {
                                                                                             label: 'Select Pickup Point',
                                                                                         },
                                                                                         {
-                                                                                            value: 'airport',
+                                                                                            value: AIRPORT,
                                                                                             label: 'Airport',
                                                                                         },
                                                                                         {
-                                                                                            value: 'hotel_villa',
+                                                                                            value: HOTEL_VILLA,
                                                                                             label: 'Hotel/Villa',
                                                                                         },
                                                                                         {
-                                                                                            value: 'not_applicable',
+                                                                                            value: NOT_APPLICABLE,
                                                                                             label: 'Not Applicable',
                                                                                         },
                                                                                     ]}
                                                                                 />
                                                                                 <div className="row g-3">
-                                                                                    <div className="col-6">
-                                                                                        <FormInput
-                                                                                            placeholder="Pickup Location"
-                                                                                            name="returnPickupLocation"
-                                                                                        />
-                                                                                    </div>
+                                                                                    {formRequest.returnPickupPoint ==
+                                                                                    AIRPORT ? (
+                                                                                        <div className="col-6">
+                                                                                            <FormInput
+                                                                                                placeholder="Flight Number"
+                                                                                                name="returnPickupFlightNumber"
+                                                                                            />
+                                                                                        </div>
+                                                                                    ) : formRequest.returnPickupPoint ==
+                                                                                      HOTEL_VILLA ? (
+                                                                                        <div className="col-6">
+                                                                                            <FormInput
+                                                                                                placeholder="Pickup Location"
+                                                                                                name="returnPickupLocation"
+                                                                                            />
+                                                                                        </div>
+                                                                                    ) : null}
                                                                                     <div className="col-6">
                                                                                         <FormTimePicker
                                                                                             placeholder="12:33"
@@ -833,23 +885,32 @@ const BoatTransferBookingModal = ({ boatId }: { boatId?: number }) => {
                                                                                             label: 'Select Pickup Point',
                                                                                         },
                                                                                         {
-                                                                                            value: 'airport',
+                                                                                            value: AIRPORT,
                                                                                             label: 'Airport',
                                                                                         },
                                                                                         {
-                                                                                            value: 'hotel_villa',
+                                                                                            value: HOTEL_VILLA,
                                                                                             label: 'Hotel/Villa',
                                                                                         },
                                                                                         {
-                                                                                            value: 'not_applicable',
+                                                                                            value: NOT_APPLICABLE,
                                                                                             label: 'Not Applicable',
                                                                                         },
                                                                                     ]}
                                                                                 />
-                                                                                <FormInput
-                                                                                    placeholder="Location"
-                                                                                    name="returnDropOffLocation"
-                                                                                />
+                                                                                {formRequest.returnDropOffPoint ==
+                                                                                AIRPORT ? (
+                                                                                    <FormInput
+                                                                                        placeholder="Location"
+                                                                                        name="returnDropOffLocation"
+                                                                                    />
+                                                                                ) : formRequest.returnDropOffPoint ==
+                                                                                  HOTEL_VILLA ? (
+                                                                                    <FormInput
+                                                                                        placeholder="Flight Number"
+                                                                                        name="returnDropOffFlightNumber"
+                                                                                    />
+                                                                                ) : null}
                                                                             </div>
                                                                         </div>
                                                                     )}

@@ -11,7 +11,7 @@ const BlogTemplate = async ({ content }: PropsSectionContent) => {
     const page = 1
     const { blogs = [], pagination = {} } = await getBlogList({
         page,
-        limit: 12,
+        limit: 1,
     }).then((res) => {
         return {
             blogs: res?.result || [],
@@ -33,11 +33,7 @@ const BlogTemplate = async ({ content }: PropsSectionContent) => {
             <section className="container py-4">
                 <Breadcrumb />
             </section>
-            <SectionBlogList
-                passBlogs={blogs}
-                passPage={page}
-                passPagination={pagination}
-            />
+            <SectionBlogList />
             <FooterLayout />
         </>
     )
