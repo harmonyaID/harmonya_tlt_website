@@ -4,7 +4,10 @@ import FormRangeDatepicker from '@/component/form/FormRangeDatepicker'
 import { BtnPrimary } from '@/component/general/Button'
 import { ReactNode } from 'react'
 import FormInput from '@/component/form/FormInput'
-import usePropertyVariantBooking from '@/page/propertyVariant/hook/usePropertyVariantBooking.hook'
+import usePropertyVariantBooking, {
+    BookingVariantOption,
+} from '@/page/propertyVariant/hook/usePropertyVariantBooking.hook'
+import FormSelectOption from '@/component/form/FormSelectOption'
 import { formatMoney } from '@/helper/guestyBooking.helper'
 
 const LabelForm = ({ children }: { children?: ReactNode }) => (
@@ -13,13 +16,24 @@ const LabelForm = ({ children }: { children?: ReactNode }) => (
     </p>
 )
 
+const toNumber = (v: any) => (Number(v) > 0 ? Number(v) : null)
+
 const PropertyVariantBooking = ({
     propertyVariant = {},
+    variants,
+    isLoadingVariants = false,
 }: {
     propertyVariant?: any
+    // diisi di property detail: daftar variant (accommodation) yang bisa dibooking
+    variants?: BookingVariantOption[]
+    isLoadingVariants?: boolean
 }) => {
     const {
         formRequest,
+        variantId,
+        isSelectVariant,
+        listingName,
+        guestLimit,
         booking,
         error,
         isLoading,
@@ -29,14 +43,26 @@ const PropertyVariantBooking = ({
     } = usePropertyVariantBooking(
         propertyVariant?.guestyId || '',
         propertyVariant?.nickname || '',
+        {
+            variants,
+            maxGuests:
+                toNumber(propertyVariant?.accommodates) ??
+                toNumber(propertyVariant?.occupancy),
+        },
     )
+
+    const hasVariants = !!variants?.length
+    const title =
+        listingName || (isSelectVariant ? '' : propertyVariant?.nickname)
 
     return (
         <>
             <div className="p-4 border border-neutral-200 rounded-4">
-                <p className="fs-18 font-tt-drugs fw-600 text-grey-200 pt-2">
-                    {propertyVariant?.nickname || 'Villa tanjung - 4 bedrooms'}
-                </p>
+                {title ? (
+                    <p className="fs-18 font-tt-drugs fw-600 text-grey-200 pt-2">
+                        {title}
+                    </p>
+                ) : null}
 
                 <FormWrap actions={{ handleSubmit: () => _handleSubmit() }}>
                     <WrapFormContext
@@ -45,6 +71,36 @@ const PropertyVariantBooking = ({
                             change: _handleChange,
                         }}>
                         <div className="vstack gap-3 mb-4">
+                            {isSelectVariant ? (
+                                <div className="border-bottomP pb-0">
+                                    <LabelForm>Property</LabelForm>
+                                    <FormSelectOption
+                                        name="variantId"
+                                        value={variantId}
+                                        className="form-property"
+                                        disabled={
+                                            isLoadingVariants || !hasVariants
+                                        }>
+                                        <option value="">
+                                            {isLoadingVariants
+                                                ? 'Loading...'
+                                                : hasVariants
+                                                  ? 'Select property'
+                                                  : 'No property available'}
+                                        </option>
+                                        {variants?.map((v) => (
+                                            <option
+                                                key={v.guestyId}
+                                                value={v.guestyId}>
+                                                {v.nickname}
+                                                {v.guests
+                                                    ? ` (max ${v.guests} guests)`
+                                                    : ''}
+                                            </option>
+                                        ))}
+                                    </FormSelectOption>
+                                </div>
+                            ) : null}
                             <div className="border-bottomP pb-0">
                                 <LabelForm>check-in & Check-out</LabelForm>
                                 <FormRangeDatepicker
@@ -52,7 +108,9 @@ const PropertyVariantBooking = ({
                                     config={{
                                         format: 'dd M yyyy',
                                         // tanggal yang sudah lewat tidak bisa dipilih
-                                        minDate: new Date(),
+                                        minDate: new Date(
+                                            new Date().setHours(0, 0, 0, 0),
+                                        ),
                                     }}
                                     isIconArrow
                                     placeholderFrom="Check-In"
@@ -63,7 +121,11 @@ const PropertyVariantBooking = ({
                                 <LabelForm>Guest</LabelForm>
                                 <FormInput
                                     name="guest"
-                                    placeholder="e.g 8"
+                                    placeholder={
+                                        guestLimit
+                                            ? `Max ${guestLimit} guests`
+                                            : 'Number of guests'
+                                    }
                                     className="form-property"
                                     // type="number"
                                     isNumberOnly
@@ -76,9 +138,13 @@ const PropertyVariantBooking = ({
                     <BtnPrimary
                         type="submit"
                         isLoading={isLoading}
-                        isDisabled={isLoading}
+                        isDisabled={
+                            isLoading ||
+                            (isSelectVariant &&
+                                (isLoadingVariants || !hasVariants))
+                        }
                         className="rounded-pillP w-100 text-uppercase">
-                        Search
+                        Check Availability
                     </BtnPrimary>
                 </FormWrap>
 

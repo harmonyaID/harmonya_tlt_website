@@ -19,6 +19,8 @@ const PaymentMain = () => {
         booking,
         isReady,
         isLoading,
+        isExpired,
+        isRetryPayment,
         error,
     } = usePaymentBook()
 
@@ -42,6 +44,16 @@ const PaymentMain = () => {
                                 Browse properties
                             </BtnLinkPrimary>
                         </div>
+                    ) : isReady && isExpired ? (
+                        <div className="text-center py-5">
+                            <p className="fs-24 text-grey-300">
+                                Your price quote has expired. Please search your
+                                dates again to get the latest price.
+                            </p>
+                            <BtnLinkPrimary href={STAY_PATH}>
+                                Browse properties
+                            </BtnLinkPrimary>
+                        </div>
                     ) : (
                         <FormWrap actions={{ handleSubmit: _handleSubmit }}>
                             <WrapFormContext
@@ -59,6 +71,11 @@ const PaymentMain = () => {
                                         <PaymentSummary
                                             booking={booking}
                                             isLoading={isLoading}
+                                            isCard={
+                                                formRequest.paymentMethod ===
+                                                'credit_card'
+                                            }
+                                            isRetryPayment={isRetryPayment}
                                             error={error}
                                         />
                                     </div>

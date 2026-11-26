@@ -103,14 +103,32 @@ const PropertyDetail = ({
         .filter((tab) => !!tab.show)
         .map(({ id, label }) => ({ id, label }))
 
+    // pilihan property (variant/accommodation) untuk booking Guesty.
+    // Property tanpa variant tapi punya listing Guesty -> property itu sendiri.
+    const bookingVariants = accommodations.length
+        ? accommodations.map((a) => ({
+              guestyId: a.guestyId,
+              nickname: a.nickname,
+              guests: a.guests,
+          }))
+        : detail?.guestyId
+          ? [{ guestyId: detail.guestyId, nickname: detail.nickname || '' }]
+          : []
+
     const BookingForm = {
         [SOURCE_TYPE_BOOKEASY_ID]: (
             <PropertyVariantBookingBookeasy propertyVariant={detail} />
         ),
         [SOURCE_TYPE_GUESTY_ID]: (
-            <PropertyVariantBooking propertyVariant={detail} />
+            <PropertyVariantBooking
+                propertyVariant={detail}
+                variants={bookingVariants}
+                isLoadingVariants={isLoadingAccommodation}
+            />
         ),
     }
+
+    console.log('id: ', id)
 
     return (
         <>
@@ -390,7 +408,7 @@ const PropertyDetail = ({
 
             <PropertyThingsToExplore />
             <PropertyOther allSlug={allSlug} />
-            <PropertyFormInquiry />
+            <PropertyFormInquiry propertyId={id} />
         </>
     )
 }

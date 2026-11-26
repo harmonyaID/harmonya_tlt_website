@@ -32,7 +32,7 @@ const SectionPropertyHero = ({ content = {} }: { content?: any | {} }) => {
                     <div className="row justify-content-center">
                         <div className="col-lg-12 text-white">
                             <div
-                                className="wp-font-tt-drugs wp-fw-300"
+                                className="wp-font-tt-drugs wp-fw-300 fs-md-48 fs-32"
                                 dangerouslySetInnerHTML={{
                                     __html: content?.content || '',
                                 }}
@@ -71,6 +71,15 @@ const SectionPropertyHero = ({ content = {} }: { content?: any | {} }) => {
                                                         id="inputDates"
                                                         config={{
                                                             format: 'dd M yyyy',
+                                                            // tanggal yang sudah lewat tidak bisa dipilih
+                                                            minDate: new Date(
+                                                                new Date().setHours(
+                                                                    0,
+                                                                    0,
+                                                                    0,
+                                                                    0,
+                                                                ),
+                                                            ),
                                                         }}
                                                         isIconArrow
                                                         placeholderFrom="Check-In"
