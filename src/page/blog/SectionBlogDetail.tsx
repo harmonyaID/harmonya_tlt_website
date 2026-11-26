@@ -16,6 +16,7 @@ import Breadcrumb from '@/component/general/Breadcrumb'
 import ShareBlog from '@/component/general/ShareBlog'
 import { useState, useEffect } from 'react'
 import ValidImage from '@/component/general/ValidImage'
+import Link from 'next/link'
 
 const SectionContent = ({
     children,
@@ -123,6 +124,29 @@ const SectionBlogDetail = ({ detail = {} }: { detail?: any }) => {
 
                 <div className="col-md-3">
                     <BlogListSideRight />
+
+                    {detail?.affiliates?.length && (
+                        <div
+                            className="vstack gap-4"
+                            style={{
+                                marginTop: '10rem',
+                            }}>
+                            {detail?.affiliates?.map((vm) => (
+                                <Link
+                                    href={vm.bannerUrl}
+                                    key={vm.id}
+                                    target="_blank">
+                                    <ValidImage
+                                        src={vm.bannerImage}
+                                        alt={vm.title}
+                                        width={382}
+                                        height={319}
+                                        className="w-100 h-100 object-fit-cover"
+                                    />
+                                </Link>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
         </section>

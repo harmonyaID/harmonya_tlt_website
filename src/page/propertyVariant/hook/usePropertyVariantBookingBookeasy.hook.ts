@@ -11,6 +11,8 @@ import {
 import { PAYMENT_PATH, THANK_YOU_BOOKEASY } from '@/config/pagePath.config'
 import { createPropertyInquiryForm } from '@/service/api/property.api'
 import { isSuccess } from '@/helper/base/condition.helper'
+import moment from 'moment'
+import { parsePhoneNumber } from 'react-phone-number-input'
 
 const bookingParam = {
     propertyId: '',
@@ -29,10 +31,10 @@ const bookingParam = {
     childrenAges: [1],
     comments: '',
     currency: '',
-    pricePerNight: '',
-    nights: '',
+    pricePerNight: 0,
+    nights: 0,
     fee: '',
-    total: '',
+    total: 0,
     payableAmount: '',
     payableCurrency: '',
     rateOptions: [],
@@ -45,13 +47,57 @@ const usePropertyVariantBookingBookeasy = (propertyVariant: any) => {
     const [formRequest, setFormRequest] = useState(bookingParam)
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
+    const getTotalNights = (checkInDate: string, checkOutDate: string) => {
+        const checkIn = moment(checkInDate, 'DD MMM YYYY', true)
+        const checkOut = moment(checkOutDate, 'DD MMM YYYY', true)
+
+        if (
+            !checkIn.isValid() ||
+            !checkOut.isValid() ||
+            !checkOut.isAfter(checkIn, 'day')
+        ) {
+            return 0
+        }
+
+        return checkOut.diff(checkIn, 'days')
+    }
+
     const _handleChange = (name, value) => {
-        setFormRequest((prev) => ({ ...prev, [name]: value }))
+        setFormRequest((prev) => {
+            const checkInDate =
+                name === 'checkInDate' ? value : prev.checkInDate
+
+            const checkOutDate =
+                name === 'checkOutDate' ? value : prev.checkOutDate
+
+            const totalNights =
+                checkInDate && checkOutDate
+                    ? getTotalNights(checkInDate, checkOutDate)
+                    : 0
+
+            return {
+                ...prev,
+                [name]: value,
+                nights: totalNights,
+                total: prev.pricePerNight * totalNights,
+            }
+        })
     }
 
     const _handleSubmit = () => {
         setIsLoading(true)
-        createPropertyInquiryForm(formRequest)
+
+        const countryCode = parsePhoneNumber(formRequest.mobileNumber)?.countryCallingCode || ''
+
+        createPropertyInquiryForm({
+            ...formRequest,
+            checkInDate: formatDateOnly(formRequest.checkInDate, 'DD MMM YYYY'),
+            checkOutDate: formatDateOnly(
+                formRequest.checkOutDate,
+                'DD MMM YYYY',
+            ),
+            countryCode: countryCode,
+        })
             .then((res) => {
                 if (isSuccess(res)) {
                     setFormRequest(bookingParam)
@@ -60,7 +106,7 @@ const usePropertyVariantBookingBookeasy = (propertyVariant: any) => {
             })
             .finally(() => setIsLoading(false))
     }
-    // console.log(propertyVariant)
+
     useEffect(() => {
         if (propertyVariant) {
             setFormRequest((prev) => ({
@@ -68,6 +114,9 @@ const usePropertyVariantBookingBookeasy = (propertyVariant: any) => {
                 propertyId: propertyVariant?.id,
                 currency: propertyVariant?.currency,
                 sourceTypeId: propertyVariant?.sourceType?.id,
+                pricePerNight: Number(
+                    propertyVariant?.pricing?.weekdayBasePrice,
+                ),
             }))
         }
     }, [propertyVariant])
