@@ -40,6 +40,7 @@ export const VILLA_MANAGEMENT_PATH = '/villa-management'
 export const PROPERTY_PATH = '/property'
 export const PROPERTY_SLUG_PATH = '/property/'
 export const PROPERTY_MANAGEMENT_PATH = '/property-management'
+export const PROPERTY_RESULT_PATH = '/property-result'
 
 // Blog
 export const BLOG_PATH = '/blog'

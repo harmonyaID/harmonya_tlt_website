@@ -9,7 +9,7 @@ import PropertyFormSelectTreeOption from '@/page/property/component/PropertyForm
 import { isBoolean } from 'lodash'
 
 const SectionHomeHero = ({ content = {} }: { content?: any | {} }) => {
-    const { formSearch, _handleChange } = usePropertyHeroSearch()
+    const { formSearch, _handleChange, _handleSearch } = usePropertyHeroSearch()
 
     console.log('SectionHomeHero: ', content)
 
@@ -47,7 +47,7 @@ const SectionHomeHero = ({ content = {} }: { content?: any | {} }) => {
                 <div className="row justify-content-center">
                     <div className="col-lg-9">
                         <div className="content-hero-search-card text-white py-3 px-4 rounded-3">
-                            <FormWrap actions={{ handleSubmit: () => {} }}>
+                            <FormWrap actions={{ handleSubmit: _handleSearch }}>
                                 <WrapFormContext
                                     formRequest={formSearch}
                                     actions={{ change: _handleChange }}>
@@ -103,13 +103,22 @@ const SectionHomeHero = ({ content = {} }: { content?: any | {} }) => {
                                                         'GUEST'}
                                                 </label>
                                                 <input
-                                                    type="text"
+                                                    type="number"
+                                                    min={1}
+                                                    inputMode="numeric"
                                                     className="form-control form-transparent-underline"
                                                     id="inputDates"
                                                     name="guest"
                                                     placeholder={
                                                         content.searchPlaceholderGuest ||
                                                         'e.g name'
+                                                    }
+                                                    value={formSearch.guest}
+                                                    onChange={(e) =>
+                                                        _handleChange(
+                                                            'guest',
+                                                            e.target.value,
+                                                        )
                                                     }
                                                 />
                                             </div>
@@ -146,15 +155,13 @@ const SectionHomeHero = ({ content = {} }: { content?: any | {} }) => {
                                             </div>
                                         </div>
                                         <div className="col-md-auto">
-                                            <BtnLinkPrimary
+                                            <BtnPrimary
                                                 type="button"
-                                                href={
-                                                    content?.buttonLink || '#'
-                                                }
+                                                handle={_handleSearch}
                                                 className="rounded-pill">
                                                 {content?.buttonText ||
                                                     'SEARCH'}
-                                            </BtnLinkPrimary>
+                                            </BtnPrimary>
                                         </div>
                                     </div>
                                 </WrapFormContext>

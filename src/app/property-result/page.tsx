@@ -1,7 +1,13 @@
 import PropertyVariantTemplate from '@/page/@template/PropertyVariantTemplate'
 import { getPageDetail } from '@/service/api/contentPage.api'
 
-const Page = async () => {
+type PropsData = {
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}
+
+const Page = async ({ searchParams }: PropsData) => {
+    const query = await searchParams
+
     const contentPage = await getPageDetail('stay')
         .then((res) => res?.result || {})
         .catch((err) => {
@@ -12,7 +18,7 @@ const Page = async () => {
 
     return (
         <>
-            <PropertyVariantTemplate content={contentPage} />
+            <PropertyVariantTemplate content={contentPage} query={query} />
         </>
     )
 }

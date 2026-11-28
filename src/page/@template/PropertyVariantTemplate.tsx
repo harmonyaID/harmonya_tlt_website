@@ -9,7 +9,12 @@ import FooterNewsLatterStaticLayout from '@/component/layout/FooterNewsLatterSta
 import FooterLayout from '@/component/layout/Footer.layout'
 import PropertyVariantMain from '@/page/propertyVariant/PropertyVariantMain'
 
-const PropertyVariantTemplate = async ({ content }: PropsSectionContent) => {
+const PropertyVariantTemplate = async ({
+    content,
+    query = {},
+}: PropsSectionContent & {
+    query?: { [key: string]: string | string[] | undefined }
+}) => {
     const { SECTION1 = {}, SECTION2 = {} } = content?.content || {}
 
     console.log('content: ', content)
@@ -23,7 +28,8 @@ const PropertyVariantTemplate = async ({ content }: PropsSectionContent) => {
             <NavbarLayout isBgTransparent />
             <SectionPropertyHero content={SECTION1} />
             {/*<SectionListProperty />*/}
-            <PropertyVariantMain />
+            {/* key: search baru -> list di-reset ke halaman 1 */}
+            <PropertyVariantMain key={JSON.stringify(query)} query={query} />
             <SectionPropertyHighlight />
             <SectionPropertyOffer list={offers} />
             <FooterNewsLatterStaticLayout />

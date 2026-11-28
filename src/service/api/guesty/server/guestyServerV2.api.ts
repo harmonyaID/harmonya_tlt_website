@@ -13,8 +13,27 @@ import {
 const API_VERSION = '/v1'
 
 // ========== LISTINGS
-export const getListingGuestyServerV2 = (params: Record<string, any> = {}) =>
-    guestyServerV2Get(API_VERSION + '/listings', params)
+// Langsung ke Guesty (Bearer Token dinamis via /guesty-open-api)
+// ex params = {
+//     limit: 25, skip: 0,   // page 1 -> skip 0, page 2 -> skip 25, dst.
+//     fields: '_id',
+//     available: { checkIn: 'YYYY-MM-DD', checkOut: 'YYYY-MM-DD', minOccupancy: 2 },
+// }
+// response: { results: [{ _id }], count (total listing), limit, skip }
+export const getListingGuestyServerV2 = (params: Record<string, any> = {}) => {
+    const { available, ...rest } = params
+
+    return guestyDirectGet(API_VERSION + '/listings', {
+        ...rest,
+        // Guesty meminta `available` dikirim sebagai JSON string
+        ...(available && {
+            available:
+                typeof available === 'string'
+                    ? available
+                    : JSON.stringify(available),
+        }),
+    })
+}
 
 export const getDetailListingGuestyServerV2 = (id: string, params = {}) =>
     guestyServerV2Get(API_VERSION + '/listings/' + id, params)

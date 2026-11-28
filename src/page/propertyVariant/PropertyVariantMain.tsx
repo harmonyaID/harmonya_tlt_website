@@ -31,7 +31,11 @@ import InfoNotAvailable from '@/component/general/InfoEmpty'
 import usePropertyVariantMainHook from '@/page/propertyVariant/hook/usePropertyVariantMain.hook'
 import ValidImage from '@/component/general/ValidImage'
 
-const PropertyVariantMain = () => {
+const PropertyVariantMain = ({
+    query = {},
+}: {
+    query?: { [key: string]: string | string[] | undefined }
+}) => {
     const pathname = usePathname() || '/'
 
     const {
@@ -42,7 +46,7 @@ const PropertyVariantMain = () => {
         search,
         setSearch,
         _handleChange,
-    } = usePropertyVariantMainHook()
+    } = usePropertyVariantMainHook(query)
 
     return (
         <>
